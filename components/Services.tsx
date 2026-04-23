@@ -38,7 +38,7 @@ export default function Services() {
               onMouseLeave={e => (e.currentTarget.style.background = 'var(--bg2)')}
             >
               <div style={{ fontSize: '1.2rem', marginBottom: 20, width: 44, height: 44, border: '1px solid var(--border2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)' }}>{s.icon}</div>
-              <div style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', color: 'var(--accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{s.cat}</div>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: '0.82rem', color: 'var(--accent)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>{s.cat}</div>
               <div style={{ fontFamily: 'var(--display)', fontSize: '1.15rem', fontWeight: 600, color: 'var(--text)', marginBottom: 10 }}>{s.name}</div>
               <div style={{ fontSize: '0.85rem', color: 'var(--text2)', lineHeight: 1.75 }}>{s.desc}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 16 }}>
