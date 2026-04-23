@@ -82,14 +82,15 @@ export default function Hero() {
           ].map(s => (
             <div key={s.label} style={{ textAlign: 'center' }}>
               <span style={{
-                fontFamily: 'var(--display)', fontSize: '2rem', fontWeight: 700,
+                fontFamily: 'var(--display)', fontSize: '2.6rem', fontWeight: 800,
                 color: 'var(--text)', display: 'block',
               }}>
-                {s.num}<span style={{ color: 'var(--accent)', fontSize: '1.2rem' }}>{s.unit}</span>
+                {s.num}<span style={{ color: 'var(--accent)', fontSize: '1.6rem' }}>{s.unit}</span>
               </span>
               <span style={{
-                fontFamily: 'var(--mono)', fontSize: '0.65rem',
-                color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase',
+                fontFamily: 'var(--mono)', fontSize: '0.85rem',
+                color: 'var(--text2)', letterSpacing: '0.06em', textTransform: 'uppercase',
+                fontWeight: 500,
               }}>{s.label}</span>
             </div>
           ))}
