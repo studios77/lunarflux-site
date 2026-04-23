@@ -39,9 +39,9 @@ export default function Pricing() {
             <div key={p.name} style={{
               border: p.featured ? '1px solid var(--accent)' : '1px solid var(--border)',
               borderRadius: 8, padding: '36px 28px',
-              background: p.featured ? 'linear-gradient(160deg, rgba(59,130,246,0.08), var(--surface))' : 'var(--surface)',
+              background: p.featured ? 'linear-gradient(160deg, rgba(56,189,248,0.1), var(--surface))' : 'var(--surface)',
               position: 'relative', transition: 'transform 0.3s, box-shadow 0.3s',
-              boxShadow: p.featured ? '0 0 40px rgba(59,130,246,0.12)' : 'none',
+              boxShadow: p.featured ? '0 0 40px rgba(56,189,248,0.15)' : 'none',
             }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)' }}
@@ -61,7 +61,7 @@ export default function Pricing() {
               <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 24, lineHeight: 1.7 }}>{p.desc}</p>
               <ul style={{ listStyle: 'none', marginBottom: 32 }}>
                 {p.features.map(f => (
-                  <li key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                  <li key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(56,189,248,0.08)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                     <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>
                     {f}
                   </li>
@@ -81,14 +81,14 @@ export default function Pricing() {
         </div>
 
         {/* Enterprise */}
-        <div className="reveal" style={{ marginTop: 16, border: '1px solid var(--border)', borderRadius: 8, padding: '36px 28px', background: 'linear-gradient(135deg, rgba(139,92,246,0.08), var(--surface))' }}>
+        <div className="reveal" style={{ marginTop: 16, border: '1px solid var(--border)', borderRadius: 8, padding: '36px 28px', background: 'linear-gradient(135deg, rgba(253,230,138,0.07), var(--surface))' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Enterprise</div>
           <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: 6 }}>Full AI Security Suite</div>
-          <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: '#8b5cf6', margin: '16px 0' }}>맞춤 견적</div>
+          <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent2)', margin: '16px 0' }}>맞춤 견적</div>
           <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 20, lineHeight: 1.7, maxWidth: 600 }}>무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0 24px', marginBottom: 24 }}>
             {['무제한 채널 + 전용서버','AI 보안 관제 24/7','딥페이크 탐지 모듈','HA/DR 완전 이중화','LLM 보안 감사','전담 기술이사 지원'].map(f => (
-              <div key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(255,255,255,0.04)', display: 'flex', gap: 10 }}>
+              <div key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(56,189,248,0.08)', display: 'flex', gap: 10 }}>
                 <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>{f}
               </div>
             ))}

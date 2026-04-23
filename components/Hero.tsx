@@ -7,7 +7,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
         width: 800, height: 500,
-        background: 'radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.06) 40%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(56,189,248,0.15) 0%, rgba(253,230,138,0.07) 45%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', width: '100%' }}>
@@ -33,7 +33,7 @@ export default function Hero() {
         }}>
           차세대<br />
           <span style={{
-            background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+            background: 'linear-gradient(135deg, #38bdf8, #fde68a)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>보안 인프라</span><br />
@@ -58,7 +58,7 @@ export default function Hero() {
             padding: '14px 36px', background: 'var(--accent)', color: '#000',
             border: 'none', borderRadius: 4, fontFamily: 'var(--mono)',
             fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em',
-            textDecoration: 'none', boxShadow: '0 0 30px rgba(59,130,246,0.3)',
+            textDecoration: 'none', boxShadow: '0 0 30px rgba(56,189,248,0.35)',
             transition: 'all 0.25s',
           }}>서비스 살펴보기</a>
           <a href="#contact" style={{

@@ -1,18 +1,18 @@
 :root {
-  --bg: #050810;
-  --bg2: #090d1a;
-  --bg3: #0d1225;
-  --surface: #111827;
-  --surface2: #1a2236;
-  --border: rgba(99,179,255,0.12);
-  --border2: rgba(99,179,255,0.22);
-  --accent: #3b82f6;
-  --accent2: #06b6d4;
-  --accent3: #8b5cf6;
-  --glow: rgba(59,130,246,0.15);
-  --text: #e2e8f0;
-  --text2: #94a3b8;
-  --text3: #475569;
+  --bg: #040e1c;
+  --bg2: #071628;
+  --bg3: #0b1e36;
+  --surface: #0f2540;
+  --surface2: #152d4d;
+  --border: rgba(56,189,248,0.14);
+  --border2: rgba(56,189,248,0.28);
+  --accent: #38bdf8;
+  --accent2: #fde68a;
+  --accent3: #fbbf24;
+  --glow: rgba(56,189,248,0.18);
+  --text: #e2f0ff;
+  --text2: #93c5fd;
+  --text3: #4d7fa8;
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'Noto Sans KR', sans-serif;
   --display: 'Syne', sans-serif;
@@ -44,8 +44,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(56,189,248,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.05) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
