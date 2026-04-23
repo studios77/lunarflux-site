@@ -21,7 +21,7 @@ export default function Contact() {
     { icon: '📧', title: 'Email', val: 'contact@lunarflux.al' },
     { icon: '💬', title: 'Kakao / Telegram', val: '@lunarflux_support' },
     { icon: '🕐', title: '응답 시간', val: '평일 24시간 이내 / 긴급 장애 즉시' },
-    { icon: '📍', title: '서비스 지역', val: '대한민국 전역 (원격 운영 가능)' },
+    { icon: '📍', title: '서비스 지역', val: '글로벌 지역 (원격 운영 가능)' },
   ]
 
   return (
