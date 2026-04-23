@@ -31,13 +31,12 @@ export default function Hero() {
           fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: 'var(--text)',
           marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
         }}>
-          차세대<br />
-          <span style={{
+          IDC · <span style={{
             background: 'linear-gradient(135deg, #0284c7, #d97706)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-          }}>보안 인프라</span><br />
-          플랫폼
+          }}>AI보안</span> · 스트리밍<br />
+          통합 플랫폼
         </h1>
 
         <p style={{
