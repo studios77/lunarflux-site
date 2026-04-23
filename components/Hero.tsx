@@ -15,7 +15,7 @@ export default function Hero() {
           display: 'inline-flex', alignItems: 'center', gap: 8,
           fontFamily: 'var(--mono)', fontSize: '0.7rem', color: 'var(--accent2)',
           letterSpacing: '0.12em', padding: '6px 16px',
-          border: '1px solid rgba(6,182,212,0.3)', borderRadius: 2,
+          border: '1px solid rgba(14,165,233,0.35)', borderRadius: 2,
           marginBottom: 32, textTransform: 'uppercase',
           animation: 'fadeUp 0.8s ease both',
         }}>
@@ -33,7 +33,7 @@ export default function Hero() {
         }}>
           차세대<br />
           <span style={{
-            background: 'linear-gradient(135deg, #38bdf8, #fde68a)',
+            background: 'linear-gradient(135deg, #0284c7, #d97706)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>보안 인프라</span><br />
@@ -41,7 +41,7 @@ export default function Hero() {
         </h1>
 
         <p style={{
-          fontSize: '1.05rem', color: 'var(--text2)', maxWidth: 560,
+          fontSize: '1.05rem', color: 'var(--text)', maxWidth: 560,
           margin: '0 auto 48px', lineHeight: 1.8,
           animation: 'fadeUp 0.8s 0.2s ease both',
         }}>
@@ -55,7 +55,7 @@ export default function Hero() {
           animation: 'fadeUp 0.8s 0.3s ease both',
         }}>
           <a href="#services" style={{
-            padding: '14px 36px', background: 'var(--accent)', color: '#000',
+            padding: '14px 36px', background: 'var(--accent)', color: '#fff',
             border: 'none', borderRadius: 4, fontFamily: 'var(--mono)',
             fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em',
             textDecoration: 'none', boxShadow: '0 0 30px rgba(56,189,248,0.35)',
