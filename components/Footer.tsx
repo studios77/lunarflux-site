@@ -3,7 +3,7 @@ export default function Footer() {
     <footer style={{ background: 'var(--bg2)', borderTop: '1px solid var(--border)', padding: '48px 5%', position: 'relative', zIndex: 1 }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 20 }}>
         <div style={{ fontFamily: 'var(--display)', fontSize: '1rem', fontWeight: 800, color: 'var(--text)' }}>
-          Lunar<span style={{ color: 'var(--accent)' }}>Flux</span>
+          Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
         </div>
         <ul style={{ display: 'flex', gap: 24, listStyle: 'none' }}>
           {[['서비스','#services'],['요금','#pricing'],['소개','#about'],['문의','#contact']].map(([label, href]) => (

@@ -36,7 +36,7 @@ export default function Nav() {
           animation: 'pulse 2s ease-in-out infinite',
           display: 'inline-block',
         }} />
-        Lunar<span style={{ color: 'var(--accent)' }}>Flux</span>
+        Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
       </a>
 
       <ul style={{ display: 'flex', alignItems: 'center', gap: 32, listStyle: 'none' }}>
