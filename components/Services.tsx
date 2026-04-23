@@ -19,7 +19,7 @@ export default function Services() {
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
             Services
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: '#fff', marginBottom: 16 }}>통합 기술 서비스</h2>
+          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>통합 기술 서비스</h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>IDC 인프라, AI 보안, 라이브 스트리밍을 하나의 플랫폼에서.</p>
         </div>
 
@@ -39,7 +39,7 @@ export default function Services() {
             >
               <div style={{ fontSize: '1.2rem', marginBottom: 20, width: 44, height: 44, border: '1px solid var(--border2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)' }}>{s.icon}</div>
               <div style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', color: 'var(--accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{s.cat}</div>
-              <div style={{ fontFamily: 'var(--display)', fontSize: '1.15rem', fontWeight: 600, color: '#fff', marginBottom: 10 }}>{s.name}</div>
+              <div style={{ fontFamily: 'var(--display)', fontSize: '1.15rem', fontWeight: 600, color: 'var(--text)', marginBottom: 10 }}>{s.name}</div>
               <div style={{ fontSize: '0.85rem', color: 'var(--text2)', lineHeight: 1.75 }}>{s.desc}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 16 }}>
                 {s.tags.map(t => (

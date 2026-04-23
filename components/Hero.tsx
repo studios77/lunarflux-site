@@ -7,7 +7,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
         width: 800, height: 500,
-        background: 'radial-gradient(ellipse, rgba(56,189,248,0.15) 0%, rgba(253,230,138,0.07) 45%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(14,165,233,0.1) 0%, rgba(245,158,11,0.06) 45%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', width: '100%' }}>
@@ -28,7 +28,7 @@ export default function Hero() {
 
         <h1 style={{
           fontFamily: 'var(--display)', fontSize: 'clamp(3rem, 8vw, 6.5rem)',
-          fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: '#fff',
+          fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: 'var(--text)',
           marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
         }}>
           차세대<br />
@@ -63,7 +63,7 @@ export default function Hero() {
           }}>서비스 살펴보기</a>
           <a href="#contact" style={{
             padding: '14px 36px', background: 'transparent', color: 'var(--text)',
-            border: '1px solid rgba(99,179,255,0.22)', borderRadius: 4,
+            border: '1px solid var(--border2)', borderRadius: 4,
             fontFamily: 'var(--mono)', fontSize: '0.8rem', letterSpacing: '0.06em',
             textDecoration: 'none', transition: 'all 0.25s',
           }}>무료 상담 신청</a>
@@ -83,7 +83,7 @@ export default function Hero() {
             <div key={s.label} style={{ textAlign: 'center' }}>
               <span style={{
                 fontFamily: 'var(--display)', fontSize: '2rem', fontWeight: 700,
-                color: '#fff', display: 'block',
+                color: 'var(--text)', display: 'block',
               }}>
                 {s.num}<span style={{ color: 'var(--accent)', fontSize: '1.2rem' }}>{s.unit}</span>
               </span>

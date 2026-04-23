@@ -22,12 +22,12 @@ export default function Nav() {
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
       padding: '0 5%', height: 64,
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      background: 'rgba(4,14,28,0.88)', backdropFilter: 'blur(20px)',
+      background: 'rgba(240,248,255,0.92)', backdropFilter: 'blur(20px)',
       borderBottom: '1px solid var(--border)',
     }}>
       <a href="#hero" style={{
         fontFamily: 'var(--display)', fontSize: '1.2rem', fontWeight: 800,
-        letterSpacing: '-0.02em', color: '#fff', textDecoration: 'none',
+        letterSpacing: '-0.02em', color: 'var(--text)', textDecoration: 'none',
         display: 'flex', alignItems: 'center', gap: 8,
       }}>
         <span style={{

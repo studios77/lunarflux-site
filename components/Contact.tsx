@@ -32,7 +32,7 @@ export default function Contact() {
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
             Contact
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: '#fff', marginBottom: 16 }}>서비스 문의</h2>
+          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>서비스 문의</h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>기술이사가 직접 검토 후 24시간 내 회신드립니다.</p>
         </div>
 
@@ -43,7 +43,7 @@ export default function Contact() {
                 <div style={{ fontSize: '1rem', width: 36, height: 36, background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.22)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
                 <div>
                   <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text)' }}>{c.val}</div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--text2)' }}>{c.val}</div>
                 </div>
               </div>
             ))}

@@ -30,7 +30,7 @@ export default function Pricing() {
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
             Pricing
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: '#fff', marginBottom: 16 }}>투명한 요금제</h2>
+          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>투명한 요금제</h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>필요한 서비스만 선택하세요. 모든 플랜에 기본 모니터링과 기술 지원이 포함됩니다.</p>
         </div>
 
@@ -50,9 +50,9 @@ export default function Pricing() {
                 <div style={{ position: 'absolute', top: -1, right: 24, background: 'var(--accent)', color: '#000', fontFamily: 'var(--mono)', fontSize: '0.6rem', fontWeight: 500, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '0 0 4px 4px' }}>POPULAR</div>
               )}
               <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>{p.tier}</div>
-              <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: 6 }}>{p.name}</div>
+              <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{p.name}</div>
               <div style={{ margin: '20px 0' }}>
-                <span style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 700, color: '#fff' }}>
+                <span style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 700, color: 'var(--text)' }}>
                   <span style={{ fontSize: '1rem', fontWeight: 400, color: 'var(--text2)', fontFamily: 'var(--mono)', verticalAlign: 'super' }}>₩</span>
                   {p.price}
                   <span style={{ fontSize: '0.8rem', color: 'var(--text3)', fontFamily: 'var(--mono)', fontWeight: 400 }}>{p.unit}</span>
@@ -72,7 +72,7 @@ export default function Pricing() {
                 fontFamily: 'var(--mono)', fontSize: '0.75rem', letterSpacing: '0.06em', transition: 'all 0.25s',
                 background: p.featured ? 'var(--accent)' : 'transparent',
                 border: p.featured ? '1px solid var(--accent)' : '1px solid var(--border2)',
-                color: p.featured ? '#000' : 'var(--text)', fontWeight: p.featured ? 500 : 400,
+                color: p.featured ? '#fff' : 'var(--text)', fontWeight: p.featured ? 500 : 400,
               }}>
                 {p.tier === 'IDC Standard' || p.tier === 'HA / DR' ? '상담 신청' : '시작하기'}
               </a>
@@ -83,7 +83,7 @@ export default function Pricing() {
         {/* Enterprise */}
         <div className="reveal" style={{ marginTop: 16, border: '1px solid var(--border)', borderRadius: 8, padding: '36px 28px', background: 'linear-gradient(135deg, rgba(253,230,138,0.07), var(--surface))' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Enterprise</div>
-          <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: '#fff', marginBottom: 6 }}>Full AI Security Suite</div>
+          <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>Full AI Security Suite</div>
           <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent2)', margin: '16px 0' }}>맞춤 견적</div>
           <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 20, lineHeight: 1.7, maxWidth: 600 }}>무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0 24px', marginBottom: 24 }}>
