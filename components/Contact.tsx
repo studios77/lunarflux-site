@@ -33,7 +33,7 @@ export default function Contact() {
             Contact
           </div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>서비스 문의</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>기술이사가 직접 검토 후 24시간 내 회신드립니다.</p>
+          <p style={{ fontSize: '0.95rem', color: '#111827', maxWidth: 520, lineHeight: 1.8 }}>기술이사가 직접 검토 후 24시간 내 회신드립니다.</p>
         </div>
 
         <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
@@ -42,8 +42,8 @@ export default function Contact() {
               <div key={c.title} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '14px 16px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 6 }}>
                 <div style={{ fontSize: '1rem', width: 36, height: 36, background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.22)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
                 <div>
-                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--text2)' }}>{c.val}</div>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
+                  <div style={{ fontSize: '0.85rem', color: '#111827', fontWeight: 500 }}>{c.val}</div>
                 </div>
               </div>
             ))}
@@ -59,7 +59,7 @@ export default function Contact() {
                   { label: '연락처', type: 'tel', placeholder: '010-0000-0000', full: false },
                 ].map(f => (
                   <div key={f.label}>
-                    <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{f.label}</label>
+                    <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{f.label}</label>
                     <input type={f.type} placeholder={f.placeholder} style={inputStyle}
                       onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                       onBlur={e => (e.target.style.borderColor = 'var(--border)')}
@@ -68,7 +68,7 @@ export default function Contact() {
                 ))}
 
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>관심 서비스</label>
+                  <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>관심 서비스</label>
                   <select style={{ ...inputStyle, appearance: 'none' }}
                     onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                     onBlur={e => (e.target.style.borderColor = 'var(--border)')}
@@ -88,7 +88,7 @@ export default function Contact() {
                 </div>
 
                 <div style={{ gridColumn: '1 / -1' }}>
-                  <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>문의 내용</label>
+                  <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>문의 내용</label>
                   <textarea placeholder="현재 인프라 환경이나 필요하신 서비스를 자유롭게 작성해 주세요." rows={5}
                     style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
                     onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
