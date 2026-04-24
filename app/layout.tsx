@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'LunarFlux — AI Security & Streaming Infrastructure',
+  title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
   description: 'IDC 서버 임대·위탁운영부터 AI 보안 관제, Ultrastream 엔진 기반 라이브 스트리밍까지. 하나의 플랫폼으로 완성하는 기술 인프라.',
   keywords: 'IDC, AI 보안, 스트리밍, 서버 임대, 위탁운영, 이중화, 딥페이크 탐지',
   openGraph: {
-    title: 'LunarFlux — AI Security & Streaming Infrastructure',
+    title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
     description: '차세대 보안 인프라 플랫폼',
     url: 'https://lunarflux.al',
     siteName: 'LunarFlux',
