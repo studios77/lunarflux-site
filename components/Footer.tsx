@@ -9,8 +9,7 @@ const links = [
 
 const companyInfo = [
   { label: '회사명', value: '주식회사 스트리밍랩스' },
-  { label: '대표', value: '박혜미' },
-  { label: '사업자등록번호', value: '　' },
+  { label: '사업자등록번호', value: '536-88-02408' },
   { label: '주소', value: '서울시 강서구 마곡중앙6로 21, 508호' },
   { label: '전화', value: '0505-924-1004' },
   { label: '이메일', value: 'contact@lunarflux.ai' },
