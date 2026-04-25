@@ -5,7 +5,7 @@ const whyItems = [
   { num: '01', title: 'IDC + AI 보안 + 스트리밍 원스톱', desc: '세 영역을 한 회사가 통합 운영하는 플랫폼. 서버 임대부터 AI 관제까지 단일 창구.' },
   { num: '02', title: '인공지능보안 전공자 기술 자문', desc: 'AI 보안 기술엔지니어가 직접 서비스를 설계하고 운영합니다.' },
   { num: '03', title: '자체 개발 Ultrastream 엔진', desc: 'MediaMTX 기반 LL-HLS 1~2초 레이턴시. 상용 솔루션 대비 80% 비용 절감.' },
-  { num: '04', title: 'Proxmox 기반 완전 이중화 인프라', desc: 'Windows Server 2022 + Proxmox VM 운영 경험. HA/DR 설계 및 실운영 검증 완료.' },
+  { num: '04', title: '가상화 기반 완전 이중화 인프라', desc: '모든 운영체제 VM. HA/DR 설계 및 실운영 검증 완료.' },
 ]
 
 const termLines = [
