@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
     description: '스트리밍 솔루션·영상 스트리밍 플랫폼·IDC·클라우드 인프라·AI 보안·네트워크 보안·백업/DR 솔루션. 차세대 기술 인프라 플랫폼.',
-    url: 'https://lunarflux.al',
+    url: 'https://lunarflux.ai',
     siteName: 'LunarFlux',
     locale: 'ko_KR',
     type: 'website',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description: '스트리밍 솔루션·IDC·AI 보안·백업/DR 솔루션을 하나의 플랫폼으로.',
   },
   alternates: {
-    canonical: 'https://lunarflux.al',
+    canonical: 'https://lunarflux.ai',
   },
   robots: {
     index: true,

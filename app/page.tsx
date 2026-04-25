@@ -24,14 +24,72 @@ export default function Home() {
     return () => obs.disconnect()
   }, [])
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'LunarFlux AI',
+    url: 'https://lunarflux.ai',
+    logo: 'https://lunarflux.ai/logo.png',
+    description: 'IDC 서버 임대·위탁운영, 스트리밍 솔루션, 영상 스트리밍 플랫폼, AI 보안, 네트워크 보안, 백업/DR 솔루션을 제공하는 차세대 기술 인프라 플랫폼',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'KR',
+    },
+    sameAs: [
+      'https://lunarflux.ai',
+    ],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'LunarFlux 서비스',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: '스트리밍 솔루션 / 영상 스트리밍 플랫폼',
+            description: 'Ultrastream 엔진 기반 라이브 스트리밍 및 영상 스트리밍 플랫폼 서비스',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'IDC / 클라우드 인프라',
+            description: 'IDC 서버 임대·위탁운영 및 클라우드 인프라 서비스',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'AI 보안 / 네트워크 보안',
+            description: 'AI 기반 보안 관제, 딥페이크 탐지, 네트워크 보안 서비스',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: '백업/DR 솔루션',
+            description: '데이터 백업, 재해복구(DR), 이중화 솔루션 서비스',
+          },
+        },
+      ],
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <NextSeo
         title="LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼"
         description="스트리밍 솔루션·영상 스트리밍 플랫폼·IDC·클라우드 인프라·AI 보안·네트워크 보안·백업/DR 솔루션. 하나의 플랫폼으로 완성하는 차세대 기술 인프라."
-        canonical="https://lunarflux.al"
+        canonical="https://lunarflux.ai"
         openGraph={{
-          url: 'https://lunarflux.al',
+          url: 'https://lunarflux.ai',
           title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
           description: '스트리밍 솔루션·영상 스트리밍 플랫폼·IDC·클라우드 인프라·AI 보안·네트워크 보안·백업/DR 솔루션.',
           siteName: 'LunarFlux',
