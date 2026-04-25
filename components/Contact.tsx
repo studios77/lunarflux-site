@@ -61,7 +61,7 @@ export default function Contact() {
             Contact
           </div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>서비스 문의</h2>
-          <p style={{ fontSize: '0.95rem', color: '#111827', maxWidth: 520, lineHeight: 1.8 }}>기술이사가 직접 검토 후 24시간 내 회신드립니다.</p>
+          <p style={{ fontSize: '0.95rem', color: '#111827', maxWidth: 520, lineHeight: 1.8 }}>전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
         </div>
 
         <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
