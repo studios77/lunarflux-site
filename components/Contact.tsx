@@ -1,13 +1,41 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
+
+const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE'
 
 export default function Contact() {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const formRef = useRef<HTMLFormElement>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
-    setTimeout(() => setSent(false), 3000)
+    if (!formRef.current) return
+
+    setStatus('sending')
+
+    const formData = new FormData(formRef.current)
+    formData.append('access_key', WEB3FORMS_KEY)
+    formData.append('subject', '[LunarFlux] 새 서비스 문의가 접수되었습니다')
+    formData.append('from_name', 'LunarFlux 문의')
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await res.json()
+      if (data.success) {
+        setStatus('success')
+        formRef.current.reset()
+        setTimeout(() => setStatus('idle'), 4000)
+      } else {
+        setStatus('error')
+        setTimeout(() => setStatus('idle'), 4000)
+      }
+    } catch {
+      setStatus('error')
+      setTimeout(() => setStatus('idle'), 4000)
+    }
   }
 
   const inputStyle: React.CSSProperties = {
@@ -50,17 +78,17 @@ export default function Contact() {
           </div>
 
           <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '36px 32px' }}>
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 {[
-                  { label: '이름 / 담당자', type: 'text', placeholder: '홍길동', full: false },
-                  { label: '회사명', type: 'text', placeholder: '(주)루나테크', full: false },
-                  { label: '이메일', type: 'email', placeholder: 'contact@company.com', full: false },
-                  { label: '연락처', type: 'tel', placeholder: '010-0000-0000', full: false },
+                  { label: '이름 / 담당자', name: 'name', type: 'text', placeholder: '홍길동' },
+                  { label: '회사명', name: 'company', type: 'text', placeholder: '(주)루나테크' },
+                  { label: '이메일', name: 'email', type: 'email', placeholder: 'contact@company.com' },
+                  { label: '연락처', name: 'phone', type: 'tel', placeholder: '010-0000-0000' },
                 ].map(f => (
                   <div key={f.label}>
                     <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{f.label}</label>
-                    <input type={f.type} placeholder={f.placeholder} style={inputStyle}
+                    <input type={f.type} name={f.name} placeholder={f.placeholder} required={f.name === 'name' || f.name === 'email'} style={inputStyle}
                       onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                       onBlur={e => (e.target.style.borderColor = 'var(--border)')}
                     />
@@ -69,7 +97,7 @@ export default function Contact() {
 
                 <div style={{ gridColumn: '1 / -1' }}>
                   <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>관심 서비스</label>
-                  <select style={{ ...inputStyle, appearance: 'none' }}
+                  <select name="service" style={{ ...inputStyle, appearance: 'none' }}
                     onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                     onBlur={e => (e.target.style.borderColor = 'var(--border)')}
                   >
@@ -89,7 +117,7 @@ export default function Contact() {
 
                 <div style={{ gridColumn: '1 / -1' }}>
                   <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>문의 내용</label>
-                  <textarea placeholder="현재 인프라 환경이나 필요하신 서비스를 자유롭게 작성해 주세요." rows={5}
+                  <textarea name="message" placeholder="현재 인프라 환경이나 필요하신 서비스를 자유롭게 작성해 주세요." rows={5}
                     style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
                     onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                     onBlur={e => (e.target.style.borderColor = 'var(--border)')}
@@ -97,14 +125,27 @@ export default function Contact() {
                 </div>
               </div>
 
-              <button type="submit" style={{
+              {status === 'error' && (
+                <p style={{ marginTop: 12, fontSize: '0.82rem', color: '#ef4444', fontFamily: 'var(--mono)' }}>
+                  전송 실패 — 잠시 후 다시 시도해주세요.
+                </p>
+              )}
+
+              <button type="submit" disabled={status === 'sending'} style={{
                 width: '100%', marginTop: 16, padding: 14,
-                background: sent ? '#28c840' : 'var(--accent)', color: '#000',
+                background: status === 'success' ? '#28c840' : status === 'error' ? '#ef4444' : 'var(--accent)',
+                color: '#000',
                 border: 'none', borderRadius: 4,
                 fontFamily: 'var(--mono)', fontSize: '0.78rem', fontWeight: 500,
-                letterSpacing: '0.08em', cursor: 'pointer', transition: 'all 0.25s',
+                letterSpacing: '0.08em',
+                cursor: status === 'sending' ? 'not-allowed' : 'pointer',
+                transition: 'all 0.25s',
+                opacity: status === 'sending' ? 0.7 : 1,
               }}>
-                {sent ? '전송 완료 — 곧 연락드리겠습니다 ✓' : '문의 전송 — 24시간 내 회신'}
+                {status === 'sending' && '전송 중…'}
+                {status === 'success' && '전송 완료 — 곧 연락드리겠습니다 ✓'}
+                {status === 'error' && '전송 실패 — 다시 시도해주세요'}
+                {status === 'idle' && '문의 전송 — 24시간 내 회신'}
               </button>
             </form>
           </div>
