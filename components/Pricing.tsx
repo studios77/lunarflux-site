@@ -93,7 +93,7 @@ export default function Pricing() {
           <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent2)', margin: '16px 0' }}>맞춤 견적</div>
           <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 20, lineHeight: 1.7, maxWidth: 600 }}>무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화.</p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0 24px', marginBottom: 24 }}>
-            {['무제한 채널 + 전용서버','AI 보안 관제 24/7','딥페이크 탐지 모듈','HA/DR 완전 이중화','LLM 보안 감사','전담 기술이사 지원'].map(f => (
+            {['무제한 채널 + 전용서버','AI 보안 관제 24/7','딥페이크 탐지 모듈','HA/DR 완전 이중화','LLM 보안 감사','전담 전문기술엔지니어 지원'].map(f => (
               <div key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(56,189,248,0.08)', display: 'flex', gap: 10 }}>
                 <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>{f}
               </div>
