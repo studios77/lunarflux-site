@@ -1,11 +1,11 @@
 const plans = [
   {
-    tier: 'Starter', name: '스트림 Basic', price: '49,000', unit: '/월', featured: false,
+    tier: 'Starter', name: '스트림 Basic', price: '49,000', unit: '/hour', featured: false,
     desc: '라이브 스트리밍을 시작하는 소규모 팀에 적합한 플랜입니다.',
     features: ['Ultrastream 엔진 1채널','LL-HLS 스트리밍 (최대 1080p)','동시 시청자 100명','VOD 저장 50GB','기본 모니터링 대시보드','이메일 기술지원'],
   },
   {
-    tier: 'Professional', name: 'Stream Pro + AI', price: '149,000', unit: '/월', featured: true,
+    tier: 'Professional', name: 'Stream Pro + AI', price: '가격문의', unit: '', featured: true,
     desc: '스트리밍 + AI 보안이 결합된 가장 인기 있는 통합 플랜입니다.',
     features: ['Ultrastream 엔진 5채널','ABR 4단계 (1080p ~ 360p)','동시 시청자 1,000명','VOD 500GB + CDN','AI 이상탐지 + IP 자동차단','멀티플랫폼 동시 송출','24시간 Slack 기술지원'],
   },
@@ -52,11 +52,17 @@ export default function Pricing() {
               <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>{p.tier}</div>
               <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{p.name}</div>
               <div style={{ margin: '20px 0' }}>
-                <span style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 700, color: 'var(--text)' }}>
-                  <span style={{ fontSize: '1rem', fontWeight: 400, color: 'var(--text2)', fontFamily: 'var(--mono)', verticalAlign: 'super' }}>₩</span>
-                  {p.price}
-                  <span style={{ fontSize: '0.8rem', color: 'var(--text3)', fontFamily: 'var(--mono)', fontWeight: 400 }}>{p.unit}</span>
-                </span>
+                {p.price === '가격문의' ? (
+                  <span style={{ fontFamily: 'var(--display)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--accent)' }}>
+                    가격문의
+                  </span>
+                ) : (
+                  <span style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 700, color: 'var(--text)' }}>
+                    <span style={{ fontSize: '1rem', fontWeight: 400, color: 'var(--text2)', fontFamily: 'var(--mono)', verticalAlign: 'super' }}>₩</span>
+                    {p.price}
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text3)', fontFamily: 'var(--mono)', fontWeight: 400 }}>{p.unit}</span>
+                  </span>
+                )}
               </div>
               <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 24, lineHeight: 1.7 }}>{p.desc}</p>
               <ul style={{ listStyle: 'none', marginBottom: 32 }}>
