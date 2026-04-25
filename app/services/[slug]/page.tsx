@@ -7,18 +7,24 @@ export function generateStaticParams() {
   return servicesData.map(s => ({ slug: s.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug)
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params
+  const service = getServiceBySlug(slug)
   if (!service) return {}
   return {
     title: `${service.name} — LunarFlux AI`,
     description: service.summary,
-    alternates: { canonical: `https://lunarflux.ai/services/${service.slug}` },
+    alternates: { canonical: `https://lunarflux.ai/services/${service.slug}/` },
   }
 }
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const s = getServiceBySlug(params.slug)
+export default async function ServicePage(
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params
+  const s = getServiceBySlug(slug)
   if (!s) notFound()
 
   return (
@@ -41,10 +47,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       </nav>
 
       {/* Hero */}
-      <section style={{
-        paddingTop: 120, paddingBottom: 80, padding: '120px 5% 80px',
-        maxWidth: 1100, margin: '0 auto',
-      }}>
+      <section style={{ padding: '120px 5% 80px', maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
           {s.cat}
@@ -93,8 +96,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       {/* Specs + Use Cases */}
       <section style={{ padding: '80px 5%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60 }}>
-
-          {/* Specs */}
           <div>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
@@ -110,7 +111,6 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </ul>
           </div>
 
-          {/* Use Cases */}
           <div>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
@@ -167,12 +167,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
             {servicesData.filter(sv => sv.slug !== s.slug).slice(0, 4).map(sv => (
               <Link key={sv.slug} href={`/services/${sv.slug}/`} style={{
-                display: 'block', padding: '20px 20px', textDecoration: 'none',
+                display: 'block', padding: '20px', textDecoration: 'none',
                 border: '1px solid var(--border)', borderRadius: 6, background: 'var(--surface)',
-                transition: 'border-color 0.2s',
-              }}
-                onMouseEnter={undefined}
-              >
+              }}>
                 <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>{sv.icon}</div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', color: 'var(--accent)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{sv.cat}</div>
                 <div style={{ fontFamily: 'var(--display)', fontSize: '0.95rem', fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>{sv.name}</div>
