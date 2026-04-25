@@ -3,15 +3,37 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
-  description: 'IDC 서버 임대·위탁운영부터 AI 보안 관제, Ultrastream 엔진 기반 라이브 스트리밍까지. 하나의 플랫폼으로 완성하는 기술 인프라.',
-  keywords: 'IDC, AI 보안, 스트리밍, 서버 임대, 위탁운영, 이중화, 딥페이크 탐지',
+  description: 'IDC 서버 임대·위탁운영부터 AI 보안 관제, Ultrastream 엔진 기반 라이브 스트리밍까지. 스트리밍 솔루션, 영상 스트리밍 플랫폼, 클라우드 인프라, AI 보안, 네트워크 보안, 백업/DR 솔루션을 하나의 플랫폼으로.',
+  keywords: [
+    'IDC', 'IDC 서버 임대', 'IDC 위탁운영', '클라우드 인프라', '서버 임대',
+    '스트리밍 솔루션', '영상 스트리밍', '영상 스트리밍 플랫폼', '라이브 스트리밍', 'Ultrastream',
+    'AI 보안', '네트워크 보안', '딥페이크 탐지', 'AI 보안 관제', '사이버 보안',
+    '백업 솔루션', 'DR 솔루션', '재해복구', '데이터 백업', '이중화',
+    'LunarFlux', '루나플럭스'
+  ],
   openGraph: {
     title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
-    description: '차세대 보안 인프라 플랫폼',
+    description: '스트리밍 솔루션·영상 스트리밍 플랫폼·IDC·클라우드 인프라·AI 보안·네트워크 보안·백업/DR 솔루션. 차세대 기술 인프라 플랫폼.',
     url: 'https://lunarflux.al',
     siteName: 'LunarFlux',
     locale: 'ko_KR',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
+    description: '스트리밍 솔루션·IDC·AI 보안·백업/DR 솔루션을 하나의 플랫폼으로.',
+  },
+  alternates: {
+    canonical: 'https://lunarflux.al',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 }
 
