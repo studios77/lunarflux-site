@@ -137,10 +137,10 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                   <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: plan.popular ? 'var(--accent)' : 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>
                     {plan.size}
                   </div>
-                  <div style={{ fontFamily: 'var(--display)', fontSize: '1.15rem', fontWeight: 700, color: plan.popular ? '#fff' : 'var(--text)', marginBottom: 16 }}>
+                  <div style={{ fontFamily: 'var(--display)', fontSize: '1rem', fontWeight: 700, color: plan.popular ? '#fff' : 'var(--text)', marginBottom: 16 }}>
                     {plan.name}
                   </div>
-                  <div style={{ fontSize: '1.6rem', fontWeight: 800, fontFamily: 'var(--display)', color: plan.popular ? 'var(--accent)' : 'var(--text)', letterSpacing: '-0.02em', marginBottom: 4 }}>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, fontFamily: 'var(--display)', color: plan.popular ? 'var(--accent)' : 'var(--text)', letterSpacing: '-0.02em', marginBottom: 4 }}>
                     {plan.price}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: plan.popular ? 'rgba(255,255,255,0.5)' : 'var(--text3)', fontFamily: 'var(--mono)', marginBottom: 20 }}>
