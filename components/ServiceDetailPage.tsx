@@ -148,7 +148,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                   </div>
                   <div style={{ borderTop: `1px solid ${plan.popular ? 'rgba(14,165,233,0.25)' : 'var(--border)'}`, paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {[
-                      { label: '전력', value: plan.power },
                       { label: '네트워크', value: plan.network },
                       { label: '냉각·보안', value: '포함' },
                       { label: 'IPMI 원격관리', value: '포함' },

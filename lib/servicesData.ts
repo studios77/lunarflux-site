@@ -1,7 +1,6 @@
 export type ColoPlan = {
   name: string
   size: string
-  power: string
   network: string
   price: string
   note?: string
@@ -58,16 +57,14 @@ export const servicesData: ServiceData[] = [
       {
         name: '1U Basic',
         size: '1U',
-        power: '최대 200W',
-        network: '1Gbps 공유',
+        network: '1Gbps 전용회선',
         price: '150,000원',
         note: '월 기준 / 부가세 별도',
       },
       {
         name: '2U Standard',
         size: '2U',
-        power: '최대 400W',
-        network: '1Gbps 공유',
+        network: '1Gbps 전용회선',
         price: '220,000원',
         note: '월 기준 / 부가세 별도',
         popular: true,
@@ -75,24 +72,21 @@ export const servicesData: ServiceData[] = [
       {
         name: '4U Pro',
         size: '4U',
-        power: '최대 600W',
-        network: '1Gbps 전용',
+        network: '1Gbps 전용회선',
         price: '350,000원',
         note: '월 기준 / 부가세 별도',
       },
       {
         name: '하프랙',
         size: '20U',
-        power: '최대 2kW',
-        network: '1Gbps 전용',
+        network: '1Gbps 전용회선',
         price: '800,000원',
         note: '월 기준 / 부가세 별도',
       },
       {
         name: '풀랙',
         size: '42U',
-        power: '최대 5kW',
-        network: '10Gbps 전용',
+        network: '1Gbps 전용회선',
         price: '1,500,000원',
         note: '월 기준 / 부가세 별도',
       },
