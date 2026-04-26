@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 
 const edges = [
   {
@@ -20,14 +21,15 @@ const edges = [
     icon: '🤖',
     title: 'LLM 기반 AI 보안 관제',
     subtitle: '룰이 아닌 맥락으로 대응',
-    desc: '기존 SIEM/SOAR는 사전 정의된 룰에만 반응합니다. LunarFlux AI 관제 에이전트는 LLM이 보안 이벤트의 맥락을 이해하고 처음 보는 공격 패턴도 스스로 판단·대응합니다. 24시간 인력 관제 대비 비용 90% 절감.',
+    desc: '기존 보안 시스템은 사전 정의된 패턴에만 반응합니다. LunarFlux AI 관제는 보안 이벤트의 맥락을 이해하고 처음 보는 공격 패턴도 스스로 판단·대응합니다. 24시간 인력 관제 대비 비용 90% 절감.',
     stats: [
-      { val: '50+', label: 'SOAR 플레이북' },
+      { val: '50+', label: '자동 대응 시나리오' },
       { val: '90%', label: '관제 비용 절감' },
       { val: '< 5분', label: '위협→격리' },
     ],
     highlight: 'IT 보안 전담 인력이 없는 기업도 엔터프라이즈급 관제 실현',
     color: '#f59e0b',
+    link: '/services/ai-security/',
   },
   {
     badge: '03 · 초저지연 스트리밍',
@@ -126,6 +128,11 @@ export default function EdgeSection() {
                 <div style={{ marginTop: 18, padding: '10px 14px', background: `${e.color}10`, borderLeft: `3px solid ${e.color}`, borderRadius: '0 6px 6px 0', fontSize: '0.8rem', color: 'var(--text2)', lineHeight: 1.6 }}>
                   {e.highlight}
                 </div>
+                {e.link && (
+                  <Link href={e.link} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 20, fontFamily: 'var(--mono)', fontSize: '0.75rem', color: e.color, textDecoration: 'none', letterSpacing: '0.04em', borderBottom: `1px solid ${e.color}55`, paddingBottom: 2 }}>
+                    상세 서비스 페이지 보기 →
+                  </Link>
+                )}
               </div>
 
               {/* Right — stats */}
