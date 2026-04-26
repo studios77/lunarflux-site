@@ -104,77 +104,78 @@ export default function Nav() {
             {/* Dropdown */}
             {menuOpen && (
               <div
-                onMouseEnter={() => {
-                  if (closeTimer.current) clearTimeout(closeTimer.current)
-                }}
-                onMouseLeave={() => {
-                  closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
-                }}
+                onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current) }}
+                onMouseLeave={() => { closeTimer.current = setTimeout(() => setMenuOpen(false), 250) }}
                 style={{
-                position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
-                marginTop: 0, paddingTop: 8,
-                background: 'var(--surface)', border: '1px solid var(--border2)',
-                borderRadius: 12, padding: '20px 0',
-                boxShadow: '0 20px 60px rgba(14,165,233,0.15)',
-                display: 'flex', gap: 0,
-                minWidth: 700,
-                zIndex: 300,
-              }}>
-                {serviceMenu.map((cat, ci) => (
-                  <div key={ci} style={{
-                    flex: 1, padding: '0 20px',
-                    borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
-                  }}>
-                    <div style={{
-                      fontFamily: 'var(--mono)', fontSize: '0.6rem',
-                      color: cat.color, letterSpacing: '0.12em', textTransform: 'uppercase',
-                      marginBottom: 12, fontWeight: 700,
-                      display: 'flex', alignItems: 'center', gap: 6,
+                  position: 'absolute', top: 'calc(100% + 8px)',
+                  left: '50%', transform: 'translateX(-50%)',
+                  background: 'var(--surface)', border: '1px solid var(--border2)',
+                  borderRadius: 12,
+                  boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
+                  minWidth: 680,
+                  zIndex: 9999,
+                  display: 'flex', flexDirection: 'column',
+                  overflow: 'visible',
+                }}
+              >
+                {/* 카테고리 행 */}
+                <div style={{ display: 'flex', padding: '20px 0 16px' }}>
+                  {serviceMenu.map((cat, ci) => (
+                    <div key={ci} style={{
+                      flex: 1, padding: '0 20px',
+                      borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
                     }}>
-                      <span style={{ width: 12, height: 1, background: cat.color, display: 'inline-block' }} />
-                      {cat.cat}
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                      {cat.items.map((item, ii) => (
-                        <Link
-                          key={ii}
-                          href={`/services/${item.slug}/`}
-                          onClick={() => setMenuOpen(false)}
-                          style={{
-                            display: 'block', padding: '8px 10px', borderRadius: 6,
-                            textDecoration: 'none',
-                            background: item.highlight ? `${cat.color}10` : 'transparent',
-                            border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
-                            transition: 'background 0.15s',
-                          }}
-                          onMouseEnter={e => {
-                            if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'var(--bg)'
-                          }}
-                          onMouseLeave={e => {
-                            if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
-                          }}
-                        >
-                          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontFamily: 'var(--sans)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text)' }}>
-                              {item.name}
-                            </span>
-                            {item.highlight && (
-                              <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '1px 6px', letterSpacing: '0.06em' }}>
-                                NEW
+                      <div style={{
+                        fontFamily: 'var(--mono)', fontSize: '0.6rem',
+                        color: cat.color, letterSpacing: '0.12em', textTransform: 'uppercase',
+                        marginBottom: 12, fontWeight: 700,
+                        display: 'flex', alignItems: 'center', gap: 6,
+                      }}>
+                        <span style={{ width: 12, height: 1, background: cat.color, display: 'inline-block' }} />
+                        {cat.cat}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        {cat.items.map((item, ii) => (
+                          <Link
+                            key={ii}
+                            href={`/services/${item.slug}/`}
+                            onClick={() => setMenuOpen(false)}
+                            style={{
+                              display: 'block', padding: '8px 10px', borderRadius: 6,
+                              textDecoration: 'none',
+                              background: item.highlight ? `${cat.color}10` : 'transparent',
+                              border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
+                              transition: 'background 0.15s',
+                            }}
+                            onMouseEnter={e => {
+                              if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'var(--bg)'
+                            }}
+                            onMouseLeave={e => {
+                              if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                              <span style={{ fontFamily: 'var(--sans)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text)' }}>
+                                {item.name}
                               </span>
-                            )}
-                          </div>
-                          <div style={{ fontFamily: 'var(--sans)', fontSize: '0.72rem', color: 'var(--text3)', marginTop: 2 }}>
-                            {item.desc}
-                          </div>
-                        </Link>
-                      ))}
+                              {item.highlight && (
+                                <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '1px 6px', letterSpacing: '0.06em' }}>
+                                  NEW
+                                </span>
+                              )}
+                            </div>
+                            <div style={{ fontFamily: 'var(--sans)', fontSize: '0.72rem', color: 'var(--text3)', marginTop: 2 }}>
+                              {item.desc}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
 
-                {/* 하단 바로가기 */}
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderTop: '1px solid var(--border)', padding: '10px 20px', display: 'flex', gap: 16, background: 'var(--bg)', borderRadius: '0 0 12px 12px' }}>
+                {/* 하단 바로가기 — 절대위치 없이 자연스럽게 */}
+                <div style={{ borderTop: '1px solid var(--border)', padding: '10px 20px', display: 'flex', gap: 16, background: 'var(--bg)', borderRadius: '0 0 12px 12px' }}>
                   <a href="#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     전체 서비스 보기 →
                   </a>
