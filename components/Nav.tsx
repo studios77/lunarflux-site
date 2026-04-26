@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 const serviceMenu = [
@@ -37,6 +37,7 @@ export default function Nav() {
   const [active, setActive] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
@@ -79,8 +80,13 @@ export default function Nav() {
 
           {/* 서비스 드롭다운 */}
           <li style={{ position: 'relative' }}
-            onMouseEnter={() => setMenuOpen(true)}
-            onMouseLeave={() => setMenuOpen(false)}
+            onMouseEnter={() => {
+              if (closeTimer.current) clearTimeout(closeTimer.current)
+              setMenuOpen(true)
+            }}
+            onMouseLeave={() => {
+              closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
+            }}
           >
             <button style={{
               fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700,
@@ -97,9 +103,16 @@ export default function Nav() {
 
             {/* Dropdown */}
             {menuOpen && (
-              <div style={{
+              <div
+                onMouseEnter={() => {
+                  if (closeTimer.current) clearTimeout(closeTimer.current)
+                }}
+                onMouseLeave={() => {
+                  closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
+                }}
+                style={{
                 position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)',
-                marginTop: 12,
+                marginTop: 0, paddingTop: 8,
                 background: 'var(--surface)', border: '1px solid var(--border2)',
                 borderRadius: 12, padding: '20px 0',
                 boxShadow: '0 20px 60px rgba(14,165,233,0.15)',
