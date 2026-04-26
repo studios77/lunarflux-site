@@ -1,0 +1,58 @@
+# LunarFlux AI — Cursor Rules
+
+## Framework & Environment
+- Always use **Next.js 16 App Router** (`app/` directory) — NOT Pages Router
+- Project is configured with `output: 'export'` (static export) — no server-side runtime
+- React version follows Next.js built-in canary (React 19 compatible)
+
+## Styling
+- Prefer **inline `style` props** or **CSS Modules** for component styling (current project convention)
+- For hover/focus effects in Server Components, use `<style>` tag with CSS class selectors — NOT JS event handlers
+- Do NOT introduce Tailwind CSS unless the user explicitly requests a migration
+
+## Server vs Client Components
+- Default to **Server Components** (no `'use client'` at top)
+- Add `'use client'` ONLY when using: `useState`, `useEffect`, `useRef`, browser APIs, or event handlers
+- **NEVER** put `export const metadata` and `'use client'` in the same file — split into separate files
+
+```tsx
+// ❌ WRONG
+'use client'
+export const metadata = { title: '...' }
+
+// ✅ CORRECT — split into two files
+// page.tsx  →  export const metadata  (Server Component)
+// ui.tsx    →  'use client'           (Client Component)
+```
+
+## Static Export Constraints
+- Dynamic routes must define `generateStaticParams()`
+- `useSearchParams()` must be wrapped in `<Suspense>`
+- No Route Handlers or Middleware (not supported in static export)
+- Use plain `<img>` or external image CDN instead of `next/image` optimizer
+
+## Routing & Navigation
+- Page links: `<Link href="...">` from `next/link`
+- Programmatic navigation: `useRouter()` from `next/navigation`
+- External links: plain `<a target="_blank" rel="noopener noreferrer">`
+
+## SEO & Metadata
+```tsx
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: '페이지 제목 | LunarFlux AI',
+  description: '페이지 설명',
+  keywords: ['키워드1', '키워드2'],
+  openGraph: { title: '...', description: '...', images: ['/og.png'] },
+}
+```
+
+## Git & Deployment
+- Always `git add` → `git commit` → `git push origin main` after completing tasks
+- Commit messages in English, imperative style: `feat:`, `fix:`, `chore:`, `docs:`
+- Deployment via Vercel (auto-deploys on push to main)
+
+## Reference
+- Next.js official docs: https://nextjs.org/docs
+- App Router guide: https://nextjs.org/docs/app
+- Static exports: https://nextjs.org/docs/app/guides/static-exports
