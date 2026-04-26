@@ -43,9 +43,10 @@ export default function Nav() {
         {['services','pricing','about','contact'].map(id => (
           <li key={id}>
             <a href={`#${id}`} style={{
-              fontFamily: 'var(--mono)', fontSize: '0.75rem',
+              fontFamily: 'var(--sans)', fontSize: '1rem',
+              fontWeight: 700,
               color: active === id ? 'var(--accent)' : 'var(--text2)',
-              textDecoration: 'none', letterSpacing: '0.05em',
+              textDecoration: 'none', letterSpacing: '0.02em',
               transition: 'color 0.2s',
             }}>
               {id === 'services' ? '서비스' : id === 'pricing' ? '요금' : id === 'about' ? '소개' : '문의'}
