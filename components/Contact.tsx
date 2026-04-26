@@ -47,6 +47,7 @@ export default function Contact() {
 
   const contactItems = [
     { icon: '📧', title: 'Email', val: 'contact@lunarflux.al' },
+    { icon: '📞', title: '긴급 24시간 연락처', val: '010-3204-3847', highlight: true },
     { icon: '💬', title: 'Kakao / Telegram', val: '@lunarflux_support' },
     { icon: '🕐', title: '응답 시간', val: '평일 24시간 이내 / 긴급 장애 즉시' },
     { icon: '📍', title: '서비스 지역', val: '글로벌 전지역 가능(원격 운영)' },
@@ -67,11 +68,17 @@ export default function Contact() {
         <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {contactItems.map(c => (
-              <div key={c.title} style={{ display: 'flex', gap: 14, alignItems: 'flex-start', padding: '14px 16px', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 6 }}>
-                <div style={{ fontSize: '1rem', width: 36, height: 36, background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.22)', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
+              <div key={c.title} style={{
+                display: 'flex', gap: 14, alignItems: 'flex-start', padding: '14px 16px',
+                background: c.highlight ? 'linear-gradient(135deg, rgba(14,165,233,0.08), rgba(14,165,233,0.04))' : 'var(--surface)',
+                border: c.highlight ? '1.5px solid var(--accent)' : '1px solid var(--border)',
+                borderRadius: 6,
+                boxShadow: c.highlight ? '0 0 16px rgba(14,165,233,0.1)' : 'none',
+              }}>
+                <div style={{ fontSize: '1rem', width: 36, height: 36, background: c.highlight ? 'rgba(14,165,233,0.15)' : 'rgba(56,189,248,0.1)', border: `1px solid ${c.highlight ? 'var(--accent)' : 'rgba(56,189,248,0.22)'}`, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
                 <div>
-                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
-                  <div style={{ fontSize: '0.85rem', color: '#111827', fontWeight: 500 }}>{c.val}</div>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: c.highlight ? 'var(--accent)' : '#111827', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
+                  <a href={c.highlight ? `tel:${c.val.replace(/-/g, '')}` : undefined} style={{ fontSize: c.highlight ? '1rem' : '0.85rem', color: '#111827', fontWeight: c.highlight ? 700 : 500, textDecoration: 'none', letterSpacing: c.highlight ? '0.04em' : 'normal' }}>{c.val}</a>
                 </div>
               </div>
             ))}
