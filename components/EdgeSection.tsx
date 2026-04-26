@@ -44,6 +44,7 @@ const edges = [
     ],
     highlight: '스포츠 중계·라이브 커머스·실시간 경매에서 경쟁사와 체감 차이',
     color: '#10b981',
+    link: '/services/ultrastream/',
   },
 ]
 
