@@ -6,9 +6,11 @@
 - React version follows Next.js built-in canary (React 19 compatible)
 
 ## Styling
-- Prefer **inline `style` props** or **CSS Modules** for component styling (current project convention)
-- For hover/focus effects in Server Components, use `<style>` tag with CSS class selectors — NOT JS event handlers
-- Do NOT introduce Tailwind CSS unless the user explicitly requests a migration
+- Use **Tailwind CSS v4** utility classes as the primary styling method
+- Tailwind is imported via `@import "tailwindcss"` in `app/globals.css`
+- CSS custom properties (CSS variables in `:root`) are still available and can be used alongside Tailwind
+- For hover/focus effects in Server Components, prefer Tailwind `hover:` variants over JS event handlers
+- Inline `style` props are acceptable for dynamic/computed values (e.g. `style={{ width: progress + '%' }}`)
 
 ## Server vs Client Components
 - Default to **Server Components** (no `'use client'` at top)
