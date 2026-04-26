@@ -9,6 +9,7 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import ChatBot from '@/components/ChatBot'
 import EdgeSection from '@/components/EdgeSection'
+import ScrollTop from '@/components/ScrollTop'
 
 export default function Home() {
   useEffect(() => {
@@ -97,6 +98,7 @@ export default function Home() {
       </main>
       <Footer />
       <ChatBot />
+      <ScrollTop />
     </>
   )
 }
