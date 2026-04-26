@@ -1,3 +1,13 @@
+export type ColoPlan = {
+  name: string
+  size: string
+  power: string
+  network: string
+  price: string
+  note?: string
+  popular?: boolean
+}
+
 export type ServiceData = {
   slug: string
   icon: string
@@ -10,6 +20,7 @@ export type ServiceData = {
   specs: string[]
   useCases: string[]
   cta: string
+  coloPricing?: ColoPlan[]
 }
 
 export const servicesData: ServiceData[] = [
@@ -43,6 +54,49 @@ export const servicesData: ServiceData[] = [
       '데이터 분석 / GPU 연산 서버',
     ],
     cta: '서버 임대 상담 신청',
+    coloPricing: [
+      {
+        name: '1U Basic',
+        size: '1U',
+        power: '최대 200W',
+        network: '1Gbps 공유',
+        price: '150,000원',
+        note: '월 기준 / 부가세 별도',
+      },
+      {
+        name: '2U Standard',
+        size: '2U',
+        power: '최대 400W',
+        network: '1Gbps 공유',
+        price: '220,000원',
+        note: '월 기준 / 부가세 별도',
+        popular: true,
+      },
+      {
+        name: '4U Pro',
+        size: '4U',
+        power: '최대 600W',
+        network: '1Gbps 전용',
+        price: '350,000원',
+        note: '월 기준 / 부가세 별도',
+      },
+      {
+        name: '하프랙',
+        size: '20U',
+        power: '최대 2kW',
+        network: '1Gbps 전용',
+        price: '800,000원',
+        note: '월 기준 / 부가세 별도',
+      },
+      {
+        name: '풀랙',
+        size: '42U',
+        power: '최대 5kW',
+        network: '10Gbps 전용',
+        price: '1,500,000원',
+        note: '월 기준 / 부가세 별도',
+      },
+    ],
   },
   {
     slug: 'managed-service',
