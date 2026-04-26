@@ -4,37 +4,72 @@
 
   <url>
     <loc>https://lunarflux.ai/</loc>
-    <lastmod>2026-04-25</lastmod>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://lunarflux.ai/#services</loc>
-    <lastmod>2026-04-25</lastmod>
+    <loc>https://lunarflux.ai/services/server-rental/</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://lunarflux.ai/#pricing</loc>
-    <lastmod>2026-04-25</lastmod>
+    <loc>https://lunarflux.ai/services/managed-service/</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://lunarflux.ai/#about</loc>
-    <lastmod>2026-04-25</lastmod>
+    <loc>https://lunarflux.ai/services/ha/</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://lunarflux.ai/#contact</loc>
-    <lastmod>2026-04-25</lastmod>
+    <loc>https://lunarflux.ai/services/db-cluster/</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://lunarflux.ai/services/ultrastream/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lunarflux.ai/services/vod-multistream/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://lunarflux.ai/services/ai-stream-security/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lunarflux.ai/services/deepfake-detection/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://lunarflux.ai/services/ai-agent/</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
 </urlset>
