@@ -8,6 +8,7 @@ import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import ChatBot from '@/components/ChatBot'
+import EdgeSection from '@/components/EdgeSection'
 
 export default function Home() {
   useEffect(() => {
@@ -89,6 +90,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <EdgeSection />
         <Pricing />
         <About />
         <Contact />
