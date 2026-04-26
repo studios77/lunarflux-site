@@ -167,20 +167,7 @@ export default function AISecurityPage() {
           </h2>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 20 }}>
             {strengths.map((s, i) => (
-              <div key={i} style={{
-                background: 'var(--surface)', border: '1px solid var(--border)',
-                borderRadius: 12, padding: '32px 28px',
-                transition: 'border-color 0.25s, box-shadow 0.25s',
-              }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--accent)'
-                  ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 24px rgba(14,165,233,0.1)'
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'
-                  ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
-                }}
-              >
+              <div key={i} className="sec-card">
                 <div style={{ fontSize: '1.8rem', marginBottom: 16 }}>{s.icon}</div>
                 <h3 style={{ fontFamily: 'var(--display)', fontSize: '1.05rem', fontWeight: 700, color: 'var(--text)', marginBottom: 12, lineHeight: 1.4 }}>{s.title}</h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text2)', lineHeight: 1.8 }}>{s.desc}</p>
@@ -307,6 +294,17 @@ export default function AISecurityPage() {
         @keyframes pulse2 {
           0%, 100% { opacity: 1; transform: scale(1); }
           50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        .sec-card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 32px 28px;
+          transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .sec-card:hover {
+          border-color: var(--accent);
+          box-shadow: 0 0 24px rgba(14,165,233,0.1);
         }
       `}</style>
     </main>

@@ -220,10 +220,7 @@ export default function UltrastreamPage() {
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: 20 }}>
             {strengths.map((s, i) => (
-              <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '30px 26px', transition: 'border-color 0.25s, box-shadow 0.25s' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--accent)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 0 24px rgba(14,165,233,0.1)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLDivElement).style.boxShadow = 'none' }}
-              >
+              <div key={i} className="us-card">
                 <div style={{ fontSize: '1.8rem', marginBottom: 14 }}>{s.icon}</div>
                 <h3 style={{ fontFamily: 'var(--display)', fontSize: '1.02rem', fontWeight: 700, color: 'var(--text)', marginBottom: 10, lineHeight: 1.4 }}>{s.title}</h3>
                 <p style={{ fontSize: '0.84rem', color: 'var(--text2)', lineHeight: 1.8 }}>{s.desc}</p>
@@ -333,6 +330,19 @@ export default function UltrastreamPage() {
         </div>
       </section>
 
+      <style>{`
+        .us-card {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 30px 26px;
+          transition: border-color 0.25s, box-shadow 0.25s;
+        }
+        .us-card:hover {
+          border-color: var(--accent);
+          box-shadow: 0 0 24px rgba(14,165,233,0.1);
+        }
+      `}</style>
     </main>
   )
 }
