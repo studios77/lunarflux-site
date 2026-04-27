@@ -1,10 +1,62 @@
-# LunarFlux Site — Cursor 프로젝트 규칙
+# LunarFlux AI — Cursor Rules
 
-## Next.js 라우팅: App Router만 사용
+## Framework & Environment — App Router 전용
+- **항상 [Next.js App Router](https://nextjs.org/docs/app)만 사용합니다.** `app/` 디렉터리에 라우트·페이지·레이아웃을 둡니다.
+- **Pages Router(`pages/`, `getServerSideProps` / `getStaticProps` 등)는 사용하지 않고, 새로 추가하지도 마세요.**
+- Next.js 16, App Router, `output: 'export'`(정적 내보내기) — 서버 런타임 없음
+- React는 Next.js 번들(React 19 호환)을 따릅니다
 
-- 이 저장소의 **유일한 라우팅 모델은 [Next.js App Router](https://nextjs.org/docs/app)** (`app/` 디렉터리)입니다.
-- **새 페이지·레이아웃·로딩 UI·에러 UI**는 반드시 `app/` 아래에 추가합니다 (`page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx`, `not-found.tsx`, `route segment` 등).
-- **Pages Router** (`pages/` 디렉터리, `getServerSideProps` / `getStaticProps` 등)는 **사용하지 않습니다.** 기존 코드가 없다면 추가하지 마세요.
-- `next/link`, `next/navigation`의 `useRouter` / `usePathname` 등 **App Router용 API**를 사용합니다. (`next/router`의 Pages Router 전용 사용 지양)
+## Styling
+- Use **Tailwind CSS v4** utility classes as the primary styling method
+- Tailwind is imported via `@import "tailwindcss"` in `app/globals.css`
+- CSS custom properties (CSS variables in `:root`) are still available and can be used alongside Tailwind
+- For hover/focus effects in Server Components, prefer Tailwind `hover:` variants over JS event handlers
+- Inline `style` props are acceptable for dynamic/computed values (e.g. `style={{ width: progress + '%' }}`)
 
-자세한 규칙(서버/클라이언트 컴포넌트, 정적 export, SEO)은 `.cursor/rules/nextjs-latest.mdc`를 따릅니다.
+## Server vs Client Components
+- Default to **Server Components** (no `'use client'` at top)
+- Add `'use client'` ONLY when using: `useState`, `useEffect`, `useRef`, browser APIs, or event handlers
+- **NEVER** put `export const metadata` and `'use client'` in the same file — split into separate files
+
+```tsx
+// ❌ WRONG
+'use client'
+export const metadata = { title: '...' }
+
+// ✅ CORRECT — split into two files
+// page.tsx  →  export const metadata  (Server Component)
+// ui.tsx    →  'use client'           (Client Component)
+```
+
+## Static Export Constraints
+- Dynamic routes must define `generateStaticParams()`
+- `useSearchParams()` must be wrapped in `<Suspense>`
+- No Route Handlers or Middleware (not supported in static export)
+- Use plain `<img>` or external image CDN instead of `next/image` optimizer
+
+## Routing & Navigation
+- Page links: `<Link href="...">` from `next/link`
+- Programmatic navigation: `useRouter()` from `next/navigation` (not `next/router` for new code)
+- External links: plain `<a target="_blank" rel="noopener noreferrer">`
+
+## SEO & Metadata
+```tsx
+import type { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: '페이지 제목 | LunarFlux AI',
+  description: '페이지 설명',
+  keywords: ['키워드1', '키워드2'],
+  openGraph: { title: '...', description: '...', images: ['/og.png'] },
+}
+```
+
+## Git & Deployment
+- Always `git add` → `git commit` → `git push origin main` after completing tasks
+- Commit messages in English, imperative style: `feat:`, `fix:`, `chore:`, `docs:`
+- Deployment via Vercel (auto-deploys on push to main)
+
+## Reference
+- Next.js official docs: https://nextjs.org/docs
+- App Router guide: https://nextjs.org/docs/app
+- Static exports: https://nextjs.org/docs/app/guides/static-exports
+- Project detail rules also in: `.cursor/rules/nextjs-latest.mdc`
