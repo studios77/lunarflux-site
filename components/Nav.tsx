@@ -52,7 +52,7 @@ const serviceMenu: ServiceMenuCategory[] = [
             name: '시스템 복구 · 이전 · 트러블슈팅',
             nameLines: ['시스템 복구 · 이전 ·', '트러블슈팅'],
             slug: 'system-recovery-migration',
-            desc: '고객사 온프레 · 자체 서버',
+            desc: '외부 운영 서버 · 요청 시',
           },
         ],
       },

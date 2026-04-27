@@ -57,7 +57,7 @@ export default function Home() {
           itemOffered: {
             '@type': 'Service',
             name: 'IDC / 클라우드 인프라',
-            description: 'IDC 서버 임대·코로케이션·위탁운영, HA/DB 이중화, 고객사 온프레·자체 서버 대상 시스템 복구·이전·트러블슈팅',
+            description: 'IDC 서버 임대·코로케이션·위탁운영, HA/DB 이중화, 외부 고객이 운영 중인 서버 대상 시스템 복구·이전·트러블슈팅(요청 시)',
           },
         },
         {
