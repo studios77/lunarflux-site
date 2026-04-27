@@ -61,8 +61,8 @@ export default function Nav() {
         background: 'rgba(240,253,244,0.95)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
       }}>
-        {/* Logo */}
-        <a href="#hero" style={{
+        {/* Logo — always goes to home */}
+        <Link href="/" onClick={() => { setMenuOpen(false); setMobileOpen(false) }} style={{
           fontFamily: 'var(--display)', fontSize: '1.2rem', fontWeight: 800,
           letterSpacing: '-0.02em', color: 'var(--text)', textDecoration: 'none',
           display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
@@ -73,7 +73,7 @@ export default function Nav() {
             display: 'inline-block',
           }} />
           Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <ul style={{ display: 'flex', alignItems: 'center', gap: 28, listStyle: 'none', margin: 0, padding: 0 }}>
