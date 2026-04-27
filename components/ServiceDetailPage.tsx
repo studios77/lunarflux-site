@@ -14,8 +14,8 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         padding: '0 5%', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/images/logo.png" alt="LunarFlux AI Logo" style={{ height: 28, width: 'auto' }} />
+        <Link href="/" style={{ fontFamily: 'var(--display)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.02em' }}>
+          Lunar<span style={{ color: 'var(--accent)' }}>Flux</span>
         </Link>
         <Link href="/#services" style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--text2)', textDecoration: 'none', letterSpacing: '0.06em' }}>
           ← 서비스 목록
