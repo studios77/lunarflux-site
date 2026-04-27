@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# 원격으로 올리기 전에 프로덕션 빌드가 통과하는지 확인합니다.
+set -e
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT" || exit 1
+echo "pre-push: npm run build …"
+npm run build

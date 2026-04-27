@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build"
+    "export": "next build",
+    "prepare": "node scripts/ensure-git-hooks.cjs",
+    "git-hooks": "node scripts/ensure-git-hooks.cjs",
+    "git:cp": "node scripts/commit-push.cjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.4",
