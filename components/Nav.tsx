@@ -4,33 +4,30 @@ import Link from 'next/link'
 
 type ServiceMenuLink = {
   name: string
-  /** 긴 제목 2줄 표시(데스크톱·모바일 공통). 없으면 name만 사용 */
-  nameLines?: string[]
   slug: string
   desc: string
   highlight?: boolean
 }
 
 function MenuItemTitle({ item, size }: { item: ServiceMenuLink; size: 'sm' | 'md' }) {
-  const fs = size === 'sm' ? '0.9rem' : '1rem'
-  const lines = item.nameLines ?? [item.name]
+  const fs = size === 'sm' ? '0.875rem' : '0.95rem'
   return (
-    <span style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
-      {lines.map((ln, i) => (
-        <span
-          key={i}
-          style={{
-            fontFamily: 'var(--sans)',
-            fontSize: fs,
-            fontWeight: 600,
-            color: 'var(--text)',
-            lineHeight: 1.3,
-            wordBreak: 'keep-all',
-          }}
-        >
-          {ln}
-        </span>
-      ))}
+    <span
+      style={{
+        display: 'block',
+        minWidth: 0,
+        fontFamily: 'var(--sans)',
+        fontSize: fs,
+        fontWeight: 600,
+        color: 'var(--text)',
+        lineHeight: 1.35,
+        letterSpacing: '-0.01em',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}
+    >
+      {item.name}
     </span>
   )
 }
@@ -44,10 +41,10 @@ const serviceMenu: ServiceMenuCategory[] = [
     sections: [
       {
         items: [
-          { name: '서버 임대 · 코로케이션', nameLines: ['서버 임대 ·', '코로케이션'], slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
+          { name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
           { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
           { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
-          { name: 'DB 이중화 관리', nameLines: ['DB 이중화', '관리'], slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
+          { name: 'DB 이중화 관리', slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
           {
             name: '서버 장애 복구 및 이전',
             slug: 'system-recovery-migration',
@@ -65,22 +62,22 @@ const serviceMenu: ServiceMenuCategory[] = [
         sub: '관제 · 자동화',
         items: [
           { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제', highlight: true },
-          { name: 'AI 자율 관제 에이전트', nameLines: ['AI 자율 관제', '에이전트'], slug: 'ai-agent', desc: 'LLM SOC · SOAR' },
+          { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR' },
         ],
       },
       {
         sub: '스트리밍 · 미디어',
         items: [
-          { name: 'AI 스트림 이상탐지', nameLines: ['AI 스트림', '이상탐지'], slug: 'ai-stream-security', desc: 'DDoS · 하이재킹 차단' },
+          { name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'DDoS · 하이재킹 차단' },
           { name: '딥페이크 탐지', slug: 'deepfake-detection', desc: '실시간 합성 영상 검출' },
         ],
       },
       {
         sub: '인프라 · 거버넌스',
         items: [
-          { name: '네트워크 보안 · IDS/IPS', nameLines: ['네트워크 보안 ·', 'IDS/IPS'], slug: 'network-security', desc: '침입탐지 · 이상 ML' },
-          { name: '제로트러스트 설계', nameLines: ['제로트러스트', '설계'], slug: 'zero-trust', desc: '세그먼트 · MFA' },
-          { name: 'LLM 보안 감사', nameLines: ['LLM 보안', '감사'], slug: 'llm-security-audit', desc: '유출 · 인젝션 점검' },
+          { name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지 · 이상 ML' },
+          { name: '제로트러스트 설계', slug: 'zero-trust', desc: '세그먼트 · MFA' },
+          { name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '유출 · 인젝션 점검' },
         ],
       },
     ],
@@ -91,8 +88,8 @@ const serviceMenu: ServiceMenuCategory[] = [
     sections: [
       {
         items: [
-          { name: 'Ultrastream 스트리밍', nameLines: ['Ultrastream', '스트리밍'], slug: 'ultrastream', desc: 'LL-HLS 1~2초', highlight: true },
-          { name: 'VOD + 멀티 리스트림', nameLines: ['VOD + 멀티', '리스트림'], slug: 'vod-multistream', desc: '동시 송출' },
+          { name: 'Ultrastream 스트리밍', slug: 'ultrastream', desc: 'LL-HLS 1~2초', highlight: true },
+          { name: 'VOD + 멀티 리스트림', slug: 'vod-multistream', desc: '동시 송출' },
         ],
       },
     ],
@@ -178,8 +175,8 @@ export default function Nav() {
                   background: 'var(--surface)', border: '1px solid var(--border2)',
                   borderRadius: 12,
                   boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
-                  width: 'min(980px, calc(100vw - 24px))',
-                  maxWidth: 'calc(100vw - 24px)',
+                  width: 'min(1120px, calc(100vw - 20px))',
+                  maxWidth: 'calc(100vw - 20px)',
                   zIndex: 9999,
                   display: 'flex', flexDirection: 'column',
                   overflow: 'hidden',
@@ -187,11 +184,11 @@ export default function Nav() {
                 }}
               >
                 {/* 카테고리 행 — 3열이 항상 한 줄에 (스트리밍 열이 아래로 떨어지지 않도록 grid) */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '18px 0 14px', gap: 0 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '18px 10px 14px', gap: 0 }}>
                   {serviceMenu.map((cat, ci) => (
                     <div key={ci} style={{
                       minWidth: 0,
-                      padding: '0 14px',
+                      padding: '0 10px',
                       borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
                     }}>
                       <div style={{
@@ -235,12 +232,12 @@ export default function Nav() {
                                   if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
                                 }}
                               >
-                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, flexWrap: 'nowrap' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'nowrap' }}>
                                   <div style={{ flex: 1, minWidth: 0 }}>
                                     <MenuItemTitle item={item} size="sm" />
                                   </div>
                                   {item.highlight && (
-                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.56rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '3px 7px', letterSpacing: '0.06em', flexShrink: 0, marginTop: 2 }}>
+                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.56rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '3px 7px', letterSpacing: '0.06em', flexShrink: 0 }}>
                                       NEW
                                     </span>
                                   )}
@@ -351,16 +348,18 @@ export default function Nav() {
                       style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        alignItems: 'flex-start',
+                        alignItems: 'center',
                         gap: 10,
                         padding: '12px 0',
                         borderBottom: '1px solid var(--border)',
                         textDecoration: 'none',
                       }}
                     >
-                      <MenuItemTitle item={item} size="md" />
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <MenuItemTitle item={item} size="md" />
+                      </div>
                       {item.highlight && (
-                        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '4px 9px', flexShrink: 0, marginTop: 2 }}>
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '4px 9px', flexShrink: 0 }}>
                           NEW
                         </span>
                       )}
