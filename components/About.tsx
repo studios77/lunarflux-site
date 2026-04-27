@@ -2,15 +2,15 @@
 import { useEffect, useRef } from 'react'
 
 const whyItems = [
-  { num: '01', title: 'IDC + AI 보안 + 스트리밍 원스톱', desc: '세 영역을 한 회사가 통합 운영하는 플랫폼. 서버 임대부터 AI 관제까지 단일 창구.' },
-  { num: '02', title: '인공지능보안 전공자 기술 자문', desc: 'AI 보안 기술엔지니어가 직접 서비스를 설계하고 운영합니다.' },
-  { num: '03', title: '자체 개발 Ultrastream 엔진', desc: 'MediaMTX 기반 LL-HLS 1~2초 레이턴시. 상용 솔루션 대비 80% 비용 절감.' },
-  { num: '04', title: '가상화 기반 완전 이중화 인프라', desc: '모든 운영체제 VM. HA/DR 설계 및 실운영 검증 완료.' },
+  { num: '01', title: 'AI 파이프라인을 인프라와 같이 납품', desc: '탐지·분류·대응 모델과 데이터 경로를 IDC·네트워크·스트림 스택에 맞춰 설계합니다. PoC가 아닌 상용 운영 기준으로 맞춥니다.' },
+  { num: '02', title: 'LLM·ML을 실제 관제·스트림에 탑재', desc: '자율 관제 에이전트, 스트림 이상탐지, 딥페이크 검출 등을 고객 트래픽에 연결해 돌립니다. 보안·미디어 엔지니어가 온콜로 이어집니다.' },
+  { num: '03', title: '자체 Ultrastream + AI 미디어 스택', desc: '초저지연 LL-HLS 엔진과 AI 검증 레이어를 함께 운영합니다. 방송·커머스·공공 스트림에 맞춘 구성.' },
+  { num: '04', title: '가상화·HA 위에서 AI 워크로드까지', desc: 'GPU·CPU 워크로드, 이중화, 백업·DR까지 한 로드맵으로 설계·전환합니다.' },
 ]
 
 const termLines = [
   { type: 'prompt', text: '$ lunarflux status --all' },
-  { type: 'out', text: 'Connecting to LunarFlux AI Engine...' },
+  { type: 'out', text: 'Connecting to LunarFlux AI control plane…' },
   { type: 'blank' },
   { type: 'ok', text: '✓ MediaMTX      running — 4 streams active' },
   { type: 'ok', text: '✓ HA Cluster    ACTIVE-ACTIVE — no failover' },
@@ -18,8 +18,8 @@ const termLines = [
   { type: 'ok', text: '✓ Backup        last: 2h ago — verified OK' },
   { type: 'blank' },
   { type: 'prompt', text: '$ ai-sec scan --realtime' },
-  { type: 'out', text: 'Analyzing traffic patterns...' },
-  { type: 'ok', text: '✓ AI Engine     0 threats detected' },
+  { type: 'out', text: 'LLM summarizer + ML baselines — scoring events…' },
+  { type: 'ok', text: '✓ AI Engine     0 critical — 12 low queued for review' },
   { type: 'warn', text: '⚠ IP Block      3 IPs blocked (GeoIP KP,RU)' },
   { type: 'ok', text: '✓ Deepfake      stream integrity verified' },
   { type: 'blank' },
@@ -54,7 +54,8 @@ export default function About() {
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
             Why LunarfluxAI
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>왜 LunarfluxAI인가?</h2>
+          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>AI를 「기능」이 아니라 운영으로</h2>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.75, marginBottom: 8 }}>슬라이드용 데모가 아니라, 관제·스트림·거버넌스에 붙는 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>실서비스 AI</strong>를 지향합니다.</p>
         </div>
 
         <div className="reveal two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>

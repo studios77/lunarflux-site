@@ -5,9 +5,9 @@ export default function Hero() {
       padding: '100px 5% 60px', overflow: 'hidden', position: 'relative', zIndex: 1,
     }}>
       <div style={{
-        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-        width: 800, height: 500,
-        background: 'radial-gradient(ellipse, rgba(16,185,129,0.06) 0%, rgba(245,158,11,0.04) 45%, transparent 70%)',
+        position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)',
+        width: 920, height: 560,
+        background: 'radial-gradient(ellipse at 40% 40%, rgba(16,185,129,0.08) 0%, transparent 55%), radial-gradient(ellipse at 70% 30%, rgba(99,102,241,0.06) 0%, transparent 50%), radial-gradient(ellipse, rgba(245,158,11,0.04) 35%, transparent 72%)',
         pointerEvents: 'none',
       }} />
       <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', width: '100%' }}>
@@ -23,33 +23,32 @@ export default function Hero() {
             width: 6, height: 6, borderRadius: '50%', background: 'var(--accent2)',
             animation: 'pulse 1.5s ease-in-out infinite', display: 'inline-block',
           }} />
-          AI Security & Streaming Infrastructure
+          AI-native ops · production stack
         </div>
 
         <h1 style={{
-          fontFamily: 'var(--display)', fontSize: 'clamp(3rem, 8vw, 6.5rem)',
-          fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: 'var(--text)',
+          fontFamily: 'var(--display)', fontSize: 'clamp(2.6rem, 7vw, 5.2rem)',
+          fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', color: 'var(--text)',
           marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
           wordBreak: 'keep-all',
         }}>
-          IDC · <span style={{
-            background: 'linear-gradient(135deg, #059669, #d97706)',
+          <span style={{
+            background: 'linear-gradient(135deg, #059669 0%, #0d9488 40%, #6366f1 75%, #d97706 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-          }}>AI보안</span> ·{' '}
-          <span style={{ whiteSpace: 'nowrap' }}>스트리밍</span>
+          }}>AI가 결합된</span> 인프라
           <br />
-          통합 플랫폼
+          <span style={{ color: 'var(--text2)', fontWeight: 700 }}>IDC · 보안 · 스트리밍</span>을 한 팀이 운영
         </h1>
 
         <p style={{
-          fontSize: '1.05rem', color: 'var(--text)', maxWidth: 560,
-          margin: '0 auto 48px', lineHeight: 1.8,
+          fontSize: '1.05rem', color: 'var(--text2)', maxWidth: 600,
+          margin: '0 auto 48px', lineHeight: 1.85,
           animation: 'fadeUp 0.8s 0.2s ease both',
         }}>
-          IDC 서버 임대·위탁운영부터 AI 보안 관제,<br />
-          Ultrastream 엔진 기반 라이브 스트리밍까지.<br />
-          하나의 플랫폼으로 완성하는 기술 인프라.
+          LLM 기반 자율 관제·스트림 이상탐지·딥페이크 검출 등 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>실제 트래픽에서 돌아가는 AI</strong>를
+          IDC·네트워크·라이브 스택과 붙여 설계합니다.<br />
+          슬라이드가 아니라 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>상용 파이프라인</strong>으로 제공합니다.
         </p>
 
         <div style={{
@@ -85,8 +84,8 @@ export default function Hero() {
           {[
             { num: '99.99', unit: '%', label: 'Uptime SLA' },
             { num: '1~2', unit: 's', label: 'LL-HLS 레이턴시' },
-            { num: '24', unit: '/7', label: 'AI 보안 관제' },
-            { num: '14', unit: '개', label: '핵심 서비스' },
+            { num: '24', unit: '/7', label: 'AI 관제·자동대응' },
+            { num: '14', unit: '+', label: 'AI 결합 서비스' },
           ].map(s => (
             <div key={s.label} style={{ 
               textAlign: 'center', background: 'rgba(255,255,255,0.6)', 

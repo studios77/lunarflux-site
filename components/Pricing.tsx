@@ -99,8 +99,8 @@ export default function Pricing() {
               <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
               Pricing
             </div>
-            <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>투명한 요금제</h2>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>필요한 서비스만 선택하세요. 모든 플랜에 기본 모니터링과 기술 지원이 포함됩니다.</p>
+            <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>AI·스트림·IDC, 한 장표로</h2>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 540, lineHeight: 1.8 }}>스트림부터 AI 이상탐지·관제까지 필요한 모듈만 고르세요. 엔터프라이즈는 전용 스택 + 맞춤 AI 보안 스위트로 확장합니다.</p>
           </div>
 
           <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginTop: 60 }}>

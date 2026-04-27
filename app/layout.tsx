@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
-  description: 'IDC 서버 임대·위탁운영, 외부 고객 운영 서버 장애 복구 및 이전·트러블슈팅, AI 보안 관제, Ultrastream 기반 라이브 스트리밍까지. 클라우드 인프라, 네트워크 보안, 백업/DR을 하나의 플랫폼으로.',
+  title: 'LunarFlux AI — AI 결합 IDC · 보안 관제 · 초저지연 스트리밍',
+  description: 'LLM·ML 기반 자율 보안 관제, 스트림 이상탐지, 딥페이크 검출 등 실운영 AI를 IDC·네트워크·Ultrastream 스택과 통합 제공. 서버 임대·위탁운영·HA/DR까지 한 팀이 운영합니다.',
   keywords: [
     'IDC', 'IDC 서버 임대', 'IDC 위탁운영', 'IDC 코로케이션', '서버 임대', '서버 위탁관리',
     '코로케이션', '1U 서버', '2U 서버', '풀랙', '하프랙', '데이터센터 임대',
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     'LunarFlux', '루나플럭스', 'LunarFlux AI'
   ],
   openGraph: {
-    title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
-    description: '스트리밍 솔루션·영상 스트리밍 플랫폼·IDC·클라우드 인프라·AI 보안·네트워크 보안·백업/DR 솔루션. 차세대 기술 인프라 플랫폼.',
+    title: 'LunarFlux AI — AI 결합 IDC · 보안 관제 · 초저지연 스트리밍',
+    description: '실서비스 AI(LLM 관제·스트림 이상탐지·딥페이크)와 IDC·스트리밍 인프라를 함께 설계·운영합니다.',
     url: 'https://lunarflux.ai',
     siteName: 'LunarFlux',
     locale: 'ko_KR',
@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LunarFlux AI — IDC 서버 임대·AI 보안·스트리밍 통합 플랫폼',
-    description: '스트리밍 솔루션·IDC·AI 보안·백업/DR 솔루션을 하나의 플랫폼으로.',
+    title: 'LunarFlux AI — AI 결합 IDC · 보안 · 스트리밍',
+    description: '실운영 AI와 인프라를 한 팀이 통합 제공합니다.',
   },
   alternates: {
     canonical: 'https://lunarflux.ai',
