@@ -48,7 +48,7 @@ const serviceMenu: ServiceMenuCategory[] = [
           {
             name: '서버 장애 복구 및 이전',
             slug: 'system-recovery-migration',
-            desc: '트러블슈팅 포함 · 외부 운영 서버 · 요청 시',
+            desc: '트러블슈팅 포함 · 원격·현장',
           },
         ],
       },
