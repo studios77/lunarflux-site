@@ -30,12 +30,15 @@ export default function Hero() {
           fontFamily: 'var(--display)', fontSize: 'clamp(3rem, 8vw, 6.5rem)',
           fontWeight: 800, lineHeight: 1.0, letterSpacing: '-0.03em', color: 'var(--text)',
           marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
+          wordBreak: 'keep-all',
         }}>
           IDC · <span style={{
             background: 'linear-gradient(135deg, #059669, #d97706)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-          }}>AI보안</span> · 스트리밍<br />
+          }}>AI보안</span> ·{' '}
+          <span style={{ whiteSpace: 'nowrap' }}>스트리밍</span>
+          <br />
           통합 플랫폼
         </h1>
 
