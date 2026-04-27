@@ -82,9 +82,8 @@ export default function AISecurityPage() {
         padding: '0 5%', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
-        <Link href="/" style={{ fontFamily: 'var(--display)', fontWeight: 800, fontSize: '1.2rem', color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)', display: 'inline-block' }} />
-          Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/images/logo.png" alt="LunarFlux AI Logo" style={{ height: 28, width: 'auto' }} />
         </Link>
         <Link href="/#services" style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--text2)', textDecoration: 'none', letterSpacing: '0.06em' }}>
           ← 서비스 목록

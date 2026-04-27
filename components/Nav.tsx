@@ -63,16 +63,9 @@ export default function Nav() {
       }}>
         {/* Logo */}
         <a href="#hero" style={{
-          fontFamily: 'var(--display)', fontSize: '1.2rem', fontWeight: 800,
-          letterSpacing: '-0.02em', color: 'var(--text)', textDecoration: 'none',
-          display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
+          display: 'flex', alignItems: 'center', flexShrink: 0,
         }}>
-          <span style={{
-            width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)',
-            boxShadow: '0 0 10px var(--accent)', animation: 'pulse 2s ease-in-out infinite',
-            display: 'inline-block',
-          }} />
-          Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
+          <img src="/images/logo.png" alt="LunarFlux AI Logo" style={{ height: 32, width: 'auto' }} />
         </a>
 
         {/* Desktop Menu */}
