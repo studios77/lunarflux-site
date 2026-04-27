@@ -54,11 +54,21 @@ export default function Contact() {
     outline: 'none', width: '100%', transition: 'border-color 0.2s',
   }
 
-  const contactItems = [
+  const contactItems: Array<{
+    icon: string
+    title: string
+    highlight?: boolean
+    val?: string
+    lines?: string[]
+  }> = [
     { icon: '📧', title: 'Email', val: 'contact@lunarflux.ai' },
     { icon: '📞', title: '긴급 24시간 연락처', val: '010-3204-3847', highlight: true },
     { icon: '💬', title: 'Kakao / Telegram', val: '@lunarflux_support' },
-    { icon: '🕐', title: '응답 시간', val: '인공지능보안 전문 엔지니어 검토 후 24시간 내 / 긴급 장애 즉시' },
+    {
+      icon: '🕐',
+      title: '응답 시간',
+      lines: ['AI보안 전문 엔지니어 검토 후 24시간 내', '긴급 장애 즉시'],
+    },
     { icon: '📍', title: '서비스 지역', val: '글로벌 전지역 가능(원격 운영)' },
   ]
 
@@ -71,7 +81,7 @@ export default function Contact() {
             Contact
           </div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>서비스 문의</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text)', maxWidth: 520, lineHeight: 1.8 }}>인공지능보안 전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text)', maxWidth: 520, lineHeight: 1.8 }}>AI보안 전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
         </div>
 
         <div className="reveal contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
@@ -87,7 +97,15 @@ export default function Contact() {
                 <div style={{ fontSize: '1rem', width: 36, height: 36, background: c.highlight ? 'rgba(16,185,129,0.15)' : 'rgba(15,23,42,0.06)', border: `1px solid ${c.highlight ? 'var(--accent)' : 'var(--border)'}`, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
                 <div>
                   <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: c.highlight ? 'var(--accent)' : 'var(--text)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
-                  <a href={c.highlight ? `tel:${c.val.replace(/-/g, '')}` : undefined} style={{ fontSize: c.highlight ? '1rem' : '0.85rem', color: 'var(--text)', fontWeight: c.highlight ? 700 : 500, textDecoration: 'none', letterSpacing: c.highlight ? '0.04em' : 'normal' }}>{c.val}</a>
+                  {c.lines ? (
+                    <div style={{ fontSize: '0.85rem', color: 'var(--text)', fontWeight: 500, lineHeight: 1.6 }}>
+                      {c.lines.map((line, i) => (
+                        <div key={i}>{line}</div>
+                      ))}
+                    </div>
+                  ) : (
+                    <a href={c.highlight && c.val ? `tel:${c.val.replace(/-/g, '')}` : undefined} style={{ fontSize: c.highlight ? '1rem' : '0.85rem', color: 'var(--text)', fontWeight: c.highlight ? 700 : 500, textDecoration: 'none', letterSpacing: c.highlight ? '0.04em' : 'normal' }}>{c.val}</a>
+                  )}
                 </div>
               </div>
             ))}
@@ -178,7 +196,12 @@ export default function Contact() {
                 {status === 'sending' && '전송 중…'}
                 {status === 'success' && '전송 완료 — 곧 연락드리겠습니다 ✓'}
                 {status === 'error' && '전송 실패 — 다시 시도해주세요'}
-                {status === 'idle' && '문의 전송 — 인공지능보안 전문 엔지니어가 24시간 내 회신'}
+                {status === 'idle' && (
+                  <>
+                    <span style={{ display: 'block' }}>문의 전송</span>
+                    <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 500, marginTop: 4, opacity: 0.92 }}>AI보안 전문 엔지니어가 24시간 내 회신</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
