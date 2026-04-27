@@ -2,7 +2,38 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
-type ServiceMenuLink = { name: string; slug: string; desc: string; highlight?: boolean }
+type ServiceMenuLink = {
+  name: string
+  /** 긴 제목 2줄 표시(데스크톱·모바일 공통). 없으면 name만 사용 */
+  nameLines?: string[]
+  slug: string
+  desc: string
+  highlight?: boolean
+}
+
+function MenuItemTitle({ item, size }: { item: ServiceMenuLink; size: 'sm' | 'md' }) {
+  const fs = size === 'sm' ? '0.74rem' : '0.88rem'
+  const lines = item.nameLines ?? [item.name]
+  return (
+    <span style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+      {lines.map((ln, i) => (
+        <span
+          key={i}
+          style={{
+            fontFamily: 'var(--sans)',
+            fontSize: fs,
+            fontWeight: 600,
+            color: 'var(--text)',
+            lineHeight: 1.28,
+            wordBreak: 'keep-all',
+          }}
+        >
+          {ln}
+        </span>
+      ))}
+    </span>
+  )
+}
 type ServiceMenuSection = { sub?: string; items: ServiceMenuLink[] }
 type ServiceMenuCategory = { cat: string; color: string; sections: ServiceMenuSection[] }
 
@@ -13,10 +44,16 @@ const serviceMenu: ServiceMenuCategory[] = [
     sections: [
       {
         items: [
-          { name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
+          { name: '서버 임대 · 코로케이션', nameLines: ['서버 임대 ·', '코로케이션'], slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
           { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
           { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
-          { name: 'DB 이중화 관리', slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
+          { name: 'DB 이중화 관리', nameLines: ['DB 이중화', '관리'], slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
+          {
+            name: '시스템 복구 · 이전 · 트러블슈팅',
+            nameLines: ['시스템 복구 · 이전 ·', '트러블슈팅'],
+            slug: 'system-recovery-migration',
+            desc: '고객사 온프레 · 자체 서버',
+          },
         ],
       },
     ],
@@ -29,22 +66,22 @@ const serviceMenu: ServiceMenuCategory[] = [
         sub: '관제 · 자동화',
         items: [
           { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제', highlight: true },
-          { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR 자동화' },
+          { name: 'AI 자율 관제 에이전트', nameLines: ['AI 자율 관제', '에이전트'], slug: 'ai-agent', desc: 'LLM SOC · SOAR' },
         ],
       },
       {
         sub: '스트리밍 · 미디어',
         items: [
-          { name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'DDoS · 세션 하이재킹 자동차단' },
-          { name: '딥페이크 탐지', slug: 'deepfake-detection', desc: '실시간 AI 합성 영상 검출' },
+          { name: 'AI 스트림 이상탐지', nameLines: ['AI 스트림', '이상탐지'], slug: 'ai-stream-security', desc: 'DDoS · 하이재킹 차단' },
+          { name: '딥페이크 탐지', slug: 'deepfake-detection', desc: '실시간 합성 영상 검출' },
         ],
       },
       {
         sub: '인프라 · 거버넌스',
         items: [
-          { name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지·이상 트래픽 ML' },
-          { name: '제로트러스트 설계', slug: 'zero-trust', desc: '세그먼트 · MFA · 최소권한' },
-          { name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '유출·프롬프트 인젝션 점검' },
+          { name: '네트워크 보안 · IDS/IPS', nameLines: ['네트워크 보안 ·', 'IDS/IPS'], slug: 'network-security', desc: '침입탐지 · 이상 ML' },
+          { name: '제로트러스트 설계', nameLines: ['제로트러스트', '설계'], slug: 'zero-trust', desc: '세그먼트 · MFA' },
+          { name: 'LLM 보안 감사', nameLines: ['LLM 보안', '감사'], slug: 'llm-security-audit', desc: '유출 · 인젝션 점검' },
         ],
       },
     ],
@@ -55,8 +92,8 @@ const serviceMenu: ServiceMenuCategory[] = [
     sections: [
       {
         items: [
-          { name: 'Ultrastream 스트리밍', slug: 'ultrastream', desc: 'LL-HLS 1~2초 초저지연', highlight: true },
-          { name: 'VOD + 멀티 리스트림', slug: 'vod-multistream', desc: '유튜브·트위치 동시 송출' },
+          { name: 'Ultrastream 스트리밍', nameLines: ['Ultrastream', '스트리밍'], slug: 'ultrastream', desc: 'LL-HLS 1~2초', highlight: true },
+          { name: 'VOD + 멀티 리스트림', nameLines: ['VOD + 멀티', '리스트림'], slug: 'vod-multistream', desc: '동시 송출' },
         ],
       },
     ],
@@ -142,8 +179,8 @@ export default function Nav() {
                   background: 'var(--surface)', border: '1px solid var(--border2)',
                   borderRadius: 12,
                   boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
-                  width: 'min(760px, calc(100vw - 32px))',
-                  maxWidth: 'calc(100vw - 32px)',
+                  width: 'min(920px, calc(100vw - 24px))',
+                  maxWidth: 'calc(100vw - 24px)',
                   zIndex: 9999,
                   display: 'flex', flexDirection: 'column',
                   overflow: 'hidden',
@@ -151,11 +188,11 @@ export default function Nav() {
                 }}
               >
                 {/* 카테고리 행 — 3열이 항상 한 줄에 (스트리밍 열이 아래로 떨어지지 않도록 grid) */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '20px 0 16px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '18px 0 14px', gap: 0 }}>
                   {serviceMenu.map((cat, ci) => (
                     <div key={ci} style={{
                       minWidth: 0,
-                      padding: '0 16px',
+                      padding: '0 14px',
                       borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
                     }}>
                       <div style={{
@@ -184,8 +221,9 @@ export default function Nav() {
                                 key={`${si}-${ii}`}
                                 href={`/services/${item.slug}/`}
                                 onClick={() => setMenuOpen(false)}
+                                title={item.name}
                                 style={{
-                                  display: 'block', padding: '8px 10px', borderRadius: 6,
+                                  display: 'block', padding: '9px 8px', borderRadius: 6,
                                   textDecoration: 'none',
                                   background: item.highlight ? `${cat.color}10` : 'transparent',
                                   border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
@@ -198,17 +236,17 @@ export default function Nav() {
                                   if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
                                 }}
                               >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                                  <span style={{ fontFamily: 'var(--sans)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text)' }}>
-                                    {item.name}
-                                  </span>
+                                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 6, flexWrap: 'nowrap' }}>
+                                  <div style={{ flex: 1, minWidth: 0 }}>
+                                    <MenuItemTitle item={item} size="sm" />
+                                  </div>
                                   {item.highlight && (
-                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '1px 6px', letterSpacing: '0.06em' }}>
+                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.5rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '2px 6px', letterSpacing: '0.06em', flexShrink: 0, marginTop: 2 }}>
                                       NEW
                                     </span>
                                   )}
                                 </div>
-                                <div style={{ fontFamily: 'var(--sans)', fontSize: '0.72rem', color: 'var(--text3)', marginTop: 2 }}>
+                                <div style={{ fontFamily: 'var(--sans)', fontSize: '0.65rem', color: 'var(--text3)', marginTop: 4, lineHeight: 1.45, wordBreak: 'keep-all' }}>
                                   {item.desc}
                                 </div>
                               </Link>
@@ -306,9 +344,27 @@ export default function Nav() {
                     </div>
                   )}
                   {sec.items.map((item, ii) => (
-                    <Link key={`${si}-${ii}`} href={`/services/${item.slug}/`} onClick={() => setMobileOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
-                      <span style={{ fontFamily: 'var(--sans)', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)' }}>{item.name}</span>
-                      {item.highlight && <span style={{ fontFamily: 'var(--mono)', fontSize: '0.55rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '2px 8px' }}>NEW</span>}
+                    <Link
+                      key={`${si}-${ii}`}
+                      href={`/services/${item.slug}/`}
+                      title={item.name}
+                      onClick={() => setMobileOpen(false)}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start',
+                        gap: 10,
+                        padding: '12px 0',
+                        borderBottom: '1px solid var(--border)',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      <MenuItemTitle item={item} size="md" />
+                      {item.highlight && (
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '3px 8px', flexShrink: 0, marginTop: 2 }}>
+                          NEW
+                        </span>
+                      )}
                     </Link>
                   ))}
                 </div>

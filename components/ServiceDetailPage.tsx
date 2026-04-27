@@ -19,7 +19,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
             {s.icon}
           </div>
           <div>
-            <h1 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', marginBottom: 12 }}>
+            <h1 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.85rem,4.8vw,3rem)', fontWeight: 700, lineHeight: 1.12, letterSpacing: '-0.02em', marginBottom: 12, wordBreak: 'keep-all', maxWidth: '100%' }}>
               {s.name}
             </h1>
             <p style={{ fontSize: '1.05rem', color: 'var(--text2)', lineHeight: 1.8, maxWidth: 640 }}>{s.desc}</p>
@@ -174,13 +174,13 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
       <section style={{ padding: '80px 5%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--text3)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 28 }}>관련 서비스</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
             {servicesData.filter(sv => sv.slug !== s.slug).slice(0, 4).map(sv => (
-              <Link key={sv.slug} href={`/services/${sv.slug}/`} style={{ display: 'block', padding: '20px', textDecoration: 'none', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--surface)' }}>
-                <div style={{ fontSize: '1.1rem', marginBottom: 10 }}>{sv.icon}</div>
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', color: 'var(--accent)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{sv.cat}</div>
-                <div style={{ fontFamily: 'var(--display)', fontSize: '0.95rem', fontWeight: 600, color: 'var(--text)', marginBottom: 6 }}>{sv.name}</div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--text2)', lineHeight: 1.6 }}>{sv.summary}</div>
+              <Link key={sv.slug} href={`/services/${sv.slug}/`} title={sv.name} style={{ display: 'block', padding: '18px 16px', textDecoration: 'none', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--surface)' }}>
+                <div style={{ fontSize: '1.05rem', marginBottom: 8 }}>{sv.icon}</div>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem', color: 'var(--accent)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{sv.cat}</div>
+                <div style={{ fontFamily: 'var(--display)', fontSize: '0.88rem', fontWeight: 600, color: 'var(--text)', marginBottom: 6, lineHeight: 1.25, wordBreak: 'keep-all' }}>{sv.name}</div>
+                <div style={{ fontSize: '0.74rem', color: 'var(--text2)', lineHeight: 1.55, wordBreak: 'keep-all' }}>{sv.summary}</div>
               </Link>
             ))}
           </div>

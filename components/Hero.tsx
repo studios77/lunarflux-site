@@ -86,7 +86,7 @@ export default function Hero() {
             { num: '99.99', unit: '%', label: 'Uptime SLA' },
             { num: '1~2', unit: 's', label: 'LL-HLS 레이턴시' },
             { num: '24', unit: '/7', label: 'AI 보안 관제' },
-            { num: '19', unit: '개', label: '핵심 서비스' },
+            { num: '14', unit: '개', label: '핵심 서비스' },
           ].map(s => (
             <div key={s.label} style={{ 
               textAlign: 'center', background: 'rgba(255,255,255,0.6)', 

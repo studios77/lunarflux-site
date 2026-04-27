@@ -1,19 +1,30 @@
 import Link from 'next/link'
 
-const services = [
-  { icon: '🏢', cat: 'IDC / 서버', name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '가상화 기반 VM 즉시 할당부터 고객 장비 입주(코로케이션)까지. 전력·냉각·네트워크 포함, IPMI 원격관리.', tags: ['KVM','IPMI','Bare Metal'] },
+type ServiceCard = {
+  icon: string
+  cat: string
+  name: string
+  nameLines?: string[]
+  slug: string
+  desc: string
+  tags: string[]
+}
+
+const services: ServiceCard[] = [
+  { icon: '🏢', cat: 'IDC / 서버', name: '서버 임대 · 코로케이션', nameLines: ['서버 임대 ·', '코로케이션'], slug: 'server-rental', desc: '가상화 기반 VM 즉시 할당부터 고객 장비 입주(코로케이션)까지. 전력·냉각·네트워크 포함, IPMI 원격관리.', tags: ['KVM','IPMI','Bare Metal'] },
   { icon: '⚙️', cat: 'IDC / MSP', name: '위탁운영 매니지먼트', slug: 'managed-service', desc: 'OS 패치·장애대응·성능튜닝 전담. Zabbix+Grafana 실시간 모니터링, 월 SLA 리포트.', tags: ['Zabbix','Ansible','Grafana'] },
   { icon: '🔄', cat: 'IDC / HA', name: '운영서버 이중화 (HA)', slug: 'ha', desc: 'Active-Active/Standby 구성, 자동 페일오버 30초 이내, L4/L7 로드밸런서, 99.99% SLA.', tags: ['Keepalived','HAProxy','Pacemaker'] },
-  { icon: '🗄️', cat: 'IDC / DB', name: 'DB 이중화 매니지먼트', slug: 'db-cluster', desc: 'Galera Cluster·Master-Slave 구성·모니터링·자동복구 위탁관리. 슬로우쿼리 분석.', tags: ['Galera','ProxySQL','Percona'] },
+  { icon: '🗄️', cat: 'IDC / DB', name: 'DB 이중화 매니지먼트', nameLines: ['DB 이중화', '매니지먼트'], slug: 'db-cluster', desc: 'Galera Cluster·Master-Slave 구성·모니터링·자동복구 위탁관리. 슬로우쿼리 분석.', tags: ['Galera','ProxySQL','Percona'] },
+  { icon: '🛠️', cat: 'IDC / 서버', name: '시스템 복구 · 이전 · 트러블슈팅', nameLines: ['시스템 복구 · 이전 ·', '트러블슈팅'], slug: 'system-recovery-migration', desc: 'LunarFlux IDC 여부와 무관하게 고객사 서버·VM·온프레 환경의 장애 복구, 이전, 성능·네트워크 TS. 원격·현장.', tags: ['긴급복구','이전','온프레'] },
   { icon: '🛡️', cat: 'AI 보안', name: 'AI 보안 관제', slug: 'ai-security', desc: '365일 24시간 무인 관제. 위협 자동 탐지·분류·대응과 비용 절감을 동시에. 공공·금융·중견기업 특화.', tags: ['24/7','자동 대응','컴플라이언스'] },
-  { icon: '🤖', cat: 'AI 보안', name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM 기반 SOC 자동화. Wazuh SIEM·SOAR 플레이북으로 탐지→분석→대응까지 연결.', tags: ['LLM','SIEM','SOAR'] },
-  { icon: '🛰️', cat: 'AI 보안', name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'RTMP/HLS 트래픽 머신러닝 분석. 세션 하이재킹·인젝션·DDoS 실시간 탐지 및 자동차단.', tags: ['Python ML','MediaMTX','Fail2ban'] },
-  { icon: '🔍', cat: 'AI 보안', name: '딥페이크 탐지 서비스', slug: 'deepfake-detection', desc: '라이브 스트림 내 AI 합성 영상·음성 실시간 검출. 방송사·기업 미디어 대상 고부가가치.', tags: ['PyTorch','ONNX','FaceForensics'] },
-  { icon: '🌐', cat: 'AI 보안', name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지·방지와 ML 보조 이상탐지. 경계·내부 세그먼트 가시화 및 SIEM 연동.', tags: ['Suricata','Zeek','eBPF'] },
-  { icon: '🔐', cat: 'AI 보안', name: '제로트러스트 아키텍처', slug: 'zero-trust', desc: 'ID·디바이스·맥락 기반 최소권한. 마이크로세그먼트·MFA·지속 검증 로드맵.', tags: ['IAM','세그먼트','MFA'] },
-  { icon: '📋', cat: 'AI 보안', name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '생성형 AI 유출·프롬프트 인젝션·RAG 거버넌스 점검. 정책·기술·운영 권고안.', tags: ['프롬프트','거버넌스','감사'] },
-  { icon: '📡', cat: '스트리밍', name: 'Ultrastream 엔진 호스팅', slug: 'ultrastream', desc: '국내 CDN 대비 10배 빠른 LL-HLS 1~2초 초저지연. 공공기관·기업·방송사·라이브커머스 전용. 동시 시청자 무제한, 99.99% 가용성.', tags: ['초저지연','무제한 시청자','99.99% SLA'] },
-  { icon: '🎬', cat: '스트리밍', name: 'VOD 관리 + 멀티 리스트림', slug: 'vod-multistream', desc: 'VOD 저장·썸네일 자동생성. 유튜브·트위치·네이버 동시 송출 자동화.', tags: ['MariaDB','Cloudflare','FFmpeg'] },
+  { icon: '🤖', cat: 'AI 보안', name: 'AI 자율 관제 에이전트', nameLines: ['AI 자율 관제', '에이전트'], slug: 'ai-agent', desc: 'LLM 기반 SOC 자동화. Wazuh SIEM·SOAR 플레이북으로 탐지→분석→대응까지 연결.', tags: ['LLM','SIEM','SOAR'] },
+  { icon: '🛰️', cat: 'AI 보안', name: 'AI 스트림 이상탐지', nameLines: ['AI 스트림', '이상탐지'], slug: 'ai-stream-security', desc: 'RTMP/HLS 트래픽 머신러닝 분석. 세션 하이재킹·인젝션·DDoS 실시간 탐지 및 자동차단.', tags: ['Python ML','MediaMTX','Fail2ban'] },
+  { icon: '🔍', cat: 'AI 보안', name: '딥페이크 탐지 서비스', nameLines: ['딥페이크', '탐지 서비스'], slug: 'deepfake-detection', desc: '라이브 스트림 내 AI 합성 영상·음성 실시간 검출. 방송사·기업 미디어 대상 고부가가치.', tags: ['PyTorch','ONNX','FaceForensics'] },
+  { icon: '🌐', cat: 'AI 보안', name: '네트워크 보안 · IDS/IPS', nameLines: ['네트워크 보안 ·', 'IDS/IPS'], slug: 'network-security', desc: '침입탐지·방지와 ML 보조 이상탐지. 경계·내부 세그먼트 가시화 및 SIEM 연동.', tags: ['Suricata','Zeek','eBPF'] },
+  { icon: '🔐', cat: 'AI 보안', name: '제로트러스트 아키텍처', nameLines: ['제로트러스트', '아키텍처'], slug: 'zero-trust', desc: 'ID·디바이스·맥락 기반 최소권한. 마이크로세그먼트·MFA·지속 검증 로드맵.', tags: ['IAM','세그먼트','MFA'] },
+  { icon: '📋', cat: 'AI 보안', name: 'LLM 보안 감사', nameLines: ['LLM 보안', '감사'], slug: 'llm-security-audit', desc: '생성형 AI 유출·프롬프트 인젝션·RAG 거버넌스 점검. 정책·기술·운영 권고안.', tags: ['프롬프트','거버넌스','감사'] },
+  { icon: '📡', cat: '스트리밍', name: 'Ultrastream 엔진 호스팅', nameLines: ['Ultrastream', '엔진 호스팅'], slug: 'ultrastream', desc: '국내 CDN 대비 10배 빠른 LL-HLS 1~2초 초저지연. 공공기관·기업·방송사·라이브커머스 전용. 동시 시청자 무제한, 99.99% 가용성.', tags: ['초저지연','무제한 시청자','99.99% SLA'] },
+  { icon: '🎬', cat: '스트리밍', name: 'VOD 관리 + 멀티 리스트림', nameLines: ['VOD 관리 +', '멀티 리스트림'], slug: 'vod-multistream', desc: 'VOD 저장·썸네일 자동생성. 유튜브·트위치·네이버 동시 송출 자동화.', tags: ['MariaDB','Cloudflare','FFmpeg'] },
 ]
 
 export default function Services() {
@@ -30,11 +41,11 @@ export default function Services() {
         </div>
 
         <div className="reveal" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           gap: 20, marginTop: 60,
         }}>
           {services.map(s => (
-            <Link key={s.name} href={`/services/${s.slug}/`} style={{ textDecoration: 'none' }}>
+            <Link key={s.slug} href={`/services/${s.slug}/`} title={s.name} style={{ textDecoration: 'none' }}>
               <div style={{
                 background: 'rgba(255,255,255,0.6)', padding: '36px 32px', height: '100%',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer',
@@ -58,8 +69,12 @@ export default function Services() {
               >
                 <div style={{ fontSize: '1.4rem', marginBottom: 20, width: 48, height: 48, border: '1px solid var(--border2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', boxShadow: '0 4px 12px rgba(16,185,129,0.08)' }}>{s.icon}</div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>{s.cat}</div>
-                <div style={{ fontFamily: 'var(--display)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em' }}>{s.name}</div>
-                <div style={{ fontSize: '0.9rem', color: 'var(--text2)', lineHeight: 1.7, marginBottom: 20 }}>{s.desc}</div>
+                <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.05rem, 2.8vw, 1.2rem)', fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em', lineHeight: 1.22, minHeight: '2.6em', wordBreak: 'keep-all' }}>
+                  {(s.nameLines ?? [s.name]).map((line, i) => (
+                    <span key={i} style={{ display: 'block' }}>{line}</span>
+                  ))}
+                </div>
+                <div style={{ fontSize: '0.86rem', color: 'var(--text2)', lineHeight: 1.65, marginBottom: 20, wordBreak: 'keep-all' }}>{s.desc}</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {s.tags.map(t => (
                     <span key={t} style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', padding: '4px 10px', background: 'rgba(16,185,129,0.05)', border: '1px solid var(--border)', borderRadius: 20, color: 'var(--text3)', letterSpacing: '0.02em', fontWeight: 500 }}>{t}</span>

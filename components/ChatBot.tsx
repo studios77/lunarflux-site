@@ -23,6 +23,18 @@ function getBotResponse(input: string): string {
     return 'LunarFlux IDC 서버 임대·위탁운영 서비스는 국내 주요 IDC에 위치한 고사양 서버를 합리적인 비용으로 제공합니다.\n\n✔ 전용 서버 / 코로케이션\n✔ 24/7 모니터링 및 운영 대행\n✔ 유연한 계약 기간 (월 단위)\n\n자세한 견적은 하단 [문의하기]를 통해 문의해 주세요.'
   }
 
+  if (
+    q.includes('트러블') ||
+    q.includes('서버 이전') ||
+    q.includes('시스템 이전') ||
+    q.includes('서버복구') ||
+    q.includes('서버 복구') ||
+    q.includes('시스템 복구') ||
+    (q.includes('장애') && (q.includes('복구') || q.includes('대응')))
+  ) {
+    return 'LunarFlux IDC에 두신 서버가 아니어도, 고객사 온프레미스·자체 VM·클라우드 인스턴스에 대해 기술지원이 가능합니다.\n\n✔ 장애 복구·데이터 복원\n✔ 시스템·DB 이전 및 컷오버\n✔ 성능·네트워크 트러블슈팅\n✔ 원격 우선, 필요 시 현장 방문\n\n상세: [서비스] → IDC/서버 → 시스템 복구·이전·트러블슈팅\n자세한 견적은 [문의하기]로 문의해 주세요.'
+  }
+
   if (q.includes('스트리밍') || q.includes('ultrastream') || q.includes('라이브') || q.includes('vod')) {
     return 'LunarFlux Ultrastream 엔진 기반 스트리밍 솔루션을 제공합니다.\n\n✔ 초저지연 라이브 스트리밍\n✔ VOD 멀티스트림 동시 배포\n✔ 4K·8K 고화질 지원\n✔ CDN 연동 및 글로벌 배포\n\n플랫폼 데모 및 가격 문의는 [문의하기] 섹션을 이용해 주세요.'
   }
@@ -31,7 +43,7 @@ function getBotResponse(input: string): string {
     return 'AI 기반 보안 솔루션을 제공합니다.\n\n✔ AI 보안 관제 (이상 트래픽 실시간 탐지)\n✔ 딥페이크 탐지 엔진\n✔ 네트워크 보안 / IDS·IPS\n✔ 제로트러스트 아키텍처 적용 지원\n\n현재 무료 PoC(개념검증) 프로그램을 운영 중입니다. 문의 주세요!'
   }
 
-  if (q.includes('백업') || q.includes('dr') || q.includes('재해') || q.includes('이중화') || q.includes('복구')) {
+  if (q.includes('백업') || q.includes('dr') || q.includes('재해') || q.includes('이중화') || (q.includes('복구') && (q.includes('백업') || q.includes('재해') || q.includes('재해복구')))) {
     return '데이터 보호 및 재해복구(DR) 솔루션을 제공합니다.\n\n✔ 자동 증분 백업 (일·주·월)\n✔ 지리적 이중화 (Active-Active / Active-Standby)\n✔ RTO 1시간 이내 복구 보장\n✔ 클라우드·온프레미스 하이브리드 지원\n\n지금 바로 [무료 상담]을 신청해 보세요.'
   }
 
@@ -51,7 +63,7 @@ function getBotResponse(input: string): string {
     return 'LunarFlux AI는 차세대 기술 인프라 전문 기업입니다.\n\n🌙 주요 사업 분야\n✔ IDC 서버 임대·위탁운영\n✔ 스트리밍 솔루션 / 영상 플랫폼\n✔ AI 보안 / 딥페이크 탐지\n✔ 네트워크 보안\n✔ 백업 / 재해복구(DR)\n\n기업 고객의 디지털 인프라를 안전하고 효율적으로 운영할 수 있도록 지원합니다.'
   }
 
-  return '죄송합니다, 정확한 답변을 드리기 어렵습니다. 😅\n\n아래 항목 중 궁금하신 내용을 선택하시거나, [문의하기] 섹션을 통해 직접 문의해 주시면 전문 담당자가 빠르게 안내해 드리겠습니다.\n\n• IDC 서버 임대\n• 스트리밍 솔루션\n• AI 보안 서비스\n• 백업/DR 솔루션\n• 요금 및 상담'
+  return '죄송합니다, 정확한 답변을 드리기 어렵습니다. 😅\n\n아래 항목 중 궁금하신 내용을 선택하시거나, [문의하기] 섹션을 통해 직접 문의해 주시면 전문 담당자가 빠르게 안내해 드리겠습니다.\n\n• IDC 서버 임대 / 코로케이션\n• 시스템 복구 · 이전 · 트러블슈팅\n• 스트리밍 솔루션\n• AI 보안 서비스\n• 백업/DR 솔루션\n• 요금 및 상담'
 }
 
 export default function ChatBot() {

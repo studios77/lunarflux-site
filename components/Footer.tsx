@@ -29,7 +29,7 @@ export default function Footer() {
               LunarFlux<span style={{ color: 'var(--accent)' }}>AI</span>
             </div>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: '#94a3b8', letterSpacing: '0.08em', lineHeight: 1.6 }}>
-              IDC · AI 보안 · 스트리밍<br />인프라 전문 기업
+              IDC · 복구·이전 · AI 보안 · 스트리밍<br />인프라 전문 기업
             </div>
           </div>
 

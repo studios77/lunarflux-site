@@ -104,26 +104,38 @@ export default function Contact() {
 
                 <div style={{ gridColumn: '1 / -1' }}>
                   <label style={{ display: 'block', fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>관심 서비스</label>
-                  <select name="service" style={{ ...inputStyle, appearance: 'none' }}
+                  <select
+                    name="service"
+                    style={{ ...inputStyle, appearance: 'none', fontSize: '0.84rem', lineHeight: 1.45, paddingTop: 12, paddingBottom: 12 }}
                     onFocus={e => (e.target.style.borderColor = 'var(--accent)')}
                     onBlur={e => (e.target.style.borderColor = 'var(--border)')}
                   >
                     <option value="">서비스를 선택해주세요</option>
-                    <option>서버 임대 / 코로케이션</option>
-                    <option>위탁운영 (MSP)</option>
-                    <option>서버 이중화 (HA)</option>
-                    <option>DB 이중화 매니지먼트</option>
-                    <option>DR 재해복구</option>
-                    <option>Ultrastream 스트리밍 호스팅</option>
-                    <option>AI 보안 관제</option>
-                    <option>AI 자율 관제 에이전트 (LLM SOC)</option>
-                    <option>AI 스트림 이상탐지</option>
-                    <option>딥페이크 탐지</option>
-                    <option>네트워크 보안 · IDS/IPS</option>
-                    <option>제로트러스트 설계</option>
-                    <option>LLM 보안 감사</option>
-                    <option>엔터프라이즈 (전체 통합)</option>
-                    <option>기타 / 복합 문의</option>
+                    <optgroup label="IDC / 서버">
+                      <option>서버 임대 / 코로케이션</option>
+                      <option>위탁운영 (MSP)</option>
+                      <option>서버 이중화 (HA)</option>
+                      <option>DB 이중화 매니지먼트</option>
+                      <option>시스템 복구 · 이전 · 트러블슈팅 (고객사 인프라)</option>
+                    </optgroup>
+                    <optgroup label="AI 보안">
+                      <option>AI 보안 관제</option>
+                      <option>AI 자율 관제 에이전트 (LLM SOC)</option>
+                      <option>AI 스트림 이상탐지</option>
+                      <option>딥페이크 탐지</option>
+                      <option>네트워크 보안 · IDS/IPS</option>
+                      <option>제로트러스트 설계</option>
+                      <option>LLM 보안 감사</option>
+                    </optgroup>
+                    <optgroup label="스트리밍">
+                      <option>Ultrastream 스트리밍 호스팅</option>
+                      <option>VOD + 멀티 리스트림</option>
+                    </optgroup>
+                    <optgroup label="기타">
+                      <option>DR 재해복구</option>
+                      <option>엔터프라이즈 (전체 통합)</option>
+                      <option>기타 / 복합 문의</option>
+                    </optgroup>
                   </select>
                 </div>
 
