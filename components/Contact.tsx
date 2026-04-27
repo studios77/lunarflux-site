@@ -46,7 +46,7 @@ export default function Contact() {
   }
 
   const contactItems = [
-    { icon: '📧', title: 'Email', val: 'contact@lunarflux.al' },
+    { icon: '📧', title: 'Email', val: 'contact@lunarflux.ai' },
     { icon: '📞', title: '긴급 24시간 연락처', val: '010-3204-3847', highlight: true },
     { icon: '💬', title: 'Kakao / Telegram', val: '@lunarflux_support' },
     { icon: '🕐', title: '응답 시간', val: '평일 24시간 이내 / 긴급 장애 즉시' },
