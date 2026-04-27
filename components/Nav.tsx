@@ -58,7 +58,7 @@ export default function Nav() {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
         padding: '0 5%', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(240,253,244,0.95)', backdropFilter: 'blur(20px)',
+        background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
       }}>
         {/* Logo — always goes to home */}

@@ -7,7 +7,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
         width: 800, height: 500,
-        background: 'radial-gradient(ellipse, rgba(16,185,129,0.1) 0%, rgba(245,158,11,0.06) 45%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(16,185,129,0.06) 0%, rgba(245,158,11,0.04) 45%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', width: '100%' }}>

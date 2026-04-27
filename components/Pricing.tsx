@@ -99,9 +99,9 @@ export default function Pricing() {
               <div key={p.name} style={{
                 border: p.featured ? '1px solid var(--accent)' : '1px solid var(--border)',
                 borderRadius: 8, padding: '36px 28px',
-                background: p.featured ? 'linear-gradient(160deg, rgba(52,211,153,0.1), var(--surface))' : 'var(--surface)',
+                background: p.featured ? 'linear-gradient(160deg, rgba(16,185,129,0.05), var(--surface))' : 'var(--surface)',
                 position: 'relative', transition: 'transform 0.3s, box-shadow 0.3s',
-                boxShadow: p.featured ? '0 0 40px rgba(52,211,153,0.15)' : 'none',
+                boxShadow: p.featured ? '0 0 32px rgba(16,185,129,0.1)' : 'none',
                 display: 'flex', flexDirection: 'column',
               }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)' }}
@@ -126,7 +126,7 @@ export default function Pricing() {
                 <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 24, lineHeight: 1.7 }}>{p.desc}</p>
                 <ul style={{ listStyle: 'none', marginBottom: 32, flex: 1 }}>
                   {p.features.map(f => (
-                    <li key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(52,211,153,0.08)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                    <li key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                       <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>
                       {f}
                     </li>
@@ -171,7 +171,7 @@ export default function Pricing() {
             <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 20, lineHeight: 1.7, maxWidth: 600 }}>무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0 24px', marginBottom: 24 }}>
               {['무제한 채널 + 전용서버','AI 보안 관제 24/7','딥페이크 탐지 모듈','HA/DR 완전 이중화','LLM 보안 감사','전담 전문기술엔지니어 지원'].map(f => (
-                <div key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid rgba(52,211,153,0.08)', display: 'flex', gap: 10 }}>
+                <div key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid var(--border)', display: 'flex', gap: 10 }}>
                   <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>{f}
                 </div>
               ))}

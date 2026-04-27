@@ -75,7 +75,7 @@ export default function Contact() {
                 borderRadius: 6,
                 boxShadow: c.highlight ? '0 0 16px rgba(16,185,129,0.1)' : 'none',
               }}>
-                <div style={{ fontSize: '1rem', width: 36, height: 36, background: c.highlight ? 'rgba(16,185,129,0.15)' : 'rgba(52,211,153,0.1)', border: `1px solid ${c.highlight ? 'var(--accent)' : 'rgba(52,211,153,0.22)'}`, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
+                <div style={{ fontSize: '1rem', width: 36, height: 36, background: c.highlight ? 'rgba(16,185,129,0.15)' : 'rgba(15,23,42,0.06)', border: `1px solid ${c.highlight ? 'var(--accent)' : 'var(--border)'}`, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{c.icon}</div>
                 <div>
                   <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: c.highlight ? 'var(--accent)' : 'var(--text)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 3 }}>{c.title}</div>
                   <a href={c.highlight ? `tel:${c.val.replace(/-/g, '')}` : undefined} style={{ fontSize: c.highlight ? '1rem' : '0.85rem', color: 'var(--text)', fontWeight: c.highlight ? 700 : 500, textDecoration: 'none', letterSpacing: c.highlight ? '0.04em' : 'normal' }}>{c.val}</a>

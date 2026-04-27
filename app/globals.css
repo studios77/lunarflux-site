@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f0fdf4;
-  --bg2: #dcfce7;
-  --bg3: #bbf7d0;
+  /* 흰색·그레이 베이스, 녹색은 액센트·포인트용만 */
+  --bg: #ffffff;
+  --bg2: #f8fafc;
+  --bg3: #f1f5f9;
   --surface: #ffffff;
-  --surface2: #ecfdf5;
-  --border: rgba(16,185,129,0.22);
-  --border2: rgba(16,185,129,0.4);
+  --surface2: #ffffff;
+  --border: rgba(15, 23, 42, 0.09);
+  --border2: rgba(15, 23, 42, 0.14);
   --accent: #10b981;
   --accent2: #f59e0b;
   --accent3: #d97706;
-  --glow: rgba(16,185,129,0.15);
-  --text: #022c22;
-  --text2: #064e3b;
-  --text3: #047857;
+  --accent-soft: rgba(16, 185, 129, 0.08);
+  --accent-soft2: rgba(16, 185, 129, 0.14);
+  --glow: rgba(16, 185, 129, 0.12);
+  --text: #0f172a;
+  --text2: #334155;
+  --text3: #64748b;
   --mono: 'JetBrains Mono', 'Pretendard Variable', Pretendard, monospace;
   --sans: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   --display: 'Inter', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
@@ -36,8 +39,8 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.08), transparent 25%),
-              radial-gradient(circle at 85% 30%, rgba(52, 211, 153, 0.08), transparent 25%);
+  background: radial-gradient(circle at 18% 45%, rgba(16, 185, 129, 0.045), transparent 32%),
+              radial-gradient(circle at 82% 25%, rgba(245, 158, 11, 0.04), transparent 28%);
   pointer-events: none;
   z-index: 0;
 }
@@ -46,13 +49,13 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(16,185,129,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16,185,129,0.05) 1px, transparent 1px);
+    linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
   z-index: 0;
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.15) 100%);
 }
 
 ::-webkit-scrollbar { width: 4px; }
