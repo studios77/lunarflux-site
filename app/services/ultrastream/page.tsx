@@ -1,5 +1,6 @@
 ﻿import Link from 'next/link'
 import type { Metadata } from 'next'
+import Nav from '@/components/Nav'
 
 export const metadata: Metadata = {
   title: 'Ultrastream — LL-HLS 초저지연 라이브 스트리밍 플랫폼 | LunarFlux AI',
@@ -122,23 +123,7 @@ const stats = [
 export default function UltrastreamPage() {
   return (
     <main style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
-
-      {/* Nav */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(240,253,244,0.92)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid var(--border)',
-        padding: '0 5%', height: 64,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      }}>
-        <Link href="/" style={{ fontFamily: 'var(--display)', fontWeight: 800, fontSize: '1.2rem', color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)', boxShadow: '0 0 10px var(--accent)', display: 'inline-block' }} />
-          Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
-        </Link>
-        <Link href="/#services" style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--text2)', textDecoration: 'none', letterSpacing: '0.06em' }}>
-          ← 서비스 목록
-        </Link>
-      </nav>
+      <Nav />
 
       {/* Hero */}
       <section style={{ padding: '130px 5% 80px', maxWidth: 1100, margin: '0 auto', position: 'relative', overflow: 'hidden' }}>

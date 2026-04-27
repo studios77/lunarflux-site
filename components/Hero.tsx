@@ -54,23 +54,29 @@ export default function Hero() {
           animation: 'fadeUp 0.8s 0.3s ease both',
         }}>
           <a href="#services" style={{
-            padding: '14px 36px', background: 'var(--accent)', color: '#fff',
-            border: 'none', borderRadius: 4, fontFamily: 'var(--mono)',
-            fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em',
-            textDecoration: 'none', boxShadow: '0 0 30px rgba(52,211,153,0.35)',
-            transition: 'all 0.25s',
-          }}>서비스 살펴보기</a>
+            padding: '16px 40px', background: 'var(--accent)', color: '#fff',
+            border: 'none', borderRadius: 30, fontFamily: 'var(--sans)',
+            fontSize: '0.95rem', fontWeight: 600, letterSpacing: '0.02em',
+            textDecoration: 'none', boxShadow: '0 8px 24px rgba(16,185,129,0.25)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(16,185,129,0.35)'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(16,185,129,0.25)'; }}
+          >서비스 살펴보기</a>
           <a href="#contact" style={{
-            padding: '14px 36px', background: 'transparent', color: 'var(--text)',
-            border: '1px solid var(--border2)', borderRadius: 4,
-            fontFamily: 'var(--mono)', fontSize: '0.8rem', letterSpacing: '0.06em',
-            textDecoration: 'none', transition: 'all 0.25s',
-          }}>무료 상담 신청</a>
+            padding: '16px 40px', background: 'rgba(255,255,255,0.8)', color: 'var(--text)',
+            border: '1px solid var(--border2)', borderRadius: 30, backdropFilter: 'blur(10px)',
+            fontFamily: 'var(--sans)', fontSize: '0.95rem', fontWeight: 600, letterSpacing: '0.02em',
+            textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.background = '#fff'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.8)'; }}
+          >무료 상담 신청</a>
         </div>
 
         <div style={{
-          display: 'flex', justifyContent: 'center', gap: 48, marginTop: 80,
-          paddingTop: 48, borderTop: '1px solid var(--border)', flexWrap: 'wrap',
+          display: 'flex', justifyContent: 'center', gap: 24, marginTop: 80,
+          paddingTop: 48, flexWrap: 'wrap',
           animation: 'fadeUp 0.8s 0.4s ease both',
         }}>
           {[
@@ -79,17 +85,22 @@ export default function Hero() {
             { num: '24', unit: '/7', label: 'AI 보안 관제' },
             { num: '19', unit: '개', label: '핵심 서비스' },
           ].map(s => (
-            <div key={s.label} style={{ textAlign: 'center' }}>
+            <div key={s.label} style={{ 
+              textAlign: 'center', background: 'rgba(255,255,255,0.6)', 
+              backdropFilter: 'blur(12px)', border: '1px solid var(--border)', 
+              borderRadius: 20, padding: '24px 32px', minWidth: 180,
+              boxShadow: '0 8px 32px rgba(0,0,0,0.03)'
+            }}>
               <span style={{
-                fontFamily: 'var(--display)', fontSize: '2.6rem', fontWeight: 800,
-                color: 'var(--text)', display: 'block',
+                fontFamily: 'var(--display)', fontSize: '2.8rem', fontWeight: 800,
+                color: 'var(--text)', display: 'block', lineHeight: 1.1, marginBottom: 4
               }}>
-                {s.num}<span style={{ color: 'var(--accent)', fontSize: '1.6rem' }}>{s.unit}</span>
+                {s.num}<span style={{ color: 'var(--accent)', fontSize: '1.6rem', marginLeft: 2 }}>{s.unit}</span>
               </span>
               <span style={{
-                fontFamily: 'var(--mono)', fontSize: '0.85rem',
-                color: 'var(--text2)', letterSpacing: '0.06em', textTransform: 'uppercase',
-                fontWeight: 500,
+                fontFamily: 'var(--sans)', fontSize: '0.85rem',
+                color: 'var(--text3)', letterSpacing: '0.04em',
+                fontWeight: 600,
               }}>{s.label}</span>
             </div>
           ))}

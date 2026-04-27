@@ -27,34 +27,42 @@ export default function Services() {
 
         <div className="reveal" style={{
           display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 1, background: 'var(--border)',
-          border: '1px solid var(--border)', borderRadius: 8, overflow: 'hidden', marginTop: 60,
+          gap: 20, marginTop: 60,
         }}>
           {services.map(s => (
             <Link key={s.name} href={`/services/${s.slug}/`} style={{ textDecoration: 'none' }}>
               <div style={{
-                background: 'var(--bg2)', padding: '36px 32px', height: '100%',
-                transition: 'background 0.3s', cursor: 'pointer',
+                background: 'rgba(255,255,255,0.6)', padding: '36px 32px', height: '100%',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer',
                 position: 'relative', overflow: 'hidden',
+                borderRadius: 20, border: '1px solid var(--border)',
+                backdropFilter: 'blur(12px)',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
               }}
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'var(--bg3)'
+                  (e.currentTarget as HTMLElement).style.background = '#ffffff'
+                  ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'
+                  ;(e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(16,185,129,0.12)'
+                  ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)'
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'var(--bg2)'
+                  (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.6)'
+                  ;(e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
+                  ;(e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)'
+                  ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
                 }}
               >
-                <div style={{ fontSize: '1.2rem', marginBottom: 20, width: 44, height: 44, border: '1px solid var(--border2)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)' }}>{s.icon}</div>
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.82rem', color: 'var(--accent)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>{s.cat}</div>
-                <div style={{ fontFamily: 'var(--display)', fontSize: '1.15rem', fontWeight: 600, color: 'var(--text)', marginBottom: 10 }}>{s.name}</div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--text2)', lineHeight: 1.75, marginBottom: 16 }}>{s.desc}</div>
+                <div style={{ fontSize: '1.4rem', marginBottom: 20, width: 48, height: 48, border: '1px solid var(--border2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', boxShadow: '0 4px 12px rgba(16,185,129,0.08)' }}>{s.icon}</div>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>{s.cat}</div>
+                <div style={{ fontFamily: 'var(--display)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em' }}>{s.name}</div>
+                <div style={{ fontSize: '0.9rem', color: 'var(--text2)', lineHeight: 1.7, marginBottom: 20 }}>{s.desc}</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                   {s.tags.map(t => (
-                    <span key={t} style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', padding: '3px 8px', border: '1px solid var(--border)', borderRadius: 2, color: 'var(--text3)', letterSpacing: '0.05em' }}>{t}</span>
+                    <span key={t} style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', padding: '4px 10px', background: 'rgba(16,185,129,0.05)', border: '1px solid var(--border)', borderRadius: 20, color: 'var(--text3)', letterSpacing: '0.02em', fontWeight: 500 }}>{t}</span>
                   ))}
                 </div>
-                <div style={{ marginTop: 20, fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', letterSpacing: '0.06em' }}>
-                  자세히 보기 →
+                <div style={{ marginTop: 24, fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.04em', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
+                  자세히 보기 <span style={{ fontSize: '1rem' }}>→</span>
                 </div>
               </div>
             </Link>

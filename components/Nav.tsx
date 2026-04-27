@@ -176,12 +176,12 @@ export default function Nav() {
 
                 {/* 하단 바로가기 — 절대위치 없이 자연스럽게 */}
                 <div style={{ borderTop: '1px solid var(--border)', padding: '10px 20px', display: 'flex', gap: 16, background: 'var(--bg)', borderRadius: '0 0 12px 12px' }}>
-                  <a href="#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                  <Link href="/#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     전체 서비스 보기 →
-                  </a>
-                  <a href="#contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                  </Link>
+                  <Link href="/#contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     무료 상담 신청 →
-                  </a>
+                  </Link>
                 </div>
               </div>
             )}
@@ -194,20 +194,20 @@ export default function Nav() {
             { id: 'contact', label: '문의' },
           ].map(m => (
             <li key={m.id}>
-              <a href={`#${m.id}`} style={{
+              <Link href={`/#${m.id}`} style={{
                 fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700,
                 color: active === m.id ? 'var(--accent)' : 'var(--text2)',
                 textDecoration: 'none', letterSpacing: '0.02em', transition: 'color 0.2s',
               }}>
                 {m.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         {/* CTA + 모바일 햄버거 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <a href="#contact" style={{
+          <Link href="/#contact" style={{
             fontFamily: 'var(--mono)', fontSize: '0.75rem',
             padding: '8px 18px', background: 'transparent',
             border: '1px solid var(--accent)', color: 'var(--accent)',
@@ -224,7 +224,7 @@ export default function Nav() {
             }}
           >
             무료 상담
-          </a>
+          </Link>
 
           {/* 모바일 햄버거 */}
           <button
@@ -262,9 +262,9 @@ export default function Nav() {
           ))}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 16 }}>
             {[{id:'pricing',label:'요금'},{id:'about',label:'소개'},{id:'contact',label:'문의'}].map(m => (
-              <a key={m.id} href={`#${m.id}`} onClick={() => setMobileOpen(false)} style={{ fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700, color: 'var(--text2)', textDecoration: 'none', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+              <Link key={m.id} href={`/#${m.id}`} onClick={() => setMobileOpen(false)} style={{ fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700, color: 'var(--text2)', textDecoration: 'none', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
                 {m.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>

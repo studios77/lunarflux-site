@@ -1,26 +1,12 @@
 import Link from 'next/link'
+import Nav from '@/components/Nav'
 import type { ServiceData } from '@/lib/servicesData'
 import { servicesData } from '@/lib/servicesData'
 
 export default function ServiceDetailPage({ s }: { s: ServiceData }) {
   return (
     <main style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
-
-      {/* Nav */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(2,4,12,0.85)', backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid var(--border)',
-        padding: '0 5%', height: 64,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      }}>
-        <Link href="/" style={{ fontFamily: 'var(--display)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--text)', textDecoration: 'none', letterSpacing: '-0.02em' }}>
-          Lunar<span style={{ color: 'var(--accent)' }}>Flux</span>
-        </Link>
-        <Link href="/#services" style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--text2)', textDecoration: 'none', letterSpacing: '0.06em' }}>
-          ← 서비스 목록
-        </Link>
-      </nav>
+      <Nav />
 
       {/* Hero */}
       <section style={{ padding: '120px 5% 80px', maxWidth: 1100, margin: '0 auto' }}>
