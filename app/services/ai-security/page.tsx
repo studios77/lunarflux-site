@@ -255,7 +255,7 @@ export default function AISecurityPage() {
           </h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, marginBottom: 40 }}>
             현재 인프라의 보안 취약점을 무료로 진단해 드립니다.<br />
-            보안 전문 엔지니어가 검토 후 24시간 이내 결과를 안내해 드립니다.
+            전문 엔지니어가 검토 후 24시간 이내 결과를 안내해 드립니다.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(16,185,129,0.25)' }}>
@@ -266,7 +266,7 @@ export default function AISecurityPage() {
             </a>
           </div>
           <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap' }}>
-            {['도입 비용 무료 견적', '보안 전문 엔지니어 24시간 내 회신', '계약 의무 없음'].map((t, i) => (
+            {['도입 비용 무료 견적', '전문 엔지니어 24시간 내 회신', '계약 의무 없음'].map((t, i) => (
               <div key={i} style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: 'var(--text3)', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ color: 'var(--accent)' }}>✓</span> {t}
               </div>

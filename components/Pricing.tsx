@@ -237,7 +237,7 @@ export default function Pricing() {
                     접수가 완료됐습니다!
                   </div>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text2)', lineHeight: 1.7, marginBottom: 24 }}>
-                    보안 전문 엔지니어가 확인 후 <strong>24시간 이내</strong> 연락드립니다.<br />
+                    전문 엔지니어가 확인 후 <strong>24시간 이내</strong> 연락드립니다.<br />
                     긴급 문의: <a href="tel:01032043847" style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>010-3204-3847</a>
                   </p>
                   <button
@@ -334,7 +334,7 @@ export default function Pricing() {
                   </button>
 
                   <p style={{ marginTop: 10, fontSize: '0.72rem', color: 'var(--text3)', textAlign: 'center', fontFamily: 'var(--mono)' }}>
-                    보안 전문 엔지니어 확인 후 24시간 이내 회신 · 긴급: 010-3204-3847
+                    전문 엔지니어 확인 후 24시간 이내 회신 · 긴급: 010-3204-3847
                   </p>
                 </form>
               )}
