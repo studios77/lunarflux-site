@@ -40,15 +40,15 @@ export default function Services() {
         </div>
 
         <div className="reveal" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: 20, marginTop: 60,
         }}>
           {services.map(s => (
-            <Link key={s.slug} href={`/services/${s.slug}/`} title={s.name} style={{ textDecoration: 'none' }}>
+            <Link key={s.slug} href={`/services/${s.slug}/`} title={s.name} style={{ textDecoration: 'none', minWidth: 0 }}>
               <div style={{
-                background: 'rgba(255,255,255,0.6)', padding: '36px 32px', height: '100%',
+                background: 'rgba(255,255,255,0.6)', padding: '36px 28px', height: '100%',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer',
-                position: 'relative', overflow: 'hidden',
+                position: 'relative', overflow: 'hidden', minWidth: 0,
                 borderRadius: 20, border: '1px solid var(--border)',
                 backdropFilter: 'blur(12px)',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
@@ -68,7 +68,21 @@ export default function Services() {
               >
                 <div style={{ fontSize: '1.4rem', marginBottom: 20, width: 48, height: 48, border: '1px solid var(--border2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', boxShadow: '0 4px 12px rgba(16,185,129,0.08)' }}>{s.icon}</div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>{s.cat}</div>
-                <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.05rem, 2.8vw, 1.2rem)', fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em', lineHeight: 1.3, wordBreak: 'keep-all' }}>
+                <div
+                  style={{
+                    fontFamily: 'var(--display)',
+                    fontSize: 'clamp(1rem, 2.2vw, 1.1rem)',
+                    fontWeight: 700,
+                    color: 'var(--text)',
+                    marginBottom: 12,
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.35,
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    minWidth: 0,
+                  }}
+                >
                   {s.name}
                 </div>
                 <div style={{ fontSize: '0.86rem', color: 'var(--text2)', lineHeight: 1.65, marginBottom: 20, wordBreak: 'keep-all' }}>{s.desc}</div>
