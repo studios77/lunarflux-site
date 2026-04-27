@@ -67,7 +67,7 @@ export default function Contact() {
     {
       icon: '🕐',
       title: '응답 시간',
-      lines: ['AI보안 전문 엔지니어 검토 후 24시간 내', '긴급 장애 즉시'],
+      lines: ['보안 전문 엔지니어 검토 후 24시간 내', '긴급 장애 즉시'],
     },
     { icon: '📍', title: '서비스 지역', val: '글로벌 전지역 가능(원격 운영)' },
   ]
@@ -81,7 +81,7 @@ export default function Contact() {
             Contact
           </div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>서비스 문의</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text)', maxWidth: 520, lineHeight: 1.8 }}>AI보안 전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text)', maxWidth: 520, lineHeight: 1.8 }}>보안 전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
         </div>
 
         <div className="reveal contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
@@ -199,7 +199,7 @@ export default function Contact() {
                 {status === 'idle' && (
                   <>
                     <span style={{ display: 'block' }}>문의 전송</span>
-                    <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 500, marginTop: 4, opacity: 0.92 }}>AI보안 전문 엔지니어가 24시간 내 회신</span>
+                    <span style={{ display: 'block', fontSize: '0.72rem', fontWeight: 500, marginTop: 4, opacity: 0.92 }}>보안 전문 엔지니어가 24시간 내 회신</span>
                   </>
                 )}
               </button>
