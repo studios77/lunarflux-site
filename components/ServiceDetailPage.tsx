@@ -158,7 +158,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
       <section style={{ background: 'var(--bg2)', padding: '80px 5%', textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.6rem,4vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 16 }}>지금 바로 시작하세요</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, marginBottom: 36 }}>전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, marginBottom: 36 }}>인공지능보안 전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(52,211,153,0.3)' }}>
               {s.cta}
