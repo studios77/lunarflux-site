@@ -21,7 +21,7 @@ export default function Footer() {
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '64px 5% 40px' }}>
 
         {/* 상단 3단 */}
-        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr auto', gap: 48, alignItems: 'start', flexWrap: 'wrap' }}>
+        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '200px 1fr auto', gap: 48, alignItems: 'start' }}>
 
           {/* 왼쪽: 로고 */}
           <div>
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
 
           {/* 오른쪽: 링크 */}
-          <ul style={{ display: 'flex', flexDirection: 'column', gap: 12, listStyle: 'none', margin: 0, padding: 0, alignItems: 'flex-end' }}>
+          <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 12, listStyle: 'none', margin: 0, padding: 0, alignItems: 'flex-end' }}>
             {links.map(([label, href]) => (
               <li key={label}>
                 <a
@@ -71,6 +71,12 @@ export default function Footer() {
           </span>
         </div>
       </div>
+      <style>{`
+        @media(max-width:768px){ 
+          footer .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; } 
+          footer .footer-links { align-items: flex-start !important; }
+        }
+      `}</style>
     </footer>
   )
 }

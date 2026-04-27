@@ -67,7 +67,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
 
       {/* Specs + Use Cases */}
       <section style={{ padding: '80px 5%' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60 }}>
+        <div className="specs-grid" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60 }}>
           <div>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 28, display: 'flex', alignItems: 'center', gap: 10 }}>
               <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
@@ -201,6 +201,11 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </div>
       </section>
 
+      <style>{`
+        @media(max-width:768px){ 
+          .specs-grid { grid-template-columns: 1fr !important; gap: 40px !important; } 
+        }
+      `}</style>
     </main>
   )
 }

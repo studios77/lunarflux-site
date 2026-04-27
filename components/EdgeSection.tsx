@@ -89,7 +89,7 @@ export default function EdgeSection() {
         {/* 3 Edge Cards */}
         <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: 24, marginTop: 60 }}>
           {edges.map((e, i) => (
-            <div key={i} style={{
+            <div key={i} className="edge-card" style={{
               background: 'var(--surface)',
               border: '1px solid var(--border)',
               borderRadius: 12,
@@ -159,7 +159,7 @@ export default function EdgeSection() {
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
             검증된 수치
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden' }}>
+          <div className="trust-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden' }}>
             {trustStats.map((t, i) => (
               <div key={i} style={{ background: 'var(--surface)', padding: '32px 24px', textAlign: 'center' }}>
                 <div style={{ fontFamily: 'var(--display)', fontSize: '2rem', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.03em', marginBottom: 8 }}>
@@ -208,6 +208,12 @@ export default function EdgeSection() {
         </div>
 
       </div>
+      <style>{`
+        @media(max-width:768px){ 
+          .edge-card { grid-template-columns: 1fr !important; gap: 32px !important; } 
+          .trust-grid { grid-template-columns: 1fr 1fr !important; } 
+        }
+      `}</style>
     </section>
   )
 }

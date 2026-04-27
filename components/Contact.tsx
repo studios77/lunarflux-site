@@ -65,7 +65,7 @@ export default function Contact() {
           <p style={{ fontSize: '0.95rem', color: '#111827', maxWidth: 520, lineHeight: 1.8 }}>전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
+        <div className="reveal contact-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 60, marginTop: 60, alignItems: 'start' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             {contactItems.map(c => (
               <div key={c.title} style={{
@@ -86,7 +86,7 @@ export default function Contact() {
 
           <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, padding: '36px 32px' }}>
             <form ref={formRef} onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+              <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
                 {[
                   { label: '이름 / 담당자', name: 'name', type: 'text', placeholder: '홍길동' },
                   { label: '회사명', name: 'company', type: 'text', placeholder: '(주)루나테크' },
@@ -158,6 +158,12 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <style>{`
+        @media(max-width:768px){ 
+          #contact .contact-grid { grid-template-columns: 1fr !important; gap: 40px !important; } 
+          #contact .form-grid { grid-template-columns: 1fr !important; } 
+        }
+      `}</style>
     </section>
   )
 }

@@ -57,7 +57,7 @@ export default function About() {
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>왜 LunarfluxAI인가?</h2>
         </div>
 
-        <div className="reveal" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>
+        <div className="reveal two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {whyItems.map(w => (
               <div key={w.num} style={{ display: 'flex', gap: 18, alignItems: 'flex-start', padding: 20, border: '1px solid var(--border)', borderRadius: 6, background: 'var(--surface)', transition: 'border-color 0.3s' }}

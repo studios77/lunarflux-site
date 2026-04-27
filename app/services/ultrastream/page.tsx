@@ -245,7 +245,7 @@ export default function UltrastreamPage() {
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             {useCases.map((u, i) => (
-              <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden', display: 'grid', gridTemplateColumns: '280px 1fr' }}>
+              <div key={i} className="use-case-card" style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden', display: 'grid', gridTemplateColumns: '280px 1fr' }}>
                 {/* 좌측 */}
                 <div style={{ background: `linear-gradient(160deg, ${u.color}18, ${u.color}08)`, borderRight: `1px solid ${u.color}22`, padding: '32px 28px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div style={{ fontSize: '2rem', marginBottom: 12 }}>{u.icon}</div>
@@ -341,6 +341,9 @@ export default function UltrastreamPage() {
         .us-card:hover {
           border-color: var(--accent);
           box-shadow: 0 0 24px rgba(14,165,233,0.1);
+        }
+        @media(max-width:768px){
+          .use-case-card { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </main>
