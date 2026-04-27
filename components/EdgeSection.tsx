@@ -75,14 +75,14 @@ export default function EdgeSection() {
         <div className="reveal">
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
-            AI differentiators
+            Competitive Edge
           </div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14 }}>
-            프로덕션에서 통하는<br />
-            <span style={{ background: 'linear-gradient(135deg,#059669,#4f46e5,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>3가지 AI 결합 우위</span>
+            경쟁사 대비 두드러지는<br />
+            <span style={{ background: 'linear-gradient(135deg,#059669,#0d9488,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>세 가지 기술 강점</span>
           </h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, maxWidth: 580 }}>
-            딥페이크·LLM 관제·초저지연 스트림 — 각각 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>실제 라이브·보안 트래픽</strong> 위에서 굴립니다. 한 팀이 엔드투엔드로 맞춥니다.
+          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, maxWidth: 560 }}>
+            딥페이크 탐지, AI 보안 관제, 초저지연 스트리밍을 라이브·보안 환경에 맞춰 제공합니다. 설계부터 운영까지 한 팀이 맡습니다.
           </p>
         </div>
 

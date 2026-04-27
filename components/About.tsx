@@ -2,15 +2,15 @@
 import { useEffect, useRef } from 'react'
 
 const whyItems = [
-  { num: '01', title: 'AI 파이프라인을 인프라와 같이 납품', desc: '탐지·분류·대응 모델과 데이터 경로를 IDC·네트워크·스트림 스택에 맞춰 설계합니다. PoC가 아닌 상용 운영 기준으로 맞춥니다.' },
-  { num: '02', title: 'LLM·ML을 실제 관제·스트림에 탑재', desc: '자율 관제 에이전트, 스트림 이상탐지, 딥페이크 검출 등을 고객 트래픽에 연결해 돌립니다. 보안·미디어 엔지니어가 온콜로 이어집니다.' },
-  { num: '03', title: '자체 Ultrastream + AI 미디어 스택', desc: '초저지연 LL-HLS 엔진과 AI 검증 레이어를 함께 운영합니다. 방송·커머스·공공 스트림에 맞춘 구성.' },
-  { num: '04', title: '가상화·HA 위에서 AI 워크로드까지', desc: 'GPU·CPU 워크로드, 이중화, 백업·DR까지 한 로드맵으로 설계·전환합니다.' },
+  { num: '01', title: '인프라와 AI 보안을 함께', desc: '서버·네트워크·스트림 위에 보안 AI를 올리는 설계를 같이 잡습니다. 도입 이후 운영까지 한 창구로 이어집니다.' },
+  { num: '02', title: '실제 트래픽에서 돌아가는 AI', desc: '자율 관제, 스트림 이상 탐지, 딥페이크 검출 등을 고객 환경에 맞춰 연결합니다. 이슈가 생기면 보안·미디어 엔지니어가 바로 대응합니다.' },
+  { num: '03', title: '자체 Ultrastream 엔진', desc: 'LL-HLS로 1~2초 수준의 지연을 목표로 합니다. 방송·라이브커머스·공공 중계 등 용도에 맞춰 구성합니다.' },
+  { num: '04', title: '가상화·이중화·백업까지', desc: 'VM, HA, DB 클러스터, 백업·DR까지 한 번에 설계할 수 있습니다.' },
 ]
 
 const termLines = [
   { type: 'prompt', text: '$ lunarflux status --all' },
-  { type: 'out', text: 'Connecting to LunarFlux AI control plane…' },
+  { type: 'out', text: 'LunarFlux 엔진에 연결 중…' },
   { type: 'blank' },
   { type: 'ok', text: '✓ MediaMTX      running — 4 streams active' },
   { type: 'ok', text: '✓ HA Cluster    ACTIVE-ACTIVE — no failover' },
@@ -18,8 +18,8 @@ const termLines = [
   { type: 'ok', text: '✓ Backup        last: 2h ago — verified OK' },
   { type: 'blank' },
   { type: 'prompt', text: '$ ai-sec scan --realtime' },
-  { type: 'out', text: 'LLM summarizer + ML baselines — scoring events…' },
-  { type: 'ok', text: '✓ AI Engine     0 critical — 12 low queued for review' },
+  { type: 'out', text: '실시간 이벤트 분석 중…' },
+  { type: 'ok', text: '✓ AI Engine     위협 0건 · 낮은 등급 12건 검토 대기' },
   { type: 'warn', text: '⚠ IP Block      3 IPs blocked (GeoIP KP,RU)' },
   { type: 'ok', text: '✓ Deepfake      stream integrity verified' },
   { type: 'blank' },
@@ -54,8 +54,8 @@ export default function About() {
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
             Why LunarfluxAI
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>AI를 「기능」이 아니라 운영으로</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.75, marginBottom: 8 }}>슬라이드용 데모가 아니라, 관제·스트림·거버넌스에 붙는 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>실서비스 AI</strong>를 지향합니다.</p>
+          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>왜 LunarfluxAI인가?</h2>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.75, marginBottom: 8 }}>인프라와 AI 보안, 스트리밍을 나눠 맡기지 않고 한 팀이 맡습니다. 설계부터 운영·장애 대응까지 이어집니다.</p>
         </div>
 
         <div className="reveal two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>

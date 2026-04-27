@@ -33,10 +33,10 @@ export default function Services() {
         <div className="reveal">
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
-            AI × Infrastructure
+            Services
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>운영 검증된 AI 결합 서비스</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 560, lineHeight: 1.8 }}>모델만 데모하는 게 아니라, SIEM·스트림·딥페이크·LLM 거버넌스까지 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>실제 고객 환경에 탑재·운영</strong>합니다. IDC·MSP·HA와 같은 라인으로 납품·관제합니다.</p>
+          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>통합 기술 서비스</h2>
+          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>IDC 인프라, AI 보안, 라이브 스트리밍을 한 플랫폼에서. 필요한 항목만 고르거나, 전체를 맡기셔도 됩니다.</p>
         </div>
 
         <div className="reveal" style={{

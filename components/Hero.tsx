@@ -23,32 +23,34 @@ export default function Hero() {
             width: 6, height: 6, borderRadius: '50%', background: 'var(--accent2)',
             animation: 'pulse 1.5s ease-in-out infinite', display: 'inline-block',
           }} />
-          AI-native ops · production stack
+          IDC · AI 보안 · 라이브 스트리밍
         </div>
 
         <h1 style={{
-          fontFamily: 'var(--display)', fontSize: 'clamp(2.6rem, 7vw, 5.2rem)',
-          fontWeight: 800, lineHeight: 1.05, letterSpacing: '-0.03em', color: 'var(--text)',
+          fontFamily: 'var(--display)', fontSize: 'clamp(2.75rem, 7.5vw, 5.5rem)',
+          fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.03em', color: 'var(--text)',
           marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
           wordBreak: 'keep-all',
         }}>
+          IDC ·{' '}
           <span style={{
-            background: 'linear-gradient(135deg, #059669 0%, #0d9488 40%, #6366f1 75%, #d97706 100%)',
+            background: 'linear-gradient(135deg, #059669, #0d9488, #6366f1)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-          }}>AI가 결합된</span> 인프라
+          }}>AI 보안</span>
+          {' · '}
+          <span style={{ whiteSpace: 'nowrap' }}>스트리밍</span>
           <br />
-          <span style={{ color: 'var(--text2)', fontWeight: 700 }}>IDC · 보안 · 스트리밍</span>을 한 팀이 운영
+          <span style={{ color: 'var(--text2)', fontWeight: 700 }}>한곳에서 설계하고 운영합니다</span>
         </h1>
 
         <p style={{
-          fontSize: '1.05rem', color: 'var(--text2)', maxWidth: 600,
+          fontSize: '1.05rem', color: 'var(--text2)', maxWidth: 560,
           margin: '0 auto 48px', lineHeight: 1.85,
           animation: 'fadeUp 0.8s 0.2s ease both',
         }}>
-          LLM 기반 자율 관제·스트림 이상탐지·딥페이크 검출 등 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>실제 트래픽에서 돌아가는 AI</strong>를
-          IDC·네트워크·라이브 스택과 붙여 설계합니다.<br />
-          슬라이드가 아니라 <strong style={{ color: 'var(--text)', fontWeight: 600 }}>상용 파이프라인</strong>으로 제공합니다.
+          서버 임대·위탁운영부터 자율 보안 관제, 스트림 이상 탐지, 딥페이크 검출까지.<br />
+          고객 환경에 맞춰 붙이고, Ultrastream으로 라이브까지 이어 드립니다.
         </p>
 
         <div style={{
@@ -84,8 +86,8 @@ export default function Hero() {
           {[
             { num: '99.99', unit: '%', label: 'Uptime SLA' },
             { num: '1~2', unit: 's', label: 'LL-HLS 레이턴시' },
-            { num: '24', unit: '/7', label: 'AI 관제·자동대응' },
-            { num: '14', unit: '+', label: 'AI 결합 서비스' },
+            { num: '24', unit: '/7', label: '보안 관제' },
+            { num: '14', unit: '개', label: '통합 서비스' },
           ].map(s => (
             <div key={s.label} style={{ 
               textAlign: 'center', background: 'rgba(255,255,255,0.6)', 
