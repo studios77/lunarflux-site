@@ -6,6 +6,10 @@
 - Next.js 16, App Router, `output: 'export'`(정적 내보내기) — 서버 런타임 없음
 - React는 Next.js 번들(React 19 호환)을 따릅니다
 
+## TypeScript
+- `tsconfig.json`은 `strict` + `noUnusedLocals` / `noUnusedParameters` / `noImplicitReturns` 등을 켜 두었습니다. **추론·자동완성에 맡기지 말고** 공개 API·props에는 타입을 명시합니다.
+- 서비스 상세·슬러그 관련은 **`@/lib/app-types` 또는 `@/lib/servicesData`** — `ServiceData`, `ServiceSlug`, `SERVICE_SLUGS`, `getServiceBySlug` / `findServiceBySlug`를 사용합니다. (임의 `string`으로 슬러그를 쓰지 말고 `ServiceSlug` 또는 `findServiceBySlug`로 조회)
+
 ## Styling
 - Use **Tailwind CSS v4** utility classes as the primary styling method
 - Tailwind is imported via `@import "tailwindcss"` in `app/globals.css`

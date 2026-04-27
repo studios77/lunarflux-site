@@ -342,6 +342,26 @@ export const servicesData: ServiceData[] = [
   },
 ]
 
-export function getServiceBySlug(slug: string): ServiceData | undefined {
+/** `servicesData`에 정의된 서비스 상세 페이지 슬러그 (데이터와 동기화 유지) */
+export const SERVICE_SLUGS = [
+  'server-rental',
+  'managed-service',
+  'ha',
+  'db-cluster',
+  'ai-stream-security',
+  'deepfake-detection',
+  'ultrastream',
+  'vod-multistream',
+  'ai-agent',
+] as const
+
+export type ServiceSlug = (typeof SERVICE_SLUGS)[number]
+
+export function getServiceBySlug(slug: ServiceSlug): ServiceData | undefined {
+  return servicesData.find(s => s.slug === slug)
+}
+
+/** URL 등 임의 문자열에서 조회할 때(상세 페이지 `getServiceBySlug`와 달리 런타임 조회) */
+export function findServiceBySlug(slug: string): ServiceData | undefined {
   return servicesData.find(s => s.slug === slug)
 }
