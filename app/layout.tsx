@@ -1,5 +1,15 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#ffffff',
+}
+
+const SITE = new URL('https://lunarflux.ai')
+
+export const metadataBase = SITE
 
 export const metadata: Metadata = {
   title: 'LunarFlux AI — IDC 서버 임대·AI 보안·라이브 스트리밍',
@@ -17,8 +27,12 @@ export const metadata: Metadata = {
     'DDoS 차단', '보안 관제', 'SIEM', '제로트러스트',
     '백업 솔루션', 'DR 솔루션', '재해복구', '데이터 백업', '서버 이중화', 'HA 구성',
     '서버 복구', '서버 장애 복구', '시스템 이전', '트러블슈팅', '온프레미스 기술지원',
+    '인공지능보안 전문', '인공지능보안서비스', '스트리밍랩스',
     'LunarFlux', '루나플럭스', 'LunarFlux AI'
   ],
+  authors: [{ name: 'LunarFlux AI', url: 'https://lunarflux.ai' }],
+  creator: 'LunarFlux AI',
+  formatDetection: { email: false, address: false, telephone: false },
   openGraph: {
     title: 'LunarFlux AI — IDC · AI 보안 · 라이브 스트리밍',
     description: 'IDC 인프라와 AI 보안, 초저지연 스트리밍을 함께 제공합니다.',
@@ -41,8 +55,12 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
     },
   },
+  category: 'technology',
 }
 
 export default function RootLayout({
