@@ -5,7 +5,7 @@ import Link from 'next/link'
 const serviceMenu = [
   {
     cat: 'IDC / 서버',
-    color: '#0ea5e9',
+    color: '#10b981',
     items: [
       { name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
       { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
@@ -58,7 +58,7 @@ export default function Nav() {
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
         padding: '0 5%', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(240,248,255,0.95)', backdropFilter: 'blur(20px)',
+        background: 'rgba(240,253,244,0.95)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
       }}>
         {/* Logo */}
@@ -111,7 +111,7 @@ export default function Nav() {
                   left: '50%', transform: 'translateX(-50%)',
                   background: 'var(--surface)', border: '1px solid var(--border2)',
                   borderRadius: 12,
-                  boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
+                  boxShadow: '0 20px 60px rgba(16,185,129,0.18)',
                   minWidth: 680,
                   zIndex: 9999,
                   display: 'flex', flexDirection: 'column',

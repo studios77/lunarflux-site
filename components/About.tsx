@@ -64,7 +64,7 @@ export default function About() {
                 onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border2)')}
                 onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
               >
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--accent)', background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.22)', borderRadius: 3, padding: '4px 8px', flexShrink: 0, marginTop: 2 }}>{w.num}</div>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--accent)', background: 'rgba(52,211,153,0.1)', border: '1px solid rgba(52,211,153,0.22)', borderRadius: 3, padding: '4px 8px', flexShrink: 0, marginTop: 2 }}>{w.num}</div>
                 <div>
                   <h4 style={{ fontFamily: 'var(--display)', fontSize: '0.95rem', fontWeight: 600, color: 'var(--text)', marginBottom: 5 }}>{w.title}</h4>
                   <p style={{ fontSize: '0.82rem', color: 'var(--text2)', lineHeight: 1.7 }}>{w.desc}</p>
@@ -73,7 +73,7 @@ export default function About() {
             ))}
           </div>
 
-          <div style={{ background: '#0a0e1a', border: '1px solid var(--border2)', borderRadius: 8, overflow: 'hidden', fontFamily: 'var(--mono)' }}>
+          <div style={{ background: '#022c22', border: '1px solid var(--border2)', borderRadius: 8, overflow: 'hidden', fontFamily: 'var(--mono)' }}>
             <div style={{ background: 'var(--surface)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 6, borderBottom: '1px solid var(--border)' }}>
               {['#ff5f57','#febc2e','#28c840'].map(c => <span key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c, display: 'inline-block' }} />)}
               <span style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', marginLeft: 'auto', letterSpacing: '0.05em' }}>lunarflux — security-monitor</span>

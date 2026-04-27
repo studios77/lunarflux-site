@@ -17,7 +17,7 @@ const companyInfo = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0f1117', borderTop: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
+    <footer style={{ background: '#022c22', borderTop: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '64px 5% 40px' }}>
 
         {/* 상단 3단 */}

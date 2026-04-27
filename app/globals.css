@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f0f8ff;
-  --bg2: #e6f3ff;
-  --bg3: #dbeafe;
+  --bg: #f0fdf4;
+  --bg2: #dcfce7;
+  --bg3: #bbf7d0;
   --surface: #ffffff;
-  --surface2: #f0f9ff;
-  --border: rgba(14,165,233,0.18);
-  --border2: rgba(14,165,233,0.36);
-  --accent: #0ea5e9;
+  --surface2: #ecfdf5;
+  --border: rgba(16,185,129,0.22);
+  --border2: rgba(16,185,129,0.4);
+  --accent: #10b981;
   --accent2: #f59e0b;
   --accent3: #d97706;
-  --glow: rgba(14,165,233,0.15);
-  --text: #0c1a2e;
-  --text2: #1e4d7a;
-  --text3: #5a8ab0;
+  --glow: rgba(16,185,129,0.15);
+  --text: #022c22;
+  --text2: #064e3b;
+  --text3: #047857;
   --mono: 'IBM Plex Mono', monospace;
-  --sans: 'Noto Sans KR', sans-serif;
-  --display: 'Syne', sans-serif;
+  --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  --display: 'Syne', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,8 +46,8 @@ body::before {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(14,165,233,0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14,165,233,0.07) 1px, transparent 1px);
+    linear-gradient(rgba(16,185,129,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,0.08) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;

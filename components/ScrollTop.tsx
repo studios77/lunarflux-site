@@ -37,7 +37,7 @@ export default function ScrollTop() {
         border: '1px solid var(--border2)',
         cursor: 'pointer',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 4px 20px rgba(14,165,233,0.15)',
+        boxShadow: '0 4px 20px rgba(16,185,129,0.15)',
         opacity: visible ? 1 : 0,
         transform: visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.85)',
         transition: 'opacity 0.3s ease, transform 0.3s ease',
@@ -46,11 +46,11 @@ export default function ScrollTop() {
       }}
       onMouseEnter={e => {
         (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)'
-        ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(14,165,233,0.35)'
+        ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(16,185,129,0.35)'
       }}
       onMouseLeave={e => {
         (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border2)'
-        ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 20px rgba(14,165,233,0.15)'
+        ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 20px rgba(16,185,129,0.15)'
       }}
     >
       {/* 원형 진행 표시 */}

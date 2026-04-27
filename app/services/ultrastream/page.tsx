@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const comparisons = [
   { label: '일반 HLS (국내 CDN 평균)', delay: '10~30초', bar: 100, color: '#ef4444' },
   { label: '경쟁사 저지연 솔루션', delay: '3~5초', bar: 30, color: '#f59e0b' },
-  { label: 'Ultrastream LL-HLS', delay: '1~2초', bar: 10, color: '#0ea5e9' },
+  { label: 'Ultrastream LL-HLS', delay: '1~2초', bar: 10, color: '#10b981' },
 ]
 
 const strengths = [
@@ -57,7 +57,7 @@ const useCases = [
   {
     sector: '공공기관 · 지자체',
     icon: '🏛️',
-    color: '#0ea5e9',
+    color: '#10b981',
     title: '전국 단위 생중계도 끊김 없이',
     scenarios: [
       '시·도지사 기자회견 및 브리핑 실시간 중계',
@@ -126,7 +126,7 @@ export default function UltrastreamPage() {
       {/* Nav */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(240,248,255,0.92)', backdropFilter: 'blur(20px)',
+        background: 'rgba(240,253,244,0.92)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
         padding: '0 5%', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -142,7 +142,7 @@ export default function UltrastreamPage() {
 
       {/* Hero */}
       <section style={{ padding: '130px 5% 80px', maxWidth: 1100, margin: '0 auto', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: 0, right: 0, width: 600, height: 600, background: 'radial-gradient(ellipse, rgba(14,165,233,0.13) 0%, transparent 65%)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', top: 0, right: 0, width: 600, height: 600, background: 'radial-gradient(ellipse, rgba(16,185,129,0.13) 0%, transparent 65%)', pointerEvents: 'none' }} />
 
         <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
@@ -151,7 +151,7 @@ export default function UltrastreamPage() {
 
         <h1 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2.4rem,6vw,4.2rem)', fontWeight: 800, lineHeight: 1.06, letterSpacing: '-0.03em', marginBottom: 28, maxWidth: 820 }}>
           국내 CDN보다<br />
-          <span style={{ background: 'linear-gradient(135deg,#0284c7,#38bdf8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>10배 빠른 스트리밍.</span><br />
+          <span style={{ background: 'linear-gradient(135deg,#059669,#34d399)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>10배 빠른 스트리밍.</span><br />
           지연 없는 라이브가<br />게임을 바꿉니다.
         </h1>
 
@@ -162,7 +162,7 @@ export default function UltrastreamPage() {
         </p>
 
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 60 }}>
-          <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#fff', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(14,165,233,0.35)' }}>
+          <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#fff', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(16,185,129,0.35)' }}>
             무료 데모 신청
           </Link>
           <a href="tel:01032043847" style={{ padding: '14px 36px', background: 'transparent', color: 'var(--text)', border: '1px solid var(--border2)', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', letterSpacing: '0.06em', textDecoration: 'none' }}>
@@ -193,8 +193,8 @@ export default function UltrastreamPage() {
       </section>
 
       {/* 핵심 수치 */}
-      <section style={{ background: 'linear-gradient(135deg,#0c1e3a,#0a2a50)', padding: '70px 5%' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(14,165,233,0.2)', borderRadius: 12, overflow: 'hidden' }}>
+      <section style={{ background: 'linear-gradient(135deg,#064e3b,#022c22)', padding: '70px 5%' }}>
+        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 12, overflow: 'hidden' }}>
           {stats.map((s, i) => (
             <div key={i} style={{ padding: '36px 28px', textAlign: 'center', background: 'rgba(0,0,0,0.15)' }}>
               <div style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 800, color: 'var(--accent)', letterSpacing: '-0.03em', marginBottom: 8 }}>{s.val}</div>
@@ -302,7 +302,7 @@ export default function UltrastreamPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ background: 'linear-gradient(135deg,#0c1e3a,#0a2a50)', padding: '80px 5%', textAlign: 'center' }}>
+      <section style={{ background: 'linear-gradient(135deg,#064e3b,#022c22)', padding: '80px 5%', textAlign: 'center' }}>
         <div style={{ maxWidth: 680, margin: '0 auto' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 16 }}>지금 시작하세요</div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.6rem,4vw,2.6rem)', fontWeight: 800, letterSpacing: '-0.02em', color: '#fff', marginBottom: 16, lineHeight: 1.2 }}>
@@ -313,7 +313,7 @@ export default function UltrastreamPage() {
             전문 엔지니어가 귀사 환경에 맞는 구성을 안내해 드립니다.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/#contact" style={{ padding: '15px 40px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.82rem', fontWeight: 700, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 40px rgba(14,165,233,0.4)' }}>
+            <Link href="/#contact" style={{ padding: '15px 40px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.82rem', fontWeight: 700, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 40px rgba(16,185,129,0.4)' }}>
               무료 데모 신청하기
             </Link>
             <a href="tel:01032043847" style={{ padding: '15px 40px', background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.25)', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.82rem', letterSpacing: '0.06em', textDecoration: 'none' }}>
@@ -340,7 +340,7 @@ export default function UltrastreamPage() {
         }
         .us-card:hover {
           border-color: var(--accent);
-          box-shadow: 0 0 24px rgba(14,165,233,0.1);
+          box-shadow: 0 0 24px rgba(16,185,129,0.1);
         }
         @media(max-width:768px){
           .use-case-card { grid-template-columns: 1fr !important; }

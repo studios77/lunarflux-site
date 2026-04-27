@@ -7,7 +7,7 @@ export default function Hero() {
       <div style={{
         position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
         width: 800, height: 500,
-        background: 'radial-gradient(ellipse, rgba(14,165,233,0.1) 0%, rgba(245,158,11,0.06) 45%, transparent 70%)',
+        background: 'radial-gradient(ellipse, rgba(16,185,129,0.1) 0%, rgba(245,158,11,0.06) 45%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', width: '100%' }}>
@@ -15,7 +15,7 @@ export default function Hero() {
           display: 'inline-flex', alignItems: 'center', gap: 8,
           fontFamily: 'var(--mono)', fontSize: '0.7rem', color: 'var(--accent2)',
           letterSpacing: '0.12em', padding: '6px 16px',
-          border: '1px solid rgba(14,165,233,0.35)', borderRadius: 2,
+          border: '1px solid rgba(16,185,129,0.35)', borderRadius: 2,
           marginBottom: 32, textTransform: 'uppercase',
           animation: 'fadeUp 0.8s ease both',
         }}>
@@ -32,7 +32,7 @@ export default function Hero() {
           marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
         }}>
           IDC · <span style={{
-            background: 'linear-gradient(135deg, #0284c7, #d97706)',
+            background: 'linear-gradient(135deg, #059669, #d97706)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
           }}>AI보안</span> · 스트리밍<br />
@@ -57,7 +57,7 @@ export default function Hero() {
             padding: '14px 36px', background: 'var(--accent)', color: '#fff',
             border: 'none', borderRadius: 4, fontFamily: 'var(--mono)',
             fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em',
-            textDecoration: 'none', boxShadow: '0 0 30px rgba(56,189,248,0.35)',
+            textDecoration: 'none', boxShadow: '0 0 30px rgba(52,211,153,0.35)',
             transition: 'all 0.25s',
           }}>서비스 살펴보기</a>
           <a href="#contact" style={{

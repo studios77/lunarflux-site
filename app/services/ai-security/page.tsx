@@ -77,7 +77,7 @@ export default function AISecurityPage() {
       {/* Nav */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(240,248,255,0.92)', backdropFilter: 'blur(20px)',
+        background: 'rgba(240,253,244,0.92)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
         padding: '0 5%', height: 64,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -96,7 +96,7 @@ export default function AISecurityPage() {
         <div style={{
           position: 'absolute', top: '10%', right: '5%',
           width: 500, height: 500,
-          background: 'radial-gradient(ellipse, rgba(14,165,233,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse, rgba(16,185,129,0.12) 0%, transparent 70%)',
           pointerEvents: 'none',
         }} />
         <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -105,7 +105,7 @@ export default function AISecurityPage() {
         </div>
         <h1 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2.4rem,6vw,4rem)', fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.03em', marginBottom: 28, maxWidth: 800 }}>
           사람 없이 24시간,<br />
-          <span style={{ background: 'linear-gradient(135deg,#0284c7,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI가 스스로 지키는</span><br />
+          <span style={{ background: 'linear-gradient(135deg,#059669,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>AI가 스스로 지키는</span><br />
           보안 관제
         </h1>
         <p style={{ fontSize: '1.05rem', color: 'var(--text2)', lineHeight: 1.85, maxWidth: 580, marginBottom: 44 }}>
@@ -114,7 +114,7 @@ export default function AISecurityPage() {
           위협을 탐지하고 스스로 대응합니다.
         </p>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-          <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(14,165,233,0.3)' }}>
+          <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(16,185,129,0.3)' }}>
             무료 보안 진단 신청
           </Link>
           <a href="tel:01032043847" style={{ padding: '14px 36px', background: 'transparent', color: 'var(--text)', border: '1px solid var(--border2)', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', letterSpacing: '0.06em', textDecoration: 'none' }}>
@@ -193,10 +193,10 @@ export default function AISecurityPage() {
                 {i < steps.length - 1 && (
                   <div style={{ position: 'absolute', top: 22, right: 0, width: 28, height: 2, background: 'linear-gradient(90deg, var(--accent), var(--border))', display: 'none' }} />
                 )}
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--accent)', background: 'rgba(14,165,233,0.1)', border: '1px solid rgba(14,165,233,0.25)', borderRadius: 4, padding: '4px 10px', display: 'inline-block', marginBottom: 16 }}>
+                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--accent)', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', borderRadius: 4, padding: '4px 10px', display: 'inline-block', marginBottom: 16 }}>
                   STEP {s.num}
                 </div>
-                <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), #0284c7)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, color: '#fff', fontFamily: 'var(--display)', fontWeight: 700, fontSize: '1rem' }}>
+                <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent), #059669)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16, color: '#fff', fontFamily: 'var(--display)', fontWeight: 700, fontSize: '1rem' }}>
                   {i + 1}
                 </div>
                 <h3 style={{ fontFamily: 'var(--display)', fontSize: '1rem', fontWeight: 700, color: 'var(--text)', marginBottom: 10, lineHeight: 1.4 }}>{s.title}</h3>
@@ -235,7 +235,7 @@ export default function AISecurityPage() {
       </section>
 
       {/* 도입 효과 */}
-      <section style={{ background: 'linear-gradient(135deg, #0c1e3a 0%, #0a2a50 100%)', padding: '80px 5%' }}>
+      <section style={{ background: 'linear-gradient(135deg, #064e3b 0%, #022c22 100%)', padding: '80px 5%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
             <span style={{ width: 24, height: 1, background: 'var(--accent)', display: 'inline-block' }} />
@@ -251,7 +251,7 @@ export default function AISecurityPage() {
               { before: '업무 시간만', after: '365일 24시간', label: '관제 운영 시간' },
               { before: '사후 처리', after: '실시간 차단', label: '위협 대응 방식' },
             ].map((item, i) => (
-              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(14,165,233,0.2)', borderRadius: 10, padding: '28px 22px' }}>
+              <div key={i} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 10, padding: '28px 22px' }}>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 12 }}>{item.label}</div>
                 <div style={{ fontFamily: 'var(--sans)', fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', textDecoration: 'line-through', marginBottom: 6 }}>{item.before}</div>
                 <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 800, color: 'var(--accent)', letterSpacing: '-0.02em' }}>{item.after}</div>
@@ -273,7 +273,7 @@ export default function AISecurityPage() {
             전문 엔지니어가 검토 후 24시간 이내 결과를 안내해 드립니다.
           </p>
           <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(14,165,233,0.25)' }}>
+            <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(16,185,129,0.25)' }}>
               무료 진단 신청하기
             </Link>
             <a href="tel:01032043847" style={{ padding: '14px 36px', background: 'transparent', color: 'var(--text)', border: '1px solid var(--border2)', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', letterSpacing: '0.06em', textDecoration: 'none' }}>
@@ -304,7 +304,7 @@ export default function AISecurityPage() {
         }
         .sec-card:hover {
           border-color: var(--accent);
-          box-shadow: 0 0 24px rgba(14,165,233,0.1);
+          box-shadow: 0 0 24px rgba(16,185,129,0.1);
         }
       `}</style>
     </main>

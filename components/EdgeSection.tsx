@@ -14,7 +14,7 @@ const edges = [
       { val: '24/7', label: '무인 감시' },
     ],
     highlight: '보이스피싱·선거 조작·기업 사칭 영상 대응에 즉시 적용 가능',
-    color: '#0ea5e9',
+    color: '#10b981',
   },
   {
     badge: '02 · AI 자율 관제',
@@ -79,7 +79,7 @@ export default function EdgeSection() {
           </div>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14 }}>
             시장을 압도하는<br />
-            <span style={{ background: 'linear-gradient(135deg,#0284c7,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>3가지 기술 차별점</span>
+            <span style={{ background: 'linear-gradient(135deg,#059669,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>3가지 기술 차별점</span>
           </h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, maxWidth: 560 }}>
             경쟁사가 한 가지를 잘할 때, LunarFlux AI는 세 가지를 동시에 제공합니다.

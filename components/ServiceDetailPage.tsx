@@ -117,11 +117,11 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
               {s.coloPricing.map((plan, i) => (
                 <div key={i} style={{
                   position: 'relative',
-                  background: plan.popular ? 'linear-gradient(160deg, #0c1e3a 0%, #0a2a50 100%)' : 'var(--surface)',
+                  background: plan.popular ? 'linear-gradient(160deg, #064e3b 0%, #022c22 100%)' : 'var(--surface)',
                   border: plan.popular ? '1.5px solid var(--accent)' : '1px solid var(--border)',
                   borderRadius: 12,
                   padding: '28px 22px 24px',
-                  boxShadow: plan.popular ? '0 0 32px rgba(14,165,233,0.18)' : '0 1px 6px rgba(0,0,0,0.05)',
+                  boxShadow: plan.popular ? '0 0 32px rgba(16,185,129,0.18)' : '0 1px 6px rgba(0,0,0,0.05)',
                   display: 'flex', flexDirection: 'column', gap: 0,
                 }}>
                   {plan.popular && (
@@ -146,7 +146,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                   <div style={{ fontSize: '0.7rem', color: plan.popular ? 'rgba(255,255,255,0.5)' : 'var(--text3)', fontFamily: 'var(--mono)', marginBottom: 20 }}>
                     {plan.note}
                   </div>
-                  <div style={{ borderTop: `1px solid ${plan.popular ? 'rgba(14,165,233,0.25)' : 'var(--border)'}`, paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <div style={{ borderTop: `1px solid ${plan.popular ? 'rgba(16,185,129,0.25)' : 'var(--border)'}`, paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
                     {[
                       { label: '네트워크', value: plan.network },
                       { label: '냉각·보안', value: '포함' },
@@ -174,7 +174,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.6rem,4vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 16 }}>지금 바로 시작하세요</h2>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, marginBottom: 36 }}>전문 엔지니어가 직접 검토 후 24시간 내 회신드립니다.</p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(56,189,248,0.3)' }}>
+            <Link href="/#contact" style={{ padding: '14px 36px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', fontWeight: 500, letterSpacing: '0.06em', textDecoration: 'none', boxShadow: '0 0 30px rgba(52,211,153,0.3)' }}>
               {s.cta}
             </Link>
             <Link href="/#services" style={{ padding: '14px 36px', background: 'transparent', color: 'var(--text)', border: '1px solid var(--border2)', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.8rem', letterSpacing: '0.06em', textDecoration: 'none' }}>
