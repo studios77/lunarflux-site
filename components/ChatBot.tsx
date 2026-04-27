@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import { isAdminNotifyConfigured, notifyAdminInstant } from '@/lib/adminNotify'
 
 interface Message {
   role: 'user' | 'bot'
@@ -75,8 +76,33 @@ export default function ChatBot() {
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
   const [unread, setUnread] = useState(1)
+  const [notifyBusy, setNotifyBusy] = useState(false)
+  const [notifyOk, setNotifyOk] = useState(false)
   const endRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const hasUserMessage = messages.some(m => m.role === 'user')
+
+  const notifyStaff = async () => {
+    if (!isAdminNotifyConfigured() || notifyBusy || !hasUserMessage) return
+    setNotifyBusy(true)
+    setNotifyOk(false)
+    const transcript = messages
+      .slice(-20)
+      .map(m => `${m.role === 'user' ? '[고객]' : '[봇]'} ${m.text.replace(/\n+/g, ' ')}`)
+      .join('\n')
+      .slice(0, 3800)
+    await notifyAdminInstant({
+      title: '[LunarFlux] 채팅 상담 알림',
+      fields: {
+        '대화 내용': transcript || '(비어 있음)',
+        안내: '고객이 담당자 알림을 요청했습니다. 이메일 회신과 함께 확인해 주세요.',
+      },
+    })
+    setNotifyBusy(false)
+    setNotifyOk(true)
+    setTimeout(() => setNotifyOk(false), 5000)
+  }
 
   useEffect(() => {
     if (open) {
@@ -297,6 +323,43 @@ export default function ChatBot() {
 
           <div ref={endRef} />
         </div>
+
+        {isAdminNotifyConfigured() && (
+          <div style={{
+            padding: '8px 12px',
+            borderTop: '1px solid var(--border)',
+            background: 'rgba(14,165,233,0.06)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 8,
+            flexShrink: 0,
+          }}>
+            <span style={{ fontSize: '0.68rem', color: 'var(--text3)', lineHeight: 1.4 }}>
+              담당자에게 Slack/Discord로 즉시 알림을 보냅니다.
+            </span>
+            <button
+              type="button"
+              onClick={() => void notifyStaff()}
+              disabled={notifyBusy || !hasUserMessage}
+              style={{
+                flexShrink: 0,
+                padding: '6px 12px',
+                fontSize: '0.72rem',
+                fontFamily: 'var(--mono)',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+                borderRadius: 6,
+                border: '1px solid var(--accent)',
+                background: hasUserMessage && !notifyBusy ? 'var(--accent)' : 'transparent',
+                color: hasUserMessage && !notifyBusy ? '#000' : 'var(--text3)',
+                cursor: hasUserMessage && !notifyBusy ? 'pointer' : 'not-allowed',
+              }}
+            >
+              {notifyBusy ? '전송 중…' : notifyOk ? '알림 전송됨' : '담당자 알림'}
+            </button>
+          </div>
+        )}
 
         {/* Input */}
         <div style={{

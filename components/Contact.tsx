@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
+import { formDataToRecord, notifyAdminInstant } from '@/lib/adminNotify'
 
 const WEB3FORMS_KEY = '92e76d57-87e2-4f09-8084-bc2552db772d'
 
@@ -25,6 +26,14 @@ export default function Contact() {
       })
       const data = await res.json()
       if (data.success) {
+        const snapshot = formDataToRecord(new FormData(formRef.current))
+        void notifyAdminInstant({
+          title: '[LunarFlux] 서비스 문의 접수',
+          fields: {
+            ...snapshot,
+            subject: '[LunarFlux] 새 서비스 문의가 접수되었습니다',
+          },
+        })
         setStatus('success')
         formRef.current.reset()
         setTimeout(() => setStatus('idle'), 4000)

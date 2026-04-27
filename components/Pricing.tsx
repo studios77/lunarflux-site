@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
+import { formDataToRecord, notifyAdminInstant } from '@/lib/adminNotify'
 
 const WEB3FORMS_KEY = '92e76d57-87e2-4f09-8084-bc2552db772d'
 
@@ -71,6 +72,14 @@ export default function Pricing() {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
       const data = await res.json()
       if (data.success) {
+        const snapshot = formDataToRecord(new FormData(formRef.current))
+        void notifyAdminInstant({
+          title: `[LunarFlux] 요금제 신청 — ${modal.planTier} / ${modal.planName}`,
+          fields: {
+            ...snapshot,
+            subject: `[LunarFlux 요금제 접수] ${modal.planTier} — ${modal.planName}`,
+          },
+        })
         setStatus('success')
         formRef.current.reset()
       } else {
