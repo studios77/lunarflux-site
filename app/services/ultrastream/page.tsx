@@ -179,7 +179,7 @@ export default function UltrastreamPage() {
 
       {/* 핵심 수치 */}
       <section style={{ background: 'linear-gradient(135deg,#064e3b,#022c22)', padding: '70px 5%' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 12, overflow: 'hidden' }}>
+        <div className="ultrastream-stat-grid" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: 12, overflow: 'hidden' }}>
           {stats.map((s, i) => (
             <div key={i} style={{ padding: '36px 28px', textAlign: 'center', background: 'rgba(0,0,0,0.15)' }}>
               <div style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 800, color: 'var(--accent)', letterSpacing: '-0.03em', marginBottom: 8 }}>{s.val}</div>
@@ -327,7 +327,10 @@ export default function UltrastreamPage() {
           border-color: var(--accent);
           box-shadow: 0 0 24px rgba(16,185,129,0.1);
         }
-        @media(max-width:768px){
+        @media (max-width: 900px) {
+          .ultrastream-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+        }
+        @media (max-width: 960px) {
           .use-case-card { grid-template-columns: 1fr !important; }
         }
       `}</style>

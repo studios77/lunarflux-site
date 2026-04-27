@@ -112,17 +112,20 @@ export default function Nav() {
                   background: 'var(--surface)', border: '1px solid var(--border2)',
                   borderRadius: 12,
                   boxShadow: '0 20px 60px rgba(16,185,129,0.18)',
-                  minWidth: 680,
+                  width: 'min(680px, calc(100vw - 32px))',
+                  maxWidth: 'calc(100vw - 32px)',
                   zIndex: 9999,
                   display: 'flex', flexDirection: 'column',
-                  overflow: 'visible',
+                  overflow: 'hidden',
+                  boxSizing: 'border-box',
                 }}
               >
-                {/* 카테고리 행 */}
-                <div style={{ display: 'flex', padding: '20px 0 16px' }}>
+                {/* 카테고리 행 — 3열이 항상 한 줄에 (스트리밍 열이 아래로 떨어지지 않도록 grid) */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '20px 0 16px' }}>
                   {serviceMenu.map((cat, ci) => (
                     <div key={ci} style={{
-                      flex: 1, padding: '0 20px',
+                      minWidth: 0,
+                      padding: '0 16px',
                       borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
                     }}>
                       <div style={{
