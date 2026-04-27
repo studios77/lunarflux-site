@@ -2,33 +2,63 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
-const serviceMenu = [
+type ServiceMenuLink = { name: string; slug: string; desc: string; highlight?: boolean }
+type ServiceMenuSection = { sub?: string; items: ServiceMenuLink[] }
+type ServiceMenuCategory = { cat: string; color: string; sections: ServiceMenuSection[] }
+
+const serviceMenu: ServiceMenuCategory[] = [
   {
     cat: 'IDC / 서버',
-    color: '#10b981',
-    items: [
-      { name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
-      { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
-      { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
-      { name: 'DB 이중화 관리', slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
+    color: '#0ea5e9',
+    sections: [
+      {
+        items: [
+          { name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
+          { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
+          { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
+          { name: 'DB 이중화 관리', slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
+        ],
+      },
     ],
   },
   {
     cat: 'AI 보안',
     color: '#f59e0b',
-    items: [
-      { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제', highlight: true },
-      { name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'DDoS · 세션 하이재킹 자동차단' },
-      { name: '딥페이크 탐지', slug: 'deepfake-detection', desc: '실시간 AI 합성 영상 검출' },
-      { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR 자동화' },
+    sections: [
+      {
+        sub: '관제 · 자동화',
+        items: [
+          { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제', highlight: true },
+          { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR 자동화' },
+        ],
+      },
+      {
+        sub: '스트리밍 · 미디어',
+        items: [
+          { name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'DDoS · 세션 하이재킹 자동차단' },
+          { name: '딥페이크 탐지', slug: 'deepfake-detection', desc: '실시간 AI 합성 영상 검출' },
+        ],
+      },
+      {
+        sub: '인프라 · 거버넌스',
+        items: [
+          { name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지·이상 트래픽 ML' },
+          { name: '제로트러스트 설계', slug: 'zero-trust', desc: '세그먼트 · MFA · 최소권한' },
+          { name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '유출·프롬프트 인젝션 점검' },
+        ],
+      },
     ],
   },
   {
     cat: '스트리밍',
     color: '#10b981',
-    items: [
-      { name: 'Ultrastream 스트리밍', slug: 'ultrastream', desc: 'LL-HLS 1~2초 초저지연', highlight: true },
-      { name: 'VOD + 멀티 리스트림', slug: 'vod-multistream', desc: '유튜브·트위치 동시 송출' },
+    sections: [
+      {
+        items: [
+          { name: 'Ultrastream 스트리밍', slug: 'ultrastream', desc: 'LL-HLS 1~2초 초저지연', highlight: true },
+          { name: 'VOD + 멀티 리스트림', slug: 'vod-multistream', desc: '유튜브·트위치 동시 송출' },
+        ],
+      },
     ],
   },
 ]
@@ -111,8 +141,8 @@ export default function Nav() {
                   left: '50%', transform: 'translateX(-50%)',
                   background: 'var(--surface)', border: '1px solid var(--border2)',
                   borderRadius: 12,
-                  boxShadow: '0 20px 60px rgba(16,185,129,0.18)',
-                  width: 'min(680px, calc(100vw - 32px))',
+                  boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
+                  width: 'min(760px, calc(100vw - 32px))',
                   maxWidth: 'calc(100vw - 32px)',
                   zIndex: 9999,
                   display: 'flex', flexDirection: 'column',
@@ -138,39 +168,52 @@ export default function Nav() {
                         {cat.cat}
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        {cat.items.map((item, ii) => (
-                          <Link
-                            key={ii}
-                            href={`/services/${item.slug}/`}
-                            onClick={() => setMenuOpen(false)}
-                            style={{
-                              display: 'block', padding: '8px 10px', borderRadius: 6,
-                              textDecoration: 'none',
-                              background: item.highlight ? `${cat.color}10` : 'transparent',
-                              border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
-                              transition: 'background 0.15s',
-                            }}
-                            onMouseEnter={e => {
-                              if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'var(--bg)'
-                            }}
-                            onMouseLeave={e => {
-                              if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
-                            }}
-                          >
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                              <span style={{ fontFamily: 'var(--sans)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text)' }}>
-                                {item.name}
-                              </span>
-                              {item.highlight && (
-                                <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '1px 6px', letterSpacing: '0.06em' }}>
-                                  NEW
-                                </span>
-                              )}
-                            </div>
-                            <div style={{ fontFamily: 'var(--sans)', fontSize: '0.72rem', color: 'var(--text3)', marginTop: 2 }}>
-                              {item.desc}
-                            </div>
-                          </Link>
+                        {cat.sections.map((sec, si) => (
+                          <div key={si}>
+                            {sec.sub && (
+                              <div style={{
+                                fontFamily: 'var(--mono)', fontSize: '0.55rem', color: 'var(--text3)',
+                                letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600,
+                                marginTop: si > 0 ? 14 : 0, marginBottom: 6, paddingLeft: 2,
+                              }}>
+                                {sec.sub}
+                              </div>
+                            )}
+                            {sec.items.map((item, ii) => (
+                              <Link
+                                key={`${si}-${ii}`}
+                                href={`/services/${item.slug}/`}
+                                onClick={() => setMenuOpen(false)}
+                                style={{
+                                  display: 'block', padding: '8px 10px', borderRadius: 6,
+                                  textDecoration: 'none',
+                                  background: item.highlight ? `${cat.color}10` : 'transparent',
+                                  border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
+                                  transition: 'background 0.15s',
+                                }}
+                                onMouseEnter={e => {
+                                  if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'var(--bg)'
+                                }}
+                                onMouseLeave={e => {
+                                  if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
+                                }}
+                              >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                                  <span style={{ fontFamily: 'var(--sans)', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text)' }}>
+                                    {item.name}
+                                  </span>
+                                  {item.highlight && (
+                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '1px 6px', letterSpacing: '0.06em' }}>
+                                      NEW
+                                    </span>
+                                  )}
+                                </div>
+                                <div style={{ fontFamily: 'var(--sans)', fontSize: '0.72rem', color: 'var(--text3)', marginTop: 2 }}>
+                                  {item.desc}
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -255,11 +298,20 @@ export default function Nav() {
               <div style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', color: cat.color, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>
                 {cat.cat}
               </div>
-              {cat.items.map((item, ii) => (
-                <Link key={ii} href={`/services/${item.slug}/`} onClick={() => setMobileOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
-                  <span style={{ fontFamily: 'var(--sans)', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)' }}>{item.name}</span>
-                  {item.highlight && <span style={{ fontFamily: 'var(--mono)', fontSize: '0.55rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '2px 8px' }}>NEW</span>}
-                </Link>
+              {cat.sections.map((sec, si) => (
+                <div key={si}>
+                  {sec.sub && (
+                    <div style={{ fontFamily: 'var(--mono)', fontSize: '0.55rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: si > 0 ? 12 : 0, marginBottom: 8, fontWeight: 600 }}>
+                      {sec.sub}
+                    </div>
+                  )}
+                  {sec.items.map((item, ii) => (
+                    <Link key={`${si}-${ii}`} href={`/services/${item.slug}/`} onClick={() => setMobileOpen(false)} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid var(--border)', textDecoration: 'none' }}>
+                      <span style={{ fontFamily: 'var(--sans)', fontSize: '0.9rem', fontWeight: 600, color: 'var(--text)' }}>{item.name}</span>
+                      {item.highlight && <span style={{ fontFamily: 'var(--mono)', fontSize: '0.55rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '2px 8px' }}>NEW</span>}
+                    </Link>
+                  ))}
+                </div>
               ))}
             </div>
           ))}

@@ -116,7 +116,12 @@ export default function Contact() {
                     <option>DR 재해복구</option>
                     <option>Ultrastream 스트리밍 호스팅</option>
                     <option>AI 보안 관제</option>
+                    <option>AI 자율 관제 에이전트 (LLM SOC)</option>
+                    <option>AI 스트림 이상탐지</option>
                     <option>딥페이크 탐지</option>
+                    <option>네트워크 보안 · IDS/IPS</option>
+                    <option>제로트러스트 설계</option>
+                    <option>LLM 보안 감사</option>
                     <option>엔터프라이즈 (전체 통합)</option>
                     <option>기타 / 복합 문의</option>
                   </select>
