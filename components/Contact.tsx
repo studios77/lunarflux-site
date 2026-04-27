@@ -116,7 +116,7 @@ export default function Contact() {
                       <option>위탁운영 (MSP)</option>
                       <option>서버 이중화 (HA)</option>
                       <option>DB 이중화 매니지먼트</option>
-                      <option>시스템 복구 · 이전 · 트러블슈팅 (외부 운영 서버)</option>
+                      <option>서버 장애 복구 및 이전 (외부 운영 서버)</option>
                     </optgroup>
                     <optgroup label="AI 보안">
                       <option>AI 보안 관제</option>

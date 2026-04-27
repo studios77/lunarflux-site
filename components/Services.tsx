@@ -15,7 +15,7 @@ const services: ServiceCard[] = [
   { icon: '⚙️', cat: 'IDC / MSP', name: '위탁운영 매니지먼트', slug: 'managed-service', desc: 'OS 패치·장애대응·성능튜닝 전담. Zabbix+Grafana 실시간 모니터링, 월 SLA 리포트.', tags: ['Zabbix','Ansible','Grafana'] },
   { icon: '🔄', cat: 'IDC / HA', name: '운영서버 이중화 (HA)', slug: 'ha', desc: 'Active-Active/Standby 구성, 자동 페일오버 30초 이내, L4/L7 로드밸런서, 99.99% SLA.', tags: ['Keepalived','HAProxy','Pacemaker'] },
   { icon: '🗄️', cat: 'IDC / DB', name: 'DB 이중화 매니지먼트', nameLines: ['DB 이중화', '매니지먼트'], slug: 'db-cluster', desc: 'Galera Cluster·Master-Slave 구성·모니터링·자동복구 위탁관리. 슬로우쿼리 분석.', tags: ['Galera','ProxySQL','Percona'] },
-  { icon: '🛠️', cat: 'IDC / 서버', name: '시스템 복구 · 이전 · 트러블슈팅', nameLines: ['시스템 복구 · 이전 ·', '트러블슈팅'], slug: 'system-recovery-migration', desc: 'LunarFlux IDC 여부와 무관하게, 외부 고객이 운영 중인 서버·VM·온프레 환경에 대해 서비스가 필요한 고객이 요청 시 장애 복구, 이전, 성능·네트워크 TS. 원격·현장.', tags: ['긴급복구','이전','온프레'] },
+  { icon: '🛠️', cat: 'IDC / 서버', name: '서버 장애 복구 및 이전', slug: 'system-recovery-migration', desc: 'LunarFlux IDC 여부와 무관하게, 외부 고객이 운영 중인 서버·VM·온프레 환경에 대해 서비스가 필요한 고객이 요청 시 장애 복구, 이전, 성능·네트워크 TS. 원격·현장.', tags: ['긴급복구','이전','온프레'] },
   { icon: '🛡️', cat: 'AI 보안', name: 'AI 보안 관제', slug: 'ai-security', desc: '365일 24시간 무인 관제. 위협 자동 탐지·분류·대응과 비용 절감을 동시에. 공공·금융·중견기업 특화.', tags: ['24/7','자동 대응','컴플라이언스'] },
   { icon: '🤖', cat: 'AI 보안', name: 'AI 자율 관제 에이전트', nameLines: ['AI 자율 관제', '에이전트'], slug: 'ai-agent', desc: 'LLM 기반 SOC 자동화. Wazuh SIEM·SOAR 플레이북으로 탐지→분석→대응까지 연결.', tags: ['LLM','SIEM','SOAR'] },
   { icon: '🛰️', cat: 'AI 보안', name: 'AI 스트림 이상탐지', nameLines: ['AI 스트림', '이상탐지'], slug: 'ai-stream-security', desc: 'RTMP/HLS 트래픽 머신러닝 분석. 세션 하이재킹·인젝션·DDoS 실시간 탐지 및 자동차단.', tags: ['Python ML','MediaMTX','Fail2ban'] },

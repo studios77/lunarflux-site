@@ -12,10 +12,10 @@ type ServiceMenuLink = {
 }
 
 function MenuItemTitle({ item, size }: { item: ServiceMenuLink; size: 'sm' | 'md' }) {
-  const fs = size === 'sm' ? '0.74rem' : '0.88rem'
+  const fs = size === 'sm' ? '0.9rem' : '1rem'
   const lines = item.nameLines ?? [item.name]
   return (
-    <span style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+    <span style={{ display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
       {lines.map((ln, i) => (
         <span
           key={i}
@@ -24,7 +24,7 @@ function MenuItemTitle({ item, size }: { item: ServiceMenuLink; size: 'sm' | 'md
             fontSize: fs,
             fontWeight: 600,
             color: 'var(--text)',
-            lineHeight: 1.28,
+            lineHeight: 1.3,
             wordBreak: 'keep-all',
           }}
         >
@@ -49,10 +49,9 @@ const serviceMenu: ServiceMenuCategory[] = [
           { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
           { name: 'DB 이중화 관리', nameLines: ['DB 이중화', '관리'], slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
           {
-            name: '시스템 복구 · 이전 · 트러블슈팅',
-            nameLines: ['시스템 복구 · 이전 ·', '트러블슈팅'],
+            name: '서버 장애 복구 및 이전',
             slug: 'system-recovery-migration',
-            desc: '외부 운영 서버 · 요청 시',
+            desc: '트러블슈팅 포함 · 외부 운영 서버 · 요청 시',
           },
         ],
       },
@@ -179,7 +178,7 @@ export default function Nav() {
                   background: 'var(--surface)', border: '1px solid var(--border2)',
                   borderRadius: 12,
                   boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
-                  width: 'min(920px, calc(100vw - 24px))',
+                  width: 'min(980px, calc(100vw - 24px))',
                   maxWidth: 'calc(100vw - 24px)',
                   zIndex: 9999,
                   display: 'flex', flexDirection: 'column',
@@ -196,8 +195,8 @@ export default function Nav() {
                       borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
                     }}>
                       <div style={{
-                        fontFamily: 'var(--mono)', fontSize: '0.6rem',
-                        color: cat.color, letterSpacing: '0.12em', textTransform: 'uppercase',
+                        fontFamily: 'var(--mono)', fontSize: '0.7rem',
+                        color: cat.color, letterSpacing: '0.1em', textTransform: 'uppercase',
                         marginBottom: 12, fontWeight: 700,
                         display: 'flex', alignItems: 'center', gap: 6,
                       }}>
@@ -209,8 +208,8 @@ export default function Nav() {
                           <div key={si}>
                             {sec.sub && (
                               <div style={{
-                                fontFamily: 'var(--mono)', fontSize: '0.55rem', color: 'var(--text3)',
-                                letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600,
+                                fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--text3)',
+                                letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600,
                                 marginTop: si > 0 ? 14 : 0, marginBottom: 6, paddingLeft: 2,
                               }}>
                                 {sec.sub}
@@ -223,7 +222,7 @@ export default function Nav() {
                                 onClick={() => setMenuOpen(false)}
                                 title={item.name}
                                 style={{
-                                  display: 'block', padding: '9px 8px', borderRadius: 6,
+                                  display: 'block', padding: '10px 8px', borderRadius: 6,
                                   textDecoration: 'none',
                                   background: item.highlight ? `${cat.color}10` : 'transparent',
                                   border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
@@ -241,12 +240,12 @@ export default function Nav() {
                                     <MenuItemTitle item={item} size="sm" />
                                   </div>
                                   {item.highlight && (
-                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.5rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '2px 6px', letterSpacing: '0.06em', flexShrink: 0, marginTop: 2 }}>
+                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.56rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '3px 7px', letterSpacing: '0.06em', flexShrink: 0, marginTop: 2 }}>
                                       NEW
                                     </span>
                                   )}
                                 </div>
-                                <div style={{ fontFamily: 'var(--sans)', fontSize: '0.65rem', color: 'var(--text3)', marginTop: 4, lineHeight: 1.45, wordBreak: 'keep-all' }}>
+                                <div style={{ fontFamily: 'var(--sans)', fontSize: '0.8rem', color: 'var(--text3)', marginTop: 5, lineHeight: 1.45, wordBreak: 'keep-all' }}>
                                   {item.desc}
                                 </div>
                               </Link>
@@ -260,10 +259,10 @@ export default function Nav() {
 
                 {/* 하단 바로가기 — 절대위치 없이 자연스럽게 */}
                 <div style={{ borderTop: '1px solid var(--border)', padding: '10px 20px', display: 'flex', gap: 16, background: 'var(--bg)', borderRadius: '0 0 12px 12px' }}>
-                  <Link href="/#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                  <Link href="/#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     전체 서비스 보기 →
                   </Link>
-                  <Link href="/#contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                  <Link href="/#contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     무료 상담 신청 →
                   </Link>
                 </div>
@@ -333,13 +332,13 @@ export default function Nav() {
         }}>
           {serviceMenu.map((cat, ci) => (
             <div key={ci} style={{ marginBottom: 24 }}>
-              <div style={{ fontFamily: 'var(--mono)', fontSize: '0.6rem', color: cat.color, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: '0.7rem', color: cat.color, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>
                 {cat.cat}
               </div>
               {cat.sections.map((sec, si) => (
                 <div key={si}>
                   {sec.sub && (
-                    <div style={{ fontFamily: 'var(--mono)', fontSize: '0.55rem', color: 'var(--text3)', letterSpacing: '0.1em', textTransform: 'uppercase', marginTop: si > 0 ? 12 : 0, marginBottom: 8, fontWeight: 600 }}>
+                    <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--text3)', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: si > 0 ? 12 : 0, marginBottom: 8, fontWeight: 600 }}>
                       {sec.sub}
                     </div>
                   )}
@@ -361,7 +360,7 @@ export default function Nav() {
                     >
                       <MenuItemTitle item={item} size="md" />
                       {item.highlight && (
-                        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.52rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '3px 8px', flexShrink: 0, marginTop: 2 }}>
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '4px 9px', flexShrink: 0, marginTop: 2 }}>
                           NEW
                         </span>
                       )}
