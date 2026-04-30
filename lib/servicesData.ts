@@ -411,7 +411,7 @@ export const servicesData: ServiceData[] = [
         { label: 'ABR 트랜스코딩', ours: 'FFmpeg 4단계 (1080p~360p)', others: ['내장 인코더 제한적', 'Adaptive Bitrate 제공', '별도 FFmpeg 연동'] },
         { label: 'LL-HLS', ours: '네이티브 지원', others: ['미지원', 'EE 버전 유료', '미지원'] },
         { label: 'SRT 프로토콜', ours: '네이티브 지원', others: ['플러그인 필요', '네이티브 지원(EE)', '네이티브 지원(Pro)'] },
-        { label: '오픈소스', ours: 'MediaMTX (Apache 2.0)', others: ['상용 (라이선스 필요)', '상용 (EE 라이선스)', 'GNU GPLv3'] },
+        { label: '라이선스', ours: '인공지능 기능', others: ['상용 (라이선스 필요)', '상용 (EE 라이선스)', 'GNU GPLv3'] },
         { label: '인코더 연동', ours: 'OBS, FFMpeg, Wirecast 즉시', others: ['OBS 지원', 'OBS 지원', 'OBS 지원'] },
         { label: '확장성', ours: 'CDN 연동 무제한 시청자', others: ['서버당 제한', '유료 클러스터링', '서버당 제한'] },
         { label: '녹화 기능', ours: '스트림 자동 녹화 + VOD 변환', others: ['녹화 추가 비용', '녹화 지원(EE)', '녹화 추가 비용'] },
