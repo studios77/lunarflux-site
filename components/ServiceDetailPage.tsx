@@ -95,9 +95,9 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                   <tr style={{ background: 'var(--surface)' }}>
                     <th style={{ padding: '14px 20px', textAlign: 'left', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>기능</th>
                     <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', borderBottom: '1px solid var(--border)', fontWeight: 700, background: 'rgba(52,211,153,0.06)', minWidth: 160 }}>UltraStreamingEngine</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>Wowza</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>Ant Media</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>Red5 Pro</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>A사</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>B사</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>C사</th>
                   </tr>
                 </thead>
                 <tbody>
