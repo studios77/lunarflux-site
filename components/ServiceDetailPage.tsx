@@ -8,7 +8,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
     <main style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
       <Nav />
 
-      {/* Hero */}
       <section style={{ padding: '120px 5% 80px', maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
@@ -32,7 +31,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </div>
       </section>
 
-      {/* Highlights */}
       <section style={{ background: 'var(--bg2)', padding: '80px 5%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 40, display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -51,7 +49,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </div>
       </section>
 
-      {/* Specs + Use Cases */}
       <section style={{ padding: '80px 5%' }}>
         <div className="specs-grid" style={{ maxWidth: 1100, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60 }}>
           <div>
@@ -85,7 +82,42 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </div>
       </section>
 
-      {/* Colocation Pricing Table */}
+      {s.comparison && s.comparison.items.length > 0 && (
+        <section style={{ background: 'var(--bg2)', padding: '80px 5%' }}>
+          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
+              {s.comparison.label}
+            </div>
+            <div style={{ overflowX: 'auto', borderRadius: 8, border: '1px solid var(--border)', marginTop: 24 }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 600 }}>
+                <thead>
+                  <tr style={{ background: 'var(--surface)' }}>
+                    <th style={{ padding: '14px 20px', textAlign: 'left', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>기능</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', borderBottom: '1px solid var(--border)', fontWeight: 700, background: 'rgba(52,211,153,0.06)', minWidth: 160 }}>UltraStreamingEngine</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>Wowza</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>Ant Media</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>Red5 Pro</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.comparison.items.map((item, i) => (
+                    <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)' }}>
+                      <td style={{ padding: '13px 20px', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)', fontFamily: 'var(--mono)', letterSpacing: '0.03em' }}>{item.label}</td>
+                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600, borderBottom: '1px solid var(--border)', background: 'rgba(52,211,153,0.04)' }}>{item.ours}</td>
+                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others?.[0]}</td>
+                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others?.[1]}</td>
+                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others?.[2]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p style={{ marginTop: 16, fontSize: '0.75rem', color: 'var(--text3)', fontFamily: 'var(--mono)', lineHeight: 1.6 }}>* 비교 정보는 각 엔진의 공개 문서 기준이며, 버전·플랜에 따라 차이가 있을 수 있습니다. 최신 정보는 각 벤더 공식 문서를 확인하세요.</p>
+          </div>
+        </section>
+      )}
+
       {s.coloPricing && s.coloPricing.length > 0 && (
         <section style={{ background: 'var(--bg3)', padding: '80px 5%' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -93,51 +125,27 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
               <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
               코로케이션 요금표
             </div>
-            <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 8 }}>
-              상품별 월정액 요금
-            </h2>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text2)', marginBottom: 40, lineHeight: 1.7 }}>
-              모든 상품에 전력·냉각·네트워크 회선·IPMI 원격관리가 포함됩니다. 부가세(10%) 별도 적용.
-            </p>
+            <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.4rem,3vw,2rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 8 }}>상품별 월정액 요금</h2>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text2)', marginBottom: 40, lineHeight: 1.7 }}>모든 상품에 전력·냉각·네트워크 회선·IPMI 원격관리가 포함됩니다. 부가세(10%) 별도 적용.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 16 }}>
               {s.coloPricing.map((plan, i) => (
                 <div key={i} style={{
                   position: 'relative',
                   background: plan.popular ? 'linear-gradient(160deg, #064e3b 0%, #022c22 100%)' : 'var(--surface)',
                   border: plan.popular ? '1.5px solid var(--accent)' : '1px solid var(--border)',
-                  borderRadius: 12,
-                  padding: '28px 22px 24px',
+                  borderRadius: 12, padding: '28px 22px 24px',
                   boxShadow: plan.popular ? '0 0 32px rgba(16,185,129,0.18)' : '0 1px 6px rgba(0,0,0,0.05)',
-                  display: 'flex', flexDirection: 'column', gap: 0,
+                  display: 'flex', flexDirection: 'column',
                 }}>
                   {plan.popular && (
-                    <div style={{
-                      position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)',
-                      background: 'var(--accent)', color: '#000',
-                      fontFamily: 'var(--mono)', fontSize: '0.62rem', fontWeight: 700,
-                      padding: '3px 14px', borderRadius: 20, letterSpacing: '0.08em', whiteSpace: 'nowrap',
-                    }}>
-                      POPULAR
-                    </div>
+                    <div style={{ position: 'absolute', top: -12, left: '50%', transform: 'translateX(-50%)', background: 'var(--accent)', color: '#000', fontFamily: 'var(--mono)', fontSize: '0.62rem', fontWeight: 700, padding: '3px 14px', borderRadius: 20, letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>POPULAR</div>
                   )}
-                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: plan.popular ? 'var(--accent)' : 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>
-                    {plan.size}
-                  </div>
-                  <div style={{ fontFamily: 'var(--display)', fontSize: '1rem', fontWeight: 700, color: plan.popular ? '#fff' : 'var(--text)', marginBottom: 16 }}>
-                    {plan.name}
-                  </div>
-                  <div style={{ fontSize: '1.15rem', fontWeight: 800, fontFamily: 'var(--display)', color: plan.popular ? 'var(--accent)' : 'var(--text)', letterSpacing: '-0.02em', marginBottom: 4 }}>
-                    {plan.price}
-                  </div>
-                  <div style={{ fontSize: '0.7rem', color: plan.popular ? 'rgba(255,255,255,0.5)' : 'var(--text3)', fontFamily: 'var(--mono)', marginBottom: 20 }}>
-                    {plan.note}
-                  </div>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: plan.popular ? 'var(--accent)' : 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{plan.size}</div>
+                  <div style={{ fontFamily: 'var(--display)', fontSize: '1rem', fontWeight: 700, color: plan.popular ? '#fff' : 'var(--text)', marginBottom: 16 }}>{plan.name}</div>
+                  <div style={{ fontSize: '1.15rem', fontWeight: 800, fontFamily: 'var(--display)', color: plan.popular ? 'var(--accent)' : 'var(--text)', letterSpacing: '-0.02em', marginBottom: 4 }}>{plan.price}</div>
+                  <div style={{ fontSize: '0.7rem', color: plan.popular ? 'rgba(255,255,255,0.5)' : 'var(--text3)', fontFamily: 'var(--mono)', marginBottom: 20 }}>{plan.note}</div>
                   <div style={{ borderTop: `1px solid ${plan.popular ? 'rgba(16,185,129,0.25)' : 'var(--border)'}`, paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
-                    {[
-                      { label: '네트워크', value: plan.network },
-                      { label: '냉각·보안', value: '포함' },
-                      { label: 'IPMI 원격관리', value: '포함' },
-                    ].map((item, j) => (
+                    {[{ label: '네트워크', value: plan.network }, { label: '냉각·보안', value: '포함' }, { label: 'IPMI 원격관리', value: '포함' }].map((item, j) => (
                       <div key={j} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.78rem', color: plan.popular ? 'rgba(255,255,255,0.75)' : 'var(--text2)' }}>
                         <span>{item.label}</span>
                         <span style={{ fontWeight: 600, color: plan.popular ? '#fff' : 'var(--text)' }}>{item.value}</span>
@@ -147,14 +155,11 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                 </div>
               ))}
             </div>
-            <p style={{ marginTop: 24, fontSize: '0.78rem', color: 'var(--text3)', fontFamily: 'var(--mono)', lineHeight: 1.7 }}>
-              * 추가 IP, 전용 회선 업그레이드, 교차 연결(Cross Connect) 등은 별도 협의 | 장기 계약(6·12개월) 시 최대 20% 할인
-            </p>
+            <p style={{ marginTop: 24, fontSize: '0.78rem', color: 'var(--text3)', fontFamily: 'var(--mono)', lineHeight: 1.7 }}>* 추가 IP, 전용 회선 업그레이드, 교차 연결(Cross Connect) 등은 별도 협의 | 장기 계약(6·12개월) 시 최대 20% 할인</p>
           </div>
         </section>
       )}
 
-      {/* CTA */}
       <section style={{ background: 'var(--bg2)', padding: '80px 5%', textAlign: 'center' }}>
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
           <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1.6rem,4vw,2.4rem)', fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 16 }}>지금 바로 시작하세요</h2>
@@ -170,7 +175,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </div>
       </section>
 
-      {/* Related Services */}
       <section style={{ padding: '80px 5%' }}>
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--text3)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 28 }}>관련 서비스</div>
@@ -188,9 +192,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
       </section>
 
       <style>{`
-        @media(max-width:768px){ 
-          .specs-grid { grid-template-columns: 1fr !important; gap: 40px !important; } 
-        }
+        @media(max-width:768px){ .specs-grid { grid-template-columns: 1fr !important; gap: 40px !important; } }
       `}</style>
     </main>
   )
