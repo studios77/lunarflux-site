@@ -22,7 +22,7 @@ const services: ServiceCard[] = [
   { icon: '🌐', cat: 'AI 보안', name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지·방지와 ML 보조 이상탐지. 경계·내부 세그먼트 가시화 및 SIEM 연동.', tags: ['Suricata','Zeek','eBPF'] },
   { icon: '🔐', cat: 'AI 보안', name: '제로트러스트 아키텍처', slug: 'zero-trust', desc: 'ID·디바이스·맥락 기반 최소권한. 마이크로세그먼트·MFA·지속 검증 로드맵.', tags: ['IAM','세그먼트','MFA'] },
   { icon: '📋', cat: 'AI 보안', name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '생성형 AI 유출·프롬프트 인젝션·RAG 거버넌스 점검. 정책·기술·운영 권고안.', tags: ['프롬프트','거버넌스','감사'] },
-  { icon: '📡', cat: '스트리밍', name: 'Ultrastream 엔진 호스팅', slug: 'ultrastream', desc: '국내 CDN 대비 10배 빠른 LL-HLS 1~2초 초저지연. 공공기관·기업·방송사·라이브커머스 전용. 동시 시청자 무제한, 99.99% 가용성.', tags: ['초저지연','무제한 시청자','99.99% SLA'] },
+  { icon: '📡', cat: '스트리밍', name: 'UltraStreamingEngine', slug: 'ultrastream', desc: '국내 CDN 대비 10배 빠른 LL-HLS 1~2초 초저지연. 공공기관·기업·방송사·라이브커머스 전용. 동시 시청자 무제한, 99.99% 가용성.', tags: ['초저지연','무제한 시청자','99.99% SLA'] },
   { icon: '🎬', cat: '스트리밍', name: 'VOD 관리 + 멀티 리스트림', slug: 'vod-multistream', desc: 'VOD 저장·썸네일 자동생성. 유튜브·트위치·네이버 동시 송출 자동화.', tags: ['MariaDB','Cloudflare','FFmpeg'] },
 ]
 
@@ -68,21 +68,7 @@ export default function Services() {
               >
                 <div style={{ fontSize: '1.4rem', marginBottom: 20, width: 48, height: 48, border: '1px solid var(--border2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', boxShadow: '0 4px 12px rgba(16,185,129,0.08)' }}>{s.icon}</div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>{s.cat}</div>
-                <div
-                  style={{
-                    fontFamily: 'var(--display)',
-                    fontSize: 'clamp(1rem, 2.2vw, 1.1rem)',
-                    fontWeight: 700,
-                    color: 'var(--text)',
-                    marginBottom: 12,
-                    letterSpacing: '-0.02em',
-                    lineHeight: 1.35,
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    minWidth: 0,
-                  }}
-                >
+                <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1rem, 2.2vw, 1.1rem)', fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em', lineHeight: 1.35, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
                   {s.name}
                 </div>
                 <div style={{ fontSize: '0.86rem', color: 'var(--text2)', lineHeight: 1.65, marginBottom: 20, wordBreak: 'keep-all' }}>{s.desc}</div>

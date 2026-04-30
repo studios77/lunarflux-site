@@ -1,9 +1,8 @@
 import type { MetadataRoute } from 'next'
+import { SITE_ORIGIN } from '@/lib/site'
 
 export const dynamic = 'force-static'
 export const revalidate = false
-
-const BASE = 'https://lunarflux.ai'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -14,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'bingbot', allow: '/' },
       { userAgent: 'DaumOA', allow: '/' },
     ],
-    sitemap: `${BASE}/sitemap.xml`,
-    host: BASE,
+    sitemap: `${SITE_ORIGIN}/sitemap.xml`,
+    host: SITE_ORIGIN,
   }
 }

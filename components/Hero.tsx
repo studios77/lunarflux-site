@@ -50,7 +50,7 @@ export default function Hero() {
           animation: 'fadeUp 0.8s 0.2s ease both',
         }}>
           서버 임대·위탁운영부터 자율 보안 관제, 스트림 이상 탐지, 딥페이크 검출까지.<br />
-          고객 환경에 맞춰 붙이고, Ultrastream으로 라이브까지 이어 드립니다.
+          고객 환경에 맞춰 붙이고, UltraStreamingEngine으로 라이브까지 이어 드립니다.
         </p>
 
         <div style={{

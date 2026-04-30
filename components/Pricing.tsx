@@ -8,12 +8,12 @@ const plans = [
   {
     tier: 'Starter', name: '스트림 Basic', price: '49,000', unit: '/hour', featured: false,
     desc: '라이브 스트리밍을 시작하는 소규모 팀에 적합한 플랜입니다.',
-    features: ['Ultrastream 엔진 1채널','LL-HLS 스트리밍 (최대 1080p)','동시 시청자 100명','VOD 저장 50GB','기본 모니터링 대시보드','이메일 기술지원'],
+    features: ['UltraStreamingEngine 1채널','LL-HLS 스트리밍 (최대 1080p)','동시 시청자 100명','VOD 저장 50GB','기본 모니터링 대시보드','이메일 기술지원'],
   },
   {
     tier: 'Professional', name: 'Stream Pro + AI', price: '가격문의', unit: '', featured: true,
     desc: '스트리밍 + AI 보안이 결합된 가장 인기 있는 통합 플랜입니다.',
-    features: ['Ultrastream 엔진 5채널','ABR 4단계 (1080p ~ 360p)','동시 시청자 1,000명','VOD 500GB + CDN','AI 이상탐지 + IP 자동차단','멀티플랫폼 동시 송출','24시간 Slack 기술지원'],
+    features: ['UltraStreamingEngine 5채널','ABR 4단계 (1080p ~ 360p)','동시 시청자 1,000명','VOD 500GB + CDN','AI 이상탐지 + IP 자동차단','멀티플랫폼 동시 송출','24시간 Slack 기술지원'],
   },
   {
     tier: 'IDC Standard', name: '서버 위탁운영', price: '30만~', unit: '/월', featured: false,
@@ -64,8 +64,8 @@ export default function Pricing() {
 
     const fd = new FormData(formRef.current)
     fd.append('access_key', WEB3FORMS_KEY)
-    fd.append('subject', `[LunarFlux 요금제 접수] ${modal.planTier} — ${modal.planName}`)
-    fd.append('from_name', 'LunarFlux 요금제 신청')
+    fd.append('subject', `[LunarFlux AI 요금제 접수] ${modal.planTier} — ${modal.planName}`)
+    fd.append('from_name', 'LunarFlux AI 요금제 신청')
     fd.append('plan', `${modal.planTier} / ${modal.planName}`)
 
     try {
@@ -74,10 +74,10 @@ export default function Pricing() {
       if (data.success) {
         const snapshot = formDataToRecord(new FormData(formRef.current))
         void notifyAdminInstant({
-          title: `[LunarFlux] 요금제 신청 — ${modal.planTier} / ${modal.planName}`,
+          title: `[LunarFlux AI] 요금제 신청 — ${modal.planTier} / ${modal.planName}`,
           fields: {
             ...snapshot,
-            subject: `[LunarFlux 요금제 접수] ${modal.planTier} — ${modal.planName}`,
+            subject: `[LunarFlux AI 요금제 접수] ${modal.planTier} — ${modal.planName}`,
           },
         })
         setStatus('success')
@@ -100,7 +100,7 @@ export default function Pricing() {
               Pricing
             </div>
             <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>투명한 요금제</h2>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>스트리밍, AI 보안, IDC 운영 중 필요한 범위만 선택하세요. 기업용 맞춤 견적도 상담으로 안내합니다.</p>
+            <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>스트리밍, AI 보안, IDC 운영 중 필요한 범위만 선택하세요. 기업용 맞춰 견적도 상담으로 안내합니다.</p>
           </div>
 
           <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginTop: 60 }}>
@@ -172,11 +172,10 @@ export default function Pricing() {
             ))}
           </div>
 
-          {/* Enterprise */}
           <div className="reveal" style={{ marginTop: 16, border: '1px solid var(--border)', borderRadius: 8, padding: '36px 28px', background: 'linear-gradient(135deg, rgba(253,230,138,0.07), var(--surface))' }}>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Enterprise</div>
             <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>Full AI Security Suite</div>
-            <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent2)', margin: '16px 0' }}>맞춤 견적</div>
+            <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent2)', margin: '16px 0' }}>맞춰 견적</div>
             <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 20, lineHeight: 1.7, maxWidth: 640 }}>무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화 + 외부 운영 서버 복구·이전 지원.</p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0 20px', marginBottom: 24 }}>
               {['무제한 채널 + 전용서버','AI 보안 관제 24/7','딥페이크 탐지 모듈','HA/DR 완전 이중화','LLM 보안 감사','서버 장애 복구 및 이전','네트워크 IDS/IPS','전담 전문기술엔지니어 지원'].map(f => (
@@ -195,7 +194,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Modal Overlay */}
       {modal.open && (
         <div
           onClick={e => { if (e.target === e.currentTarget) closeModal() }}
@@ -212,7 +210,6 @@ export default function Pricing() {
             boxShadow: '0 24px 80px rgba(0,0,0,0.3)',
             overflow: 'hidden',
           }}>
-            {/* Modal Header */}
             <div style={{ padding: '24px 28px 20px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
               <div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--accent)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6 }}>
@@ -228,13 +225,12 @@ export default function Pricing() {
               >✕</button>
             </div>
 
-            {/* Modal Body */}
             <div style={{ padding: '24px 28px 28px' }}>
               {status === 'success' ? (
                 <div style={{ textAlign: 'center', padding: '32px 0' }}>
                   <div style={{ fontSize: '2.5rem', marginBottom: 16 }}>✅</div>
                   <div style={{ fontFamily: 'var(--display)', fontSize: '1.1rem', fontWeight: 700, color: 'var(--text)', marginBottom: 10 }}>
-                    접수가 완료됐습니다!
+                    접수가 완료뙀습니다!
                   </div>
                   <p style={{ fontSize: '0.85rem', color: 'var(--text2)', lineHeight: 1.7, marginBottom: 24 }}>
                     전문 엔지니어가 확인 후 <strong>24시간 이내</strong> 연락드립니다.<br />
@@ -305,7 +301,6 @@ export default function Pricing() {
                     </div>
                   </div>
 
-                  {/* 선택 플랜 표시 */}
                   <div style={{ marginTop: 16, padding: '10px 14px', background: 'rgba(16,185,129,0.06)', border: '1px solid var(--border2)', borderRadius: 6, display: 'flex', alignItems: 'center', gap: 10 }}>
                     <span style={{ color: 'var(--accent)', fontSize: '0.8rem' }}>✓</span>
                     <span style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: 'var(--text2)' }}>

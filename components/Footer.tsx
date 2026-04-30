@@ -19,11 +19,7 @@ export default function Footer() {
   return (
     <footer style={{ background: '#022c22', borderTop: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '64px 5% 40px' }}>
-
-        {/* 상단 3단 */}
         <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '200px 1fr auto', gap: 48, alignItems: 'start' }}>
-
-          {/* 왼쪽: 로고 */}
           <div>
             <div style={{ fontFamily: 'var(--display)', fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', marginBottom: 8 }}>
               LunarFlux<span style={{ color: 'var(--accent)' }}>AI</span>
@@ -33,7 +29,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 가운데: 사업자 정보 */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {companyInfo.map(({ label, value }) => (
               <div key={label} style={{ display: 'flex', gap: 10, alignItems: 'baseline' }}>
@@ -47,7 +42,6 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* 오른쪽: 링크 */}
           <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 12, listStyle: 'none', margin: 0, padding: 0, alignItems: 'flex-end' }}>
             {links.map(([label, href]) => (
               <li key={label}>
@@ -64,10 +58,9 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* 하단 구분선 + 카피라이트 */}
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'center' }}>
           <span style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: '#475569', letterSpacing: '0.06em' }}>
-            © 2025 LunarFlux. All rights reserved.
+            © 2025 LunarFlux AI. All rights reserved.
           </span>
         </div>
       </div>

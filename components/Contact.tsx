@@ -16,8 +16,8 @@ export default function Contact() {
 
     const formData = new FormData(formRef.current)
     formData.append('access_key', WEB3FORMS_KEY)
-    formData.append('subject', '[LunarFlux] 새 서비스 문의가 접수되었습니다')
-    formData.append('from_name', 'LunarFlux 문의')
+    formData.append('subject', '[LunarFlux AI] 새 서비스 문의가 접수되었습니다')
+    formData.append('from_name', 'LunarFlux AI 문의')
 
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -28,10 +28,10 @@ export default function Contact() {
       if (data.success) {
         const snapshot = formDataToRecord(new FormData(formRef.current))
         void notifyAdminInstant({
-          title: '[LunarFlux] 서비스 문의 접수',
+          title: '[LunarFlux AI] 서비스 문의 접수',
           fields: {
             ...snapshot,
-            subject: '[LunarFlux] 새 서비스 문의가 접수되었습니다',
+            subject: '[LunarFlux AI] 새 서비스 문의가 접수되었습니다',
           },
         })
         setStatus('success')
@@ -155,7 +155,7 @@ export default function Contact() {
                       <option>LLM 보안 감사</option>
                     </optgroup>
                     <optgroup label="스트리밍">
-                      <option>Ultrastream 스트리밍 호스팅</option>
+                      <option>UltraStreamingEngine</option>
                       <option>VOD + 멀티 리스트림</option>
                     </optgroup>
                     <optgroup label="기타">
@@ -194,7 +194,7 @@ export default function Contact() {
                 opacity: status === 'sending' ? 0.7 : 1,
               }}>
                 {status === 'sending' && '전송 중…'}
-                {status === 'success' && '전송 완료 — 곧 연락드리겠습니다 ✓'}
+                {status === 'success' && '전송 완료 — 곳 연락드리겠습니다 ✓'}
                 {status === 'error' && '전송 실패 — 다시 시도해주세요'}
                 {status === 'idle' && (
                   <>

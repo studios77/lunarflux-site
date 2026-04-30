@@ -45,11 +45,7 @@ const serviceMenu: ServiceMenuCategory[] = [
           { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
           { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
           { name: 'DB 이중화 관리', slug: 'db-cluster', desc: 'Galera 클러스터 위탁운영' },
-          {
-            name: '서버 장애 복구 및 이전',
-            slug: 'system-recovery-migration',
-            desc: '트러블슈팅 포함 · 원격·현장',
-          },
+          { name: '서버 장애 복구 및 이전', slug: 'system-recovery-migration', desc: '트러블슈팅 포함 · 원격·현장' },
         ],
       },
     ],
@@ -88,7 +84,7 @@ const serviceMenu: ServiceMenuCategory[] = [
     sections: [
       {
         items: [
-          { name: 'Ultrastream 스트리밍', slug: 'ultrastream', desc: 'LL-HLS 1~2초', highlight: true },
+          { name: 'UltraStreamingEngine', slug: 'ultrastream', desc: 'LL-HLS 1~2초', highlight: true },
           { name: 'VOD + 멀티 리스트림', slug: 'vod-multistream', desc: '동시 송출' },
         ],
       },
@@ -124,7 +120,6 @@ export default function Nav() {
         background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
       }}>
-        {/* Logo — always goes to home */}
         <Link href="/" onClick={() => { setMenuOpen(false); setMobileOpen(false) }} style={{
           fontFamily: 'var(--display)', fontSize: '1.2rem', fontWeight: 800,
           letterSpacing: '-0.02em', color: 'var(--text)', textDecoration: 'none',
@@ -135,13 +130,10 @@ export default function Nav() {
             boxShadow: '0 0 10px var(--accent)', animation: 'pulse 2s ease-in-out infinite',
             display: 'inline-block',
           }} />
-          Lunarflux<span style={{ color: 'var(--accent)' }}>AI</span>
+          LunarFlux<span style={{ color: 'var(--accent)' }}>AI</span>
         </Link>
 
-        {/* Desktop Menu */}
         <ul style={{ display: 'flex', alignItems: 'center', gap: 28, listStyle: 'none', margin: 0, padding: 0 }}>
-
-          {/* 서비스 드롭다운 */}
           <li style={{ position: 'relative' }}
             onMouseEnter={() => {
               if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -164,7 +156,6 @@ export default function Nav() {
               </svg>
             </button>
 
-            {/* Dropdown */}
             {menuOpen && (
               <div
                 onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current) }}
@@ -183,7 +174,6 @@ export default function Nav() {
                   boxSizing: 'border-box',
                 }}
               >
-                {/* 카테고리 행 — 3열이 항상 한 줄에 (스트리밍 열이 아래로 떨어지지 않도록 grid) */}
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '18px 10px 14px', gap: 0 }}>
                   {serviceMenu.map((cat, ci) => (
                     <div key={ci} style={{
@@ -253,8 +243,6 @@ export default function Nav() {
                     </div>
                   ))}
                 </div>
-
-                {/* 하단 바로가기 — 절대위치 없이 자연스럽게 */}
                 <div style={{ borderTop: '1px solid var(--border)', padding: '10px 20px', display: 'flex', gap: 16, background: 'var(--bg)', borderRadius: '0 0 12px 12px' }}>
                   <Link href="/#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     전체 서비스 보기 →
@@ -267,7 +255,6 @@ export default function Nav() {
             )}
           </li>
 
-          {/* 일반 메뉴 */}
           {[
             { id: 'pricing', label: '요금' },
             { id: 'about', label: '소개' },
@@ -285,7 +272,6 @@ export default function Nav() {
           ))}
         </ul>
 
-        {/* CTA + 모바일 햄버거 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <Link href="/#contact" style={{
             fontFamily: 'var(--mono)', fontSize: '0.75rem',
@@ -306,7 +292,6 @@ export default function Nav() {
             무료 상담
           </Link>
 
-          {/* 모바일 햄버거 */}
           <button
             onClick={() => setMobileOpen(o => !o)}
             style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'var(--text)' }}
@@ -320,7 +305,6 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* 모바일 메뉴 */}
       {mobileOpen && (
         <div style={{
           position: 'fixed', top: 64, left: 0, right: 0, zIndex: 199,

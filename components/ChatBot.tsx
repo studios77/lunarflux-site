@@ -21,7 +21,7 @@ function getBotResponse(input: string): string {
   const q = input.toLowerCase()
 
   if (q.includes('idc') || q.includes('서버 임대') || q.includes('서버임대') || q.includes('위탁')) {
-    return 'LunarFlux IDC 서버 임대·위탁운영 서비스는 국내 주요 IDC에 위치한 고사양 서버를 합리적인 비용으로 제공합니다.\n\n✔ 전용 서버 / 코로케이션\n✔ 24/7 모니터링 및 운영 대행\n✔ 유연한 계약 기간 (월 단위)\n\n자세한 견적은 하단 [문의하기]를 통해 문의해 주세요.'
+    return 'LunarFlux AI는 IDC 서버 임대·위탁운영 서비스를 통해 국내 주요 IDC에 위치한 고사양 인프라를 합리적인 비용으로 제공합니다.\n\n✔ 전용 서버 / 코로케이션\n✔ 24/7 모니터링 및 운영 대행\n✔ 유연한 계약 기간 (월 단위)\n\n자세한 견적은 하단 [문의하기]를 통해 문의해 주세요.'
   }
 
   if (
@@ -34,11 +34,11 @@ function getBotResponse(input: string): string {
     q.includes('서버 장애') ||
     (q.includes('장애') && (q.includes('복구') || q.includes('대응')))
   ) {
-    return 'LunarFlux IDC에 두신 서버가 아니어도, 외부 고객이 운영 중인 온프레미스·VM·클라우드 인스턴스에 대해 기술지원이 가능합니다. 서비스가 필요한 고객이 요청하면 착수합니다.\n\n✔ 장애 복구·데이터 복원\n✔ 시스템·DB 이전 및 컷오버\n✔ 성능·네트워크 트러블슈팅\n✔ 원격 우선, 필요 시 현장 방문\n\n상세: [서비스] → IDC/서버 → 서버 장애 복구 및 이전\n자세한 견적은 [문의하기]로 문의해 주세요.'
+    return 'LunarFlux AI 인프라가 아니어도, 외부 고객이 운영 중인 온프레미스·VM·클라우드 인스턴스에 대해 기술지원이 가능합니다. 서비스가 필요한 고객이 요청하면 착수합니다.\n\n✔ 장애 복구·데이터 복원\n✔ 시스템·DB 이전 및 컷오버\n✔ 성능·네트워크 트러블슈팅\n✔ 원격 우선, 필요 시 현장 방문\n\n상세: [서비스] → IDC/서버 → 서버 장애 복구 및 이전\n자세한 견적은 [문의하기]로 문의해 주세요.'
   }
 
   if (q.includes('스트리밍') || q.includes('ultrastream') || q.includes('라이브') || q.includes('vod')) {
-    return 'LunarFlux Ultrastream 엔진 기반 스트리밍 솔루션을 제공합니다.\n\n✔ 초저지연 라이브 스트리밍\n✔ VOD 멀티스트림 동시 배포\n✔ 4K·8K 고화질 지원\n✔ CDN 연동 및 글로벌 배포\n\n플랫폼 데모 및 가격 문의는 [문의하기] 섹션을 이용해 주세요.'
+    return 'LunarFlux AI UltraStreamingEngine 기반 스트리밍 솔루션을 제공합니다.\n\n✔ 초저지연 라이브 스트리밍\n✔ VOD 멀티스트림 동시 배포\n✔ 4K·8K 고화질 지원\n✔ CDN 연동 및 글로벌 배포\n\n플랫폼 데모 및 가격 문의는 [문의하기] 섹션을 이용해 주세요.'
   }
 
   if (q.includes('ai 보안') || q.includes('보안') || q.includes('딥페이크') || q.includes('네트워크 보안')) {
@@ -50,7 +50,7 @@ function getBotResponse(input: string): string {
   }
 
   if (q.includes('가격') || q.includes('요금') || q.includes('비용') || q.includes('견적') || q.includes('플랜')) {
-    return '요금은 사용하시는 서비스 규모와 구성에 따라 달라집니다.\n\n📦 **Starter** — 소규모 팀 / PoC 용도\n📦 **Business** — 중소기업 / 운영 환경\n📦 **Enterprise** — 대규모 인프라 / SLA 보장\n\n정확한 견적은 요구사항을 말씀해 주시면 24시간 내 회신드립니다. [문의하기] 섹션을 이용해 주세요!'
+    return '요금은 사용하시는 서비스 규모와 구성에 따라 달라집니다.\n\n📦 **Starter** — 소규모 팀 / PoC 용도\n📦 **Business** — 중소기업 / 운영 환경\n📦 **Enterprise** — 대규모 인프라 / SLA 보장\n\n정확한 견적은 요구사항을 말써 주시면 24시간 내 회신드립니다. [문의하기] 섹션을 이용해 주세요!'
   }
 
   if (q.includes('상담') || q.includes('문의') || q.includes('연락') || q.includes('신청')) {
@@ -58,11 +58,11 @@ function getBotResponse(input: string): string {
   }
 
   if (q.includes('안녕') || q.includes('hello') || q.includes('hi') || q.includes('반가')) {
-    return '안녕하세요! LunarFlux AI 어시스턴트입니다. 😊\n\nIDC 서버, 스트리밍, AI 보안, 백업/DR 등 다양한 서비스를 제공하고 있습니다. 궁금하신 점을 편하게 물어보세요!'
+    return '안녕하세요! LunarFlux AI 어시스턴트입니다.\n\nIDC 서버, 스트리밍, AI 보안, 백업/DR 등 다양한 서비스를 제공하고 있습니다. 궁금하신 점을 편하게 물어보세요!'
   }
 
-  if (q.includes('소개') || q.includes('회사') || q.includes('lunarflux') || q.includes('루나플럭스')) {
-    return 'LunarFlux AI는 차세대 기술 인프라 전문 기업입니다.\n\n🌙 주요 사업 분야\n✔ IDC 서버 임대·위탁운영\n✔ 스트리밍 솔루션 / 영상 플랫폼\n✔ AI 보안 / 딥페이크 탐지\n✔ 네트워크 보안\n✔ 백업 / 재해복구(DR)\n\n기업 고객의 디지털 인프라를 안전하고 효율적으로 운영할 수 있도록 지원합니다.'
+  if (q.includes('소개') || q.includes('회사') || q.includes('lunarflux') || q.includes('lunarfluxai') || q.includes('lunarflux ai')) {
+    return 'LunarFlux AI는 AI 보안과 스트리밍, 인프라 운영을 결합한 기술 기반 B2B 서비스 팀입니다.\n\n🌙 주요 사업 분야\n✔ IDC 서버 임대·위탁운영\n✔ 스트리밍 솔루션 / 영상 플랫폼\n✔ AI 보안 / 딥페이크 탐지\n✔ 네트워크 보안\n✔ 백업 / 재해복구(DR)\n\n기업 고객의 디지털 인프라를 안전하고 효율적으로 운영할 수 있도록 지원합니다.'
   }
 
   return '죄송합니다, 정확한 답변을 드리기 어렵습니다. 😅\n\n아래 항목 중 궁금하신 내용을 선택하시거나, [문의하기] 섹션을 통해 직접 문의해 주시면 전문 담당자가 빠르게 안내해 드리겠습니다.\n\n• IDC 서버 임대 / 코로케이션\n• 서버 장애 복구 및 이전 (외부 운영 서버)\n• 스트리밍 솔루션\n• AI 보안 서비스\n• 백업/DR 솔루션\n• 요금 및 상담'
@@ -93,10 +93,10 @@ export default function ChatBot() {
       .join('\n')
       .slice(0, 3800)
     await notifyAdminInstant({
-      title: '[LunarFlux] 채팅 상담 알림',
+      title: '[LunarFlux AI] 채팅 상담 알림',
       fields: {
         '대화 내용': transcript || '(비어 있음)',
-        안내: '고객이 담당자 알림을 요청했습니다. 이메일 회신과 함께 확인해 주세요.',
+        '안내': '고객이 담당자 알림을 요청했습니다. 이메일 회신과 함께 확인해 주세요.',
       },
     })
     setNotifyBusy(false)
@@ -136,7 +136,6 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* Floating button */}
       <button
         onClick={() => setOpen(o => !o)}
         aria-label="채팅 상담"
@@ -179,7 +178,6 @@ export default function ChatBot() {
         )}
       </button>
 
-      {/* Chat window */}
       <div style={{
         position: 'fixed', bottom: 96, right: 28, zIndex: 9998,
         width: 360, maxHeight: 560,
@@ -195,7 +193,6 @@ export default function ChatBot() {
         transition: 'transform 0.25s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease',
         transformOrigin: 'bottom right',
       }}>
-        {/* Header */}
         <div style={{
           padding: '14px 18px',
           background: 'linear-gradient(135deg, var(--accent), #059669)',
@@ -224,7 +221,6 @@ export default function ChatBot() {
           </div>
         </div>
 
-        {/* Messages */}
         <div style={{
           flex: 1, overflowY: 'auto', padding: '16px 14px',
           display: 'flex', flexDirection: 'column', gap: 10,
@@ -297,7 +293,6 @@ export default function ChatBot() {
             </div>
           )}
 
-          {/* Quick replies — show after last bot message and not typing */}
           {!typing && messages[messages.length - 1]?.role === 'bot' && (
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 2 }}>
               {QUICK_REPLIES.map(q => (
@@ -361,7 +356,6 @@ export default function ChatBot() {
           </div>
         )}
 
-        {/* Input */}
         <div style={{
           padding: '10px 12px',
           borderTop: '1px solid var(--border)',

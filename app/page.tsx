@@ -1,6 +1,8 @@
 'use client'
 import { useEffect } from 'react'
 import Nav from '@/components/Nav'
+import { SITE_NAME, SITE_ORIGIN } from '@/lib/site'
+import { SEO_DEFAULT_DESCRIPTION } from '@/lib/seo'
 import Hero from '@/components/Hero'
 import Services from '@/components/Services'
 import Pricing from '@/components/Pricing'
@@ -26,7 +28,7 @@ export default function Home() {
     return () => obs.disconnect()
   }, [])
 
-  const site = 'https://lunarflux.ai'
+  const site = SITE_ORIGIN
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -34,18 +36,17 @@ export default function Home() {
         '@type': 'WebSite',
         '@id': `${site}/#website`,
         url: site,
-        name: 'LunarFlux AI',
+        name: SITE_NAME,
         inLanguage: 'ko-KR',
-        description: 'IDC·AI 보안·라이브 스트리밍 통합 기술 서비스',
+        description: SEO_DEFAULT_DESCRIPTION,
         publisher: { '@id': `${site}/#organization` },
       },
       {
         '@type': 'Organization',
         '@id': `${site}/#organization`,
-        name: 'LunarFlux AI',
+        name: SITE_NAME,
         url: site,
-        logo: `${site}/logo.png`,
-        description: 'IDC 서버 임대·위탁운영, AI 보안 관제와 스트림 이상 탐지·딥페이크 검출, Ultrastream 기반 라이브 스트리밍 등을 제공하는 기술 인프라 파트너',
+        description: SEO_DEFAULT_DESCRIPTION,
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'KR',
@@ -53,14 +54,14 @@ export default function Home() {
         sameAs: [site],
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
-          name: 'LunarFlux 서비스',
+          name: `${SITE_NAME} 서비스`,
           itemListElement: [
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
                 name: '스트리밍 솔루션 / 영상 스트리밍 플랫폼',
-                description: 'Ultrastream 엔진 기반 초저지연 LL-HLS 라이브 스트리밍, VOD·멀티 플랫폼 동시 송출.',
+                description: 'UltraStreamingEngine 기반 초저지연 LL-HLS 라이브 스트리밍, VOD·멀티 플랫폼 동시 송출.',
               },
             },
             {

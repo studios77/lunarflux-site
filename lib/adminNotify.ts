@@ -1,11 +1,3 @@
-/**
- * Web3Forms 이메일과 별도로, 관리자에게 즉시 알림(Slack / Discord 웹훅).
- * 배포 시 .env에 NEXT_PUBLIC_ADMIN_NOTIFY_WEBHOOK 을 설정하세요.
- * - Slack: Incoming Webhook URL (hooks.slack.com/...)
- * - Discord: 채널 웹훅 URL (discord.com/api/webhooks/...)
- * URL이 없으면 아무 것도 하지 않습니다(기존 동작 유지).
- */
-
 const WEBHOOK =
   typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_ADMIN_NOTIFY_WEBHOOK?.trim() ?? '' : ''
 
@@ -52,12 +44,12 @@ export async function notifyAdminInstant(params: {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          username: 'LunarFlux 사이트',
+          username: 'LunarFlux AI 사이트',
           embeds: [
             {
               title: params.title,
               description: discordDescription,
-              color: 0x0ea5e9,
+              color: 0x10b981,
               timestamp: new Date().toISOString(),
             },
           ],
