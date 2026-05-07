@@ -36,11 +36,12 @@ type ServiceMenuCategory = { cat: string; color: string; sections: ServiceMenuSe
 
 const serviceMenu: ServiceMenuCategory[] = [
   {
-    cat: 'IDC / 서버',
+    cat: 'IDC / AIDC',
     color: '#0ea5e9',
     sections: [
       {
         items: [
+          { name: 'AIDC GPU 전용 호스팅', slug: 'aidc', desc: '초고전력 코로케이션 · RTX 5090', highlight: true },
           { name: '서버 임대 · 코로케이션', slug: 'server-rental', desc: '1U~풀랙 코로케이션 월정액' },
           { name: '위탁운영 매니지먼트', slug: 'managed-service', desc: '24시간 장애대응 · OS 패치' },
           { name: '서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 · 99.99%' },
