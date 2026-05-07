@@ -94,10 +94,14 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                 <thead>
                   <tr style={{ background: 'var(--surface)' }}>
                     <th style={{ padding: '14px 20px', textAlign: 'left', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>기능</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', borderBottom: '1px solid var(--border)', fontWeight: 700, background: 'rgba(52,211,153,0.06)', minWidth: 160 }}>UltraStreamingEngine</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>A사</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>B사</th>
-                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>C사</th>
+                    <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', borderBottom: '1px solid var(--border)', fontWeight: 700, background: 'rgba(52,211,153,0.06)', minWidth: 160 }}>{s.slug === 'aidc' ? 'AIDC GPU 전용 호스팅' : (s.slug === 'ultrastream' ? 'UltraStreamingEngine' : s.name)}</th>
+                    {s.comparison.items[0]?.others && (
+                      <>
+                        <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>A사</th>
+                        <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>B사</th>
+                        <th style={{ padding: '14px 20px', textAlign: 'center', fontFamily: 'var(--mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text3)', borderBottom: '1px solid var(--border)', fontWeight: 400 }}>C사</th>
+                      </>
+                    )}
                   </tr>
                 </thead>
                 <tbody>
@@ -105,9 +109,13 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                     <tr key={i} style={{ background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)' }}>
                       <td style={{ padding: '13px 20px', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)', fontFamily: 'var(--mono)', letterSpacing: '0.03em' }}>{item.label}</td>
                       <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--accent)', fontWeight: 600, borderBottom: '1px solid var(--border)', background: 'rgba(52,211,153,0.04)' }}>{item.ours}</td>
-                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others?.[0]}</td>
-                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others?.[1]}</td>
-                      <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others?.[2]}</td>
+                      {item.others && (
+                        <>
+                          <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others[0]}</td>
+                          <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others[1]}</td>
+                          <td style={{ padding: '13px 20px', textAlign: 'center', fontSize: '0.8rem', color: 'var(--text2)', borderBottom: '1px solid var(--border)' }}>{item.others[2]}</td>
+                        </>
+                      )}
                     </tr>
                   ))}
                 </tbody>
