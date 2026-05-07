@@ -24,11 +24,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
             <p style={{ fontSize: '1.05rem', color: 'var(--text2)', lineHeight: 1.8, maxWidth: 640 }}>{s.desc}</p>
           </div>
         </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
-          {s.tags.map(t => (
-            <span key={t} style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', padding: '5px 12px', border: '1px solid var(--accent)', borderRadius: 2, color: 'var(--accent)', letterSpacing: '0.05em' }}>{t}</span>
-          ))}
-        </div>
       </section>
 
       <section style={{ background: 'var(--bg2)', padding: '80px 5%' }}>
