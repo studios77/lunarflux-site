@@ -66,6 +66,58 @@ export const servicesData: ServiceData[] = [
     ],
   },
   {
+    slug: 'aidc',
+    icon: '⚡',
+    cat: 'IDC / AIDC',
+    name: 'AIDC GPU 전용 호스팅',
+    summary: '고성능 GPU 서버 호스팅 및 초고전력 코로케이션. AI 학습·추론 최적화.',
+    desc: '일반 IDC에서는 감당하기 어려운 초고전력(Rack당 최대 40kW)과 극심한 발열을 완벽히 제어하는 AI 전용 데이터센터(AIDC) 서비스입니다. 최신 GPU 탑재 베어메탈 호스팅과 고집적 장비 코로케이션을 제공합니다.',
+    tags: ['RTX 5090', 'NVIDIA', '고전력 랙', '딥러닝', 'LLM'],
+    highlights: [
+      { title: '최신 GPU 베어메탈', desc: 'RTX 5090 등 최신 고성능 GPU가 탑재된 단독 서버를 월 임대 방식으로 즉시 사용 가능합니다.' },
+      { title: '초고전력 밀도 지원', desc: '일반 랙(3~4kW)의 한계를 넘는 고전력(20~40kW) 환경을 안정적으로 제공하여 GPU 풀뱅크 구성이 가능합니다.' },
+      { title: 'AI 맞춤형 냉각/네트워크', desc: 'GPU 병렬 연산(Training)의 병목을 없애기 위해 고대역폭 네트워크(10G/40G)와 최적화된 공조 시스템을 운영합니다.' },
+      { title: '유연한 하드웨어 확장', desc: 'RAM 최대 8TB, 다수의 NVMe/SAS 디스크 추가 등 AI 워크로드 스케일에 맞춰 서버 스펙을 자유롭게 커스텀할 수 있습니다.' },
+    ],
+    specs: [
+      'GPU 라인업: NVIDIA RTX 5090 등 최신 모델',
+      '지원 섀시: 4U 랙마운트 (1200W Hot-Swap 듀얼/트리플 파워)',
+      '네트워크: 기본 1Gbps Dedicated (최대 10G/40G 확장 가능)',
+      '냉각/공조: 컨테인먼트 존 분리 및 고효율 항온항습',
+      '전력: GPU 특화 고용량 이중화 PDU',
+      '관리: 24/7 관제 및 IPMI 기반 대역외 관리(OOB)',
+    ],
+    useCases: [
+      '대규모 언어 모델(LLM) 자체 학습 및 파인튜닝',
+      'AI 이미지/비디오 생성 (Stable Diffusion 등) 모델 추론',
+      '대학 및 연구소의 딥러닝/머신러닝 병렬 연산',
+      '클라우드 GPU 비용 절감을 위한 자체 인프라 구축',
+      '실시간 AI 비전 분석 시스템 (자율주행, 스마트팩토리)',
+    ],
+    cta: 'GPU 호스팅 / AIDC 상담 신청',
+    coloPricing: [
+      { 
+        name: 'RTX 5090 베어메탈', 
+        size: '단독 서버 (4U)', 
+        network: '1Gbps Dedicated (Max 30Mbps)', 
+        price: '770,000원', 
+        note: '월 기준 / 부가세 별도',
+        popular: true 
+      },
+    ],
+    comparison: {
+      label: 'GPU 서버 스펙 상세',
+      items: [
+        { label: 'GPU', ours: 'NVIDIA RTX 5090 32GB x 1EA' },
+        { label: 'CPU', ours: 'Intel Xeon Silver 4208 2.1GHz * 2EA (16코어/32스레드)' },
+        { label: 'RAM', ours: 'DDR4 128G (4*32G) REG-ECC (최대 8TB 확장 가능)' },
+        { label: 'DISK', ours: 'SSD 500GB (SATA, NVMe, SAS 최대 8개 장착 가능)' },
+        { label: 'NETWORK', ours: '1Gbps UTP * 4EA' },
+        { label: 'POWER', ours: '1200W Hot-Swap Power Supply v2 * 3EA' },
+      ],
+    },
+  },
+  {
     slug: 'managed-service',
     icon: '⚙️',
     cat: 'IDC / MSP',
@@ -499,6 +551,7 @@ export const SERVICE_SLUGS = [
   'ultrastream',
   'vod-multistream',
   'ai-agent',
+  'aidc',
 ] as const
 
 export type ServiceSlug = (typeof SERVICE_SLUGS)[number]
