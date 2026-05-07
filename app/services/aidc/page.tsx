@@ -1,11 +1,16 @@
+import type { Metadata } from 'next'
 import ServiceDetailPage from '@/components/ServiceDetailPage'
-import { getServiceBySlug } from '@/lib/servicesData'
-import { getSEO } from '@/lib/seo'
+import { findServiceBySlug } from '@/lib/servicesData'
+import { serviceCanonicalUrl, SITE_NAME } from '@/lib/site'
 
-export const metadata = getSEO('aidc')
+const s = findServiceBySlug('aidc')!
 
-export default function AIDCPage() {
-  const data = getServiceBySlug('aidc')
-  if (!data) return <div>Not Found</div>
-  return <ServiceDetailPage data={data} />
+export const metadata: Metadata = {
+  title: `${s.name} | ${SITE_NAME}`,
+  description: s.summary,
+  alternates: { canonical: serviceCanonicalUrl('aidc') },
+}
+
+export default function Page() {
+  return <ServiceDetailPage s={s} />
 }

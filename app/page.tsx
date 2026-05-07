@@ -7,7 +7,6 @@ import Hero from '@/components/Hero'
 import Services from '@/components/Services'
 import Pricing from '@/components/Pricing'
 import About from '@/components/About'
-import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import ChatBot from '@/components/ChatBot'
 import EdgeSection from '@/components/EdgeSection'
@@ -108,7 +107,6 @@ export default function Home() {
         <EdgeSection />
         <Pricing />
         <About />
-        <Contact />
       </main>
       <Footer />
       <ChatBot />
