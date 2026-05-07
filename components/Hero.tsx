@@ -67,7 +67,7 @@ export default function Hero() {
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(16,185,129,0.35)'; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(16,185,129,0.25)'; }}
           >서비스 살펴보기</a>
-          <a href="#contact" style={{
+          <a href="/contact" style={{
             padding: '16px 40px', background: 'rgba(255,255,255,0.8)', color: 'var(--text)',
             border: '1px solid var(--border2)', borderRadius: 30, backdropFilter: 'blur(10px)',
             fontFamily: 'var(--sans)', fontSize: '0.95rem', fontWeight: 600, letterSpacing: '0.02em',
