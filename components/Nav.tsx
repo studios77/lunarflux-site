@@ -248,7 +248,7 @@ export default function Nav() {
                   <Link href="/#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     전체 서비스 보기 →
                   </Link>
-                  <Link href="/#contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                  <Link href="/contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
                     무료 상담 신청 →
                   </Link>
                 </div>
@@ -259,7 +259,6 @@ export default function Nav() {
           {[
             { id: 'pricing', label: '요금' },
             { id: 'about', label: '소개' },
-            { id: 'contact', label: '문의' },
           ].map(m => (
             <li key={m.id}>
               <Link href={`/#${m.id}`} style={{
@@ -271,10 +270,19 @@ export default function Nav() {
               </Link>
             </li>
           ))}
+          <li>
+            <Link href="/contact" style={{
+              fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700,
+              color: 'var(--text2)',
+              textDecoration: 'none', letterSpacing: '0.02em', transition: 'color 0.2s',
+            }}>
+              문의
+            </Link>
+          </li>
         </ul>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Link href="/#contact" style={{
+          <Link href="/contact" style={{
             fontFamily: 'var(--mono)', fontSize: '0.75rem',
             padding: '8px 18px', background: 'transparent',
             border: '1px solid var(--accent)', color: 'var(--accent)',
@@ -355,11 +363,14 @@ export default function Nav() {
             </div>
           ))}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 16 }}>
-            {[{id:'pricing',label:'요금'},{id:'about',label:'소개'},{id:'contact',label:'문의'}].map(m => (
+            {[{id:'pricing',label:'요금'},{id:'about',label:'소개'}].map(m => (
               <Link key={m.id} href={`/#${m.id}`} onClick={() => setMobileOpen(false)} style={{ fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700, color: 'var(--text2)', textDecoration: 'none', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
                 {m.label}
               </Link>
             ))}
+            <Link href="/contact" onClick={() => setMobileOpen(false)} style={{ fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700, color: 'var(--text2)', textDecoration: 'none', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+              문의
+            </Link>
           </div>
         </div>
       )}
