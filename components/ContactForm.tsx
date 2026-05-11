@@ -7,6 +7,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     company: '',
+    service: 'IDC',
     message: '',
   })
   
@@ -67,7 +68,8 @@ export default function ContactForm() {
           <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 8, fontFamily: 'var(--display)' }}>이메일 문의 폼</h3>
           <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.6 }}>
             상세한 제안서 요청, 기술 검토서 전달 등 문의사항을 남겨주시면<br/>
-            검토 후 24시간 이내에 회신해 드립니다.
+            검토 후 24시간 이내에 회신해 드립니다.<br/>
+            <span style={{ display: 'inline-block', marginTop: 8, padding: '4px 8px', background: 'rgba(255,255,255,0.05)', borderRadius: 6, fontSize: '0.9rem', color: 'var(--accent2)', fontWeight: 600 }}>contact@LunarFlux.ai</span>
           </p>
         </div>
       </div>
@@ -96,6 +98,33 @@ export default function ContactForm() {
               style={{ width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', color: 'var(--text)', outline: 'none' }}
               placeholder="(주)루나플럭스"
             />
+          </div>
+        </div>
+
+        <div>
+          <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 8, color: 'var(--text2)' }}>문의 서비스 *</label>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            {['IDC', 'AI', '보안', '스트리밍', '기타'].map(service => (
+              <button
+                key={service}
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, service }))}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 20,
+                  border: '1px solid',
+                  borderColor: formData.service === service ? 'var(--accent)' : 'var(--border)',
+                  background: formData.service === service ? 'rgba(52,211,153,0.1)' : 'var(--bg)',
+                  color: formData.service === service ? 'var(--accent)' : 'var(--text2)',
+                  fontSize: '0.9rem',
+                  fontWeight: formData.service === service ? 600 : 400,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                {service}
+              </button>
+            ))}
           </div>
         </div>
         
