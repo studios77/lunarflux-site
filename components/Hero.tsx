@@ -23,7 +23,7 @@ export default function Hero() {
             width: 6, height: 6, borderRadius: '50%', background: 'var(--accent2)',
             animation: 'pulse 1.5s ease-in-out infinite', display: 'inline-block',
           }} />
-          IDC · AI 보안 · 라이브 스트리밍
+          IDC · AI 보안 · 라이브 스트리밍 솔루션
         </div>
 
         <h1 style={{
@@ -39,7 +39,7 @@ export default function Hero() {
             backgroundClip: 'text',
           }}>AI 보안</span>
           {' · '}
-          <span style={{ whiteSpace: 'nowrap' }}>스트리밍</span>
+          <span style={{ whiteSpace: 'nowrap' }}>스트리밍솔루션</span>
           <br />
           <span style={{ color: 'var(--text2)', fontWeight: 700 }}>한곳에서 설계하고 운영합니다</span>
         </h1>
