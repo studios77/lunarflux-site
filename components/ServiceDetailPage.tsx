@@ -2,10 +2,31 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import type { ServiceData } from '@/lib/servicesData'
 import { servicesData } from '@/lib/servicesData'
+import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
 
 export default function ServiceDetailPage({ s }: { s: ServiceData }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: s.seoH1 || s.name,
+    description: s.desc,
+    provider: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: 'https://lunarflux.ai'
+    },
+    url: serviceCanonicalUrl(s.slug),
+    category: s.cat,
+    serviceType: s.name,
+  }
+
   return (
-    <main style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main style={{ background: 'var(--bg)', minHeight: '100vh', color: 'var(--text)' }}>
       <Nav />
 
       <section style={{ padding: '120px 5% 80px', maxWidth: 1100, margin: '0 auto' }}>
@@ -198,5 +219,6 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         @media(max-width:768px){ .specs-grid { grid-template-columns: 1fr !important; gap: 40px !important; } }
       `}</style>
     </main>
+    </>
   )
 }
