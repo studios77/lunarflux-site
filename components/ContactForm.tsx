@@ -51,7 +51,7 @@ export default function ContactForm() {
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       setSubmitStatus('success')
-      setFormData({ name: '', email: '', company: '', message: '' })
+      setFormData({ name: '', email: '', company: '', service: 'IDC', message: '' })
       generateCaptcha()
     } catch (error) {
       setSubmitStatus('error')
