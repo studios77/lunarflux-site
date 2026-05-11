@@ -1,5 +1,6 @@
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import ContactForm from '@/components/ContactForm'
 import { SITE_NAME } from '@/lib/site'
 
 export const metadata = {
@@ -38,19 +39,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '32px' }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
-              <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>📧</div>
-              <div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 8, fontFamily: 'var(--display)' }}>이메일 문의</h3>
-                <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.6, marginBottom: 12 }}>
-                  상세한 제안서 요청, 기술 검토서 전달 등 자료가 필요한 문의는 이메일로 보내주시기 바랍니다.<br/>
-                  검토 후 24시간 이내에 회신해 드립니다.
-                </p>
-                <a href="mailto:contact@lunarflux.ai" style={{ display: 'inline-block', fontSize: '1.1rem', color: 'var(--text)', fontWeight: 700, textDecoration: 'none', background: 'rgba(255,255,255,0.05)', padding: '8px 16px', borderRadius: 8, border: '1px solid var(--border)' }}>contact@lunarflux.ai</a>
-              </div>
-            </div>
-          </div>
+          <ContactForm />
 
           <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '32px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20 }}>
