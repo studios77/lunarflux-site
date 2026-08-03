@@ -3,6 +3,14 @@
 import { useState, useEffect } from 'react'
 import { notifyAdminInstant, isAdminNotifyConfigured } from '@/lib/adminNotify'
 
+const SERVICES = ['IDC', 'AI', '보안', '스트리밍', '기타']
+
+/** 입력 요소 공통 스타일. outline을 지우는 대신 focus 링을 남겨 키보드 접근성을 유지합니다. */
+const FIELD =
+  'w-full rounded-lg border border-line bg-canvas px-4 py-3 text-fg placeholder:text-fg-subtle outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/60'
+
+const LABEL = 'mb-2 block text-[0.9rem] text-fg-muted'
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,7 +19,7 @@ export default function ContactForm() {
     service: 'IDC',
     message: '',
   })
-  
+
   const [captcha, setCaptcha] = useState({ num1: 0, num2: 0 })
   const [captchaAnswer, setCaptchaAnswer] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -36,14 +44,14 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // Check CAPTCHA
     if (parseInt(captchaAnswer) !== captcha.num1 + captcha.num2) {
       alert('자동가입방지(캡챠) 정답이 올바르지 않습니다.')
       generateCaptcha()
       return
     }
-    
+
     // 웹훅이 설정되지 않았다면 전송할 곳이 없다. 접수된 것처럼 보이면 안 되므로
     // 성공으로 처리하지 않고 대체 연락 수단을 안내한다.
     if (!isAdminNotifyConfigured()) {
@@ -78,152 +86,154 @@ export default function ContactForm() {
   }
 
   return (
-    <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 12, padding: '32px' }}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 20, marginBottom: 24 }}>
-        <div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>📧</div>
+    <div className="rounded-xl border border-line bg-surface p-6 sm:p-8">
+      <div className="mb-6 flex items-start gap-5">
+        <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-line bg-elev text-2xl">
+          📧
+        </div>
         <div>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 8, fontFamily: 'var(--display)' }}>이메일 문의 폼</h3>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.6 }}>
-            상세한 제안서 요청, 기술 검토서 전달 등 문의사항을 남겨주시면<br/>
-            검토 후 24시간 이내에 회신해 드립니다.<br/>
-            <span style={{ display: 'inline-block', marginTop: 8, padding: '4px 8px', background: 'rgba(255,255,255,0.05)', borderRadius: 6, fontSize: '0.9rem', color: 'var(--accent2)', fontWeight: 600 }}>contact@LunarFlux.ai</span>
+          <h3 className="mb-2 text-[1.25rem] font-bold text-fg">이메일 문의 폼</h3>
+          <p className="break-keep text-[0.95rem] leading-[1.6] text-fg-muted">
+            상세한 제안서 요청, 기술 검토서 전달 등 문의사항을 남겨주시면 검토 후 24시간 이내에 회신해 드립니다.
+            <br />
+            <a
+              href="mailto:contact@LunarFlux.ai"
+              className="mt-2 inline-block rounded-md border border-line bg-elev px-2 py-1 text-[0.9rem] font-semibold text-accent-2 transition-colors hover:border-accent-2"
+            >
+              contact@LunarFlux.ai
+            </a>
           </p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-        <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          <div style={{ flex: '1 1 calc(50% - 8px)', minWidth: 200 }}>
-            <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 8, color: 'var(--text2)' }}>이름 / 직급 *</label>
-            <input 
-              type="text" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleChange} 
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <label htmlFor="cf-name" className={LABEL}>이름 / 직급 *</label>
+            <input
+              id="cf-name"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               required
-              style={{ width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', color: 'var(--text)', outline: 'none' }}
+              className={FIELD}
               placeholder="홍길동 과장"
             />
           </div>
-          <div style={{ flex: '1 1 calc(50% - 8px)', minWidth: 200 }}>
-            <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 8, color: 'var(--text2)' }}>회사명</label>
-            <input 
-              type="text" 
-              name="company" 
-              value={formData.company} 
-              onChange={handleChange} 
-              style={{ width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', color: 'var(--text)', outline: 'none' }}
+          <div>
+            <label htmlFor="cf-company" className={LABEL}>회사명</label>
+            <input
+              id="cf-company"
+              type="text"
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
+              className={FIELD}
               placeholder="(주)루나플럭스"
             />
           </div>
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 8, color: 'var(--text2)' }}>문의 서비스 *</label>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {['IDC', 'AI', '보안', '스트리밍', '기타'].map(service => (
+          <span className={LABEL}>문의 서비스 *</span>
+          <div className="flex flex-wrap gap-2">
+            {SERVICES.map(service => (
               <button
                 key={service}
                 type="button"
+                aria-pressed={formData.service === service}
                 onClick={() => setFormData(prev => ({ ...prev, service }))}
-                style={{
-                  padding: '8px 16px',
-                  borderRadius: 20,
-                  border: '1px solid',
-                  borderColor: formData.service === service ? 'var(--accent)' : 'var(--border)',
-                  background: formData.service === service ? 'rgba(52,211,153,0.1)' : 'var(--bg)',
-                  color: formData.service === service ? 'var(--accent)' : 'var(--text2)',
-                  fontSize: '0.9rem',
-                  fontWeight: formData.service === service ? 600 : 400,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
+                className={`rounded-full border px-4 py-2 text-[0.9rem] transition-all duration-200 ${
+                  formData.service === service
+                    ? 'border-accent bg-accent/10 font-semibold text-accent'
+                    : 'border-line bg-canvas text-fg-muted hover:border-line-strong hover:text-fg'
+                }`}
               >
                 {service}
               </button>
             ))}
           </div>
         </div>
-        
+
         <div>
-          <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 8, color: 'var(--text2)' }}>이메일 주소 *</label>
-          <input 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
+          <label htmlFor="cf-email" className={LABEL}>이메일 주소 *</label>
+          <input
+            id="cf-email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             required
-            style={{ width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', color: 'var(--text)', outline: 'none' }}
+            className={FIELD}
             placeholder="example@company.com"
           />
         </div>
 
         <div>
-          <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 8, color: 'var(--text2)' }}>문의 내용 *</label>
-          <textarea 
-            name="message" 
-            value={formData.message} 
-            onChange={handleChange} 
+          <label htmlFor="cf-message" className={LABEL}>문의 내용 *</label>
+          <textarea
+            id="cf-message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             required
             rows={5}
-            style={{ width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', color: 'var(--text)', outline: 'none', resize: 'vertical' }}
+            className={`${FIELD} resize-y`}
             placeholder="도입하고자 하는 서비스나 궁금하신 점을 상세히 적어주세요."
           />
         </div>
 
-        <div style={{ background: 'rgba(255,255,255,0.03)', padding: 16, borderRadius: 8, border: '1px solid var(--border)' }}>
-          <label style={{ display: 'block', fontSize: '0.9rem', marginBottom: 12, color: 'var(--text2)' }}>자동등록방지 (캡챠) *</label>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ fontSize: '1.2rem', fontWeight: 'bold', background: 'var(--bg)', padding: '8px 16px', borderRadius: 8, letterSpacing: '2px', color: 'var(--text)' }}>
+        <div className="rounded-lg border border-line bg-elev p-4">
+          <label htmlFor="cf-captcha" className="mb-3 block text-[0.9rem] text-fg-muted">
+            자동등록방지 (캡챠) *
+          </label>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="rounded-lg bg-canvas px-4 py-2 text-[1.2rem] font-bold tracking-[2px] text-fg">
               {captcha.num1} + {captcha.num2} = ?
             </div>
-            <input 
-              type="number" 
-              value={captchaAnswer} 
-              onChange={(e) => setCaptchaAnswer(e.target.value)} 
+            <input
+              id="cf-captcha"
+              type="number"
+              value={captchaAnswer}
+              onChange={(e) => setCaptchaAnswer(e.target.value)}
               required
-              style={{ width: 100, background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8, padding: '12px 16px', color: 'var(--text)', outline: 'none' }}
+              className={`${FIELD} w-25`}
               placeholder="정답"
             />
           </div>
         </div>
 
         {submitStatus === 'success' && (
-          <div style={{ color: '#34d399', fontSize: '0.95rem', padding: '12px', background: 'rgba(52,211,153,0.1)', borderRadius: 8 }}>
+          <div className="rounded-lg bg-accent/10 p-3 text-[0.95rem] leading-relaxed text-accent">
             성공적으로 문의가 접수되었습니다. 빠르게 회신드리겠습니다.
           </div>
         )}
 
         {submitStatus === 'error' && (
-          <div style={{ color: '#ef4444', fontSize: '0.95rem', padding: '12px', background: 'rgba(239,68,68,0.1)', borderRadius: 8, lineHeight: 1.6 }}>
-            문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주시고,
-            계속 실패하면 <a href="mailto:contact@LunarFlux.ai" style={{ color: '#ef4444', fontWeight: 600 }}>contact@LunarFlux.ai</a>로 직접 보내주세요.
+          <div className="rounded-lg bg-danger/10 p-3 text-[0.95rem] leading-relaxed text-danger">
+            문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주시고, 계속 실패하면{' '}
+            <a href="mailto:contact@LunarFlux.ai" className="font-semibold underline">
+              contact@LunarFlux.ai
+            </a>
+            로 직접 보내주세요.
           </div>
         )}
 
         {submitStatus === 'unconfigured' && (
-          <div style={{ color: '#f59e0b', fontSize: '0.95rem', padding: '12px', background: 'rgba(245,158,11,0.1)', borderRadius: 8, lineHeight: 1.6 }}>
-            현재 온라인 접수가 준비 중입니다.
-            번거로우시겠지만 <a href="mailto:contact@LunarFlux.ai" style={{ color: '#f59e0b', fontWeight: 600 }}>contact@LunarFlux.ai</a>로 보내주시면 동일하게 처리해 드립니다.
+          <div className="rounded-lg bg-warn/10 p-3 text-[0.95rem] leading-relaxed text-warn">
+            현재 온라인 접수가 준비 중입니다. 번거로우시겠지만{' '}
+            <a href="mailto:contact@LunarFlux.ai" className="font-semibold underline">
+              contact@LunarFlux.ai
+            </a>
+            로 보내주시면 동일하게 처리해 드립니다.
           </div>
         )}
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={isSubmitting}
-          style={{ 
-            background: 'var(--text)', 
-            color: 'var(--bg)', 
-            border: 'none', 
-            borderRadius: 8, 
-            padding: '16px', 
-            fontSize: '1rem', 
-            fontWeight: 700, 
-            cursor: isSubmitting ? 'not-allowed' : 'pointer',
-            opacity: isSubmitting ? 0.7 : 1,
-            marginTop: 8,
-            transition: 'opacity 0.2s'
-          }}
+          className="mt-2 rounded-lg bg-accent p-4 text-base font-bold text-canvas transition-all duration-200 hover:bg-accent-2 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {isSubmitting ? '접수 중...' : '문의 접수하기'}
         </button>

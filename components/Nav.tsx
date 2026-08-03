@@ -9,35 +9,47 @@ type ServiceMenuLink = {
   highlight?: boolean
 }
 
+type ServiceMenuSection = { sub?: string; items: ServiceMenuLink[] }
+type ServiceMenuCategory = { cat: string; tone: keyof typeof TONES; sections: ServiceMenuSection[] }
+
+/** 카테고리별 강조색. Tailwind가 정적으로 수집하도록 완성된 클래스명으로 보관합니다. */
+const TONES = {
+  cyan: {
+    label: 'text-accent-2',
+    bar: 'bg-accent-2',
+    highlight: 'bg-accent-2/10 border-accent-2/30',
+    badge: 'text-accent-2 bg-accent-2/15 border-accent-2/40',
+  },
+  indigo: {
+    label: 'text-indigo-400',
+    bar: 'bg-indigo-400',
+    highlight: 'bg-indigo-400/10 border-indigo-400/30',
+    badge: 'text-indigo-400 bg-indigo-400/15 border-indigo-400/40',
+  },
+  emerald: {
+    label: 'text-accent',
+    bar: 'bg-accent',
+    highlight: 'bg-accent/10 border-accent/30',
+    badge: 'text-accent bg-accent/15 border-accent/40',
+  },
+} as const
+
 function MenuItemTitle({ item, size }: { item: ServiceMenuLink; size: 'sm' | 'md' }) {
-  const fs = size === 'sm' ? '0.875rem' : '0.95rem'
   return (
     <span
-      style={{
-        display: 'block',
-        minWidth: 0,
-        fontFamily: 'var(--sans)',
-        fontSize: fs,
-        fontWeight: 600,
-        color: 'var(--text)',
-        lineHeight: 1.35,
-        letterSpacing: '-0.01em',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      }}
+      className={`block min-w-0 truncate font-semibold leading-[1.35] tracking-[-0.01em] text-fg ${
+        size === 'sm' ? 'text-[0.875rem]' : 'text-[0.95rem]'
+      }`}
     >
       {item.name}
     </span>
   )
 }
-type ServiceMenuSection = { sub?: string; items: ServiceMenuLink[] }
-type ServiceMenuCategory = { cat: string; color: string; sections: ServiceMenuSection[] }
 
 const serviceMenu: ServiceMenuCategory[] = [
   {
     cat: 'IDC / AIDC',
-    color: '#0ea5e9',
+    tone: 'cyan',
     sections: [
       {
         items: [
@@ -53,7 +65,7 @@ const serviceMenu: ServiceMenuCategory[] = [
   },
   {
     cat: 'AI 보안',
-    color: '#f59e0b',
+    tone: 'indigo',
     sections: [
       {
         sub: '관제 · 자동화',
@@ -81,7 +93,7 @@ const serviceMenu: ServiceMenuCategory[] = [
   },
   {
     cat: '스트리밍',
-    color: '#10b981',
+    tone: 'emerald',
     sections: [
       {
         items: [
@@ -92,6 +104,8 @@ const serviceMenu: ServiceMenuCategory[] = [
     ],
   },
 ]
+
+const NAV_LINK = 'text-base font-bold tracking-[0.02em] transition-colors duration-200 hover:text-accent'
 
 export default function Nav() {
   const [active, setActive] = useState('')
@@ -114,28 +128,19 @@ export default function Nav() {
 
   return (
     <>
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
-        padding: '0 5%', height: 64,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid var(--border)',
-      }}>
-        <Link href="/" onClick={() => { setMenuOpen(false); setMobileOpen(false) }} style={{
-          fontFamily: 'var(--display)', fontSize: '1.2rem', fontWeight: 800,
-          letterSpacing: '-0.02em', color: 'var(--text)', textDecoration: 'none',
-          display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
-        }}>
-          <span style={{
-            width: 8, height: 8, borderRadius: '50%', background: 'var(--accent)',
-            boxShadow: '0 0 10px var(--accent)', animation: 'pulse 2s ease-in-out infinite',
-            display: 'inline-block',
-          }} />
-          LunarFlux<span style={{ color: 'var(--accent)' }}>AI</span>
+      <nav className="fixed inset-x-0 top-0 z-200 flex h-16 items-center justify-between border-b border-line bg-canvas/85 px-5 backdrop-blur-xl sm:px-8 lg:px-[5%]">
+        <Link
+          href="/"
+          onClick={() => { setMenuOpen(false); setMobileOpen(false) }}
+          className="flex shrink-0 items-center gap-2 text-[1.2rem] font-extrabold tracking-[-0.02em] text-fg"
+        >
+          <span className="inline-block size-2 animate-[pulseDot_2s_ease-in-out_infinite] rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)]" />
+          LunarFlux<span className="text-accent">AI</span>
         </Link>
 
-        <ul style={{ display: 'flex', alignItems: 'center', gap: 28, listStyle: 'none', margin: 0, padding: 0 }}>
-          <li style={{ position: 'relative' }}
+        <ul className="hidden list-none items-center gap-7 md:flex">
+          <li
+            className="relative"
             onMouseEnter={() => {
               if (closeTimer.current) clearTimeout(closeTimer.current)
               setMenuOpen(true)
@@ -144,15 +149,23 @@ export default function Nav() {
               closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
             }}
           >
-            <button style={{
-              fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700,
-              color: menuOpen ? 'var(--accent)' : 'var(--text2)',
-              background: 'none', border: 'none', cursor: 'pointer',
-              letterSpacing: '0.02em', display: 'flex', alignItems: 'center', gap: 4,
-              padding: '4px 0', transition: 'color 0.2s',
-            }}>
+            <button
+              aria-expanded={menuOpen}
+              className={`flex items-center gap-1 py-1 text-base font-bold tracking-[0.02em] transition-colors duration-200 ${
+                menuOpen ? 'text-accent' : 'text-fg-muted hover:text-accent'
+              }`}
+            >
               서비스
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{ transform: menuOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                className={`transition-transform duration-200 ${menuOpen ? 'rotate-180' : ''}`}
+              >
                 <polyline points="6 9 12 15 18 9" />
               </svg>
             </button>
@@ -161,94 +174,83 @@ export default function Nav() {
               <div
                 onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current) }}
                 onMouseLeave={() => { closeTimer.current = setTimeout(() => setMenuOpen(false), 250) }}
-                style={{
-                  position: 'absolute', top: 'calc(100% + 8px)',
-                  left: '50%', transform: 'translateX(-50%)',
-                  background: 'var(--surface)', border: '1px solid var(--border2)',
-                  borderRadius: 12,
-                  boxShadow: '0 20px 60px rgba(14,165,233,0.18)',
-                  width: 'min(1120px, calc(100vw - 20px))',
-                  maxWidth: 'calc(100vw - 20px)',
-                  zIndex: 9999,
-                  display: 'flex', flexDirection: 'column',
-                  overflow: 'hidden',
-                  boxSizing: 'border-box',
-                }}
+                className="absolute left-1/2 top-[calc(100%+8px)] z-[9999] flex w-[min(1120px,calc(100vw-20px))] max-w-[calc(100vw-20px)] -translate-x-1/2 flex-col overflow-hidden rounded-xl border border-line-strong bg-elev shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
               >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', padding: '18px 10px 14px', gap: 0 }}>
-                  {serviceMenu.map((cat, ci) => (
-                    <div key={ci} style={{
-                      minWidth: 0,
-                      padding: '0 10px',
-                      borderRight: ci < serviceMenu.length - 1 ? '1px solid var(--border)' : 'none',
-                    }}>
-                      <div style={{
-                        fontFamily: 'var(--mono)', fontSize: '0.7rem',
-                        color: cat.color, letterSpacing: '0.1em', textTransform: 'uppercase',
-                        marginBottom: 12, fontWeight: 700,
-                        display: 'flex', alignItems: 'center', gap: 6,
-                      }}>
-                        <span style={{ width: 12, height: 1, background: cat.color, display: 'inline-block' }} />
-                        {cat.cat}
-                      </div>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                        {cat.sections.map((sec, si) => (
-                          <div key={si}>
-                            {sec.sub && (
-                              <div style={{
-                                fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--text3)',
-                                letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600,
-                                marginTop: si > 0 ? 14 : 0, marginBottom: 6, paddingLeft: 2,
-                              }}>
-                                {sec.sub}
-                              </div>
-                            )}
-                            {sec.items.map((item, ii) => (
-                              <Link
-                                key={`${si}-${ii}`}
-                                href={`/services/${item.slug}/`}
-                                onClick={() => setMenuOpen(false)}
-                                title={item.name}
-                                style={{
-                                  display: 'block', padding: '10px 8px', borderRadius: 6,
-                                  textDecoration: 'none',
-                                  background: item.highlight ? `${cat.color}10` : 'transparent',
-                                  border: item.highlight ? `1px solid ${cat.color}30` : '1px solid transparent',
-                                  transition: 'background 0.15s',
-                                }}
-                                onMouseEnter={e => {
-                                  if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'var(--bg)'
-                                }}
-                                onMouseLeave={e => {
-                                  if (!item.highlight) (e.currentTarget as HTMLElement).style.background = 'transparent'
-                                }}
-                              >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'nowrap' }}>
-                                  <div style={{ flex: 1, minWidth: 0 }}>
-                                    <MenuItemTitle item={item} size="sm" />
+                <div className="grid grid-cols-3 gap-0 px-2.5 pb-3.5 pt-4.5">
+                  {serviceMenu.map((cat, ci) => {
+                    const tone = TONES[cat.tone]
+                    return (
+                      <div
+                        key={cat.cat}
+                        className={`min-w-0 px-2.5 ${ci < serviceMenu.length - 1 ? 'border-r border-line' : ''}`}
+                      >
+                        <div
+                          className={`mb-3 flex items-center gap-1.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] ${tone.label}`}
+                        >
+                          <span className={`inline-block h-px w-3 ${tone.bar}`} />
+                          {cat.cat}
+                        </div>
+                        <div className="flex flex-col gap-0.5">
+                          {cat.sections.map((sec, si) => (
+                            <div key={sec.sub ?? si}>
+                              {sec.sub && (
+                                <div
+                                  className={`mb-1.5 pl-0.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-fg-subtle ${
+                                    si > 0 ? 'mt-3.5' : ''
+                                  }`}
+                                >
+                                  {sec.sub}
+                                </div>
+                              )}
+                              {sec.items.map(item => (
+                                <Link
+                                  key={item.slug}
+                                  href={`/services/${item.slug}/`}
+                                  onClick={() => setMenuOpen(false)}
+                                  title={item.name}
+                                  className={`block rounded-md border p-2 transition-colors duration-150 ${
+                                    item.highlight
+                                      ? tone.highlight
+                                      : 'border-transparent hover:border-line hover:bg-surface'
+                                  }`}
+                                >
+                                  <div className="flex flex-nowrap items-center gap-1.5">
+                                    <div className="min-w-0 flex-1">
+                                      <MenuItemTitle item={item} size="sm" />
+                                    </div>
+                                    {item.highlight && (
+                                      <span
+                                        className={`shrink-0 rounded-full border px-1.5 py-0.5 font-mono text-[0.56rem] tracking-[0.06em] ${tone.badge}`}
+                                      >
+                                        NEW
+                                      </span>
+                                    )}
                                   </div>
-                                  {item.highlight && (
-                                    <span style={{ fontFamily: 'var(--mono)', fontSize: '0.56rem', color: cat.color, background: `${cat.color}20`, border: `1px solid ${cat.color}40`, borderRadius: 10, padding: '3px 7px', letterSpacing: '0.06em', flexShrink: 0 }}>
-                                      NEW
-                                    </span>
-                                  )}
-                                </div>
-                                <div style={{ fontFamily: 'var(--sans)', fontSize: '0.8rem', color: 'var(--text3)', marginTop: 5, lineHeight: 1.45, wordBreak: 'keep-all' }}>
-                                  {item.desc}
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                        ))}
+                                  <div className="mt-1 break-keep text-[0.8rem] leading-[1.45] text-fg-subtle">
+                                    {item.desc}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
-                <div style={{ borderTop: '1px solid var(--border)', padding: '10px 20px', display: 'flex', gap: 16, background: 'var(--bg)', borderRadius: '0 0 12px 12px' }}>
-                  <Link href="/#services" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--accent)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                <div className="flex gap-4 border-t border-line bg-canvas px-5 py-2.5">
+                  <Link
+                    href="/#services"
+                    onClick={() => setMenuOpen(false)}
+                    className="font-mono text-[0.78rem] tracking-[0.06em] text-accent hover:text-accent-2"
+                  >
                     전체 서비스 보기 →
                   </Link>
-                  <Link href="/contact" onClick={() => setMenuOpen(false)} style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: 'var(--text3)', textDecoration: 'none', letterSpacing: '0.06em' }}>
+                  <Link
+                    href="/contact"
+                    onClick={() => setMenuOpen(false)}
+                    className="font-mono text-[0.78rem] tracking-[0.06em] text-fg-subtle hover:text-fg"
+                  >
                     무료 상담 신청 →
                   </Link>
                 </div>
@@ -261,130 +263,129 @@ export default function Nav() {
             { id: 'about', label: '소개' },
           ].map(m => (
             <li key={m.id}>
-              <Link href={`/#${m.id}`} style={{
-                fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700,
-                color: active === m.id ? 'var(--accent)' : 'var(--text2)',
-                textDecoration: 'none', letterSpacing: '0.02em', transition: 'color 0.2s',
-              }}>
+              <Link
+                href={`/#${m.id}`}
+                className={`${NAV_LINK} ${active === m.id ? 'text-accent' : 'text-fg-muted'}`}
+              >
                 {m.label}
               </Link>
             </li>
           ))}
           <li>
-            <Link href="/contact" style={{
-              fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700,
-              color: 'var(--text2)',
-              textDecoration: 'none', letterSpacing: '0.02em', transition: 'color 0.2s',
-            }}>
+            <Link href="/contact" className={`${NAV_LINK} text-fg-muted`}>
               문의
             </Link>
           </li>
         </ul>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Link href="/contact" style={{
-            fontFamily: 'var(--mono)', fontSize: '0.75rem',
-            padding: '8px 18px', background: 'transparent',
-            border: '1px solid var(--accent)', color: 'var(--accent)',
-            borderRadius: 4, textDecoration: 'none', letterSpacing: '0.05em',
-            transition: 'all 0.2s',
-          }}
-            onMouseEnter={e => {
-              (e.target as HTMLElement).style.background = 'var(--accent)'
-              ;(e.target as HTMLElement).style.color = '#000'
-            }}
-            onMouseLeave={e => {
-              (e.target as HTMLElement).style.background = 'transparent'
-              ;(e.target as HTMLElement).style.color = 'var(--accent)'
-            }}
+        <div className="flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="hidden rounded border border-accent px-4.5 py-2 font-mono text-[0.75rem] tracking-[0.05em] text-accent transition-colors duration-200 hover:bg-accent hover:text-canvas sm:block"
           >
             무료 상담
           </Link>
 
           <button
             onClick={() => setMobileOpen(o => !o)}
-            style={{ display: 'none', background: 'none', border: 'none', cursor: 'pointer', padding: 4, color: 'var(--text)' }}
-            className="hamburger"
+            aria-label={mobileOpen ? '메뉴 닫기' : '메뉴 열기'}
+            aria-expanded={mobileOpen}
+            className="flex p-1 text-fg md:hidden"
           >
-            {mobileOpen
-              ? <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              : <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-            }
+            {mobileOpen ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="18" x2="21" y2="18" />
+              </svg>
+            )}
           </button>
         </div>
       </nav>
 
       {mobileOpen && (
-        <div style={{
-          position: 'fixed', top: 64, left: 0, right: 0, zIndex: 199,
-          background: 'var(--surface)', borderBottom: '1px solid var(--border)',
-          padding: '20px 5%', maxHeight: 'calc(100vh - 64px)', overflowY: 'auto',
-        }}>
-          {serviceMenu.map((cat, ci) => (
-            <div key={ci} style={{ marginBottom: 24 }}>
-              <div style={{ fontFamily: 'var(--mono)', fontSize: '0.7rem', color: cat.color, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 700 }}>
-                {cat.cat}
-              </div>
-              {cat.sections.map((sec, si) => (
-                <div key={si}>
-                  {sec.sub && (
-                    <div style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: 'var(--text3)', letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: si > 0 ? 12 : 0, marginBottom: 8, fontWeight: 600 }}>
-                      {sec.sub}
-                    </div>
-                  )}
-                  {sec.items.map((item, ii) => (
-                    <Link
-                      key={`${si}-${ii}`}
-                      href={`/services/${item.slug}/`}
-                      title={item.name}
-                      onClick={() => setMobileOpen(false)}
-                      style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        gap: 10,
-                        padding: '12px 0',
-                        borderBottom: '1px solid var(--border)',
-                        textDecoration: 'none',
-                      }}
-                    >
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <MenuItemTitle item={item} size="md" />
-                      </div>
-                      {item.highlight && (
-                        <span style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem', color: cat.color, background: `${cat.color}15`, border: `1px solid ${cat.color}30`, borderRadius: 10, padding: '4px 9px', flexShrink: 0 }}>
-                          NEW
-                        </span>
-                      )}
-                    </Link>
-                  ))}
+        <div className="fixed inset-x-0 top-16 z-199 max-h-[calc(100vh-64px)] overflow-y-auto border-b border-line bg-elev px-5 py-5 sm:px-8 md:hidden">
+          {serviceMenu.map(cat => {
+            const tone = TONES[cat.tone]
+            return (
+              <div key={cat.cat} className="mb-6">
+                <div
+                  className={`mb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] ${tone.label}`}
+                >
+                  {cat.cat}
                 </div>
-              ))}
-            </div>
-          ))}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 16 }}>
-            {[{id:'pricing',label:'요금'},{id:'about',label:'소개'}].map(m => (
-              <Link key={m.id} href={`/#${m.id}`} onClick={() => setMobileOpen(false)} style={{ fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700, color: 'var(--text2)', textDecoration: 'none', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                {cat.sections.map((sec, si) => (
+                  <div key={sec.sub ?? si}>
+                    {sec.sub && (
+                      <div
+                        className={`mb-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-fg-subtle ${
+                          si > 0 ? 'mt-3' : ''
+                        }`}
+                      >
+                        {sec.sub}
+                      </div>
+                    )}
+                    {sec.items.map(item => (
+                      <Link
+                        key={item.slug}
+                        href={`/services/${item.slug}/`}
+                        title={item.name}
+                        onClick={() => setMobileOpen(false)}
+                        className="flex items-center justify-between gap-2.5 border-b border-line py-3"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <MenuItemTitle item={item} size="md" />
+                        </div>
+                        {item.highlight && (
+                          <span
+                            className={`shrink-0 rounded-full border px-2 py-1 font-mono text-[0.58rem] ${tone.badge}`}
+                          >
+                            NEW
+                          </span>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            )
+          })}
+          <div className="mt-4 flex flex-col">
+            {[
+              { id: 'pricing', label: '요금' },
+              { id: 'about', label: '소개' },
+            ].map(m => (
+              <Link
+                key={m.id}
+                href={`/#${m.id}`}
+                onClick={() => setMobileOpen(false)}
+                className="border-b border-line py-2.5 text-base font-bold text-fg-muted"
+              >
                 {m.label}
               </Link>
             ))}
-            <Link href="/contact" onClick={() => setMobileOpen(false)} style={{ fontFamily: 'var(--sans)', fontSize: '1rem', fontWeight: 700, color: 'var(--text2)', textDecoration: 'none', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-line py-2.5 text-base font-bold text-fg-muted"
+            >
               문의
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="mt-4 rounded border border-accent py-2.5 text-center font-mono text-[0.8rem] tracking-[0.05em] text-accent"
+            >
+              무료 상담
             </Link>
           </div>
         </div>
       )}
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(0.85); }
-        }
-        @media (max-width: 768px) {
-          nav ul { display: none !important; }
-          .hamburger { display: flex !important; }
-        }
-      `}</style>
     </>
   )
 }

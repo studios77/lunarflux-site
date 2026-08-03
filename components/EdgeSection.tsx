@@ -1,5 +1,35 @@
-'use client'
 import Link from 'next/link'
+
+/**
+ * 카드별 강조색. Tailwind가 클래스를 정적으로 수집할 수 있도록
+ * 색상 문자열을 조립하지 않고 완성된 클래스명으로 보관합니다.
+ */
+const TONES = {
+  emerald: {
+    badge: 'text-accent bg-accent/10 border-accent/30',
+    label: 'text-accent',
+    stat: 'text-accent',
+    quote: 'border-l-accent bg-accent/8',
+    link: 'text-accent border-accent/50 hover:border-accent',
+    card: 'hover:border-accent hover:shadow-[0_0_36px_rgba(52,211,153,0.16)]',
+  },
+  cyan: {
+    badge: 'text-accent-2 bg-accent-2/10 border-accent-2/30',
+    label: 'text-accent-2',
+    stat: 'text-accent-2',
+    quote: 'border-l-accent-2 bg-accent-2/8',
+    link: 'text-accent-2 border-accent-2/50 hover:border-accent-2',
+    card: 'hover:border-accent-2 hover:shadow-[0_0_36px_rgba(34,211,238,0.16)]',
+  },
+  indigo: {
+    badge: 'text-indigo-400 bg-indigo-400/10 border-indigo-400/30',
+    label: 'text-indigo-400',
+    stat: 'text-indigo-400',
+    quote: 'border-l-indigo-400 bg-indigo-400/8',
+    link: 'text-indigo-400 border-indigo-400/50 hover:border-indigo-400',
+    card: 'hover:border-indigo-400 hover:shadow-[0_0_36px_rgba(129,140,248,0.16)]',
+  },
+} as const
 
 const edges = [
   {
@@ -14,7 +44,8 @@ const edges = [
       { val: '24/7', label: '무인 감시' },
     ],
     highlight: '보이스피싱·선거 조작·기업 사칭 영상 대응에 즉시 적용 가능',
-    color: '#10b981',
+    tone: 'emerald' as const,
+    link: '/services/deepfake-detection/',
   },
   {
     badge: '02 · AI 자율 관제',
@@ -28,7 +59,7 @@ const edges = [
       { val: '< 5분', label: '위협→격리' },
     ],
     highlight: 'IT 보안 전담 인력이 없는 기업도 엔터프라이즈급 관제 실현',
-    color: '#f59e0b',
+    tone: 'cyan' as const,
     link: '/services/ai-security/',
   },
   {
@@ -43,7 +74,7 @@ const edges = [
       { val: '∞', label: '동시 시청자' },
     ],
     highlight: '스포츠 중계·라이브 커머스·실시간 경매에서 경쟁사와 체감 차이',
-    color: '#10b981',
+    tone: 'indigo' as const,
     link: '/services/ultrastream/',
   },
 ]
@@ -66,101 +97,103 @@ const sectors = [
   { icon: '🏢', label: '중견 · 중소기업' },
 ]
 
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+      <span className="inline-block h-px w-6 bg-accent-2" />
+      {children}
+    </div>
+  )
+}
+
 export default function EdgeSection() {
   return (
-    <section style={{ background: 'var(--bg2)', position: 'relative', zIndex: 1 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '100px 5%' }}>
-
+    <section className="relative z-10 bg-elev">
+      <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 md:py-24 lg:px-[5%] lg:py-25">
         <div className="reveal">
-          <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
-            Competitive Edge
-          </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 14 }}>
-            경쟁사 대비 두드러지는<br />
-            <span style={{ background: 'linear-gradient(135deg,#059669,#0d9488,#d97706)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>세 가지 기술 강점</span>
+          <SectionLabel>Competitive Edge</SectionLabel>
+          <h2 className="mb-3.5 break-keep text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
+            경쟁사 대비 두드러지는
+            <br />
+            <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
+              세 가지 기술 강점
+            </span>
           </h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', lineHeight: 1.8, maxWidth: 560 }}>
+          <p className="max-w-xl break-keep text-[0.95rem] leading-[1.8] text-fg-muted">
             딥페이크 탐지, AI 보안 관제, 초저지연 스트리밍을 라이브·보안 환경에 맞춰 제공합니다. 설계부터 운영까지 한 팀이 맡습니다.
           </p>
         </div>
 
-        <div className="reveal" style={{ display: 'flex', flexDirection: 'column', gap: 24, marginTop: 60 }}>
-          {edges.map((e, i) => (
-            <div key={i} className="edge-card" style={{
-              background: 'var(--surface)',
-              border: '1px solid var(--border)',
-              borderRadius: 12,
-              padding: '36px 36px',
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 48,
-              alignItems: 'center',
-              transition: 'border-color 0.3s, box-shadow 0.3s',
-            }}
-              onMouseEnter={e2 => {
-                (e2.currentTarget as HTMLDivElement).style.borderColor = e.color
-                ;(e2.currentTarget as HTMLDivElement).style.boxShadow = `0 0 32px ${e.color}18`
-              }}
-              onMouseLeave={e2 => {
-                (e2.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'
-                ;(e2.currentTarget as HTMLDivElement).style.boxShadow = 'none'
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                  <span style={{ fontFamily: 'var(--mono)', fontSize: '0.62rem', color: e.color, letterSpacing: '0.12em', textTransform: 'uppercase', background: `${e.color}18`, border: `1px solid ${e.color}44`, borderRadius: 20, padding: '3px 12px' }}>
-                    {e.badge}
-                  </span>
-                </div>
-                <div style={{ fontSize: '2rem', marginBottom: 10 }}>{e.icon}</div>
-                <h3 style={{ fontFamily: 'var(--display)', fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.02em', marginBottom: 4 }}>
-                  {e.title}
-                </h3>
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: e.color, marginBottom: 16, letterSpacing: '0.04em' }}>
-                  {e.subtitle}
-                </div>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text2)', lineHeight: 1.8 }}>
-                  {e.desc}
-                </p>
-                <div style={{ marginTop: 18, padding: '10px 14px', background: `${e.color}10`, borderLeft: `3px solid ${e.color}`, borderRadius: '0 6px 6px 0', fontSize: '0.8rem', color: 'var(--text2)', lineHeight: 1.6 }}>
-                  {e.highlight}
-                </div>
-                {e.link && (
-                  <Link href={e.link} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 20, fontFamily: 'var(--mono)', fontSize: '0.75rem', color: e.color, textDecoration: 'none', letterSpacing: '0.04em', borderBottom: `1px solid ${e.color}55`, paddingBottom: 2 }}>
-                    상세 서비스 페이지 보기 →
-                  </Link>
-                )}
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                {e.stats.map((s, j) => (
-                  <div key={j} style={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 24px', background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: 8 }}>
-                    <div style={{ fontFamily: 'var(--display)', fontSize: '2.2rem', fontWeight: 800, color: e.color, letterSpacing: '-0.03em', lineHeight: 1, flexShrink: 0 }}>
-                      {s.val}
-                    </div>
-                    <div style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: 'var(--text2)', letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.5 }}>
-                      {s.label}
-                    </div>
+        <div className="reveal mt-12 flex flex-col gap-6 md:mt-15">
+          {edges.map(e => {
+            const tone = TONES[e.tone]
+            return (
+              <div
+                key={e.badge}
+                className={`grid grid-cols-1 items-center gap-8 rounded-xl border border-line bg-surface p-6 transition duration-300 sm:p-9 lg:grid-cols-2 lg:gap-12 ${tone.card}`}
+              >
+                <div>
+                  <div className="mb-4 flex items-center gap-2.5">
+                    <span
+                      className={`rounded-full border px-3 py-0.5 font-mono text-[0.62rem] uppercase tracking-[0.12em] ${tone.badge}`}
+                    >
+                      {e.badge}
+                    </span>
                   </div>
-                ))}
+                  <div className="mb-2.5 text-[2rem]">{e.icon}</div>
+                  <h3 className="mb-1 break-keep text-[1.5rem] font-bold tracking-[-0.02em] text-fg">
+                    {e.title}
+                  </h3>
+                  <div className={`mb-4 font-mono text-[0.72rem] tracking-[0.04em] ${tone.label}`}>
+                    {e.subtitle}
+                  </div>
+                  <p className="break-keep text-[0.875rem] leading-[1.8] text-fg-muted">{e.desc}</p>
+                  <div
+                    className={`mt-4.5 break-keep rounded-r-md border-l-[3px] px-3.5 py-2.5 text-[0.8rem] leading-[1.6] text-fg-muted ${tone.quote}`}
+                  >
+                    {e.highlight}
+                  </div>
+                  {e.link && (
+                    <Link
+                      href={e.link}
+                      className={`mt-5 inline-flex items-center gap-1.5 border-b pb-0.5 font-mono text-[0.75rem] tracking-[0.04em] transition-colors ${tone.link}`}
+                    >
+                      상세 서비스 페이지 보기 →
+                    </Link>
+                  )}
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  {e.stats.map(s => (
+                    <div
+                      key={s.label}
+                      className="flex items-center gap-5 rounded-lg border border-line bg-canvas px-6 py-5"
+                    >
+                      <div
+                        className={`shrink-0 text-[1.8rem] font-extrabold leading-none tracking-[-0.03em] sm:text-[2.2rem] ${tone.stat}`}
+                      >
+                        {s.val}
+                      </div>
+                      <div className="font-mono text-[0.72rem] uppercase leading-normal tracking-[0.06em] text-fg-muted">
+                        {s.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
-        <div className="reveal" style={{ marginTop: 80 }}>
-          <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 32, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
-            검증된 수치
-          </div>
-          <div className="trust-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--border)', border: '1px solid var(--border)', borderRadius: 10, overflow: 'hidden' }}>
-            {trustStats.map((t, i) => (
-              <div key={i} style={{ background: 'var(--surface)', padding: '32px 24px', textAlign: 'center' }}>
-                <div style={{ fontFamily: 'var(--display)', fontSize: '2rem', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.03em', marginBottom: 8 }}>
+        <div className="reveal mt-20">
+          <SectionLabel>검증된 수치</SectionLabel>
+          <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4">
+            {trustStats.map(t => (
+              <div key={t.label} className="bg-surface px-6 py-8 text-center">
+                <div className="mb-2 text-[1.7rem] font-extrabold tracking-[-0.03em] text-fg sm:text-[2rem]">
                   {t.val}
                 </div>
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.7rem', color: 'var(--text3)', letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.5 }}>
+                <div className="break-keep font-mono text-[0.7rem] uppercase leading-normal tracking-[0.06em] text-fg-subtle">
                   {t.label}
                 </div>
               </div>
@@ -168,31 +201,13 @@ export default function EdgeSection() {
           </div>
         </div>
 
-        <div className="reveal" style={{ marginTop: 64 }}>
-          <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 24, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
-            도입 분야
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-            {sectors.map((s, i) => (
-              <div key={i} style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                padding: '10px 18px',
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                borderRadius: 40,
-                fontSize: '0.82rem', color: 'var(--text2)',
-                fontFamily: 'var(--sans)',
-                transition: 'border-color 0.2s, color 0.2s',
-              }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--accent)'
-                  ;(e.currentTarget as HTMLDivElement).style.color = 'var(--text)'
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)'
-                  ;(e.currentTarget as HTMLDivElement).style.color = 'var(--text2)'
-                }}
+        <div className="reveal mt-16">
+          <SectionLabel>도입 분야</SectionLabel>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {sectors.map(s => (
+              <div
+                key={s.label}
+                className="flex items-center gap-2 rounded-full border border-line bg-surface px-4.5 py-2.5 text-[0.82rem] text-fg-muted transition-colors duration-200 hover:border-accent hover:text-fg"
               >
                 <span>{s.icon}</span>
                 <span>{s.label}</span>
@@ -200,14 +215,7 @@ export default function EdgeSection() {
             ))}
           </div>
         </div>
-
       </div>
-      <style>{`
-        @media(max-width:768px){ 
-          .edge-card { grid-template-columns: 1fr !important; gap: 32px !important; } 
-          .trust-grid { grid-template-columns: 1fr 1fr !important; } 
-        }
-      `}</style>
     </section>
   )
 }

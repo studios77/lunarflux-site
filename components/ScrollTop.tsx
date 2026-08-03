@@ -26,34 +26,35 @@ export default function ScrollTop() {
     <button
       onClick={scrollToTop}
       aria-label="맨 위로 이동"
-      style={{
-        position: 'fixed', bottom: 96, left: 28, zIndex: 9997,
-        width: 52, height: 52, borderRadius: '50%',
-        background: 'var(--surface)', border: '1px solid var(--border2)',
-        cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 4px 20px rgba(16,185,129,0.15)',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0) scale(1)' : 'translateY(16px) scale(0.85)',
-        transition: 'opacity 0.3s ease, transform 0.3s ease',
-        pointerEvents: visible ? 'all' : 'none', padding: 0,
-      }}
-      onMouseEnter={e => {
-        (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--accent)'
-        ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 24px rgba(16,185,129,0.35)'
-      }}
-      onMouseLeave={e => {
-        (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border2)'
-        ;(e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 20px rgba(16,185,129,0.15)'
-      }}
+      className={`fixed bottom-24 left-5 z-[9997] flex size-13 items-center justify-center rounded-full border border-line-strong bg-surface p-0 shadow-[0_4px_20px_rgba(52,211,153,0.15)] transition-all duration-300 hover:border-accent hover:shadow-[0_4px_24px_rgba(52,211,153,0.35)] sm:left-7 ${
+        visible
+          ? 'translate-y-0 scale-100 opacity-100'
+          : 'pointer-events-none translate-y-4 scale-90 opacity-0'
+      }`}
     >
-      <svg width="52" height="52" viewBox="0 0 52 52" style={{ position: 'absolute', inset: 0, transform: 'rotate(-90deg)' }}>
-        <circle cx="26" cy="26" r={r} fill="none" stroke="var(--border)" strokeWidth="2" />
-        <circle cx="26" cy="26" r={r} fill="none" stroke="var(--accent)" strokeWidth="2"
-          strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
-          style={{ transition: 'stroke-dasharray 0.2s ease' }}
+      <svg width="52" height="52" viewBox="0 0 52 52" className="absolute inset-0 -rotate-90">
+        <circle cx="26" cy="26" r={r} fill="none" className="stroke-line" strokeWidth="2" />
+        <circle
+          cx="26"
+          cy="26"
+          r={r}
+          fill="none"
+          className="stroke-accent transition-[stroke-dasharray] duration-200"
+          strokeWidth="2"
+          strokeDasharray={`${dash} ${circ}`}
+          strokeLinecap="round"
         />
       </svg>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ position: 'relative', zIndex: 1 }}>
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="relative z-10 stroke-accent"
+      >
         <polyline points="18 15 12 9 6 15" />
       </svg>
     </button>

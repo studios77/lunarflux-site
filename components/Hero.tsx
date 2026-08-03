@@ -1,126 +1,76 @@
+const STATS = [
+  { num: '99.99', unit: '%', label: 'Uptime SLA' },
+  { num: '1~2', unit: 's', label: 'LL-HLS 레이턴시' },
+  { num: '24', unit: '/7', label: '보안 관제' },
+  { num: '14', unit: '개', label: '통합 서비스' },
+]
+
 export default function Hero() {
   return (
-    <section id="hero" style={{
-      minHeight: '100vh', display: 'flex', alignItems: 'center',
-      padding: '100px 5% 60px', overflow: 'hidden', position: 'relative', zIndex: 1,
-    }}>
-      <div style={{
-        position: 'absolute', top: '18%', left: '50%', transform: 'translateX(-50%)',
-        width: 920, height: 560,
-        background: 'radial-gradient(ellipse at 40% 40%, rgba(16,185,129,0.08) 0%, transparent 55%), radial-gradient(ellipse at 70% 30%, rgba(99,102,241,0.06) 0%, transparent 50%), radial-gradient(ellipse, rgba(245,158,11,0.04) 35%, transparent 72%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center', width: '100%' }}>
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          fontFamily: 'var(--mono)', fontSize: '0.7rem', color: 'var(--accent2)',
-          letterSpacing: '0.12em', padding: '6px 16px',
-          border: '1px solid rgba(16,185,129,0.35)', borderRadius: 2,
-          marginBottom: 32, textTransform: 'uppercase',
-          animation: 'fadeUp 0.8s ease both',
-        }}>
-          <span style={{
-            width: 6, height: 6, borderRadius: '50%', background: 'var(--accent2)',
-            animation: 'pulse 1.5s ease-in-out infinite', display: 'inline-block',
-          }} />
+    <section
+      id="hero"
+      className="relative z-10 flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-28 sm:px-8 md:pt-32 lg:px-[5%]"
+    >
+      {/* 앰비언트 글로우 */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[16%] h-[420px] w-[min(920px,120vw)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_40%_40%,rgba(52,211,153,0.18),transparent_58%),radial-gradient(ellipse_at_72%_32%,rgba(34,211,238,0.14),transparent_52%),radial-gradient(ellipse,rgba(99,102,241,0.10)_36%,transparent_74%)] blur-[10px] md:h-[560px]"
+      />
+
+      <div className="mx-auto w-full max-w-4xl text-center">
+        <div className="mb-8 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-sm border border-accent/35 bg-accent/5 px-4 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-accent">
+          <span className="inline-block size-1.5 animate-[pulseDot_1.5s_ease-in-out_infinite] rounded-full bg-accent" />
           IDC · AI 보안 · 라이브 스트리밍 솔루션
         </div>
 
-        <h1 style={{
-          fontFamily: 'var(--display)', fontSize: 'clamp(2.75rem, 7.5vw, 5.5rem)',
-          fontWeight: 800, lineHeight: 1.08, letterSpacing: '-0.03em', color: 'var(--text)',
-          marginBottom: 24, animation: 'fadeUp 0.8s 0.1s ease both',
-          wordBreak: 'keep-all',
-        }}>
+        <h1 className="mb-6 animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.5rem,7.5vw,5.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
           IDC ·{' '}
-          <span style={{
-            background: 'linear-gradient(135deg, #059669, #0d9488, #6366f1)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>AI 보안</span>
+          <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
+            AI 보안
+          </span>
           {' · '}
-          <span style={{ whiteSpace: 'nowrap' }}>스트리밍솔루션</span>
+          <span className="whitespace-nowrap">스트리밍솔루션</span>
           <br />
-          <span style={{ color: 'var(--text2)', fontWeight: 700 }}>한곳에서 설계하고 운영합니다</span>
+          <span className="font-bold text-fg-muted">한곳에서 설계하고 운영합니다</span>
         </h1>
 
-        <p style={{
-          fontSize: '1.05rem', color: 'var(--text2)', maxWidth: 560,
-          margin: '0 auto 48px', lineHeight: 1.85,
-          animation: 'fadeUp 0.8s 0.2s ease both',
-        }}>
-          서버 임대·위탁운영부터 자율 보안 관제, 스트림 이상 탐지, 딥페이크 검출까지.<br />
-          고객 환경에 맞춰 붙이고, UltraStreamingEngine으로 라이브까지 이어 드립니다.
+        <p className="mx-auto mb-12 max-w-xl animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-base leading-[1.85] text-fg-muted">
+          서버 임대·위탁운영부터 자율 보안 관제, 스트림 이상 탐지, 딥페이크 검출까지.
+          <br className="hidden sm:block" /> 고객 환경에 맞춰 붙이고, UltraStreamingEngine으로 라이브까지 이어 드립니다.
         </p>
 
-        <div style={{
-          display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap',
-          animation: 'fadeUp 0.8s 0.3s ease both',
-        }}>
-          <a href="#services" style={{
-            padding: '16px 40px', background: 'var(--accent)', color: '#fff',
-            border: 'none', borderRadius: 30, fontFamily: 'var(--sans)',
-            fontSize: '0.95rem', fontWeight: 600, letterSpacing: '0.02em',
-            textDecoration: 'none', boxShadow: '0 8px 24px rgba(16,185,129,0.25)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(16,185,129,0.35)'; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 8px 24px rgba(16,185,129,0.25)'; }}
-          >서비스 살펴보기</a>
-          <a href="/contact" style={{
-            padding: '16px 40px', background: 'rgba(255,255,255,0.8)', color: 'var(--text)',
-            border: '1px solid var(--border2)', borderRadius: 30, backdropFilter: 'blur(10px)',
-            fontFamily: 'var(--sans)', fontSize: '0.95rem', fontWeight: 600, letterSpacing: '0.02em',
-            textDecoration: 'none', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-          }}
-          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; (e.currentTarget as HTMLElement).style.background = '#fff'; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.8)'; }}
-          >무료 상담 신청</a>
+        <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
+          <a
+            href="#services"
+            className="rounded-full bg-accent px-10 py-4 text-[0.95rem] font-semibold tracking-[0.02em] text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-2 hover:shadow-[0_14px_36px_rgba(34,211,238,0.38)]"
+          >
+            서비스 살펴보기
+          </a>
+          <a
+            href="/contact"
+            className="rounded-full border border-line-strong bg-surface/60 px-10 py-4 text-[0.95rem] font-semibold tracking-[0.02em] text-fg backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-surface"
+          >
+            무료 상담 신청
+          </a>
         </div>
 
-        <div style={{
-          display: 'flex', justifyContent: 'center', gap: 24, marginTop: 80,
-          paddingTop: 48, flexWrap: 'wrap',
-          animation: 'fadeUp 0.8s 0.4s ease both',
-        }}>
-          {[
-            { num: '99.99', unit: '%', label: 'Uptime SLA' },
-            { num: '1~2', unit: 's', label: 'LL-HLS 레이턴시' },
-            { num: '24', unit: '/7', label: '보안 관제' },
-            { num: '14', unit: '개', label: '통합 서비스' },
-          ].map(s => (
-            <div key={s.label} style={{ 
-              textAlign: 'center', background: 'rgba(255,255,255,0.6)', 
-              backdropFilter: 'blur(12px)', border: '1px solid var(--border)', 
-              borderRadius: 20, padding: '24px 32px', minWidth: 180,
-              boxShadow: '0 8px 32px rgba(0,0,0,0.03)'
-            }}>
-              <span style={{
-                fontFamily: 'var(--display)', fontSize: '2.8rem', fontWeight: 800,
-                color: 'var(--text)', display: 'block', lineHeight: 1.1, marginBottom: 4
-              }}>
-                {s.num}<span style={{ color: 'var(--accent)', fontSize: '1.6rem', marginLeft: 2 }}>{s.unit}</span>
+        <div className="mt-20 grid animate-[fadeUp_0.8s_0.4s_ease_both] grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          {STATS.map(s => (
+            <div
+              key={s.label}
+              className="rounded-2xl border border-line bg-surface/60 px-4 py-6 text-center backdrop-blur transition-colors duration-300 hover:border-accent/40 sm:px-8"
+            >
+              <span className="mb-1 block text-[2rem] font-extrabold leading-tight text-fg sm:text-[2.8rem]">
+                {s.num}
+                <span className="ml-0.5 text-[1.2rem] text-accent sm:text-[1.6rem]">{s.unit}</span>
               </span>
-              <span style={{
-                fontFamily: 'var(--sans)', fontSize: '0.85rem',
-                color: 'var(--text3)', letterSpacing: '0.04em',
-                fontWeight: 600,
-              }}>{s.label}</span>
+              <span className="text-[0.8rem] font-semibold tracking-[0.04em] text-fg-subtle sm:text-[0.85rem]">
+                {s.label}
+              </span>
             </div>
           ))}
         </div>
       </div>
-
-      <style>{`
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(0.85); }
-        }
-      `}</style>
     </section>
   )
 }

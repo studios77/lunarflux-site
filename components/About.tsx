@@ -1,6 +1,3 @@
-'use client'
-import { useEffect, useRef } from 'react'
-
 const whyItems = [
   { num: '01', title: '인프라와 AI 보안을 함께', desc: '서버·네트워크·스트림 위에 보안 AI를 올리는 설계를 같이 잡습니다. 도입 이후 운영까지 한 창구로 이어집니다.' },
   { num: '02', title: '실제 트래픽에서 돌아가는 AI', desc: '자율 관제, 스트림 이상 탐지, 딥페이크 검출 등을 고객 환경에 맞춰 연결합니다. 이슈가 생기면 보안·미디어 엔지니어가 바로 대응합니다.' },
@@ -28,65 +25,78 @@ const termLines = [
   { type: 'cursor', text: '$ ' },
 ]
 
+/** 터미널 출력은 실제 콘솔 색을 흉내 내므로 사이트 팔레트를 따르지 않습니다 */
+const lineColor: Record<string, string> = {
+  prompt: 'text-[#e6edf3]',
+  out: 'text-[#8b949e]',
+  ok: 'text-[#3fb950]',
+  warn: 'text-[#e3b341]',
+  cursor: 'text-[#e6edf3]',
+  blank: 'text-transparent',
+}
+
 export default function About() {
-  const termRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const lines = termRef.current?.querySelectorAll('.term-line')
-    lines?.forEach((line, i) => {
-      (line as HTMLElement).style.opacity = '0';
-      setTimeout(() => {
-        (line as HTMLElement).style.transition = 'opacity 0.3s';
-        (line as HTMLElement).style.opacity = '1';
-      }, 400 + i * 100)
-    })
-  }, [])
-
-  const colorMap: Record<string, string> = {
-    prompt: '#e6edf3', out: '#8b949e', ok: '#3fb950', warn: '#e3b341', cursor: '#e6edf3', blank: 'transparent',
-  }
-
   return (
-    <section id="about" style={{ background: 'var(--bg2)', position: 'relative', zIndex: 1 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '100px 5%' }}>
+    <section id="about" className="relative z-10 bg-elev">
+      <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 md:py-24 lg:px-[5%] lg:py-25">
         <div className="reveal">
-          <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+            <span className="inline-block h-px w-6 bg-accent-2" />
             Why LunarFlux AI
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>왜 LunarFlux AI인가?</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.75, marginBottom: 8 }}>인프라와 AI 보안, 스트리밍을 나눠 맡기지 않고 한 팀이 맡습니다. 설계부터 운영·장애 대응까지 이어집니다.</p>
+          <h2 className="mb-4 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
+            왜 LunarFlux AI인가?
+          </h2>
+          <p className="max-w-lg break-keep text-[0.95rem] leading-[1.75] text-fg-muted">
+            인프라와 AI 보안, 스트리밍을 나눠 맡기지 않고 한 팀이 맡습니다. 설계부터 운영·장애 대응까지 이어집니다.
+          </p>
         </div>
 
-        <div className="reveal two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginTop: 60 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div className="reveal mt-12 grid grid-cols-1 items-center gap-10 md:mt-15 lg:grid-cols-2 lg:gap-20">
+          <div className="flex flex-col gap-4">
             {whyItems.map(w => (
-              <div key={w.num} style={{ display: 'flex', gap: 18, alignItems: 'flex-start', padding: 20, border: '1px solid var(--border)', borderRadius: 6, background: 'var(--surface)', transition: 'border-color 0.3s' }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--border2)')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border)')}
+              <div
+                key={w.num}
+                className="flex items-start gap-4 rounded-lg border border-line bg-surface p-5 transition-colors duration-300 hover:border-accent/40"
               >
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--accent)', background: 'rgba(15,23,42,0.06)', border: '1px solid var(--border)', borderRadius: 3, padding: '4px 8px', flexShrink: 0, marginTop: 2 }}>{w.num}</div>
+                <div className="mt-0.5 shrink-0 rounded border border-line bg-canvas px-2 py-1 font-mono text-[0.65rem] text-accent">
+                  {w.num}
+                </div>
                 <div>
-                  <h4 style={{ fontFamily: 'var(--display)', fontSize: '0.95rem', fontWeight: 600, color: 'var(--text)', marginBottom: 5 }}>{w.title}</h4>
-                  <p style={{ fontSize: '0.82rem', color: 'var(--text2)', lineHeight: 1.7 }}>{w.desc}</p>
+                  <h4 className="mb-1.5 text-[0.95rem] font-semibold text-fg">{w.title}</h4>
+                  <p className="break-keep text-[0.82rem] leading-[1.7] text-fg-muted">{w.desc}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div style={{ background: '#022c22', border: '1px solid var(--border2)', borderRadius: 8, overflow: 'hidden', fontFamily: 'var(--mono)' }}>
-            <div style={{ background: 'var(--surface)', padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 6, borderBottom: '1px solid var(--border)' }}>
-              {['#ff5f57','#febc2e','#28c840'].map(c => <span key={c} style={{ width: 10, height: 10, borderRadius: '50%', background: c, display: 'inline-block' }} />)}
-              <span style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', marginLeft: 'auto', letterSpacing: '0.05em' }}>lunarfluxai — security-monitor</span>
+          <div className="overflow-hidden rounded-lg border border-line-strong bg-[#02120e] font-mono">
+            <div className="flex items-center gap-1.5 border-b border-line bg-surface px-4 py-2.5">
+              {['#ff5f57', '#febc2e', '#28c840'].map(c => (
+                <span
+                  key={c}
+                  className="inline-block size-2.5 rounded-full"
+                  style={{ background: c }}
+                />
+              ))}
+              <span className="ml-auto font-mono text-[0.65rem] tracking-[0.05em] text-fg-subtle">
+                lunarfluxai — security-monitor
+              </span>
             </div>
-            <div ref={termRef} style={{ padding: 20, fontSize: '0.78rem', lineHeight: 2 }}>
+            <div className="overflow-x-auto p-5 text-[0.7rem] leading-loose sm:text-[0.78rem]">
               {termLines.map((line, i) => (
-                <div key={i} className="term-line" style={{ color: colorMap[line.type] }}>
-                  {line.type === 'blank' ? <br /> : (
+                <div
+                  key={i}
+                  className={`animate-[fadeUp_0.3s_ease_both] whitespace-pre ${lineColor[line.type]}`}
+                  style={{ animationDelay: `${400 + i * 100}ms` }}
+                >
+                  {line.type === 'blank' ? (
+                    <br />
+                  ) : (
                     <>
                       {line.text}
                       {line.type === 'cursor' && (
-                        <span style={{ display: 'inline-block', width: 8, height: 14, background: 'var(--accent)', verticalAlign: 'middle', animation: 'blink 1.1s step-end infinite' }} />
+                        <span className="inline-block h-3.5 w-2 animate-[blink_1.1s_step-end_infinite] bg-accent align-middle" />
                       )}
                     </>
                   )}
@@ -96,10 +106,6 @@ export default function About() {
           </div>
         </div>
       </div>
-      <style>{`
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-        @media(max-width:768px){ #about .two-col { grid-template-columns: 1fr !important; gap: 40px !important; } }
-      `}</style>
     </section>
   )
 }

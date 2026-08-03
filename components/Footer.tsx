@@ -1,5 +1,3 @@
-'use client'
-
 const links = [
   ['서비스', '/#services'],
   ['요금', '/#pricing'],
@@ -17,39 +15,37 @@ const companyInfo = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#022c22', borderTop: '1px solid rgba(255,255,255,0.08)', position: 'relative', zIndex: 1 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '64px 5% 40px' }}>
-        <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '200px 1fr auto', gap: 48, alignItems: 'start' }}>
+    <footer className="relative z-10 border-t border-line bg-elev">
+      <div className="mx-auto max-w-[1100px] px-5 pb-10 pt-16 sm:px-8 lg:px-[5%]">
+        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[200px_1fr_auto] md:gap-12">
           <div>
-            <div style={{ fontFamily: 'var(--display)', fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', marginBottom: 8 }}>
-              LunarFlux<span style={{ color: 'var(--accent)' }}>AI</span>
+            <div className="mb-2 text-2xl font-extrabold text-white">
+              LunarFlux<span className="text-accent">AI</span>
             </div>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: '#94a3b8', letterSpacing: '0.08em', lineHeight: 1.6 }}>
-              IDC · AI 보안 · 스트리밍<br />인프라 전문 기업
+            <div className="font-mono text-[0.72rem] leading-relaxed tracking-[0.08em] text-fg-muted">
+              IDC · AI 보안 · 스트리밍
+              <br />
+              인프라 전문 기업
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          <div className="flex flex-col gap-1.5">
             {companyInfo.map(({ label, value }) => (
-              <div key={label} style={{ display: 'flex', gap: 10, alignItems: 'baseline' }}>
-                <span style={{ fontFamily: 'var(--mono)', fontSize: '0.72rem', color: '#64748b', letterSpacing: '0.06em', minWidth: 110, flexShrink: 0 }}>
+              <div key={label} className="flex items-baseline gap-2.5">
+                <span className="w-[110px] shrink-0 font-mono text-[0.72rem] tracking-[0.06em] text-fg-subtle">
                   {label}
                 </span>
-                <span style={{ fontFamily: 'var(--sans)', fontSize: '0.85rem', color: '#e2e8f0', fontWeight: 400, lineHeight: 1.5 }}>
-                  {value}
-                </span>
+                <span className="break-keep text-[0.85rem] leading-normal text-fg">{value}</span>
               </div>
             ))}
           </div>
 
-          <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 12, listStyle: 'none', margin: 0, padding: 0, alignItems: 'flex-end' }}>
+          <ul className="flex list-none flex-col gap-3 md:items-end">
             {links.map(([label, href]) => (
               <li key={label}>
                 <a
                   href={href}
-                  style={{ fontFamily: 'var(--mono)', fontSize: '0.82rem', color: '#94a3b8', textDecoration: 'none', letterSpacing: '0.06em', transition: 'color 0.2s' }}
-                  onMouseEnter={e => ((e.target as HTMLElement).style.color = 'var(--accent)')}
-                  onMouseLeave={e => ((e.target as HTMLElement).style.color = '#94a3b8')}
+                  className="font-mono text-[0.82rem] tracking-[0.06em] text-fg-muted transition-colors duration-200 hover:text-accent"
                 >
                   {label}
                 </a>
@@ -58,18 +54,12 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'center' }}>
-          <span style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: '#475569', letterSpacing: '0.06em' }}>
+        <div className="mt-12 flex justify-center border-t border-line/70 pt-6">
+          <span className="font-mono text-[0.78rem] tracking-[0.06em] text-fg-subtle">
             © 2026 LunarFlux AI. All rights reserved.
           </span>
         </div>
       </div>
-      <style>{`
-        @media(max-width:768px){ 
-          footer .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; } 
-          footer .footer-links { align-items: flex-start !important; }
-        }
-      `}</style>
     </footer>
   )
 }

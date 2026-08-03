@@ -1,4 +1,3 @@
-'use client'
 import Link from 'next/link'
 
 const plans = [
@@ -24,110 +23,118 @@ const plans = [
   },
 ]
 
+const enterpriseFeatures = [
+  '무제한 채널 + 전용서버',
+  'AI 보안 관제 24/7',
+  '딥페이크 탐지 모듈',
+  'HA/DR 완전 이중화',
+  'LLM 보안 감사',
+  '서버 장애 복구 및 이전',
+  '네트워크 IDS/IPS',
+  '전담 전문기술엔지니어 지원',
+]
+
 export default function Pricing() {
   return (
-    <>
-      <section id="pricing" style={{ background: 'var(--bg)', position: 'relative', zIndex: 1 }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '100px 5%' }}>
-          <div className="reveal">
-            <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
-              Pricing
-            </div>
-            <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>투명한 요금제</h2>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>스트리밍, AI 보안, IDC 운영 중 필요한 범위만 선택하세요. 기업용 맞춰 견적도 상담으로 안내합니다.</p>
+    <section id="pricing" className="relative z-10 bg-canvas">
+      <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 md:py-24 lg:px-[5%] lg:py-25">
+        <div className="reveal">
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+            <span className="inline-block h-px w-6 bg-accent-2" />
+            Pricing
           </div>
+          <h2 className="mb-4 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
+            투명한 요금제
+          </h2>
+          <p className="max-w-lg break-keep text-[0.95rem] leading-[1.8] text-fg-muted">
+            스트리밍, AI 보안, IDC 운영 중 필요한 범위만 선택하세요. 기업용 맞춰 견적도 상담으로 안내합니다.
+          </p>
+        </div>
 
-          <div className="reveal" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16, marginTop: 60 }}>
-            {plans.map(p => (
-              <div key={p.name} style={{
-                border: p.featured ? '1px solid var(--accent)' : '1px solid var(--border)',
-                borderRadius: 8, padding: '36px 28px',
-                background: p.featured ? 'linear-gradient(160deg, rgba(16,185,129,0.05), var(--surface))' : 'var(--surface)',
-                position: 'relative', transition: 'transform 0.3s, box-shadow 0.3s',
-                boxShadow: p.featured ? '0 0 32px rgba(16,185,129,0.1)' : 'none',
-                display: 'flex', flexDirection: 'column',
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)' }}
-              >
-                {p.featured && (
-                  <div style={{ position: 'absolute', top: -1, right: 24, background: 'var(--accent)', color: '#000', fontFamily: 'var(--mono)', fontSize: '0.6rem', fontWeight: 500, letterSpacing: '0.08em', padding: '4px 12px', borderRadius: '0 0 4px 4px' }}>POPULAR</div>
-                )}
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>{p.tier}</div>
-                <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{p.name}</div>
-                <div style={{ margin: '20px 0' }}>
-                  {p.price === '가격문의' ? (
-                    <span style={{ fontFamily: 'var(--display)', fontSize: '1.8rem', fontWeight: 700, color: 'var(--accent)' }}>가격문의</span>
-                  ) : (
-                    <span style={{ fontFamily: 'var(--display)', fontSize: '2.4rem', fontWeight: 700, color: 'var(--text)' }}>
-                      <span style={{ fontSize: '1rem', fontWeight: 400, color: 'var(--text2)', fontFamily: 'var(--mono)', verticalAlign: 'super' }}>₩</span>
-                      {p.price}
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text3)', fontFamily: 'var(--mono)', fontWeight: 400 }}>{p.unit}</span>
-                    </span>
-                  )}
+        <div className="reveal mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-15 xl:grid-cols-4">
+          {plans.map(p => (
+            <div
+              key={p.name}
+              className={`relative flex flex-col rounded-lg px-7 py-9 transition-transform duration-300 hover:-translate-y-1 ${
+                p.featured
+                  ? 'border border-accent bg-gradient-to-b from-accent/8 to-surface shadow-[0_0_36px_rgba(52,211,153,0.14)]'
+                  : 'border border-line bg-surface'
+              }`}
+            >
+              {p.featured && (
+                <div className="absolute -top-px right-6 rounded-b bg-accent px-3 py-1 font-mono text-[0.6rem] font-medium tracking-[0.08em] text-canvas">
+                  POPULAR
                 </div>
-                <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 24, lineHeight: 1.7 }}>{p.desc}</p>
-                <ul style={{ listStyle: 'none', marginBottom: 32, flex: 1 }}>
-                  {p.features.map(f => (
-                    <li key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'flex-start', gap: 10 }}>
-                      <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/contact"
-                  style={{
-                    display: 'block', width: '100%', padding: 12, borderRadius: 4, textAlign: 'center',
-                    fontFamily: 'var(--mono)', fontSize: '0.75rem', letterSpacing: '0.06em', transition: 'all 0.25s',
-                    background: p.featured ? 'var(--accent)' : 'transparent',
-                    border: p.featured ? '1px solid var(--accent)' : '1px solid var(--border2)',
-                    color: p.featured ? '#fff' : 'var(--text)', fontWeight: p.featured ? 500 : 400,
-                    cursor: 'pointer', textDecoration: 'none',
-                  }}
-                  onMouseEnter={e => {
-                    if (!p.featured) {
-                      (e.currentTarget as HTMLElement).style.background = 'var(--accent)'
-                      ;(e.currentTarget as HTMLElement).style.color = '#fff'
-                      ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)'
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!p.featured) {
-                      (e.currentTarget as HTMLElement).style.background = 'transparent'
-                      ;(e.currentTarget as HTMLElement).style.color = 'var(--text)'
-                      ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)'
-                    }
-                  }}
-                >
-                  {p.tier === 'IDC Standard' || p.tier === 'HA / DR' ? '상담 신청' : '상담 신청'}
-                </Link>
+              )}
+              <div className="mb-2.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-fg-subtle">
+                {p.tier}
+              </div>
+              <div className="mb-1.5 text-[1.4rem] font-bold text-fg">{p.name}</div>
+              <div className="my-5">
+                {p.price === '가격문의' ? (
+                  <span className="text-[1.8rem] font-bold text-accent">가격문의</span>
+                ) : (
+                  <span className="text-[2.4rem] font-bold text-fg">
+                    <span className="align-super font-mono text-base font-normal text-fg-muted">₩</span>
+                    {p.price}
+                    <span className="font-mono text-[0.8rem] font-normal text-fg-subtle">{p.unit}</span>
+                  </span>
+                )}
+              </div>
+              <p className="mb-6 break-keep text-[0.82rem] leading-[1.7] text-fg-muted">{p.desc}</p>
+              <ul className="mb-8 flex-1 list-none">
+                {p.features.map(f => (
+                  <li
+                    key={f}
+                    className="flex items-start gap-2.5 break-keep border-b border-line py-[7px] text-[0.83rem] text-fg-muted"
+                  >
+                    <span className="mt-0.5 shrink-0 font-mono text-[0.7rem] text-accent">—</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/contact"
+                className={`block w-full rounded p-3 text-center font-mono text-[0.75rem] tracking-[0.06em] transition-all duration-250 ${
+                  p.featured
+                    ? 'border border-accent bg-accent font-medium text-canvas hover:bg-accent-2 hover:border-accent-2'
+                    : 'border border-line-strong text-fg hover:border-accent hover:bg-accent hover:text-canvas'
+                }`}
+              >
+                상담 신청
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div className="reveal mt-4 rounded-lg border border-line bg-gradient-to-br from-accent-2/8 to-surface px-7 py-9">
+          <div className="mb-2.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-fg-subtle">
+            Enterprise
+          </div>
+          <div className="mb-1.5 text-[1.4rem] font-bold text-fg">Full AI Security Suite</div>
+          <div className="my-4 text-[1.6rem] font-bold text-accent-2">맞춰 견적</div>
+          <p className="mb-5 max-w-2xl break-keep text-[0.82rem] leading-[1.7] text-fg-muted">
+            무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화 + 외부 운영 서버 복구·이전 지원.
+          </p>
+          <div className="mb-6 grid grid-cols-1 gap-x-5 sm:grid-cols-2 lg:grid-cols-4">
+            {enterpriseFeatures.map(f => (
+              <div
+                key={f}
+                className="flex gap-2.5 break-keep border-b border-line py-[7px] text-[0.83rem] text-fg-muted"
+              >
+                <span className="mt-0.5 shrink-0 font-mono text-[0.7rem] text-accent">—</span>
+                {f}
               </div>
             ))}
           </div>
-
-          <div className="reveal" style={{ marginTop: 16, border: '1px solid var(--border)', borderRadius: 8, padding: '36px 28px', background: 'linear-gradient(135deg, rgba(253,230,138,0.07), var(--surface))' }}>
-            <div style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', color: 'var(--text3)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 10 }}>Enterprise</div>
-            <div style={{ fontFamily: 'var(--display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>Full AI Security Suite</div>
-            <div style={{ fontFamily: 'var(--display)', fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent2)', margin: '16px 0' }}>맞춰 견적</div>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text2)', marginBottom: 20, lineHeight: 1.7, maxWidth: 640 }}>무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화 + 외부 운영 서버 복구·이전 지원.</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0 20px', marginBottom: 24 }}>
-              {['무제한 채널 + 전용서버','AI 보안 관제 24/7','딥페이크 탐지 모듈','HA/DR 완전 이중화','LLM 보안 감사','서버 장애 복구 및 이전','네트워크 IDS/IPS','전담 전문기술엔지니어 지원'].map(f => (
-                <div key={f} style={{ fontSize: '0.83rem', color: 'var(--text2)', padding: '7px 0', borderBottom: '1px solid var(--border)', display: 'flex', gap: 10 }}>
-                  <span style={{ color: 'var(--accent)', fontFamily: 'var(--mono)', fontSize: '0.7rem', flexShrink: 0, marginTop: 2 }}>—</span>{f}
-                </div>
-              ))}
-            </div>
-            <Link
-              href="/contact"
-              style={{ display: 'inline-block', padding: '12px 32px', background: 'var(--accent)', color: '#000', borderRadius: 4, fontFamily: 'var(--mono)', fontSize: '0.75rem', fontWeight: 500, letterSpacing: '0.06em', border: 'none', cursor: 'pointer', textDecoration: 'none' }}
-            >
-              엔터프라이즈 무료 상담 신청
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="inline-block rounded bg-accent px-8 py-3 font-mono text-[0.75rem] font-medium tracking-[0.06em] text-canvas transition-colors duration-250 hover:bg-accent-2"
+          >
+            엔터프라이즈 무료 상담 신청
+          </Link>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

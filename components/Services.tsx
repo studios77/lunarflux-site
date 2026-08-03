@@ -29,57 +29,55 @@ const services: ServiceCard[] = [
 
 export default function Services() {
   return (
-    <section id="services" style={{ background: 'var(--bg2)', position: 'relative', zIndex: 1 }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '100px 5%' }}>
+    <section id="services" className="relative z-10 bg-elev">
+      <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 md:py-24 lg:px-[5%] lg:py-25">
         <div className="reveal">
-          <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--accent2)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-            <span style={{ width: 24, height: 1, background: 'var(--accent2)', display: 'inline-block' }} />
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+            <span className="inline-block h-px w-6 bg-accent-2" />
             Services
           </div>
-          <h2 style={{ fontFamily: 'var(--display)', fontSize: 'clamp(2rem,5vw,3.2rem)', fontWeight: 700, lineHeight: 1.1, letterSpacing: '-0.02em', color: 'var(--text)', marginBottom: 16 }}>통합 기술 서비스</h2>
-          <p style={{ fontSize: '0.95rem', color: 'var(--text2)', maxWidth: 520, lineHeight: 1.8 }}>IDC 인프라, AI 보안, 라이브 스트리밍을 한 플랫폼에서. 필요한 항목만 고르거나, 전체를 맡기셔도 됩니다.</p>
+          <h2 className="mb-4 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
+            통합 기술 서비스
+          </h2>
+          <p className="max-w-lg break-keep text-[0.95rem] leading-[1.8] text-fg-muted">
+            IDC 인프라, AI 보안, 라이브 스트리밍을 한 플랫폼에서. 필요한 항목만 고르거나, 전체를 맡기셔도 됩니다.
+          </p>
         </div>
 
-        <div className="reveal" style={{
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 20, marginTop: 60,
-        }}>
+        <div className="reveal mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-15 lg:grid-cols-3">
           {services.map(s => (
-            <Link key={s.slug} href={`/services/${s.slug}/`} title={s.name} style={{ textDecoration: 'none', minWidth: 0 }}>
-              <div style={{
-                background: 'rgba(255,255,255,0.6)', padding: '36px 28px', height: '100%',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer',
-                position: 'relative', overflow: 'hidden', minWidth: 0,
-                borderRadius: 20, border: '1px solid var(--border)',
-                backdropFilter: 'blur(12px)',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.02)'
-              }}
-                onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.background = '#ffffff'
-                  ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = '0 12px 32px rgba(16,185,129,0.12)'
-                  ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border2)'
-                }}
-                onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.6)'
-                  ;(e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
-                  ;(e.currentTarget as HTMLElement).style.boxShadow = '0 4px 20px rgba(0,0,0,0.02)'
-                  ;(e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'
-                }}
-              >
-                <div style={{ fontSize: '1.4rem', marginBottom: 20, width: 48, height: 48, border: '1px solid var(--border2)', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--surface)', boxShadow: '0 4px 12px rgba(16,185,129,0.08)' }}>{s.icon}</div>
-                <div style={{ fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontWeight: 600 }}>{s.cat}</div>
-                <div style={{ fontFamily: 'var(--display)', fontSize: 'clamp(1rem, 2.2vw, 1.1rem)', fontWeight: 700, color: 'var(--text)', marginBottom: 12, letterSpacing: '-0.02em', lineHeight: 1.35, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
+            <Link
+              key={s.slug}
+              href={`/services/${s.slug}/`}
+              title={s.name}
+              className="group block min-w-0"
+            >
+              <div className="relative h-full min-w-0 overflow-hidden rounded-2xl border border-line bg-surface/60 px-7 py-9 backdrop-blur transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:bg-surface group-hover:shadow-[0_16px_40px_rgba(52,211,153,0.14)]">
+                <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-line-strong bg-elev text-[1.4rem] transition-colors duration-300 group-hover:border-accent/60">
+                  {s.icon}
+                </div>
+                <div className="mb-2 font-mono text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-accent">
+                  {s.cat}
+                </div>
+                <div className="mb-3 truncate text-[clamp(1rem,2.2vw,1.1rem)] font-bold leading-[1.35] tracking-[-0.02em] text-fg">
                   {s.name}
                 </div>
-                <div style={{ fontSize: '0.86rem', color: 'var(--text2)', lineHeight: 1.65, marginBottom: 20, wordBreak: 'keep-all' }}>{s.desc}</div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                <div className="mb-5 break-keep text-[0.86rem] leading-[1.65] text-fg-muted">
+                  {s.desc}
+                </div>
+                <div className="flex flex-wrap gap-1.5">
                   {s.tags.map(t => (
-                    <span key={t} style={{ fontFamily: 'var(--mono)', fontSize: '0.65rem', padding: '4px 10px', background: 'rgba(16,185,129,0.05)', border: '1px solid var(--border)', borderRadius: 20, color: 'var(--text3)', letterSpacing: '0.02em', fontWeight: 500 }}>{t}</span>
+                    <span
+                      key={t}
+                      className="rounded-full border border-line bg-accent/5 px-2.5 py-1 font-mono text-[0.65rem] font-medium tracking-[0.02em] text-fg-subtle"
+                    >
+                      {t}
+                    </span>
                   ))}
                 </div>
-                <div style={{ marginTop: 24, fontFamily: 'var(--mono)', fontSize: '0.75rem', color: 'var(--accent)', letterSpacing: '0.04em', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 4 }}>
-                  자세히 보기 <span style={{ fontSize: '1rem' }}>→</span>
+                <div className="mt-6 flex items-center gap-1 font-mono text-[0.75rem] font-semibold tracking-[0.04em] text-accent">
+                  자세히 보기
+                  <span className="text-base transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </div>
               </div>
             </Link>
