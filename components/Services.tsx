@@ -30,7 +30,7 @@ const services: ServiceCard[] = [
 export default function Services() {
   return (
     <section id="services" className="relative z-10 bg-elev">
-      <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 md:py-24 lg:px-[5%] lg:py-25">
+      <div className="container-page py-20 md:py-24">
         <div className="reveal">
           <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />

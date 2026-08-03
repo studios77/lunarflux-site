@@ -109,7 +109,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export default function EdgeSection() {
   return (
     <section className="relative z-10 bg-elev">
-      <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 md:py-24 lg:px-[5%] lg:py-25">
+      <div className="container-page py-20 md:py-24">
         <div className="reveal">
           <SectionLabel>Competitive Edge</SectionLabel>
           <h2 className="mb-3.5 break-keep text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">

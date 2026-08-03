@@ -128,7 +128,8 @@ export default function Nav() {
 
   return (
     <>
-      <nav className="fixed inset-x-0 top-0 z-200 flex h-16 items-center justify-between border-b border-line bg-canvas/85 px-5 backdrop-blur-xl sm:px-8 lg:px-[5%]">
+      <nav className="fixed inset-x-0 top-0 z-200 border-b border-line bg-canvas/85 backdrop-blur-xl">
+        <div className="container-page flex h-16 items-center justify-between">
         <Link
           href="/"
           onClick={() => { setMenuOpen(false); setMobileOpen(false) }}
@@ -306,10 +307,11 @@ export default function Nav() {
             )}
           </button>
         </div>
+        </div>
       </nav>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 top-16 z-199 max-h-[calc(100vh-64px)] overflow-y-auto border-b border-line bg-elev px-5 py-5 sm:px-8 md:hidden">
+        <div className="container-page fixed inset-x-0 top-16 z-199 max-h-[calc(100vh-64px)] overflow-y-auto border-b border-line bg-elev py-5 md:hidden">
           {serviceMenu.map(cat => {
             const tone = TONES[cat.tone]
             return (

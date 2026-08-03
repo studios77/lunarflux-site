@@ -4,7 +4,7 @@ import type { ServiceData } from '@/lib/servicesData'
 import { getRelatedServices } from '@/lib/servicesData'
 import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
 
-const SECTION = 'px-5 py-16 sm:px-8 md:py-20 lg:px-[5%]'
+const SECTION = 'py-16 md:py-20'
 const TH = 'border-b border-line px-5 py-3.5 text-center font-mono text-[0.65rem] font-normal uppercase tracking-[0.1em] text-fg-subtle'
 const TD = 'border-b border-line px-5 py-3.5 text-center text-[0.8rem] text-fg-muted'
 
@@ -46,7 +46,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
       <main className="min-h-screen bg-canvas text-fg">
         <Nav />
 
-        <section className="mx-auto max-w-[1100px] px-5 pb-16 pt-28 sm:px-8 md:pb-20 md:pt-30 lg:px-[5%]">
+        <section className="container-page pb-16 pt-28 md:pb-20 md:pt-30">
           <SectionLabel>{s.cat}</SectionLabel>
           <div className="mb-6 flex flex-col items-start gap-6 sm:flex-row">
             <div className="flex size-18 shrink-0 items-center justify-center rounded-xl border border-line-strong bg-surface text-[2.4rem]">
@@ -62,7 +62,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </section>
 
         <section className={`bg-elev ${SECTION}`}>
-          <div className="mx-auto max-w-[1100px]">
+          <div className="container-page">
             <SectionLabel>핵심 기능</SectionLabel>
             <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
               {s.highlights.map((h, i) => (
@@ -79,7 +79,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         </section>
 
         <section className={SECTION}>
-          <div className="mx-auto grid max-w-[1100px] grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-15">
+          <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-15">
             <div>
               <SectionLabel>사양 / 스펙</SectionLabel>
               <ul className="mt-7 list-none">
@@ -113,7 +113,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
 
         {s.comparison && s.comparison.items.length > 0 && (
           <section className={`bg-elev ${SECTION}`}>
-            <div className="mx-auto max-w-[1100px]">
+            <div className="container-page">
               <SectionLabel>{s.comparison.label}</SectionLabel>
               <div className="mt-6 overflow-x-auto rounded-lg border border-line">
                 <table className="w-full min-w-[600px] border-collapse">
@@ -166,7 +166,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
 
         {s.coloPricing && s.coloPricing.length > 0 && (
           <section className={`bg-surface ${SECTION}`}>
-            <div className="mx-auto max-w-[1100px]">
+            <div className="container-page">
               <SectionLabel>코로케이션 요금표</SectionLabel>
               <h2 className="mb-2 text-[clamp(1.4rem,3vw,2rem)] font-bold tracking-[-0.02em]">
                 상품별 월정액 요금
@@ -232,7 +232,8 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         )}
 
         <section className={`bg-elev text-center ${SECTION}`}>
-          <div className="mx-auto max-w-xl">
+          <div className="container-page">
+            <div className="mx-auto max-w-xl">
             <h2 className="mb-4 break-keep text-[clamp(1.6rem,4vw,2.4rem)] font-bold tracking-[-0.02em]">
               지금 바로 시작하세요
             </h2>
@@ -253,11 +254,12 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                 다른 서비스 보기
               </Link>
             </div>
+            </div>
           </div>
         </section>
 
         <section className={SECTION}>
-          <div className="mx-auto max-w-[1100px]">
+          <div className="container-page">
             <SectionLabel muted>관련 서비스</SectionLabel>
             <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {getRelatedServices(s.slug, 4).map(sv => (

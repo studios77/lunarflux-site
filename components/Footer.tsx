@@ -16,7 +16,7 @@ const companyInfo = [
 export default function Footer() {
   return (
     <footer className="relative z-10 border-t border-line bg-elev">
-      <div className="mx-auto max-w-[1100px] px-5 pb-10 pt-16 sm:px-8 lg:px-[5%]">
+      <div className="container-page pb-10 pt-16">
         <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[200px_1fr_auto] md:gap-12">
           <div>
             <div className="mb-2 text-2xl font-extrabold text-white">

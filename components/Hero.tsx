@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative z-10 flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-28 sm:px-8 md:pt-32 lg:px-[5%]"
+      className="relative z-10 flex min-h-screen items-center overflow-hidden pb-16 pt-28 md:pt-32"
     >
       {/* 앰비언트 글로우 */}
       <div
@@ -17,13 +17,13 @@ export default function Hero() {
         className="pointer-events-none absolute left-1/2 top-[16%] h-[420px] w-[min(920px,120vw)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_40%_40%,rgba(52,211,153,0.18),transparent_58%),radial-gradient(ellipse_at_72%_32%,rgba(34,211,238,0.14),transparent_52%),radial-gradient(ellipse,rgba(99,102,241,0.10)_36%,transparent_74%)] blur-[10px] md:h-[560px]"
       />
 
-      <div className="mx-auto w-full max-w-4xl text-center">
+      <div className="container-page text-center">
         <div className="mb-8 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-sm border border-accent/35 bg-accent/5 px-4 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-accent">
           <span className="inline-block size-1.5 animate-[pulseDot_1.5s_ease-in-out_infinite] rounded-full bg-accent" />
           IDC · AI 보안 · 라이브 스트리밍 솔루션
         </div>
 
-        <h1 className="mb-6 animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.5rem,7.5vw,5.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
+        <h1 className="mx-auto mb-6 max-w-4xl animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.5rem,7.5vw,5.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
           IDC ·{' '}
           <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
             AI 보안

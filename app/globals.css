@@ -39,6 +39,21 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
+/* ---------------------------------------------------------------------------
+   페이지 공통 컨테이너.
+   Nav·본문·Footer가 모두 같은 좌우 기준선을 쓰도록 한 곳에서 정의합니다.
+   패딩을 %가 아닌 고정값으로 두는 이유: %는 부모(전체 화면) 기준으로 계산되어
+   max-width로 잘린 박스 안에서는 화면이 넓어질수록 콘텐츠가 좁아집니다.
+--------------------------------------------------------------------------- */
+.container-page {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 640px) { .container-page { padding-inline: 2rem; } }
+@media (min-width: 1024px) { .container-page { padding-inline: 2.5rem; } }
+
 body {
   background: var(--color-canvas);
   color: var(--color-fg);

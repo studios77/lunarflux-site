@@ -12,7 +12,8 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-canvas text-fg">
       <Nav />
-      <section className="mx-auto max-w-3xl px-5 pb-20 pt-28 sm:px-8 md:pt-30 lg:px-[5%]">
+      <section className="container-page pb-20 pt-28 md:pt-30">
+        <div className="mx-auto max-w-3xl">
         <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
           <span className="inline-block h-px w-6 bg-accent-2" />
           Contact
@@ -73,6 +74,7 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
       <Footer />
