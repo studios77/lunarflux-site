@@ -57,7 +57,8 @@ export const metadata: Metadata = {
 ## Git & Deployment
 - Always `git add` → `git commit` → `git push origin main` after completing tasks
 - Commit messages in English, imperative style: `feat:`, `fix:`, `chore:`, `docs:`
-- Deployment via Vercel (auto-deploys on push to main)
+- Deployment via Cloudflare Pages (auto-deploys on push to main)
+- Static export (`output: 'export'`) — build output in `out/`; build settings live in the Cloudflare dashboard, not in the repo
 
 ## Reference
 - Next.js official docs: https://nextjs.org/docs
