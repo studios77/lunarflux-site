@@ -60,7 +60,7 @@ export default function Footer() {
 
         <div style={{ marginTop: 48, paddingTop: 24, borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'center' }}>
           <span style={{ fontFamily: 'var(--mono)', fontSize: '0.78rem', color: '#475569', letterSpacing: '0.06em' }}>
-            © 2025 LunarFlux AI. All rights reserved.
+            © 2026 LunarFlux AI. All rights reserved.
           </span>
         </div>
       </div>

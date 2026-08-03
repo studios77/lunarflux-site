@@ -595,3 +595,36 @@ export function getServiceBySlug(slug: ServiceSlug): ServiceData | undefined {
 export function findServiceBySlug(slug: string): ServiceData | undefined {
   return servicesData.find(s => s.slug === slug)
 }
+
+/** 'IDC / DB' → 'IDC' */
+function categoryRoot(cat: string): string {
+  return cat.split('/')[0].trim()
+}
+
+/**
+ * 기준 서비스와 관련도가 높은 순으로 다른 서비스를 반환합니다.
+ *
+ * 점수: 같은 세부 카테고리 +3, 같은 대분류(IDC 등) +2, 공통 태그 1개당 +2.
+ * 동점이면 servicesData의 원래 순서를 유지합니다 — 정적 빌드 결과가
+ * 매번 동일해야 하므로 정렬은 완전히 결정적이어야 합니다.
+ */
+export function getRelatedServices(slug: string, limit = 4): ServiceData[] {
+  const base = findServiceBySlug(slug)
+  const others = servicesData.filter(s => s.slug !== slug)
+  if (!base) return others.slice(0, limit)
+
+  const baseTags = new Set(base.tags)
+  const baseRoot = categoryRoot(base.cat)
+
+  return others
+    .map((service, order) => {
+      let score = 0
+      if (service.cat === base.cat) score += 3
+      else if (categoryRoot(service.cat) === baseRoot) score += 2
+      score += service.tags.filter(tag => baseTags.has(tag)).length * 2
+      return { service, score, order }
+    })
+    .sort((a, b) => b.score - a.score || a.order - b.order)
+    .slice(0, limit)
+    .map(entry => entry.service)
+}

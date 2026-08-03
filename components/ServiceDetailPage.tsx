@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
 import type { ServiceData } from '@/lib/servicesData'
-import { servicesData } from '@/lib/servicesData'
+import { getRelatedServices } from '@/lib/servicesData'
 import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
 
 export default function ServiceDetailPage({ s }: { s: ServiceData }) {
@@ -203,7 +203,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         <div style={{ maxWidth: 1100, margin: '0 auto' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.68rem', color: 'var(--text3)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 28 }}>관련 서비스</div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
-            {servicesData.filter(sv => sv.slug !== s.slug).slice(0, 4).map(sv => (
+            {getRelatedServices(s.slug, 4).map(sv => (
               <Link key={sv.slug} href={`/services/${sv.slug}/`} title={sv.name} style={{ display: 'block', padding: '18px 16px', textDecoration: 'none', border: '1px solid var(--border)', borderRadius: 6, background: 'var(--surface)' }}>
                 <div style={{ fontSize: '1.05rem', marginBottom: 8 }}>{sv.icon}</div>
                 <div style={{ fontFamily: 'var(--mono)', fontSize: '0.58rem', color: 'var(--accent)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{sv.cat}</div>

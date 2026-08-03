@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { notifyAdminInstant, isAdminNotifyConfigured } from '@/lib/adminNotify'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -14,7 +15,7 @@ export default function ContactForm() {
   const [captcha, setCaptcha] = useState({ num1: 0, num2: 0 })
   const [captchaAnswer, setCaptchaAnswer] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error' | 'unconfigured'>('idle')
 
   useEffect(() => {
     generateCaptcha()
@@ -43,17 +44,33 @@ export default function ContactForm() {
       return
     }
     
+    // 웹훅이 설정되지 않았다면 전송할 곳이 없다. 접수된 것처럼 보이면 안 되므로
+    // 성공으로 처리하지 않고 대체 연락 수단을 안내한다.
+    if (!isAdminNotifyConfigured()) {
+      setSubmitStatus('unconfigured')
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
     try {
-      // API 통신을 시뮬레이션 합니다. 실제 연결 시 여기에 fetch를 구현하세요.
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
+      await notifyAdminInstant({
+        title: '웹사이트 문의 접수',
+        fields: {
+          '이름 / 직급': formData.name,
+          '회사명': formData.company,
+          '문의 서비스': formData.service,
+          '이메일': formData.email,
+          '문의 내용': formData.message,
+        },
+      })
+
       setSubmitStatus('success')
       setFormData({ name: '', email: '', company: '', service: 'IDC', message: '' })
       generateCaptcha()
     } catch (error) {
+      console.warn('[ContactForm] 문의 전송 실패', error)
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -178,8 +195,16 @@ export default function ContactForm() {
         )}
 
         {submitStatus === 'error' && (
-          <div style={{ color: '#ef4444', fontSize: '0.95rem', padding: '12px', background: 'rgba(239,68,68,0.1)', borderRadius: 8 }}>
-            문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+          <div style={{ color: '#ef4444', fontSize: '0.95rem', padding: '12px', background: 'rgba(239,68,68,0.1)', borderRadius: 8, lineHeight: 1.6 }}>
+            문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주시고,
+            계속 실패하면 <a href="mailto:contact@LunarFlux.ai" style={{ color: '#ef4444', fontWeight: 600 }}>contact@LunarFlux.ai</a>로 직접 보내주세요.
+          </div>
+        )}
+
+        {submitStatus === 'unconfigured' && (
+          <div style={{ color: '#f59e0b', fontSize: '0.95rem', padding: '12px', background: 'rgba(245,158,11,0.1)', borderRadius: 8, lineHeight: 1.6 }}>
+            현재 온라인 접수가 준비 중입니다.
+            번거로우시겠지만 <a href="mailto:contact@LunarFlux.ai" style={{ color: '#f59e0b', fontWeight: 600 }}>contact@LunarFlux.ai</a>로 보내주시면 동일하게 처리해 드립니다.
           </div>
         )}
 

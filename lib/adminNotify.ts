@@ -14,57 +14,54 @@ export function isAdminNotifyConfigured(): boolean {
   return WEBHOOK.length > 10
 }
 
+/**
+ * 관리자 채널로 즉시 전송합니다.
+ * 전송에 실패하면 예외를 던집니다 — 호출부에서 사용자에게 실패를 알려야 하므로
+ * 오류를 삼키지 않습니다.
+ */
 export async function notifyAdminInstant(params: {
   title: string
   fields: Record<string, string>
 }): Promise<void> {
   const url = WEBHOOK
-  if (!url) return
+  if (!url) throw new Error('NEXT_PUBLIC_ADMIN_NOTIFY_WEBHOOK이 설정되지 않았습니다')
 
   const fields = stripSensitive(params.fields)
   const lines = Object.entries(fields)
     .map(([k, v]) => `**${k}**\n${(v || '—').trim()}`)
     .join('\n\n')
 
-  const slackText = `*${params.title}*\n\n${lines}`.slice(0, 35000)
-  const discordDescription = `${params.title}\n\n${lines}`.slice(0, 4090)
+  const isSlack = url.includes('hooks.slack.com')
+  const isDiscord =
+    url.includes('discord.com/api/webhooks') || url.includes('discordapp.com/api/webhooks')
 
-  try {
-    if (url.includes('hooks.slack.com')) {
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: slackText }),
-      })
-      return
-    }
-
-    if (url.includes('discord.com/api/webhooks') || url.includes('discordapp.com/api/webhooks')) {
-      await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: 'LunarFlux AI 사이트',
-          embeds: [
-            {
-              title: params.title,
-              description: discordDescription,
-              color: 0x10b981,
-              timestamp: new Date().toISOString(),
-            },
-          ],
-        }),
-      })
-      return
-    }
-
-    await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title: params.title, fields }),
+  let body: string
+  if (isSlack) {
+    body = JSON.stringify({ text: `*${params.title}*\n\n${lines}`.slice(0, 35000) })
+  } else if (isDiscord) {
+    body = JSON.stringify({
+      username: 'LunarFlux AI 사이트',
+      embeds: [
+        {
+          title: params.title,
+          description: `${params.title}\n\n${lines}`.slice(0, 4090),
+          color: 0x34d399,
+          timestamp: new Date().toISOString(),
+        },
+      ],
     })
-  } catch (e) {
-    console.warn('[notifyAdminInstant]', e)
+  } else {
+    body = JSON.stringify({ title: params.title, fields })
+  }
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body,
+  })
+
+  if (!res.ok) {
+    throw new Error(`관리자 알림 웹훅이 ${res.status} 응답을 반환했습니다`)
   }
 }
 
