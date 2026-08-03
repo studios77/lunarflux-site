@@ -1,2 +1,4 @@
-# Git for Windows 등에서 훅 스크립트 줄바꿈이 CRLF가 되면 실행이 깨질 수 있음
+# Git for Windows 등에서 셸 스크립트 줄바꿈이 CRLF가 되면 실행이 깨질 수 있음
+# (bash가 \r 를 명령 일부로 읽어 "command not found" 가 됨)
 .githooks/** text eol=lf
+*.sh text eol=lf
