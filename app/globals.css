@@ -97,12 +97,25 @@ body::before {
 ::-webkit-scrollbar-thumb { background: var(--color-line-strong); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
 
-.reveal {
+/* ---------------------------------------------------------------------------
+   스크롤 등장 애니메이션.
+
+   `.js` 가 붙어 있을 때만 요소를 숨깁니다. 이 클래스는 layout.tsx의 인라인
+   스크립트가 붙이고, 같은 스크립트가 건 타이머를 app/page.tsx의 옵저버가
+   취소합니다. 결과적으로 세 경우가 모두 안전합니다.
+
+     JS 꺼짐        → `.js` 가 아예 안 붙음        → 콘텐츠 바로 보임
+     번들 로드 실패 → 타이머가 `.js` 를 걷어냄     → 콘텐츠 드러남
+     정상           → 옵저버가 타이머를 취소       → 애니메이션 동작
+
+   `.reveal` 자체를 숨기면 위 두 실패 경로에서 본문 전체가 영영 투명해집니다.
+--------------------------------------------------------------------------- */
+.js .reveal {
   opacity: 0;
   transform: translateY(32px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
-.reveal.visible {
+.js .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -125,6 +138,6 @@ body::before {
 /* 모션 최소화를 선호하는 사용자에게는 등장 애니메이션을 끕니다 */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   [class*="animate-"] { animation: none !important; }
 }

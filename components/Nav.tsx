@@ -107,11 +107,46 @@ const serviceMenu: ServiceMenuCategory[] = [
 
 const NAV_LINK = 'text-base font-bold tracking-[0.02em] transition-colors duration-200 hover:text-accent'
 
+const SERVICE_MENU_ID = 'nav-service-menu'
+
+/**
+ * 마우스가 달린 기기인지. 터치 기기에서는 hover로 메뉴를 열지 않습니다.
+ *
+ * 아이패드 등은 탭할 때 mouseenter를 흉내 낸 뒤 click을 보내므로,
+ * 가드가 없으면 hover가 열고 곧바로 click 토글이 닫아 메뉴가 깜빡이기만 합니다.
+ */
+function isHoverCapable() {
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches
+}
+
 export default function Nav() {
   const [active, setActive] = useState('')
   const [menuOpen, setMenuOpen] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const menuWrapRef = useRef<HTMLLIElement>(null)
+
+  // 열린 메뉴를 빠져나갈 방법. hover로만 닫히면 키보드 사용자는 갇힙니다.
+  useEffect(() => {
+    if (!menuOpen) return
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      setMenuOpen(false)
+      menuButtonRef.current?.focus() // 닫은 뒤 포커스를 트리거로 되돌립니다
+    }
+    const onPointerDown = (e: PointerEvent) => {
+      if (!menuWrapRef.current?.contains(e.target as Node)) setMenuOpen(false)
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    document.addEventListener('pointerdown', onPointerDown)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.removeEventListener('pointerdown', onPointerDown)
+    }
+  }, [menuOpen])
 
   useEffect(() => {
     const sections = document.querySelectorAll('section[id]')
@@ -141,17 +176,32 @@ export default function Nav() {
 
         <ul className="hidden list-none items-center gap-7 md:flex">
           <li
+            ref={menuWrapRef}
             className="relative"
             onMouseEnter={() => {
+              if (!isHoverCapable()) return
               if (closeTimer.current) clearTimeout(closeTimer.current)
               setMenuOpen(true)
             }}
             onMouseLeave={() => {
+              if (!isHoverCapable()) return
               closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
+            }}
+            onBlur={e => {
+              // Tab으로 메뉴 밖까지 나가면 닫습니다. 안에서 이동하는 중이면 유지.
+              if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setMenuOpen(false)
             }}
           >
             <button
+              ref={menuButtonRef}
+              type="button"
+              onClick={() => {
+                if (closeTimer.current) clearTimeout(closeTimer.current)
+                setMenuOpen(o => !o)
+              }}
               aria-expanded={menuOpen}
+              aria-haspopup="true"
+              aria-controls={SERVICE_MENU_ID}
               className={`flex items-center gap-1 py-1 text-base font-bold tracking-[0.02em] transition-colors duration-200 ${
                 menuOpen ? 'text-accent' : 'text-fg-muted hover:text-accent'
               }`}
@@ -173,8 +223,15 @@ export default function Nav() {
 
             {menuOpen && (
               <div
-                onMouseEnter={() => { if (closeTimer.current) clearTimeout(closeTimer.current) }}
-                onMouseLeave={() => { closeTimer.current = setTimeout(() => setMenuOpen(false), 250) }}
+                id={SERVICE_MENU_ID}
+                onMouseEnter={() => {
+                  if (!isHoverCapable()) return
+                  if (closeTimer.current) clearTimeout(closeTimer.current)
+                }}
+                onMouseLeave={() => {
+                  if (!isHoverCapable()) return
+                  closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
+                }}
                 className="absolute left-1/2 top-[calc(100%+8px)] z-[9999] flex w-[min(1120px,calc(100vw-20px))] max-w-[calc(100vw-20px)] -translate-x-1/2 flex-col overflow-hidden rounded-xl border border-line-strong bg-elev shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
               >
                 <div className="grid grid-cols-3 gap-0 px-2.5 pb-3.5 pt-4.5">

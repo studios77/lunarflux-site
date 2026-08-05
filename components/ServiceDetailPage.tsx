@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
+import ScrollTop from '@/components/ScrollTop'
 import type { ServiceData } from '@/lib/servicesData'
 import { getRelatedServices } from '@/lib/servicesData'
 import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
@@ -43,9 +45,10 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* Nav·Footer는 <main> 밖에 둡니다. 랜드마크가 겹치면 스크린리더의
+          "본문으로 건너뛰기"가 내비게이션부터 읽습니다. */}
+      <Nav />
       <main className="min-h-screen bg-canvas text-fg">
-        <Nav />
-
         <section className="container-page pb-16 pt-28 md:pb-20 md:pt-30">
           <SectionLabel>{s.cat}</SectionLabel>
           <div className="mb-6 flex flex-col items-start gap-6 sm:flex-row">
@@ -285,6 +288,8 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
           </div>
         </section>
       </main>
+      <Footer />
+      <ScrollTop />
     </>
   )
 }

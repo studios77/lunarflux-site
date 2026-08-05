@@ -10,8 +10,9 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-canvas text-fg">
+    <>
       <Nav />
+      <main className="min-h-screen bg-canvas text-fg">
       <section className="container-page pb-20 pt-28 md:pt-30">
         <div className="mx-auto max-w-3xl">
         <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
@@ -77,7 +78,8 @@ export default function ContactPage() {
         </div>
         </div>
       </section>
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
