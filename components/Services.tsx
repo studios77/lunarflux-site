@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ServiceIcon from '@/components/ServiceIcon'
 import { servicesData } from '@/lib/servicesData'
 
 /**
@@ -56,7 +57,7 @@ export default function Services() {
                         href={`/services/${s.slug}/`}
                         className="group flex items-center gap-2.5 border-t border-line py-3 text-body text-fg-muted transition-colors hover:text-accent"
                       >
-                        <span className="shrink-0 text-meta opacity-60">{s.icon}</span>
+                        <ServiceIcon slug={s.slug} className="size-4.5 shrink-0 text-fg-subtle transition-colors group-hover:text-accent" />
                         <span className="min-w-0 break-keep">{s.name}</span>
                         <span
                           aria-hidden

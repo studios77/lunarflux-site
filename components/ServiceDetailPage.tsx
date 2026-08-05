@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
+import ServiceIcon from '@/components/ServiceIcon'
 import type { ServiceData } from '@/lib/servicesData'
 import { getRelatedServices } from '@/lib/servicesData'
 import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
@@ -52,8 +53,8 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
         <section className="container-page pb-20 pt-32 md:pb-28 md:pt-36">
           <SectionLabel>{s.cat}</SectionLabel>
           <div className="mb-6 flex flex-col items-start gap-6 sm:flex-row">
-            <div className="flex size-18 shrink-0 items-center justify-center rounded-xl border border-line-strong bg-surface text-[2.4rem]">
-              {s.icon}
+            <div className="flex size-18 shrink-0 items-center justify-center rounded-xl border border-line-strong bg-surface text-accent">
+              <ServiceIcon slug={s.slug} className="size-9" />
             </div>
             <div>
               <h1 className="mb-3 break-keep text-[clamp(1.85rem,4.8vw,3rem)] font-bold leading-[1.12] tracking-[-0.02em]">
@@ -272,7 +273,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
                   title={sv.name}
                   className="block rounded-md border border-line bg-surface px-4 py-4.5 transition-colors hover:border-accent/50"
                 >
-                  <div className="mb-2 text-lead">{sv.icon}</div>
+                  <ServiceIcon slug={sv.slug} className="mb-3 size-5 text-accent" />
                   <div className="mb-1.5 font-mono text-label uppercase tracking-[0.1em] text-accent">
                     {sv.cat}
                   </div>

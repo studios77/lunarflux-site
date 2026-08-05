@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ServiceIcon from '@/components/ServiceIcon'
 
 /**
  * 자체 제품 하나를 앞세우는 블록.
@@ -28,7 +29,8 @@ export default function Flagship() {
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/35 bg-accent/5 px-3.5 py-1 font-mono text-label uppercase tracking-[0.12em] text-accent">
               자체 개발 제품
             </div>
-            <h2 className="mb-3 break-keep text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.12] tracking-[-0.02em] text-fg">
+            <h2 className="mb-3 flex items-center gap-3.5 break-keep text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.12] tracking-[-0.02em] text-fg">
+              <ServiceIcon slug="lunarflux-guard" className="size-9 shrink-0 text-accent" />
               Lunarflux Guard
             </h2>
             <p className="mb-9 max-w-lg break-keep text-lead text-fg-muted">

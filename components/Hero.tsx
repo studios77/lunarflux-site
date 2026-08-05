@@ -1,5 +1,7 @@
 // 수치는 전부 근거가 있는 것만 씁니다.
 // IDS 룰 수·WAF 규칙 수는 Lunarflux Guard 사양서 기준입니다.
+import Link from 'next/link'
+
 // 3개로 줄입니다. 넷을 늘어놓으면 무엇이 중요한지 흐려집니다.
 // Guard 관련 수치는 바로 아래 제품 블록이 다시 보여주므로 여기서는 겹치지 않게.
 const STATS = [
@@ -12,7 +14,9 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative z-10 flex min-h-screen items-center overflow-hidden pb-16 pt-28 md:pt-32"
+      // 100vh 는 iOS 주소창 때문에 실제보다 커져 하단 지표가 잘립니다.
+      // svh 로 잡고, 화면을 꽉 채우기보다 다음 섹션이 살짝 보이게 둡니다.
+      className="relative z-10 flex min-h-[88svh] items-center overflow-hidden pb-20 pt-28 md:pt-32"
     >
       {/* 앰비언트 글로우 */}
       <div
@@ -26,7 +30,9 @@ export default function Hero() {
           차세대 방화벽 · AI 보안 관제 · 클라우드 보안
         </div>
 
-        <h1 className="mx-auto mb-6 max-w-4xl animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.5rem,7.5vw,5.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
+        {/* 88px 까지 키우면 두 줄 제목이 화면을 압도해 성기게 보입니다.
+            상한을 낮추고 아래 문단·지표와의 비율을 맞춥니다. */}
+        <h1 className="mx-auto mb-6 max-w-3xl animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.25rem,5.5vw,4.25rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-fg">
           <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
             AI 보안
           </span>
@@ -40,18 +46,18 @@ export default function Hero() {
         </p>
 
         <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
-          <a
-            href="#services"
+          <Link
+            href="/contact"
             className="rounded-full bg-accent px-10 py-4 text-body font-semibold tracking-[0.02em] text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-2 hover:shadow-[0_14px_36px_rgba(34,211,238,0.38)]"
           >
-            서비스 살펴보기
-          </a>
-          <a
-            href="/contact"
+            무료 상담 신청
+          </Link>
+          <Link
+            href="/services/lunarflux-guard/"
             className="rounded-full border border-line-strong bg-surface/60 px-10 py-4 text-body font-semibold tracking-[0.02em] text-fg backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-surface"
           >
-            무료 상담 신청
-          </a>
+            Lunarflux Guard 보기
+          </Link>
         </div>
 
         <div className="mx-auto mt-20 grid max-w-3xl animate-[fadeUp_0.8s_0.4s_ease_both] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
