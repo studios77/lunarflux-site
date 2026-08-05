@@ -64,30 +64,47 @@ const serviceMenu: ServiceMenuCategory[] = [
     ],
   },
   {
-    cat: 'AI 보안',
+    cat: '네트워크 보안',
     tone: 'indigo',
     sections: [
       {
-        sub: '방화벽 · 관제',
         items: [
           { name: 'Lunarflux Guard · NGFW', slug: 'lunarflux-guard', desc: 'NGFW·WAF·AI 융합 어플라이언스', highlight: true },
-          { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제' },
-          { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR' },
+          { name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지 · 이상 ML' },
+          { name: '제로트러스트 설계', slug: 'zero-trust', desc: '세그먼트 · MFA' },
+          { name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'DDoS · 하이재킹 차단' },
+        ],
+      },
+    ],
+  },
+  {
+    cat: '클라우드 · AI 보안',
+    tone: 'cyan',
+    sections: [
+      {
+        sub: '클라우드',
+        items: [
+          { name: '클라우드 보안 형상 진단', slug: 'cloud-posture', desc: 'CSPM · 권한 정리' },
+          { name: '클라우드 워크로드 보호', slug: 'cloud-workload', desc: '컨테이너 · 쿠버네티스' },
         ],
       },
       {
-        sub: '스트리밍 · 미디어',
+        sub: 'AI · 데이터',
         items: [
-          { name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: 'DDoS · 하이재킹 차단' },
+          { name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '유출 · 인젝션 점검' },
           { name: '딥페이크 탐지', slug: 'deepfake-detection', desc: '실시간 합성 영상 검출' },
         ],
       },
+    ],
+  },
+  {
+    cat: '보안 운영',
+    tone: 'emerald',
+    sections: [
       {
-        sub: '인프라 · 거버넌스',
         items: [
-          { name: '네트워크 보안 · IDS/IPS', slug: 'network-security', desc: '침입탐지 · 이상 ML' },
-          { name: '제로트러스트 설계', slug: 'zero-trust', desc: '세그먼트 · MFA' },
-          { name: 'LLM 보안 감사', slug: 'llm-security-audit', desc: '유출 · 인젝션 점검' },
+          { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제', highlight: true },
+          { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR' },
         ],
       },
     ],
@@ -233,9 +250,11 @@ export default function Nav() {
                   if (!isHoverCapable()) return
                   closeTimer.current = setTimeout(() => setMenuOpen(false), 250)
                 }}
-                className="absolute left-1/2 top-[calc(100%+8px)] z-[9999] flex w-[min(1120px,calc(100vw-20px))] max-w-[calc(100vw-20px)] -translate-x-1/2 flex-col overflow-hidden rounded-xl border border-line-strong bg-elev shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
+                className="absolute left-1/2 top-[calc(100%+8px)] z-[9999] flex w-[min(1320px,calc(100vw-24px))] max-w-[calc(100vw-24px)] -translate-x-1/2 flex-col overflow-hidden rounded-xl border border-line-strong bg-elev shadow-[0_20px_60px_rgba(0,0,0,0.55)]"
               >
-                <div className="grid grid-cols-3 gap-0 px-2.5 pb-3.5 pt-4.5">
+                {/* 보안을 3개 열로 펼치면서 5열이 됐습니다. 열이 늘어난 만큼
+                    메뉴 폭도 넓혀야 항목 제목이 과도하게 접히지 않습니다. */}
+                <div className="grid grid-cols-5 gap-0 px-2.5 pb-3.5 pt-4.5">
                   {serviceMenu.map((cat, ci) => {
                     const tone = TONES[cat.tone]
                     return (
@@ -318,7 +337,6 @@ export default function Nav() {
           </li>
 
           {[
-            { id: 'pricing', label: '요금' },
             { id: 'about', label: '소개' },
           ].map(m => (
             <li key={m.id}>
@@ -417,7 +435,6 @@ export default function Nav() {
           })}
           <div className="mt-4 flex flex-col">
             {[
-              { id: 'pricing', label: '요금' },
               { id: 'about', label: '소개' },
             ].map(m => (
               <Link

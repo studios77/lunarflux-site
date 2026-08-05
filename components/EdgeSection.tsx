@@ -63,27 +63,27 @@ const edges = [
     link: '/services/ai-security/',
   },
   {
-    badge: '03 · 초저지연 스트리밍',
-    icon: '📡',
-    title: 'LL-HLS 1~2초 레이턴시',
-    subtitle: '국내 CDN 평균 대비 10배 빠름',
-    desc: '국내 CDN 평균 5~15초인 HLS 지연을 LL-HLS로 1~2초까지 낮춥니다. 라이브 커머스에서 지연은 곧 전환율입니다.',
+    badge: '03 · 차세대 방화벽',
+    icon: '🧱',
+    title: 'Lunarflux Guard',
+    subtitle: 'NGFW · WAF · 로컬 AI를 한 대에',
+    desc: 'UA만 보는 WAF가 구조적으로 놓치는 위조 트래픽을, JA4+ 4지문을 방화벽이 직접 수집해 계층 모순으로 잡습니다.',
     stats: [
-      { val: '1~2s', label: 'LL-HLS 레이턴시' },
-      { val: '80%', label: '비용 절감' },
-      { val: '∞', label: '동시 시청자' },
+      { val: '6만+', label: 'IDS 탐지 룰' },
+      { val: '101', label: '자체 WAF 규칙' },
+      { val: '0', label: '외부 전송' },
     ],
-    highlight: '스포츠 중계·라이브 커머스·실시간 경매에서 경쟁사와 체감 차이',
+    highlight: '보호 대상 서버에 무설치. L2 투명 인라인이라 IP 변경도 없습니다',
     tone: 'indigo' as const,
-    link: '/services/ultrastream/',
+    link: '/services/lunarflux-guard/',
   },
 ]
 
 const trustStats = [
-  { val: '99.99%', label: '서비스 가용성 SLA' },
   { val: '24/7', label: 'AI 자율 보안 관제' },
-  { val: '< 30s', label: 'HA 자동 페일오버' },
   { val: '95%+', label: '딥페이크 탐지 정확도' },
+  { val: '101', label: '자체 WAF 규칙' },
+  { val: '99.99%', label: '서비스 가용성 SLA' },
 ]
 
 const sectors = [
@@ -113,14 +113,14 @@ export default function EdgeSection() {
         <div className="reveal">
           <SectionLabel>Competitive Edge</SectionLabel>
           <h2 className="mb-3.5 break-keep text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
-            경쟁사 대비 두드러지는
+            직접 만들어서
             <br />
             <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
-              세 가지 기술 강점
+              직접 운영합니다
             </span>
           </h2>
           <p className="max-w-xl break-keep text-body leading-[1.8] text-fg-muted">
-            딥페이크 탐지, AI 보안 관제, 초저지연 스트리밍. 설계부터 운영까지 한 팀이 맡습니다.
+            딥페이크 탐지, AI 자율 관제, 차세대 방화벽. 남의 제품을 얹는 대신 저희가 만든 것으로 지킵니다.
           </p>
         </div>
 

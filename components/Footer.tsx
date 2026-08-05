@@ -1,6 +1,5 @@
 const links = [
   ['서비스', '/#services'],
-  ['요금', '/#pricing'],
   ['소개', '/#about'],
   ['문의', '/contact'],
 ]

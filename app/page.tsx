@@ -5,7 +5,6 @@ import { SITE_NAME, SITE_ORIGIN } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION } from '@/lib/seo'
 import Hero from '@/components/Hero'
 import Services from '@/components/Services'
-import Pricing from '@/components/Pricing'
 import About from '@/components/About'
 import Footer from '@/components/Footer'
 import EdgeSection from '@/components/EdgeSection'
@@ -110,7 +109,6 @@ export default function Home() {
         <Hero />
         <Services />
         <EdgeSection />
-        <Pricing />
         <About />
       </main>
       <Footer />

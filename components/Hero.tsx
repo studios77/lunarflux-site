@@ -1,8 +1,10 @@
+// 수치는 전부 근거가 있는 것만 씁니다.
+// IDS 룰 수·WAF 규칙 수는 Lunarflux Guard 사양서 기준입니다.
 const STATS = [
+  { num: '6만', unit: '+', label: 'IDS 탐지 룰' },
+  { num: '101', unit: '개', label: '자체 WAF 규칙' },
+  { num: '24', unit: '/7', label: 'AI 자율 관제' },
   { num: '99.99', unit: '%', label: 'Uptime SLA' },
-  { num: '1~2', unit: 's', label: 'LL-HLS 레이턴시' },
-  { num: '24', unit: '/7', label: '보안 관제' },
-  { num: '14', unit: '개', label: '통합 서비스' },
 ]
 
 export default function Hero() {
@@ -20,22 +22,20 @@ export default function Hero() {
       <div className="container-page text-center">
         <div className="mb-8 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-sm border border-accent/35 bg-accent/5 px-4 py-1.5 font-mono text-label uppercase tracking-[0.12em] text-accent">
           <span className="inline-block size-1.5 animate-[pulseDot_1.5s_ease-in-out_infinite] rounded-full bg-accent" />
-          IDC · AI 보안 · 라이브 스트리밍 솔루션
+          차세대 방화벽 · AI 보안 관제 · 클라우드 보안
         </div>
 
         <h1 className="mx-auto mb-6 max-w-4xl animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.5rem,7.5vw,5.5rem)] font-extrabold leading-[1.08] tracking-[-0.03em] text-fg">
-          IDC ·{' '}
           <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
             AI 보안
           </span>
-          {' · '}
-          <span className="whitespace-nowrap">스트리밍솔루션</span>
+          을 설계하고
           <br />
-          <span className="font-bold text-fg-muted">한곳에서 설계하고 운영합니다</span>
+          <span className="font-bold text-fg-muted">직접 운영합니다</span>
         </h1>
 
-        <p className="mx-auto mb-12 max-w-lg animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-base leading-[1.85] text-fg-muted">
-          서버 임대부터 AI 보안 관제, 초저지연 라이브까지 한 팀이 설계하고 운영합니다.
+        <p className="mx-auto mb-12 max-w-xl animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-base leading-[1.85] text-fg-muted">
+          자체 개발한 차세대 방화벽 Lunarflux Guard를 중심으로, 네트워크·클라우드·AI 보안과 24시간 관제까지 한 팀이 맡습니다.
         </p>
 
         <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
