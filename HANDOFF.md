@@ -1,23 +1,29 @@
-# 작업 인계 노트 — 2026-08-04
+# 작업 인계 노트 — 2026-08-05 갱신
 
-다음 세션에서 바로 이어갈 수 있도록 오늘 작업과 남은 일을 정리합니다.
+다음 세션에서 바로 이어갈 수 있도록 작업과 남은 일을 정리합니다.
 
 ---
 
 ## 1. 지금 상태 한 줄 요약
 
-다크 테마 개편까지 **배포 완료**. 문의 폼을 Cloudflare Pages Functions로 옮기는 작업이 **커밋 전 상태**로 남아 있습니다.
+문의 폼의 Cloudflare Pages Functions 이전까지 **배포 완료**(`40996f0`). 미푸시 커밋 없음, 작업 트리 깨끗함.
 
-### ⚠️ 시작 전 확인
+### ⚠️ 남은 것 — 대시보드에서 사람이 직접
 
-로컬에 **푸시되지 않은 커밋이 있습니다.**
+`ADMIN_NOTIFY_WEBHOOK` **Secret이 아직 등록되지 않았습니다.** 그래서 지금 라이브 폼은 접수되지 않고 "온라인 접수 준비 중, 이메일로 보내주세요"를 표시합니다 — 거짓 성공을 띄우지 않도록 의도한 동작입니다.
 
-| | 커밋 |
-|---|---|
-| 원격 `origin/main` | `918e3e5` |
-| 로컬 `main` | `189a289` (이 문서와 tmux 스크립트) 이후 |
+```
+Cloudflare Pages → lunarflux → Settings → Environment variables
+ADMIN_NOTIFY_WEBHOOK = <웹훅 URL>   (Type: Secret, Production)
+```
 
-Pages Functions 작업을 마친 뒤 함께 푸시하기로 했습니다. 푸시하면 `.githooks/pre-push`가 `npm run build`로 검증한 다음 Cloudflare 배포가 트리거됩니다.
+등록 후 **재배포해야 반영**됩니다. 재배포 뒤 확인:
+
+```bash
+curl -X POST https://lunarflux.ai/api/contact -H "Content-Type: application/json" \
+  -d '{"name":"테스트","email":"a@b.com","message":"등록 확인"}'
+# 503 unconfigured → 200 {"ok":true} 로 바뀌고 관리자 채널에 메시지가 떠야 정상
+```
 
 ---
 
@@ -41,66 +47,50 @@ Pages Functions 작업을 마친 뒤 함께 푸시하기로 했습니다. 푸시
 
 ---
 
-## 3. 진행 중 — 커밋되지 않은 변경 (여기서 이어서 시작)
+## 3. 완료 — 문의 폼 웹훅을 Pages Functions로 이전 (`40996f0`)
 
-문의 폼 웹훅을 **Cloudflare Pages Functions**로 옮기는 작업입니다.
-
-```
-?? functions/api/contact.ts        (신규) 서버 측 웹훅 중계
- M components/ContactForm.tsx      /api/contact 로 POST 하도록 변경
- D lib/adminNotify.ts              클라이언트 웹훅 호출 제거 (더 이상 미사용)
- M .env.example                    ADMIN_NOTIFY_WEBHOOK 로 교체 (NEXT_PUBLIC_ 제거)
- M .gitignore                      .dev.vars, .wrangler 추가
-```
-
-### 왜 옮기는가
+### 왜 옮겼는가
 
 `NEXT_PUBLIC_` 환경변수는 **브라우저 번들에 그대로 박힙니다.** 누구나 개발자 도구로 웹훅 URL을 꺼내 스팸을 보낼 수 있고, Slack 웹훅은 브라우저에서 직접 호출하면 CORS로 차단됩니다. Pages Functions는 서버에서 호출하므로 두 문제가 모두 없어집니다.
 
-### 검증 상태
+### 검증 결과 — 로컬 wrangler·프로덕션 양쪽 통과
 
-- `npm run build` 통과
-- `npx wrangler pages dev out` 에서 **Worker 컴파일 성공** 확인
-- ❌ **엔드포인트 응답 검증은 아직 못 함** — 여기서 중단
+| 케이스 | 응답 |
+|---|---|
+| 정상 전송 (웹훅 설정됨) | `200 {"ok":true}` |
+| 웹훅 미설정 | `503 {"reason":"unconfigured"}` |
+| 잘못된 JSON | `400 {"reason":"invalid_json"}` |
+| 필수 필드 누락 | `400 {"reason":"missing_field","field":...}` |
+| 16KB 초과 본문 | `413 {"reason":"too_large"}` |
+| 웹훅이 5xx 반환 | `502` — 응답에 웹훅 URL 미노출 확인 |
+| GET | `404` |
 
-### 다음에 할 일
+정적 페이지 회귀도 확인했습니다 (`/`, `/contact/`, `/services/aidc/`, `/sitemap.xml`, `/robots.txt` 모두 200).
+
+**초안의 기대값과 달랐던 두 가지 — 둘 다 정상 동작입니다.**
+
+1. **GET은 405가 아니라 404.** Pages Functions는 매칭되는 메서드 핸들러가 없으면 정적 에셋 조회로 폴백하는데, `/api/contact` 정적 파일이 없으니 404가 됩니다. (배포 전 구 버전은 405를 반환했으므로, 405가 보이면 아직 Function이 안 올라간 것입니다 — 배포 확인용 신호로 쓸 수 있습니다.)
+2. **400 계열은 웹훅이 설정돼야 도달합니다.** 함수가 본문을 파싱하기 전에 웹훅 설정 여부부터 확인하므로, 미설정 상태에서는 무엇을 보내든 503입니다. 검증하려면 `.dev.vars`에 더미 웹훅이 필요합니다.
+
+### 해소된 가정
+
+루트 `functions/` 디렉터리가 Cloudflare Pages 빌드에 자동 인식되는지 미검증이었으나, `40996f0` 배포에서 **인식됨을 확인**했습니다. 빌드 출력이 `out`이어도 루트 `functions/`는 별도로 수집됩니다. 푸시 후 반영까지 약 3분 걸렸습니다.
+
+### 로컬에서 다시 검증할 때
+
+`npm run dev`(Next 개발 서버)는 `/api/contact`를 서빙하지 않습니다. 반드시 빌드 후 wrangler로 띄우세요.
 
 ```bash
-# 1. 로컬에서 Function 띄우기 (Next 개발 서버는 /api/contact 를 서빙하지 않음)
+echo 'ADMIN_NOTIFY_WEBHOOK=https://discord.com/api/webhooks/...' > .dev.vars   # .gitignore 처리됨
 npm run build
 npx wrangler pages dev out --port 8788
-
-# 2. 다른 창에서 응답 확인 — 기대값을 함께 적어둠
-#    웹훅 미설정 상태이므로 503 {"ok":false,"reason":"unconfigured"} 가 나와야 정상
-curl -X POST http://127.0.0.1:8788/api/contact \
-  -H "Content-Type: application/json" \
-  -d '{"name":"홍길동","email":"a@b.com","message":"테스트","company":"","service":"IDC"}'
-
-curl -X POST http://127.0.0.1:8788/api/contact -H "Content-Type: application/json" -d 'not-json'   # 400
-curl -X POST http://127.0.0.1:8788/api/contact -H "Content-Type: application/json" -d '{"name":""}' # 400
-curl http://127.0.0.1:8788/api/contact                                                              # 405
-
-# 3. 실제 웹훅으로 종단 확인하려면
-echo 'ADMIN_NOTIFY_WEBHOOK=https://discord.com/api/webhooks/...' > .dev.vars   # .gitignore 처리됨
-npx wrangler pages dev out --port 8788
 ```
-
-검증이 끝나면 커밋 → 푸시 → Cloudflare 대시보드에 **Secret** 등록:
-
-```
-Cloudflare Pages → lunarflux → Settings → Environment variables
-ADMIN_NOTIFY_WEBHOOK = <웹훅 URL>   (Type: Secret, Production)
-```
-
-> 등록 후 재배포해야 반영됩니다. 등록 전까지 폼은 "온라인 접수 준비 중, 이메일로 보내주세요"를 표시합니다 — 거짓 성공을 띄우지 않도록 의도한 동작입니다.
-
-**아직 확인되지 않은 가정**: 프로젝트 루트의 `functions/` 디렉터리가 Cloudflare Pages 빌드에서 자동 인식되는지 실제 배포로 검증되지 않았습니다. 빌드 출력 디렉터리가 `out`이므로 정상 동작해야 하지만, 첫 배포 후 `https://lunarflux.ai/api/contact` 가 404가 아닌지 반드시 확인하세요.
 
 ---
 
 ## 4. 그 밖에 남은 일 (우선순위 순)
 
-1. **문의 폼 웹훅 마무리** — 위 3번.
+1. **`ADMIN_NOTIFY_WEBHOOK` Secret 등록** — 위 1번. 사람이 대시보드에서 해야 합니다.
 2. **`npm audit` high 3건** — `npm install` 시 보고됨. 아직 확인 안 함.
 3. **`.reveal` 섹션의 JS 의존** — `app/page.tsx`의 `IntersectionObserver`가 `.visible`을 붙여야 본문이 보입니다. JS가 막히면 콘텐츠가 안 보입니다. 기존부터 있던 동작이라 손대지 않았습니다.
 4. **`package.json`에 `prepare` 스크립트 없음** — `scripts/ensure-git-hooks.cjs`는 `prepare`에서 실행되도록 작성됐지만 해당 항목이 없어 훅이 자동 등록되지 않습니다. 저장소를 새로 클론하면 `git config core.hooksPath .githooks` 를 수동 실행해야 합니다.
