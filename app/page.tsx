@@ -5,9 +5,9 @@ import { SITE_NAME, SITE_ORIGIN } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION } from '@/lib/seo'
 import Hero from '@/components/Hero'
 import Services from '@/components/Services'
-import About from '@/components/About'
+import Flagship from '@/components/Flagship'
+import ClosingCta from '@/components/ClosingCta'
 import Footer from '@/components/Footer'
-import EdgeSection from '@/components/EdgeSection'
 import ScrollTop from '@/components/ScrollTop'
 
 export default function Home() {
@@ -106,10 +106,12 @@ export default function Home() {
       <div className="grid-bg" />
       <Nav />
       <main>
+        {/* 자체 제품 → 보안 4개 축 → 마무리. 예전의 EdgeSection·About 은
+            내용이 겹치고 길어 Flagship·ClosingCta 로 흡수했습니다. */}
         <Hero />
+        <Flagship />
         <Services />
-        <EdgeSection />
-        <About />
+        <ClosingCta />
       </main>
       <Footer />
       <ScrollTop />

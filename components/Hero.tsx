@@ -1,9 +1,10 @@
 // 수치는 전부 근거가 있는 것만 씁니다.
 // IDS 룰 수·WAF 규칙 수는 Lunarflux Guard 사양서 기준입니다.
+// 3개로 줄입니다. 넷을 늘어놓으면 무엇이 중요한지 흐려집니다.
+// Guard 관련 수치는 바로 아래 제품 블록이 다시 보여주므로 여기서는 겹치지 않게.
 const STATS = [
-  { num: '6만', unit: '+', label: 'IDS 탐지 룰' },
-  { num: '101', unit: '개', label: '자체 WAF 규칙' },
   { num: '24', unit: '/7', label: 'AI 자율 관제' },
+  { num: '10', unit: '종', label: '보안 서비스' },
   { num: '99.99', unit: '%', label: 'Uptime SLA' },
 ]
 
@@ -53,7 +54,7 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="mt-20 grid animate-[fadeUp_0.8s_0.4s_ease_both] grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <div className="mx-auto mt-20 grid max-w-3xl animate-[fadeUp_0.8s_0.4s_ease_both] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
           {STATS.map(s => (
             <div
               key={s.label}
