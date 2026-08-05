@@ -3,22 +3,22 @@ import Link from 'next/link'
 const plans = [
   {
     tier: 'Starter', name: '스트림 Basic', price: '49,000', unit: '/hour', featured: false,
-    desc: '라이브 스트리밍을 시작하는 소규모 팀에 적합한 플랜입니다.',
+    desc: '라이브 스트리밍을 시작하는 소규모 팀용.',
     features: ['UltraStreamingEngine 1채널','LL-HLS 스트리밍 (최대 1080p)','동시 시청자 100명','VOD 저장 50GB','기본 모니터링 대시보드','이메일 기술지원'],
   },
   {
     tier: 'Professional', name: 'Stream Pro + AI', price: '가격문의', unit: '', featured: true,
-    desc: '스트리밍 + AI 보안이 결합된 가장 인기 있는 통합 플랜입니다.',
+    desc: '스트리밍과 AI 보안을 묶은 통합 플랜.',
     features: ['UltraStreamingEngine 5채널','ABR 4단계 (1080p ~ 360p)','동시 시청자 1,000명','VOD 500GB + CDN','AI 이상탐지 + IP 자동차단','멀티플랫폼 동시 송출','24시간 Slack 기술지원'],
   },
   {
     tier: 'IDC Standard', name: '서버 위탁운영', price: '30만~', unit: '/월', featured: false,
-    desc: '서버 운영을 전문가에게 맡기고 비즈니스에만 집중하세요.',
+    desc: '서버 운영을 맡기고 본업에 집중.',
     features: ['OS 패치·보안업데이트 전담','장애대응 (4시간 이내)','Zabbix 실시간 모니터링','월간 SLA 리포트','백업 자동화 포함','전화·원격 기술지원'],
   },
   {
     tier: 'HA / DR', name: '이중화 + DR', price: '80만~', unit: '/월', featured: false,
-    desc: '서버·DB 이중화와 재해복구까지 완전한 고가용성 구성.',
+    desc: '서버·DB 이중화에 재해복구까지.',
     features: ['Active-Active HA 구성','자동 페일오버 30초 이내','DB 이중화 (Galera Cluster)','DR 원격지 백업 연동','RTO 4h / RPO 1h 보장','분기별 복구훈련 포함'],
   },
 ]
@@ -47,7 +47,7 @@ export default function Pricing() {
             투명한 요금제
           </h2>
           <p className="max-w-lg break-keep text-body leading-[1.8] text-fg-muted">
-            스트리밍, AI 보안, IDC 운영 중 필요한 범위만 선택하세요. 기업용 맞춰 견적도 상담으로 안내합니다.
+            필요한 범위만 고르세요. 기업용 견적은 상담으로 안내합니다.
           </p>
         </div>
 

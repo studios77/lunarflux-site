@@ -37,7 +37,7 @@ const edges = [
     icon: '🔍',
     title: '실시간 딥페이크 탐지',
     subtitle: '국내 유일 라이브 스트림 특화',
-    desc: '라이브 방송 중 AI 합성 영상·음성을 실시간 검출합니다. 프레임 단위 CNN + LSTM 분석으로 탐지 정확도 95% 이상을 제공하며, 기존 솔루션이 사후 분석에 그치는 것과 달리 방송 중 즉시 차단까지 자동화됩니다.',
+    desc: '사후 분석에 그치는 기존 솔루션과 달리, 방송 중 합성 영상·음성을 프레임 단위로 잡아 즉시 차단합니다.',
     stats: [
       { val: '95%+', label: '탐지 정확도' },
       { val: '< 1s', label: '감지→차단' },
@@ -52,7 +52,7 @@ const edges = [
     icon: '🤖',
     title: 'LLM 기반 AI 보안 관제',
     subtitle: '룰이 아닌 맥락으로 대응',
-    desc: '기존 보안 시스템은 사전 정의된 패턴에만 반응합니다. LunarFlux AI 관제는 보안 이벤트의 맥락을 이해하고 처음 보는 공격 패턴도 스스로 판단·대응합니다. 24시간 인력 관제 대비 비용 90% 절감.',
+    desc: '정해진 패턴에만 반응하는 기존 관제와 달리 이벤트의 맥락을 읽습니다. 처음 보는 공격도 스스로 판단해 대응합니다.',
     stats: [
       { val: '50+', label: '자동 대응 시나리오' },
       { val: '90%', label: '관제 비용 절감' },
@@ -67,7 +67,7 @@ const edges = [
     icon: '📡',
     title: 'LL-HLS 1~2초 레이턴시',
     subtitle: '국내 CDN 평균 대비 10배 빠름',
-    desc: '국내 주요 CDN의 HLS 레이턴시는 평균 5~15초입니다. LunarFlux AI UltraStreamingEngine은 LL-HLS 프로토콜로 1~2초를 달성합니다. 라이브 커머스에서 지연 1초 단축이 구매 전환율에 직접 영향을 미칩니다.',
+    desc: '국내 CDN 평균 5~15초인 HLS 지연을 LL-HLS로 1~2초까지 낮춥니다. 라이브 커머스에서 지연은 곧 전환율입니다.',
     stats: [
       { val: '1~2s', label: 'LL-HLS 레이턴시' },
       { val: '80%', label: '비용 절감' },
@@ -120,7 +120,7 @@ export default function EdgeSection() {
             </span>
           </h2>
           <p className="max-w-xl break-keep text-body leading-[1.8] text-fg-muted">
-            딥페이크 탐지, AI 보안 관제, 초저지연 스트리밍을 라이브·보안 환경에 맞춰 제공합니다. 설계부터 운영까지 한 팀이 맡습니다.
+            딥페이크 탐지, AI 보안 관제, 초저지연 스트리밍. 설계부터 운영까지 한 팀이 맡습니다.
           </p>
         </div>
 

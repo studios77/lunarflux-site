@@ -34,9 +34,8 @@ export default function Hero() {
           <span className="font-bold text-fg-muted">한곳에서 설계하고 운영합니다</span>
         </h1>
 
-        <p className="mx-auto mb-12 max-w-xl animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-base leading-[1.85] text-fg-muted">
-          서버 임대·위탁운영부터 자율 보안 관제, 스트림 이상 탐지, 딥페이크 검출까지.
-          <br className="hidden sm:block" /> 고객 환경에 맞춰 붙이고, UltraStreamingEngine으로 라이브까지 이어 드립니다.
+        <p className="mx-auto mb-12 max-w-lg animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-base leading-[1.85] text-fg-muted">
+          서버 임대부터 AI 보안 관제, 초저지연 라이브까지 한 팀이 설계하고 운영합니다.
         </p>
 
         <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">

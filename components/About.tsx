@@ -1,8 +1,8 @@
 const whyItems = [
-  { num: '01', title: '인프라와 AI 보안을 함께', desc: '서버·네트워크·스트림 위에 보안 AI를 올리는 설계를 같이 잡습니다. 도입 이후 운영까지 한 창구로 이어집니다.' },
-  { num: '02', title: '실제 트래픽에서 돌아가는 AI', desc: '자율 관제, 스트림 이상 탐지, 딥페이크 검출 등을 고객 환경에 맞춰 연결합니다. 이슈가 생기면 보안·미디어 엔지니어가 바로 대응합니다.' },
-  { num: '03', title: '자체 UltraStreamingEngine', desc: 'LL-HLS로 1~2초 수준의 지연을 목표로 합니다. 방송·라이브커머스·공공 중계 등 용도에 맞춰 구성합니다.' },
-  { num: '04', title: '가상화·이중화·백업까지', desc: 'VM, HA, DB 클러스터, 백업·DR까지 한 번에 설계할 수 있습니다.' },
+  { num: '01', title: '인프라와 AI 보안을 함께', desc: '서버·네트워크 위에 보안 AI를 올리는 설계까지 한 창구로 이어집니다.' },
+  { num: '02', title: '실제 트래픽에서 돌아가는 AI', desc: '고객 환경에 맞춰 연결하고, 이슈는 담당 엔지니어가 바로 대응합니다.' },
+  { num: '03', title: '자체 UltraStreamingEngine', desc: 'LL-HLS 1~2초 지연. 방송·라이브커머스·공공 중계에 맞춰 구성합니다.' },
+  { num: '04', title: '가상화·이중화·백업까지', desc: 'VM, HA, DB 클러스터, 백업·DR을 한 번에 설계합니다.' },
 ]
 
 const termLines = [
@@ -48,7 +48,7 @@ export default function About() {
             왜 LunarFlux AI인가?
           </h2>
           <p className="max-w-lg break-keep text-body text-fg-muted">
-            인프라와 AI 보안, 스트리밍을 나눠 맡기지 않고 한 팀이 맡습니다. 설계부터 운영·장애 대응까지 이어집니다.
+            나눠 맡기지 않고 한 팀이 설계부터 장애 대응까지 이어서 맡습니다.
           </p>
         </div>
 
