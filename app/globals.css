@@ -57,7 +57,13 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* 고정 헤더(h-16 = 64px)가 앵커 대상의 윗부분을 덮지 않도록.
+     /#services 처럼 해시로 이동할 때 섹션 상단이 잘리던 문제.
+     각 섹션에 scroll-mt-* 를 흩뿌리는 대신 여기서 한 번에 처리합니다. */
+  scroll-padding-top: 5.5rem;
+}
 
 /* ---------------------------------------------------------------------------
    페이지 공통 컨테이너.
