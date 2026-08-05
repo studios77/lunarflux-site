@@ -256,7 +256,7 @@ export const servicesData: ServiceData[] = [
     cta: '복구·이전 상담 신청',
   },
   {
-    slug: 'ngfw',
+    slug: 'lunarflux-guard',
     icon: '🧱',
     cat: 'AI 보안',
     name: 'Lunarflux Guard · NGFW',
@@ -606,7 +606,7 @@ export const SERVICE_SLUGS = [
   'ha',
   'db-cluster',
   'system-recovery-migration',
-  'ngfw',
+  'lunarflux-guard',
   'ai-security',
   'ai-stream-security',
   'deepfake-detection',

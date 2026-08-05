@@ -70,7 +70,7 @@ const serviceMenu: ServiceMenuCategory[] = [
       {
         sub: '방화벽 · 관제',
         items: [
-          { name: 'Lunarflux Guard · NGFW', slug: 'ngfw', desc: 'NGFW·WAF·AI 융합 어플라이언스', highlight: true },
+          { name: 'Lunarflux Guard · NGFW', slug: 'lunarflux-guard', desc: 'NGFW·WAF·AI 융합 어플라이언스', highlight: true },
           { name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 자율 보안관제' },
           { name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM SOC · SOAR' },
         ],
