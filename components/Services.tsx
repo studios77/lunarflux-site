@@ -16,6 +16,7 @@ const services: ServiceCard[] = [
   { icon: '🔄', cat: 'IDC / HA', name: '운영서버 이중화 (HA)', slug: 'ha', desc: '자동 페일오버 30초 이내, 99.99% 가용성 SLA.', tags: ['Keepalived','HAProxy','Pacemaker'] },
   { icon: '🗄️', cat: 'IDC / DB', name: 'DB 이중화 매니지먼트', slug: 'db-cluster', desc: 'Galera 클러스터 구성·모니터링·자동복구 위탁관리.', tags: ['Galera','ProxySQL','Percona'] },
   { icon: '🛠️', cat: 'IDC / 서버', name: '서버 장애 복구 및 이전', slug: 'system-recovery-migration', desc: '타사 IDC·온프레 환경도 대응. 원격·현장 긴급 복구와 이전.', tags: ['긴급복구','이전','온프레'] },
+  { icon: '🧱', cat: 'AI 보안', name: 'Lunarflux Guard · NGFW', slug: 'ngfw', desc: 'NGFW·WAF·로컬 AI를 한 대에. 서버에는 무설치.', tags: ['NGFW','WAF','JA4+'] },
   { icon: '🛡️', cat: 'AI 보안', name: 'AI 보안 관제', slug: 'ai-security', desc: '24시간 무인 관제. 위협 탐지부터 대응까지 자동화.', tags: ['24/7','자동 대응','컴플라이언스'] },
   { icon: '🤖', cat: 'AI 보안', name: 'AI 자율 관제 에이전트', slug: 'ai-agent', desc: 'LLM 기반 SOC 자동화. 탐지→분석→대응을 하나로 연결.', tags: ['LLM','SIEM','SOAR'] },
   { icon: '🛰️', cat: 'AI 보안', name: 'AI 스트림 이상탐지', slug: 'ai-stream-security', desc: '세션 하이재킹·인젝션·DDoS를 실시간 탐지하고 차단.', tags: ['Python ML','MediaMTX','Fail2ban'] },
