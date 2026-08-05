@@ -275,6 +275,8 @@ export const servicesData: ServiceData[] = [
       '형태: 온프레미스 단일 가상 어플라이언스 (Proxmox VE · KVM)',
       '배치: L2 투명 인라인 브리지 2-arm, 권장 4 vCPU · 8GB 이상',
       '엔진: IDS/IPS 6만+ 룰, 자체 WAF 101규칙 21카테고리, App-ID, DNS 보안, 지오블로킹',
+      '검사: HTTPS 복호화, API 스키마 자동 수집, 포트·앱 불일치 탐지',
+      '관제: AI 상황 브리핑, 활성 인시던트 상관분석, 위협 출발지 지도, Ask the SOC',
       '운영: 테넌트별 RBAC(default-deny), SIEM 내보내기(CEF/JSON · syslog), 인증서 만료 감시',
       '안전장치: candidate→commit 원자적 적용·롤백, 보호 IP 3중 가드, 기본 fail-open',
     ],

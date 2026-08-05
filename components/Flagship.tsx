@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ServiceIcon from '@/components/ServiceIcon'
+import ConsolePreview from '@/components/ConsolePreview'
 
 /**
  * 자체 제품 하나를 앞세우는 블록.
@@ -57,17 +58,21 @@ export default function Flagship() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-px self-start overflow-hidden rounded-2xl border border-line bg-line">
-            {STATS.map(s => (
-              <div key={s.label} className="flex items-baseline gap-5 bg-surface px-8 py-9">
-                <div className="shrink-0 text-[2.4rem] font-extrabold leading-none tracking-[-0.03em] text-accent">
-                  {s.val}
+          <div className="flex flex-col gap-5 self-start">
+            <ConsolePreview />
+
+            <div className="grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
+              {STATS.map(s => (
+                <div key={s.label} className="bg-surface px-4 py-5 text-center">
+                  <div className="text-[1.6rem] font-extrabold leading-none tracking-[-0.03em] text-accent">
+                    {s.val}
+                  </div>
+                  <div className="mt-2 break-keep font-mono text-label uppercase tracking-[0.06em] text-fg-subtle">
+                    {s.label}
+                  </div>
                 </div>
-                <div className="font-mono text-meta uppercase tracking-[0.08em] text-fg-muted">
-                  {s.label}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
