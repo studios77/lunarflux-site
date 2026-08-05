@@ -69,8 +69,8 @@ const edges = [
     subtitle: 'NGFW · WAF · 로컬 AI를 한 대에',
     desc: 'UA만 보는 WAF가 구조적으로 놓치는 위조 트래픽을, JA4+ 4지문을 방화벽이 직접 수집해 계층 모순으로 잡습니다.',
     stats: [
-      { val: '6만+', label: 'IDS 탐지 룰' },
-      { val: '101', label: '자체 WAF 규칙' },
+      { val: '51,977', label: 'IDS 시그니처' },
+      { val: '105', label: '자체 WAF 규칙' },
       { val: '0', label: '외부 전송' },
     ],
     highlight: '보호 대상 서버에 무설치. L2 투명 인라인이라 IP 변경도 없습니다',
@@ -82,7 +82,7 @@ const edges = [
 const trustStats = [
   { val: '24/7', label: 'AI 자율 보안 관제' },
   { val: '95%+', label: '딥페이크 탐지 정확도' },
-  { val: '101', label: '자체 WAF 규칙' },
+  { val: '105', label: '자체 WAF 규칙' },
   { val: '99.99%', label: '서비스 가용성 SLA' },
 ]
 

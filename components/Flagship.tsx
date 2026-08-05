@@ -16,8 +16,8 @@ const POINTS = [
 ]
 
 const STATS = [
-  { val: '6만+', label: 'IDS 탐지 룰' },
-  { val: '101', label: '자체 WAF 규칙' },
+  { val: '51,977', label: 'IDS 시그니처' },
+  { val: '105', label: '자체 WAF 규칙' },
   { val: '0', label: '외부 전송' },
 ]
 

@@ -268,13 +268,13 @@ export const servicesData: ServiceData[] = [
     highlights: [
       { title: '에이전트리스 인라인', desc: '보호 대상 서버·VM에 무설치. L2 투명 브리지로 삽입되어 IP 변경과 네트워크 재설계가 없습니다.' },
       { title: 'JA4+ 4지문 봇 방어', desc: 'TLS·HTTP·TCP·핸드셰이크 지문을 방화벽이 직접 수집해, User-Agent를 위조한 자동화 도구를 계층 모순으로 식별합니다.' },
-      { title: '자체 WAF 101규칙', desc: '21개 카테고리 룰셋에 POST 본문 검사까지. 평문 HTTP를 재조립해 요청 body 기반 공격을 잡습니다.' },
+      { title: '자체 WAF 105규칙', desc: '21개 카테고리 룰셋에 POST 본문 검사까지. 평문 HTTP를 재조립해 요청 body 기반 공격을 잡습니다.' },
       { title: '외부 전송 0 · 로컬 AI', desc: '위협 브리핑과 권고를 온프레미스 sLLM이 생성합니다. 고객 트래픽과 로그가 외부로 나가지 않습니다.' },
     ],
     specs: [
       '형태: 온프레미스 단일 가상 어플라이언스 (Proxmox VE · KVM)',
       '배치: L2 투명 인라인 브리지 2-arm, 권장 4 vCPU · 8GB 이상',
-      '엔진: IDS/IPS 6만+ 룰, 자체 WAF 101규칙 21카테고리, App-ID, DNS 보안, 지오블로킹',
+      '엔진: IDS/IPS 51,977 시그니처, 자체 WAF 105규칙 21카테고리, App-ID, DNS 보안, 지오블로킹',
       '검사: HTTPS 복호화, API 스키마 자동 수집, 포트·앱 불일치 탐지',
       '관제: AI 상황 브리핑, 활성 인시던트 상관분석, 위협 출발지 지도, Ask the SOC',
       '운영: 테넌트별 RBAC(default-deny), SIEM 내보내기(CEF/JSON · syslog), 인증서 만료 감시',
