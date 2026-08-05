@@ -6,7 +6,7 @@ import type { ServiceData } from '@/lib/servicesData'
 import { getRelatedServices } from '@/lib/servicesData'
 import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
 
-const SECTION = 'py-16 md:py-20'
+const SECTION = 'py-20 md:py-28'
 const TH = 'border-b border-line px-5 py-3.5 text-center font-mono text-label font-normal uppercase tracking-[0.1em] text-fg-subtle'
 const TD = 'border-b border-line px-5 py-3.5 text-center text-meta text-fg-muted'
 
@@ -49,7 +49,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
           "본문으로 건너뛰기"가 내비게이션부터 읽습니다. */}
       <Nav />
       <main className="min-h-screen bg-canvas text-fg">
-        <section className="container-page pb-16 pt-28 md:pb-20 md:pt-30">
+        <section className="container-page pb-20 pt-32 md:pb-28 md:pt-36">
           <SectionLabel>{s.cat}</SectionLabel>
           <div className="mb-6 flex flex-col items-start gap-6 sm:flex-row">
             <div className="flex size-18 shrink-0 items-center justify-center rounded-xl border border-line-strong bg-surface text-[2.4rem]">
@@ -69,7 +69,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
             <SectionLabel>핵심 기능</SectionLabel>
             <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
               {s.highlights.map((h, i) => (
-                <div key={h.title} className="bg-elev px-7 py-9">
+                <div key={h.title} className="bg-elev px-8 py-10">
                   <div className="mb-3 font-mono text-label tracking-[0.1em] text-accent">
                     0{i + 1}
                   </div>

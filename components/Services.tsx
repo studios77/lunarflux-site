@@ -31,7 +31,7 @@ const services: ServiceCard[] = [
 export default function Services() {
   return (
     <section id="services" className="relative z-10 bg-elev">
-      <div className="container-page py-20 md:py-24">
+      <div className="container-page py-24 md:py-32">
         <div className="reveal">
           <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />
@@ -45,7 +45,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="reveal mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-15 lg:grid-cols-3">
+        <div className="reveal mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
           {services.map(s => (
             <Link
               key={s.slug}
@@ -53,7 +53,7 @@ export default function Services() {
               title={s.name}
               className="group block min-w-0"
             >
-              <div className="relative h-full min-w-0 overflow-hidden rounded-2xl border border-line bg-surface/60 px-7 py-9 backdrop-blur transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:bg-surface group-hover:shadow-[0_16px_40px_rgba(52,211,153,0.14)]">
+              <div className="relative h-full min-w-0 overflow-hidden rounded-2xl border border-line bg-surface/60 px-8 py-10 backdrop-blur transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/50 group-hover:bg-surface group-hover:shadow-[0_16px_40px_rgba(52,211,153,0.14)]">
                 <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-line-strong bg-elev text-[1.4rem] transition-colors duration-300 group-hover:border-accent/60">
                   {s.icon}
                 </div>

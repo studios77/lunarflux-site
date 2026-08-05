@@ -36,13 +36,13 @@
      (개별 요소에서 leading-* 를 지정하면 그쪽이 우선합니다.)
   ------------------------------------------------------------------------- */
   --text-label: 0.75rem;             /* 12px — mono 라벨·뱃지. 더 줄이지 않습니다 */
-  --text-label--line-height: 1.6;
+  --text-label--line-height: 1.65;
   --text-meta: 0.8125rem;            /* 13px — 표 셀·보조 설명 */
-  --text-meta--line-height: 1.7;
+  --text-meta--line-height: 1.75;
   --text-body: 0.9375rem;            /* 15px — 카드 본문 */
-  --text-body--line-height: 1.75;
+  --text-body--line-height: 1.8;
   --text-lead: 1.0625rem;            /* 17px — 섹션 도입 문단 */
-  --text-lead--line-height: 1.8;
+  --text-lead--line-height: 1.85;
 
   /* 상태 */
   --color-danger: #f87171;
@@ -80,6 +80,10 @@ body {
   font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.7;
+  /* 한글 자간. 브라우저 기본값(0)이면 받침 있는 글자가 서로 붙어
+     어두운 배경에서 특히 빽빽하게 읽힙니다. 제목은 각자 음수 tracking 을
+     명시하고 있어 이 값에 영향받지 않습니다. */
+  letter-spacing: 0.01em;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }

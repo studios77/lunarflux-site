@@ -13,7 +13,7 @@ export default function ContactPage() {
     <>
       <Nav />
       <main className="min-h-screen bg-canvas text-fg">
-      <section className="container-page pb-20 pt-28 md:pt-30">
+      <section className="container-page pb-24 pt-32 md:pt-36">
         <div className="mx-auto max-w-3xl">
         <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
           <span className="inline-block h-px w-6 bg-accent-2" />

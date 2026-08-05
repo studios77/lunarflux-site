@@ -37,7 +37,7 @@ const enterpriseFeatures = [
 export default function Pricing() {
   return (
     <section id="pricing" className="relative z-10 bg-canvas">
-      <div className="container-page py-20 md:py-24">
+      <div className="container-page py-24 md:py-32">
         <div className="reveal">
           <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />
@@ -51,11 +51,11 @@ export default function Pricing() {
           </p>
         </div>
 
-        <div className="reveal mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-15 xl:grid-cols-4">
+        <div className="reveal mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 md:mt-16 xl:grid-cols-4">
           {plans.map(p => (
             <div
               key={p.name}
-              className={`relative flex flex-col rounded-lg px-7 py-9 transition-transform duration-300 hover:-translate-y-1 ${
+              className={`relative flex flex-col rounded-lg px-8 py-10 transition-transform duration-300 hover:-translate-y-1 ${
                 p.featured
                   ? 'border border-accent bg-gradient-to-b from-accent/8 to-surface shadow-[0_0_36px_rgba(52,211,153,0.14)]'
                   : 'border border-line bg-surface'

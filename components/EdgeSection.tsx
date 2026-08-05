@@ -109,7 +109,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 export default function EdgeSection() {
   return (
     <section className="relative z-10 bg-elev">
-      <div className="container-page py-20 md:py-24">
+      <div className="container-page py-24 md:py-32">
         <div className="reveal">
           <SectionLabel>Competitive Edge</SectionLabel>
           <h2 className="mb-3.5 break-keep text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
@@ -130,7 +130,7 @@ export default function EdgeSection() {
             return (
               <div
                 key={e.badge}
-                className={`grid grid-cols-1 items-center gap-8 rounded-xl border border-line bg-surface p-6 transition duration-300 sm:p-9 lg:grid-cols-2 lg:gap-12 ${tone.card}`}
+                className={`grid grid-cols-1 items-center gap-10 rounded-xl border border-line bg-surface p-7 transition duration-300 sm:p-11 lg:grid-cols-2 lg:gap-14 ${tone.card}`}
               >
                 <div>
                   <div className="mb-4 flex items-center gap-2.5">
@@ -167,7 +167,7 @@ export default function EdgeSection() {
                   {e.stats.map(s => (
                     <div
                       key={s.label}
-                      className="flex items-center gap-5 rounded-lg border border-line bg-canvas px-6 py-5"
+                      className="flex items-center gap-6 rounded-lg border border-line bg-canvas px-7 py-6"
                     >
                       <div
                         className={`shrink-0 text-[1.8rem] font-extrabold leading-none tracking-[-0.03em] sm:text-[2.2rem] ${tone.stat}`}
@@ -189,7 +189,7 @@ export default function EdgeSection() {
           <SectionLabel>검증된 수치</SectionLabel>
           <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4">
             {trustStats.map(t => (
-              <div key={t.label} className="bg-surface px-6 py-8 text-center">
+              <div key={t.label} className="bg-surface px-6 py-10 text-center">
                 <div className="mb-2 text-[1.7rem] font-extrabold tracking-[-0.03em] text-fg sm:text-[2rem]">
                   {t.val}
                 </div>

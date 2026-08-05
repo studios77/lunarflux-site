@@ -38,7 +38,7 @@ const lineColor: Record<string, string> = {
 export default function About() {
   return (
     <section id="about" className="relative z-10 bg-elev">
-      <div className="container-page py-20 md:py-24">
+      <div className="container-page py-24 md:py-32">
         <div className="reveal">
           <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />
@@ -53,11 +53,11 @@ export default function About() {
         </div>
 
         <div className="reveal mt-12 grid grid-cols-1 items-center gap-10 md:mt-15 lg:grid-cols-2 lg:gap-20">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-5">
             {whyItems.map(w => (
               <div
                 key={w.num}
-                className="flex items-start gap-4 rounded-lg border border-line bg-surface p-5 transition-colors duration-300 hover:border-accent/40"
+                className="flex items-start gap-5 rounded-lg border border-line bg-surface p-6 transition-colors duration-300 hover:border-accent/40"
               >
                 <div className="mt-0.5 shrink-0 rounded border border-line bg-canvas px-2 py-1 font-mono text-label text-accent">
                   {w.num}
