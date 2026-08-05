@@ -68,7 +68,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ko">
+    <html
+      lang="ko"
+      // 위 인라인 스크립트가 하이드레이션 전에 class="js" 를 붙입니다.
+      // 서버 렌더 결과에는 그 클래스가 없어 React 가 불일치를 보고하므로,
+      // <html> 속성 차이만 무시합니다 (자식에는 영향 없음).
+      suppressHydrationWarning
+      // globals.css 의 scroll-behavior: smooth 를 의도한 것임을 Next 에 알립니다.
+      // 없으면 라우트 전환마다 부드러운 스크롤 경고가 뜹니다.
+      data-scroll-behavior="smooth"
+    >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
