@@ -32,14 +32,14 @@ export default function Services() {
     <section id="services" className="relative z-10 bg-elev">
       <div className="container-page py-20 md:py-24">
         <div className="reveal">
-          <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />
             Services
           </div>
           <h2 className="mb-4 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
             통합 기술 서비스
           </h2>
-          <p className="max-w-lg break-keep text-[0.95rem] leading-[1.8] text-fg-muted">
+          <p className="max-w-lg break-keep text-body leading-[1.8] text-fg-muted">
             IDC 인프라, AI 보안, 라이브 스트리밍을 한 플랫폼에서. 필요한 항목만 고르거나, 전체를 맡기셔도 됩니다.
           </p>
         </div>
@@ -56,26 +56,28 @@ export default function Services() {
                 <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-line-strong bg-elev text-[1.4rem] transition-colors duration-300 group-hover:border-accent/60">
                   {s.icon}
                 </div>
-                <div className="mb-2 font-mono text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-accent">
+                <div className="mb-2 font-mono text-meta font-semibold uppercase tracking-[0.08em] text-accent">
                   {s.cat}
                 </div>
-                <div className="mb-3 truncate text-[clamp(1rem,2.2vw,1.1rem)] font-bold leading-[1.35] tracking-[-0.02em] text-fg">
+                {/* truncate 금지 — sm 그리드에서 카드 폭이 ~278px 라
+                    "VOD 관리 + 멀티 리스트림" 같은 이름이 잘려 나갔습니다. */}
+                <div className="mb-3 break-keep text-[clamp(1rem,2.2vw,1.1rem)] font-bold leading-[1.4] tracking-[-0.02em] text-fg">
                   {s.name}
                 </div>
-                <div className="mb-5 break-keep text-[0.86rem] leading-[1.65] text-fg-muted">
+                <div className="mb-5 break-keep text-body text-fg-muted">
                   {s.desc}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {s.tags.map(t => (
                     <span
                       key={t}
-                      className="rounded-full border border-line bg-accent/5 px-2.5 py-1 font-mono text-[0.65rem] font-medium tracking-[0.02em] text-fg-subtle"
+                      className="rounded-full border border-line bg-accent/5 px-2.5 py-1 font-mono text-label font-medium tracking-[0.02em] text-fg-subtle"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 flex items-center gap-1 font-mono text-[0.75rem] font-semibold tracking-[0.04em] text-accent">
+                <div className="mt-6 flex items-center gap-1 font-mono text-meta font-semibold tracking-[0.04em] text-accent">
                   자세히 보기
                   <span className="text-base transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </div>

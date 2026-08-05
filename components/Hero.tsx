@@ -18,7 +18,7 @@ export default function Hero() {
       />
 
       <div className="container-page text-center">
-        <div className="mb-8 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-sm border border-accent/35 bg-accent/5 px-4 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-accent">
+        <div className="mb-8 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-sm border border-accent/35 bg-accent/5 px-4 py-1.5 font-mono text-label uppercase tracking-[0.12em] text-accent">
           <span className="inline-block size-1.5 animate-[pulseDot_1.5s_ease-in-out_infinite] rounded-full bg-accent" />
           IDC · AI 보안 · 라이브 스트리밍 솔루션
         </div>
@@ -42,13 +42,13 @@ export default function Hero() {
         <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
           <a
             href="#services"
-            className="rounded-full bg-accent px-10 py-4 text-[0.95rem] font-semibold tracking-[0.02em] text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-2 hover:shadow-[0_14px_36px_rgba(34,211,238,0.38)]"
+            className="rounded-full bg-accent px-10 py-4 text-body font-semibold tracking-[0.02em] text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-2 hover:shadow-[0_14px_36px_rgba(34,211,238,0.38)]"
           >
             서비스 살펴보기
           </a>
           <a
             href="/contact"
-            className="rounded-full border border-line-strong bg-surface/60 px-10 py-4 text-[0.95rem] font-semibold tracking-[0.02em] text-fg backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-surface"
+            className="rounded-full border border-line-strong bg-surface/60 px-10 py-4 text-body font-semibold tracking-[0.02em] text-fg backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-surface"
           >
             무료 상담 신청
           </a>
@@ -64,7 +64,7 @@ export default function Hero() {
                 {s.num}
                 <span className="ml-0.5 text-[1.2rem] text-accent sm:text-[1.6rem]">{s.unit}</span>
               </span>
-              <span className="text-[0.8rem] font-semibold tracking-[0.04em] text-fg-subtle sm:text-[0.85rem]">
+              <span className="text-meta font-semibold tracking-[0.04em] text-fg-subtle sm:text-body">
                 {s.label}
               </span>
             </div>

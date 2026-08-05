@@ -22,20 +22,22 @@ export default function Footer() {
             <div className="mb-2 text-2xl font-extrabold text-white">
               LunarFlux<span className="text-accent">AI</span>
             </div>
-            <div className="font-mono text-[0.72rem] leading-relaxed tracking-[0.08em] text-fg-muted">
+            <div className="font-mono text-meta tracking-[0.08em] text-fg-muted">
               IDC · AI 보안 · 스트리밍
               <br />
               인프라 전문 기업
             </div>
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          {/* 좁은 화면에서는 라벨을 값 위로 올립니다. 110px 고정 라벨을 유지하면
+              320px 뷰포트에서 값에 남는 폭이 ~160px 뿐이라 주소가 잘게 접힙니다. */}
+          <div className="flex flex-col gap-3">
             {companyInfo.map(({ label, value }) => (
-              <div key={label} className="flex items-baseline gap-2.5">
-                <span className="w-[110px] shrink-0 font-mono text-[0.72rem] tracking-[0.06em] text-fg-subtle">
+              <div key={label} className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:gap-2.5">
+                <span className="font-mono text-meta tracking-[0.06em] text-fg-subtle sm:w-[110px] sm:shrink-0">
                   {label}
                 </span>
-                <span className="break-keep text-[0.85rem] leading-normal text-fg">{value}</span>
+                <span className="break-keep text-body text-fg">{value}</span>
               </div>
             ))}
           </div>
@@ -45,7 +47,7 @@ export default function Footer() {
               <li key={label}>
                 <a
                   href={href}
-                  className="font-mono text-[0.82rem] tracking-[0.06em] text-fg-muted transition-colors duration-200 hover:text-accent"
+                  className="font-mono text-body tracking-[0.06em] text-fg-muted transition-colors duration-200 hover:text-accent"
                 >
                   {label}
                 </a>
@@ -55,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex justify-center border-t border-line/70 pt-6">
-          <span className="font-mono text-[0.78rem] tracking-[0.06em] text-fg-subtle">
+          <span className="font-mono text-meta tracking-[0.06em] text-fg-subtle">
             © 2026 LunarFlux AI. All rights reserved.
           </span>
         </div>

@@ -39,14 +39,14 @@ export default function Pricing() {
     <section id="pricing" className="relative z-10 bg-canvas">
       <div className="container-page py-20 md:py-24">
         <div className="reveal">
-          <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />
             Pricing
           </div>
           <h2 className="mb-4 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
             투명한 요금제
           </h2>
-          <p className="max-w-lg break-keep text-[0.95rem] leading-[1.8] text-fg-muted">
+          <p className="max-w-lg break-keep text-body leading-[1.8] text-fg-muted">
             스트리밍, AI 보안, IDC 운영 중 필요한 범위만 선택하세요. 기업용 맞춰 견적도 상담으로 안내합니다.
           </p>
         </div>
@@ -62,11 +62,11 @@ export default function Pricing() {
               }`}
             >
               {p.featured && (
-                <div className="absolute -top-px right-6 rounded-b bg-accent px-3 py-1 font-mono text-[0.6rem] font-medium tracking-[0.08em] text-canvas">
+                <div className="absolute -top-px right-6 rounded-b bg-accent px-3 py-1 font-mono text-label font-medium tracking-[0.08em] text-canvas">
                   POPULAR
                 </div>
               )}
-              <div className="mb-2.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-fg-subtle">
+              <div className="mb-2.5 font-mono text-label uppercase tracking-[0.12em] text-fg-subtle">
                 {p.tier}
               </div>
               <div className="mb-1.5 text-[1.4rem] font-bold text-fg">{p.name}</div>
@@ -77,25 +77,25 @@ export default function Pricing() {
                   <span className="text-[2.4rem] font-bold text-fg">
                     <span className="align-super font-mono text-base font-normal text-fg-muted">₩</span>
                     {p.price}
-                    <span className="font-mono text-[0.8rem] font-normal text-fg-subtle">{p.unit}</span>
+                    <span className="font-mono text-meta font-normal text-fg-subtle">{p.unit}</span>
                   </span>
                 )}
               </div>
-              <p className="mb-6 break-keep text-[0.82rem] leading-[1.7] text-fg-muted">{p.desc}</p>
+              <p className="mb-6 break-keep text-body text-fg-muted">{p.desc}</p>
               <ul className="mb-8 flex-1 list-none">
                 {p.features.map(f => (
                   <li
                     key={f}
-                    className="flex items-start gap-2.5 break-keep border-b border-line py-[7px] text-[0.83rem] text-fg-muted"
+                    className="flex items-start gap-2.5 break-keep border-b border-line py-[7px] text-body text-fg-muted"
                   >
-                    <span className="mt-0.5 shrink-0 font-mono text-[0.7rem] text-accent">—</span>
+                    <span className="mt-0.5 shrink-0 font-mono text-label text-accent">—</span>
                     {f}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/contact"
-                className={`block w-full rounded p-3 text-center font-mono text-[0.75rem] tracking-[0.06em] transition-all duration-250 ${
+                className={`block w-full rounded p-3 text-center font-mono text-meta tracking-[0.06em] transition-all duration-250 ${
                   p.featured
                     ? 'border border-accent bg-accent font-medium text-canvas hover:bg-accent-2 hover:border-accent-2'
                     : 'border border-line-strong text-fg hover:border-accent hover:bg-accent hover:text-canvas'
@@ -108,28 +108,28 @@ export default function Pricing() {
         </div>
 
         <div className="reveal mt-4 rounded-lg border border-line bg-gradient-to-br from-accent-2/8 to-surface px-7 py-9">
-          <div className="mb-2.5 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-fg-subtle">
+          <div className="mb-2.5 font-mono text-label uppercase tracking-[0.12em] text-fg-subtle">
             Enterprise
           </div>
           <div className="mb-1.5 text-[1.4rem] font-bold text-fg">Full AI Security Suite</div>
           <div className="my-4 text-[1.6rem] font-bold text-accent-2">맞춰 견적</div>
-          <p className="mb-5 max-w-2xl break-keep text-[0.82rem] leading-[1.7] text-fg-muted">
+          <p className="mb-5 max-w-2xl break-keep text-body text-fg-muted">
             무제한 채널 + 전용서버 + AI 보안 관제 + 딥페이크 탐지 + HA/DR 이중화 + 백업 자동화 + 외부 운영 서버 복구·이전 지원.
           </p>
           <div className="mb-6 grid grid-cols-1 gap-x-5 sm:grid-cols-2 lg:grid-cols-4">
             {enterpriseFeatures.map(f => (
               <div
                 key={f}
-                className="flex gap-2.5 break-keep border-b border-line py-[7px] text-[0.83rem] text-fg-muted"
+                className="flex gap-2.5 break-keep border-b border-line py-[7px] text-body text-fg-muted"
               >
-                <span className="mt-0.5 shrink-0 font-mono text-[0.7rem] text-accent">—</span>
+                <span className="mt-0.5 shrink-0 font-mono text-label text-accent">—</span>
                 {f}
               </div>
             ))}
           </div>
           <Link
             href="/contact"
-            className="inline-block rounded bg-accent px-8 py-3 font-mono text-[0.75rem] font-medium tracking-[0.06em] text-canvas transition-colors duration-250 hover:bg-accent-2"
+            className="inline-block rounded bg-accent px-8 py-3 font-mono text-meta font-medium tracking-[0.06em] text-canvas transition-colors duration-250 hover:bg-accent-2"
           >
             엔터프라이즈 무료 상담 신청
           </Link>

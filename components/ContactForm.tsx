@@ -8,7 +8,7 @@ const SERVICES = ['IDC', 'AI', '보안', '스트리밍', '기타']
 const FIELD =
   'w-full rounded-lg border border-line bg-canvas px-4 py-3 text-fg placeholder:text-fg-subtle outline-none transition-colors focus:border-accent focus:ring-1 focus:ring-accent/60'
 
-const LABEL = 'mb-2 block text-[0.9rem] text-fg-muted'
+const LABEL = 'mb-2 block text-body text-fg-muted'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -89,12 +89,12 @@ export default function ContactForm() {
         </div>
         <div>
           <h3 className="mb-2 text-[1.25rem] font-bold text-fg">이메일 문의 폼</h3>
-          <p className="break-keep text-[0.95rem] leading-[1.6] text-fg-muted">
+          <p className="break-keep text-body text-fg-muted">
             상세한 제안서 요청, 기술 검토서 전달 등 문의사항을 남겨주시면 검토 후 24시간 이내에 회신해 드립니다.
             <br />
             <a
               href="mailto:contact@LunarFlux.ai"
-              className="mt-2 inline-block rounded-md border border-line bg-elev px-2 py-1 text-[0.9rem] font-semibold text-accent-2 transition-colors hover:border-accent-2"
+              className="mt-2 inline-block rounded-md border border-line bg-elev px-2 py-1 text-body font-semibold text-accent-2 transition-colors hover:border-accent-2"
             >
               contact@LunarFlux.ai
             </a>
@@ -140,7 +140,7 @@ export default function ContactForm() {
                 type="button"
                 aria-pressed={formData.service === service}
                 onClick={() => setFormData(prev => ({ ...prev, service }))}
-                className={`rounded-full border px-4 py-2 text-[0.9rem] transition-all duration-200 ${
+                className={`rounded-full border px-4 py-2 text-body transition-all duration-200 ${
                   formData.service === service
                     ? 'border-accent bg-accent/10 font-semibold text-accent'
                     : 'border-line bg-canvas text-fg-muted hover:border-line-strong hover:text-fg'
@@ -181,7 +181,7 @@ export default function ContactForm() {
         </div>
 
         <div className="rounded-lg border border-line bg-elev p-4">
-          <label htmlFor="cf-captcha" className="mb-3 block text-[0.9rem] text-fg-muted">
+          <label htmlFor="cf-captcha" className="mb-3 block text-body text-fg-muted">
             자동등록방지 (캡챠) *
           </label>
           <div className="flex flex-wrap items-center gap-3">
@@ -201,13 +201,13 @@ export default function ContactForm() {
         </div>
 
         {submitStatus === 'success' && (
-          <div className="rounded-lg bg-accent/10 p-3 text-[0.95rem] leading-relaxed text-accent">
+          <div className="rounded-lg bg-accent/10 p-3 text-body text-accent">
             성공적으로 문의가 접수되었습니다. 빠르게 회신드리겠습니다.
           </div>
         )}
 
         {submitStatus === 'error' && (
-          <div className="rounded-lg bg-danger/10 p-3 text-[0.95rem] leading-relaxed text-danger">
+          <div className="rounded-lg bg-danger/10 p-3 text-body text-danger">
             문의 접수 중 오류가 발생했습니다. 잠시 후 다시 시도해주시고, 계속 실패하면{' '}
             <a href="mailto:contact@LunarFlux.ai" className="font-semibold underline">
               contact@LunarFlux.ai
@@ -217,7 +217,7 @@ export default function ContactForm() {
         )}
 
         {submitStatus === 'unconfigured' && (
-          <div className="rounded-lg bg-warn/10 p-3 text-[0.95rem] leading-relaxed text-warn">
+          <div className="rounded-lg bg-warn/10 p-3 text-body text-warn">
             현재 온라인 접수가 준비 중입니다. 번거로우시겠지만{' '}
             <a href="mailto:contact@LunarFlux.ai" className="font-semibold underline">
               contact@LunarFlux.ai

@@ -37,8 +37,8 @@ const TONES = {
 function MenuItemTitle({ item, size }: { item: ServiceMenuLink; size: 'sm' | 'md' }) {
   return (
     <span
-      className={`block min-w-0 truncate font-semibold leading-[1.35] tracking-[-0.01em] text-fg ${
-        size === 'sm' ? 'text-[0.875rem]' : 'text-[0.95rem]'
+      className={`block min-w-0 font-semibold leading-[1.4] tracking-[-0.01em] text-fg ${
+        size === 'sm' ? 'text-body' : 'text-lead'
       }`}
     >
       {item.name}
@@ -243,7 +243,7 @@ export default function Nav() {
                         className={`min-w-0 px-2.5 ${ci < serviceMenu.length - 1 ? 'border-r border-line' : ''}`}
                       >
                         <div
-                          className={`mb-3 flex items-center gap-1.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] ${tone.label}`}
+                          className={`mb-3 flex items-center gap-1.5 font-mono text-label font-bold uppercase tracking-[0.1em] ${tone.label}`}
                         >
                           <span className={`inline-block h-px w-3 ${tone.bar}`} />
                           {cat.cat}
@@ -253,7 +253,7 @@ export default function Nav() {
                             <div key={sec.sub ?? si}>
                               {sec.sub && (
                                 <div
-                                  className={`mb-1.5 pl-0.5 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-fg-subtle ${
+                                  className={`mb-1.5 pl-0.5 font-mono text-label font-semibold uppercase tracking-[0.08em] text-fg-subtle ${
                                     si > 0 ? 'mt-3.5' : ''
                                   }`}
                                 >
@@ -278,13 +278,13 @@ export default function Nav() {
                                     </div>
                                     {item.highlight && (
                                       <span
-                                        className={`shrink-0 rounded-full border px-1.5 py-0.5 font-mono text-[0.56rem] tracking-[0.06em] ${tone.badge}`}
+                                        className={`shrink-0 rounded-full border px-1.5 py-0.5 font-mono text-label tracking-[0.06em] ${tone.badge}`}
                                       >
                                         NEW
                                       </span>
                                     )}
                                   </div>
-                                  <div className="mt-1 break-keep text-[0.8rem] leading-[1.45] text-fg-subtle">
+                                  <div className="mt-1 break-keep text-meta text-fg-subtle">
                                     {item.desc}
                                   </div>
                                 </Link>
@@ -300,14 +300,14 @@ export default function Nav() {
                   <Link
                     href="/#services"
                     onClick={() => setMenuOpen(false)}
-                    className="font-mono text-[0.78rem] tracking-[0.06em] text-accent hover:text-accent-2"
+                    className="font-mono text-meta tracking-[0.06em] text-accent hover:text-accent-2"
                   >
                     전체 서비스 보기 →
                   </Link>
                   <Link
                     href="/contact"
                     onClick={() => setMenuOpen(false)}
-                    className="font-mono text-[0.78rem] tracking-[0.06em] text-fg-subtle hover:text-fg"
+                    className="font-mono text-meta tracking-[0.06em] text-fg-subtle hover:text-fg"
                   >
                     무료 상담 신청 →
                   </Link>
@@ -339,7 +339,7 @@ export default function Nav() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="hidden rounded border border-accent px-4.5 py-2 font-mono text-[0.75rem] tracking-[0.05em] text-accent transition-colors duration-200 hover:bg-accent hover:text-canvas sm:block"
+            className="hidden rounded border border-accent px-4.5 py-2 font-mono text-meta tracking-[0.05em] text-accent transition-colors duration-200 hover:bg-accent hover:text-canvas sm:block"
           >
             무료 상담
           </Link>
@@ -374,7 +374,7 @@ export default function Nav() {
             return (
               <div key={cat.cat} className="mb-6">
                 <div
-                  className={`mb-2.5 font-mono text-[0.7rem] font-bold uppercase tracking-[0.1em] ${tone.label}`}
+                  className={`mb-2.5 font-mono text-label font-bold uppercase tracking-[0.1em] ${tone.label}`}
                 >
                   {cat.cat}
                 </div>
@@ -382,7 +382,7 @@ export default function Nav() {
                   <div key={sec.sub ?? si}>
                     {sec.sub && (
                       <div
-                        className={`mb-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.08em] text-fg-subtle ${
+                        className={`mb-2 font-mono text-label font-semibold uppercase tracking-[0.08em] text-fg-subtle ${
                           si > 0 ? 'mt-3' : ''
                         }`}
                       >
@@ -402,7 +402,7 @@ export default function Nav() {
                         </div>
                         {item.highlight && (
                           <span
-                            className={`shrink-0 rounded-full border px-2 py-1 font-mono text-[0.58rem] ${tone.badge}`}
+                            className={`shrink-0 rounded-full border px-2 py-1 font-mono text-label ${tone.badge}`}
                           >
                             NEW
                           </span>
@@ -438,7 +438,7 @@ export default function Nav() {
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-4 rounded border border-accent py-2.5 text-center font-mono text-[0.8rem] tracking-[0.05em] text-accent"
+              className="mt-4 rounded border border-accent py-2.5 text-center font-mono text-meta tracking-[0.05em] text-accent"
             >
               무료 상담
             </Link>

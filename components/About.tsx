@@ -40,14 +40,14 @@ export default function About() {
     <section id="about" className="relative z-10 bg-elev">
       <div className="container-page py-20 md:py-24">
         <div className="reveal">
-          <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+          <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
             <span className="inline-block h-px w-6 bg-accent-2" />
             Why LunarFlux AI
           </div>
           <h2 className="mb-4 text-[clamp(2rem,5vw,3.2rem)] font-bold leading-[1.1] tracking-[-0.02em] text-fg">
             왜 LunarFlux AI인가?
           </h2>
-          <p className="max-w-lg break-keep text-[0.95rem] leading-[1.75] text-fg-muted">
+          <p className="max-w-lg break-keep text-body text-fg-muted">
             인프라와 AI 보안, 스트리밍을 나눠 맡기지 않고 한 팀이 맡습니다. 설계부터 운영·장애 대응까지 이어집니다.
           </p>
         </div>
@@ -59,12 +59,12 @@ export default function About() {
                 key={w.num}
                 className="flex items-start gap-4 rounded-lg border border-line bg-surface p-5 transition-colors duration-300 hover:border-accent/40"
               >
-                <div className="mt-0.5 shrink-0 rounded border border-line bg-canvas px-2 py-1 font-mono text-[0.65rem] text-accent">
+                <div className="mt-0.5 shrink-0 rounded border border-line bg-canvas px-2 py-1 font-mono text-label text-accent">
                   {w.num}
                 </div>
                 <div>
-                  <h4 className="mb-1.5 text-[0.95rem] font-semibold text-fg">{w.title}</h4>
-                  <p className="break-keep text-[0.82rem] leading-[1.7] text-fg-muted">{w.desc}</p>
+                  <h4 className="mb-1.5 text-lead font-semibold leading-snug text-fg">{w.title}</h4>
+                  <p className="break-keep text-body text-fg-muted">{w.desc}</p>
                 </div>
               </div>
             ))}
@@ -79,11 +79,11 @@ export default function About() {
                   style={{ background: c }}
                 />
               ))}
-              <span className="ml-auto font-mono text-[0.65rem] tracking-[0.05em] text-fg-subtle">
+              <span className="ml-auto font-mono text-label tracking-[0.05em] text-fg-subtle">
                 lunarfluxai — security-monitor
               </span>
             </div>
-            <div className="overflow-x-auto p-5 text-[0.7rem] leading-loose sm:text-[0.78rem]">
+            <div className="overflow-x-auto p-5 text-label leading-loose sm:text-meta">
               {termLines.map((line, i) => (
                 <div
                   key={i}

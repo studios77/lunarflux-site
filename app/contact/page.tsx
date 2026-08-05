@@ -15,12 +15,12 @@ export default function ContactPage() {
       <main className="min-h-screen bg-canvas text-fg">
       <section className="container-page pb-20 pt-28 md:pt-30">
         <div className="mx-auto max-w-3xl">
-        <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+        <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
           <span className="inline-block h-px w-6 bg-accent-2" />
           Contact
         </div>
         <h1 className="mb-4 break-keep text-[clamp(2rem,5vw,3rem)] font-bold">무료 상담 및 문의</h1>
-        <p className="mb-12 break-keep text-[1.05rem] leading-[1.8] text-fg-muted">
+        <p className="mb-12 break-keep text-lead leading-[1.8] text-fg-muted">
           서비스 도입 견적이나 인프라 구축, 장애 대응과 관련된 궁금하신 점을 해결해 드립니다.
           <br />
           아래의 상담 채널 중 가장 편하신 방법으로 연락해 주세요.
@@ -36,16 +36,16 @@ export default function ContactPage() {
               <div>
                 <h3 className="mb-2 text-[1.25rem] font-bold">
                   실시간 채팅 상담
-                  <span className="ml-2 rounded-full bg-accent px-2 py-0.5 align-middle font-mono text-[0.65rem] text-canvas">
+                  <span className="ml-2 rounded-full bg-accent px-2 py-0.5 align-middle font-mono text-label text-canvas">
                     추천
                   </span>
                 </h3>
-                <p className="mb-4 break-keep text-[0.95rem] leading-[1.6] text-fg-muted">
+                <p className="mb-4 break-keep text-body text-fg-muted">
                   화면 우측 하단의 채팅 버튼을 클릭하시면 전문 엔지니어와 실시간으로 대화하실 수 있습니다.
                   <br />
                   가장 빠르고 정확한 기술 및 비용 안내를 받아보실 수 있습니다.
                 </p>
-                <p className="break-keep text-[0.85rem] text-fg-subtle">
+                <p className="break-keep text-body text-fg-subtle">
                   * 운영 시간: 평일 10:00 - 19:00 (긴급 장애는 24시간)
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function ContactPage() {
               </div>
               <div>
                 <h3 className="mb-2 text-[1.25rem] font-bold">긴급 기술 지원</h3>
-                <p className="mb-3 break-keep text-[0.95rem] leading-[1.6] text-fg-muted">
+                <p className="mb-3 break-keep text-body text-fg-muted">
                   LunarFlux 인프라 장애 발생 시나 긴급하게 대응이 필요한 사안은 즉각 연락 바랍니다.
                   <br />
                   (일반 비용 문의는 가급적 채팅/이메일 활용을 부탁드립니다.)

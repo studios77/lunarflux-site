@@ -99,7 +99,7 @@ const sectors = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mb-3 flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.15em] text-accent-2">
+    <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">
       <span className="inline-block h-px w-6 bg-accent-2" />
       {children}
     </div>
@@ -119,7 +119,7 @@ export default function EdgeSection() {
               세 가지 기술 강점
             </span>
           </h2>
-          <p className="max-w-xl break-keep text-[0.95rem] leading-[1.8] text-fg-muted">
+          <p className="max-w-xl break-keep text-body leading-[1.8] text-fg-muted">
             딥페이크 탐지, AI 보안 관제, 초저지연 스트리밍을 라이브·보안 환경에 맞춰 제공합니다. 설계부터 운영까지 한 팀이 맡습니다.
           </p>
         </div>
@@ -135,7 +135,7 @@ export default function EdgeSection() {
                 <div>
                   <div className="mb-4 flex items-center gap-2.5">
                     <span
-                      className={`rounded-full border px-3 py-0.5 font-mono text-[0.62rem] uppercase tracking-[0.12em] ${tone.badge}`}
+                      className={`rounded-full border px-3 py-0.5 font-mono text-label uppercase tracking-[0.12em] ${tone.badge}`}
                     >
                       {e.badge}
                     </span>
@@ -144,19 +144,19 @@ export default function EdgeSection() {
                   <h3 className="mb-1 break-keep text-[1.5rem] font-bold tracking-[-0.02em] text-fg">
                     {e.title}
                   </h3>
-                  <div className={`mb-4 font-mono text-[0.72rem] tracking-[0.04em] ${tone.label}`}>
+                  <div className={`mb-4 font-mono text-meta tracking-[0.04em] ${tone.label}`}>
                     {e.subtitle}
                   </div>
-                  <p className="break-keep text-[0.875rem] leading-[1.8] text-fg-muted">{e.desc}</p>
+                  <p className="break-keep text-body leading-[1.8] text-fg-muted">{e.desc}</p>
                   <div
-                    className={`mt-4.5 break-keep rounded-r-md border-l-[3px] px-3.5 py-2.5 text-[0.8rem] leading-[1.6] text-fg-muted ${tone.quote}`}
+                    className={`mt-4.5 break-keep rounded-r-md border-l-[3px] px-3.5 py-2.5 text-meta text-fg-muted ${tone.quote}`}
                   >
                     {e.highlight}
                   </div>
                   {e.link && (
                     <Link
                       href={e.link}
-                      className={`mt-5 inline-flex items-center gap-1.5 border-b pb-0.5 font-mono text-[0.75rem] tracking-[0.04em] transition-colors ${tone.link}`}
+                      className={`mt-5 inline-flex items-center gap-1.5 border-b pb-0.5 font-mono text-meta tracking-[0.04em] transition-colors ${tone.link}`}
                     >
                       상세 서비스 페이지 보기 →
                     </Link>
@@ -174,7 +174,7 @@ export default function EdgeSection() {
                       >
                         {s.val}
                       </div>
-                      <div className="font-mono text-[0.72rem] uppercase leading-normal tracking-[0.06em] text-fg-muted">
+                      <div className="font-mono text-meta uppercase tracking-[0.06em] text-fg-muted">
                         {s.label}
                       </div>
                     </div>
@@ -193,7 +193,7 @@ export default function EdgeSection() {
                 <div className="mb-2 text-[1.7rem] font-extrabold tracking-[-0.03em] text-fg sm:text-[2rem]">
                   {t.val}
                 </div>
-                <div className="break-keep font-mono text-[0.7rem] uppercase leading-normal tracking-[0.06em] text-fg-subtle">
+                <div className="break-keep font-mono text-label uppercase tracking-[0.06em] text-fg-subtle">
                   {t.label}
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function EdgeSection() {
             {sectors.map(s => (
               <div
                 key={s.label}
-                className="flex items-center gap-2 rounded-full border border-line bg-surface px-4.5 py-2.5 text-[0.82rem] text-fg-muted transition-colors duration-200 hover:border-accent hover:text-fg"
+                className="flex items-center gap-2 rounded-full border border-line bg-surface px-4.5 py-2.5 text-body text-fg-muted transition-colors duration-200 hover:border-accent hover:text-fg"
               >
                 <span>{s.icon}</span>
                 <span>{s.label}</span>
