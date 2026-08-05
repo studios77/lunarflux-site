@@ -53,8 +53,9 @@ lunarflux-site/
 │   ├── ScrollTop.tsx      # 최상단 이동 버튼
 │   ├── ServiceDetailPage.tsx # 서비스 상세 페이지 공통 레이아웃
 │   └── Services.tsx       # 서비스 목록 개요 섹션
+├── functions/             # Cloudflare Pages Functions (서버 측 엔드포인트)
+│   └── api/contact.ts     # POST /api/contact — 문의 폼을 관리자 웹훅으로 중계
 ├── lib/                   # 전역 데이터, 타입 정의 및 비즈니스 로직
-│   ├── adminNotify.ts     # 관리자 알림 발송 유틸리티
 │   ├── app-types.ts       # 공통 TypeScript 인터페이스 선언
 │   ├── seo.ts             # SEO 관련 설정 데이터
 │   ├── servicesData.ts    # 서비스 목록 및 상세 내용을 담은 정적 데이터

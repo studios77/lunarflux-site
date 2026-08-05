@@ -114,7 +114,24 @@ git config core.hooksPath .githooks   # 저장소를 새로 클론한 경우 1�
 
 `.env.example` 참고. 현재 선택 항목 하나뿐이며 없어도 개발·빌드가 동작합니다.
 
-- `NEXT_PUBLIC_ADMIN_NOTIFY_WEBHOOK` — 설정 시 문의·요금제 접수를 Slack/Discord 웹훅으로 전달
+- `ADMIN_NOTIFY_WEBHOOK` — 설정 시 문의 접수를 Slack/Discord 웹훅으로 전달
+
+**`NEXT_PUBLIC_` 접두사를 붙이지 마세요.** 웹훅 URL은 비밀이며, `NEXT_PUBLIC_`은 값을 브라우저 번들에 그대로 노출시킵니다. 운영 값은 저장소가 아니라 Cloudflare Pages → lunarflux → Settings → Environment variables 에 **Secret**으로 등록합니다.
+
+## Pages Functions
+
+정적 내보내기라 Next.js Route Handler는 쓸 수 없지만, 저장소 루트의 `functions/` 디렉터리는 **Cloudflare Pages Functions**로 배포되어 서버 측 엔드포인트 역할을 합니다.
+
+```
+functions/api/contact.ts   POST /api/contact — 문의 폼을 관리자 웹훅으로 중계
+```
+
+`npm run dev`(Next 개발 서버)는 이 경로를 서빙하지 않습니다. 로컬 검증은 빌드 후 wrangler로 합니다.
+
+```bash
+npm run build
+npx wrangler pages dev out --port 8788     # 비밀값은 .dev.vars 에 (gitignore 처리됨)
+```
 
 ## 참고 문서
 

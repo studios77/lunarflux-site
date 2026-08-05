@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { notifyAdminInstant, isAdminNotifyConfigured } from '@/lib/adminNotify'
 
 const SERVICES = ['IDC', 'AI', '보안', '스트리밍', '기타']
 
@@ -52,31 +51,28 @@ export default function ContactForm() {
       return
     }
 
-    // 웹훅이 설정되지 않았다면 전송할 곳이 없다. 접수된 것처럼 보이면 안 되므로
-    // 성공으로 처리하지 않고 대체 연락 수단을 안내한다.
-    if (!isAdminNotifyConfigured()) {
-      setSubmitStatus('unconfigured')
-      return
-    }
-
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
     try {
-      await notifyAdminInstant({
-        title: '웹사이트 문의 접수',
-        fields: {
-          '이름 / 직급': formData.name,
-          '회사명': formData.company,
-          '문의 서비스': formData.service,
-          '이메일': formData.email,
-          '문의 내용': formData.message,
-        },
+      // Cloudflare Pages Function이 웹훅으로 중계한다.
+      // 웹훅 URL은 서버 환경변수에만 있으므로 브라우저에 노출되지 않는다.
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       })
 
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', company: '', service: 'IDC', message: '' })
-      generateCaptcha()
+      if (res.ok) {
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', company: '', service: 'IDC', message: '' })
+        generateCaptcha()
+        return
+      }
+
+      // 503 = 관리자가 웹훅을 아직 설정하지 않음. 접수된 것처럼 보이면 안 되므로
+      // 성공으로 처리하지 않고 대체 연락 수단을 안내한다.
+      setSubmitStatus(res.status === 503 ? 'unconfigured' : 'error')
     } catch (error) {
       console.warn('[ContactForm] 문의 전송 실패', error)
       setSubmitStatus('error')
