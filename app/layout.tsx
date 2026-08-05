@@ -20,9 +20,11 @@ export const viewport: Viewport = {
   themeColor: '#0b0f1a',
 }
 
-export const metadataBase = new URL(SITE_ORIGIN)
-
 export const metadata: Metadata = {
+  // metadataBase 는 별도 export 가 아니라 metadata 의 필드여야 Next 가 인식합니다.
+  // 예전에는 최상위 export 로 두어 죽은 코드였고, 그 상태에서 OG 이미지를
+  // 추가하면 상대 경로가 절대 URL 로 확장되지 않습니다.
+  metadataBase: new URL(SITE_ORIGIN),
   applicationName: SITE_NAME,
   title: SEO_DEFAULT_TITLE,
   description: SEO_DEFAULT_DESCRIPTION,

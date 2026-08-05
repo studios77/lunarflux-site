@@ -188,7 +188,9 @@ export default function Nav() {
           onClick={() => { setMenuOpen(false); setMobileOpen(false) }}
           className="flex shrink-0 items-center gap-2 text-[1.2rem] font-extrabold tracking-[-0.02em] text-fg"
         >
-          <span className="inline-block size-2 animate-[pulseDot_2s_ease-in-out_infinite] rounded-full bg-accent shadow-[0_0_10px_var(--color-accent)]" />
+          {/* 옆 텍스트가 이미 사명을 읽어주므로 장식으로 처리합니다.
+              정적 내보내기라 next/image 최적화가 없어 일반 img 를 씁니다. */}
+          <img src="/logo.png" alt="" width={26} height={26} className="shrink-0" />
           LunarFlux<span className="text-accent">AI</span>
         </Link>
 
