@@ -1,4 +1,5 @@
-import { SITE_NAME } from './site'
+import type { Metadata } from 'next'
+import { SITE_NAME, SITE_ORIGIN, serviceCanonicalUrl } from './site'
 
 /**
  * 브라우저 탭과 검색 결과에 뜨는 기본 제목·설명.
@@ -83,3 +84,69 @@ export const SEO_KEYWORDS: string[] = [
   'LunarFlux AI',
   'lunarflux.ai',
 ]
+
+/**
+ * 서비스 상세 페이지 메타데이터.
+ *
+ * 예전에는 18개 페이지가 title·description·canonical 만 갖고 openGraph 는
+ * 루트 레이아웃 것을 상속했습니다. 그래서 어느 서비스 페이지를 공유하든
+ * 카카오톡·슬랙에 홈 카드가 떴습니다.
+ *
+ * 여기서 한 번에 만들어 주면 제목을 고칠 때 OG 가 따라오지 않는 일이 없습니다.
+ */
+export function serviceMetadata(opts: {
+  slug: string
+  title: string
+  description: string
+  keywords?: string[]
+}): Metadata {
+  const url = serviceCanonicalUrl(opts.slug)
+  return {
+    title: opts.title,
+    description: opts.description,
+    keywords: opts.keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      title: opts.title,
+      description: opts.description,
+      url,
+      siteName: SITE_NAME,
+      locale: 'ko_KR',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: opts.title,
+      description: opts.description,
+    },
+  }
+}
+
+/** 서비스 외 정적 페이지(문의 등) 메타데이터 */
+export function pageMetadata(opts: {
+  path: string
+  title: string
+  description: string
+  keywords?: string[]
+}): Metadata {
+  const url = `${SITE_ORIGIN}${opts.path}`
+  return {
+    title: opts.title,
+    description: opts.description,
+    keywords: opts.keywords,
+    alternates: { canonical: url },
+    openGraph: {
+      title: opts.title,
+      description: opts.description,
+      url,
+      siteName: SITE_NAME,
+      locale: 'ko_KR',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: opts.title,
+      description: opts.description,
+    },
+  }
+}

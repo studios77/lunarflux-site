@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { SITE_NAME, SITE_ORIGIN } from '@/lib/site'
+import { SITE_NAME, SITE_ORIGIN, SITE_VERIFICATION } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE, SEO_KEYWORDS } from '@/lib/seo'
 import ChatBot from '@/components/ChatBot'
 import './globals.css'
@@ -47,6 +47,13 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: SITE_ORIGIN,
+  },
+  // 코드가 비어 있으면 태그를 내보내지 않습니다. lib/site 의 SITE_VERIFICATION 참고.
+  verification: {
+    ...(SITE_VERIFICATION.google ? { google: SITE_VERIFICATION.google } : {}),
+    ...(SITE_VERIFICATION.naver
+      ? { other: { 'naver-site-verification': SITE_VERIFICATION.naver } }
+      : {}),
   },
   robots: {
     index: true,

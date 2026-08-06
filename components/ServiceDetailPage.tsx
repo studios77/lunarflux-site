@@ -5,39 +5,72 @@ import ScrollTop from '@/components/ScrollTop'
 import ServiceIcon from '@/components/ServiceIcon'
 import type { ServiceData } from '@/lib/servicesData'
 import { getRelatedServices } from '@/lib/servicesData'
-import { SITE_NAME, serviceCanonicalUrl } from '@/lib/site'
+import { SITE_NAME, SITE_ORIGIN, serviceCanonicalUrl } from '@/lib/site'
 
 const SECTION = 'py-20 md:py-28'
 const TH = 'border-b border-line px-5 py-3.5 text-center font-mono text-label font-normal uppercase tracking-[0.1em] text-fg-subtle'
 const TD = 'border-b border-line px-5 py-3.5 text-center text-meta text-fg-muted'
 
-function SectionLabel({ children, muted }: { children: React.ReactNode; muted?: boolean }) {
+/**
+ * 섹션 머리말.
+ *
+ * 예전에는 전부 <div> 라 문서에 h1 하나와 h2 하나뿐이었습니다. 검색엔진과
+ * 스크린리더 모두 페이지 구조를 읽지 못했습니다. 기본을 h2 로 바꾸고,
+ * 카테고리 표시처럼 제목이 아닌 자리에만 as="div" 를 씁니다.
+ */
+function SectionLabel({
+  children,
+  muted,
+  as = 'h2',
+}: {
+  children: React.ReactNode
+  muted?: boolean
+  as?: 'h2' | 'div'
+}) {
+  const Tag = as
   return (
-    <div
-      className={`mb-4 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] ${
+    <Tag
+      className={`mb-4 flex items-center gap-2.5 font-mono text-label font-normal uppercase tracking-[0.15em] ${
         muted ? 'text-fg-subtle' : 'text-accent-2'
       }`}
     >
       {!muted && <span className="inline-block h-px w-6 bg-accent-2" />}
       {children}
-    </div>
+    </Tag>
   )
 }
 
 export default function ServiceDetailPage({ s }: { s: ServiceData }) {
+  // Service 와 BreadcrumbList 를 한 그래프로 묶습니다.
+  // 이동경로가 있으면 검색 결과에 "lunarflux.ai › 서비스 › 제품명" 이 표시돼
+  // 클릭률이 올라가고, 사이트 구조도 함께 전달됩니다.
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: s.seoH1 || s.name,
-    description: s.desc,
-    provider: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: 'https://lunarflux.ai'
-    },
-    url: serviceCanonicalUrl(s.slug),
-    category: s.cat,
-    serviceType: s.name,
+    '@graph': [
+      {
+        '@type': 'Service',
+        name: s.seoH1 || s.name,
+        alternateName: s.name,
+        description: s.desc,
+        provider: {
+          '@type': 'Organization',
+          name: SITE_NAME,
+          url: SITE_ORIGIN,
+        },
+        url: serviceCanonicalUrl(s.slug),
+        category: s.cat,
+        serviceType: s.name,
+        areaServed: { '@type': 'Country', name: 'KR' },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: '홈', item: `${SITE_ORIGIN}/` },
+          { '@type': 'ListItem', position: 2, name: s.cat, item: `${SITE_ORIGIN}/#services` },
+          { '@type': 'ListItem', position: 3, name: s.name, item: serviceCanonicalUrl(s.slug) },
+        ],
+      },
+    ],
   }
 
   return (
@@ -51,15 +84,28 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
       <Nav />
       <main id="main-content" className="min-h-screen bg-canvas text-fg">
         <section className="container-page pb-20 pt-32 md:pb-28 md:pt-36">
-          <SectionLabel>{s.cat}</SectionLabel>
+          {/* 카테고리는 제목이 아니므로 div 로 둡니다 */}
+          <SectionLabel as="div">{s.cat}</SectionLabel>
           <div className="mb-6 flex flex-col items-start gap-6 sm:flex-row">
             <div className="flex size-18 shrink-0 items-center justify-center rounded-xl border border-line-strong bg-surface text-accent">
               <ServiceIcon slug={s.slug} className="size-9" />
             </div>
             <div>
+              {/* 제품·서비스명은 h1 위 브랜드 줄로 올립니다.
+                  h1 에는 검색어가 담긴 seoH1 을 씁니다 — 지금까지 18개 서비스
+                  모두 이 값을 정의해 두고 JSON-LD 에만 쓰고 있어, 정작 검색엔진이
+                  가장 무겁게 보는 h1 에는 짧은 브랜드명만 들어가 있었습니다. */}
+              {s.seoH1 && s.seoH1 !== s.name && (
+                <div className="mb-2 font-mono text-meta uppercase tracking-[0.1em] text-accent">
+                  {s.name}
+                </div>
+              )}
               <h1 className="mb-3 break-keep text-[clamp(1.85rem,4.8vw,3rem)] font-bold leading-[1.12] tracking-[-0.02em]">
-                {s.name}
+                {s.seoH1 || s.name}
               </h1>
+              {s.seoH2 && (
+                <p className="mb-3 max-w-2xl break-keep text-lead font-semibold text-fg">{s.seoH2}</p>
+              )}
               <p className="max-w-2xl break-keep text-lead leading-[1.8] text-fg-muted">{s.desc}</p>
             </div>
           </div>

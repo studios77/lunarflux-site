@@ -48,12 +48,34 @@ export default function Home() {
         '@type': 'Organization',
         '@id': `${site}/#organization`,
         name: SITE_NAME,
+        // 사업자등록상 법인명. 브랜드명과 달라 함께 싣습니다.
+        legalName: '주식회사 스트리밍랩스',
         url: site,
         description: SEO_DEFAULT_DESCRIPTION,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${site}/logo.png`,
+        },
+        image: `${site}/opengraph-image.png`,
+        // 주소·전화·이메일은 검색엔진이 사업체 신뢰도를 판단할 때 보는 항목입니다.
+        // Footer 에 이미 표기된 값과 같은 값을 씁니다.
         address: {
           '@type': 'PostalAddress',
+          streetAddress: '마곡중앙6로 21, 508호',
+          addressLocality: '강서구',
+          addressRegion: '서울특별시',
           addressCountry: 'KR',
         },
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            contactType: 'sales',
+            telephone: '+82-505-924-1004',
+            email: 'contact@lunarflux.ai',
+            areaServed: 'KR',
+            availableLanguage: ['ko', 'en'],
+          },
+        ],
         sameAs: [site],
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
