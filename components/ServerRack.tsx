@@ -39,11 +39,12 @@ function RackWall({ side }: { side: 'left' | 'right' }) {
       {DEPTH.map(d => (
         <div
           key={d}
-          className="relative flex flex-1 flex-col justify-center gap-[6px] border-x border-line-strong bg-gradient-to-b from-surface via-surface/85 to-elev px-1.5"
+          className="relative flex flex-1 flex-col justify-center gap-[6px] border-x border-line-strong bg-gradient-to-b from-line-strong/50 via-surface to-elev px-1.5"
           style={{
             // 뒤쪽으로 갈수록 어둡게. 안개에 잠기는 효과입니다.
             // 감쇠를 완만하게 둬야 뒤쪽 랙이 검게 뭉개지지 않습니다.
-            opacity: 1 - d * 0.1,
+            // 반올림하지 않으면 0.9299999999999999 같은 값이 그대로 HTML 에 박힙니다
+            opacity: Number((1 - d * 0.07).toFixed(2)),
             filter: d >= 2 ? `blur(${(d - 1) * 0.6}px)` : undefined,
           }}
         >
@@ -54,9 +55,9 @@ function RackWall({ side }: { side: 'left' | 'right' }) {
             return (
               <div
                 key={u}
-                className="flex items-center gap-1 rounded-[3px] border border-line-strong/70 bg-elev/85 px-1 py-[3px]"
+                className="flex items-center gap-1 rounded-[3px] border border-line-strong bg-surface/80 px-1 py-[3px]"
               >
-                <span className="block h-[2px] flex-1 rounded-full bg-line-strong" />
+                <span className="block h-[2px] flex-1 rounded-full bg-fg-subtle/45" />
                 <span
                   className={`block size-[3px] shrink-0 rounded-full ${
                     u % 3 === 0 ? 'bg-accent' : u % 3 === 1 ? 'bg-accent-2' : 'bg-indigo-400'
@@ -93,7 +94,7 @@ export default function ServerRack() {
 
             {/* 바닥. 눕혀서 통로 타일이 소실점으로 모이게 합니다. */}
             <div
-              className="absolute inset-x-0 bottom-0 h-[62%] bg-[linear-gradient(rgba(52,211,153,0.26)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.26)_1px,transparent_1px)] bg-[length:26px_26px]"
+              className="absolute inset-x-0 bottom-0 h-[62%] bg-[linear-gradient(rgba(52,211,153,0.38)_1px,transparent_1px),linear-gradient(90deg,rgba(52,211,153,0.38)_1px,transparent_1px)] bg-[length:26px_26px]"
               style={{
                 transformOrigin: 'bottom center',
                 transform: 'rotateX(74deg)',
@@ -102,21 +103,31 @@ export default function ServerRack() {
           </div>
         </div>
 
-        {/* 통로 안쪽 조명 — 소실점에서 새어 나오는 빛.
-            범위와 세기를 키워 장면 전체를 들어 올립니다. */}
+        {/* 통로 안쪽 조명 — 소실점에서 새어 나오는 빛. 숨쉬듯 밝기가 오르내립니다. */}
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_300px_220px_at_50%_46%,rgba(52,211,153,0.42),transparent_72%)]"
+          className="pointer-events-none absolute inset-0 animate-[glowPulse_4s_ease-in-out_infinite] bg-[radial-gradient(ellipse_340px_250px_at_50%_46%,rgba(52,211,153,0.58),transparent_74%)]"
         />
-        {/* 전체 밝기 리프트. 어두운 오버레이만 걷으면 랙이 탁해 보여
-            은은한 화이트를 얹어 노출을 올립니다. */}
-        <div className="pointer-events-none absolute inset-0 bg-white/6 mix-blend-overlay" />
-        {/* 볼류메트릭 헤이즈. 가장자리만 살짝 눌러 비네팅 정도로 둡니다. */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_45%,rgba(7,11,20,0.42)_92%)]" />
-        {/* 아래쪽만 페이드. 위까지 덮으면 랙 상단이 뭉개집니다. */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-b from-transparent to-canvas/85" />
+        {/* 전체 밝기 리프트. 이 한 값으로 장면 노출을 조절합니다. */}
+        <div className="pointer-events-none absolute inset-0 bg-white/12 mix-blend-overlay" />
+
+        {/* 통로를 타고 이쪽으로 흘러나오는 데이터 빔.
+            소실점 근처에서 좁게 시작해 앞으로 오며 넓어집니다. */}
+        {[0, 1, 2].map(i => (
+          <div
+            key={i}
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-[46%] h-[3px] w-32 -translate-x-1/2 animate-[aisleBeam_3.6s_ease-out_infinite] rounded-full bg-[linear-gradient(90deg,transparent,rgba(52,211,153,0.9),rgba(34,211,238,0.7),transparent)] blur-[1px]"
+            style={{ animationDelay: `${i * 1200}ms` }}
+          />
+        ))}
+
+        {/* 볼류메트릭 헤이즈. 가장자리만 눌러 비네팅 정도로 둡니다. */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,transparent_58%,rgba(7,11,20,0.30)_95%)]" />
+        {/* 아래쪽만 페이드. 하단 라벨이 읽히도록 최소한만 덮습니다. */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-b from-transparent to-canvas/75" />
 
         {/* 훑고 지나가는 스캔선 */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-16 animate-[rackScan_6s_linear_infinite] bg-[linear-gradient(to_bottom,transparent,rgba(52,211,153,0.14),transparent)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-16 animate-[rackScan_6s_linear_infinite] bg-[linear-gradient(to_bottom,transparent,rgba(52,211,153,0.18),transparent)]" />
 
         {/* 좌상단 LIVE 칩 */}
         <div className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full border border-accent/40 bg-canvas/75 px-2.5 py-1 backdrop-blur">

@@ -223,6 +223,20 @@ body::before {
   50%      { transform: scaleX(1); }
 }
 
+/* 통로 안쪽에서 이쪽으로 흘러나오는 데이터 빔.
+   소실점에서 좁게 시작해 앞으로 오면서 넓어지고 흐려집니다. */
+@keyframes aisleBeam {
+  0%   { transform: translateY(0) scaleX(0.2); opacity: 0; }
+  18%  { opacity: 0.85; }
+  100% { transform: translateY(190px) scaleX(2.6); opacity: 0; }
+}
+
+/* 소실점 조명이 숨쉬듯 밝기가 오르내립니다 */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.72; }
+  50%      { opacity: 1; }
+}
+
 /* 모션 최소화를 선호하는 사용자에게는 등장 애니메이션을 끕니다 */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
