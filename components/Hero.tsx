@@ -1,82 +1,151 @@
-// 수치는 전부 근거가 있는 것만 씁니다.
-// IDS 룰 수·WAF 규칙 수는 Lunarflux Guard 사양서 기준입니다.
 import Link from 'next/link'
 
-// 3개로 줄입니다. 넷을 늘어놓으면 무엇이 중요한지 흐려집니다.
-// Guard 관련 수치는 바로 아래 제품 블록이 다시 보여주므로 여기서는 겹치지 않게.
+/**
+ * 관제 중심 히어로.
+ *
+ * 큰 제목만 놓는 대신 방화벽이 실제로 무엇을 보고 있는지를 첫 화면에 둡니다.
+ * IDC·SI 업체 사이트와 구분되는 지점이라, 보안 회사로 읽히게 하는 것이 목적입니다.
+ *
+ * 수치 표기 원칙:
+ *  - 티커와 우측 카드의 값(51,977 · 105 · 0)은 콘솔 실측 고정값입니다.
+ *  - 인시던트 목록은 화면 형태를 보이기 위한 예시이며, 출발지는 국가와
+ *    ASN 유형까지만 씁니다. 실제 공격자 IP 는 싣지 않습니다.
+ *    실시간처럼 오해되지 않도록 "예시 화면" 을 명시합니다.
+ */
+const TICKER = [
+  { label: '데이터패스', value: 'ENFORCING' },
+  { label: 'IDS', value: '51,977 시그니처' },
+  { label: 'WAF', value: '105 규칙' },
+  { label: '지오블로킹', value: '적용 중' },
+  { label: '외부 전송', value: '0' },
+]
+
+const INCIDENTS = [
+  { score: 71, cc: 'US', org: 'Cloud Provider (ASN)', tags: ['Scanner', '계층모순'] },
+  { score: 68, cc: 'US', org: 'Broadband ISP (ASN)', tags: ['RCE·LFI·CMDi'] },
+  { score: 65, cc: 'CN', org: 'Regional ISP (ASN)', tags: ['봇 의심'] },
+]
+
 const STATS = [
-  { num: '24', unit: '/7', label: 'AI 자율 관제' },
-  { num: '10', unit: '종', label: '보안 서비스' },
-  { num: '99.99', unit: '%', label: 'Uptime SLA' },
+  { value: '51,977', label: 'IDS 시그니처', fill: '88%' },
+  { value: '105', label: '자체 WAF 규칙 · 21 카테고리', fill: '72%' },
+  { value: '0', label: '외부 전송 · 로컬 AI 분석', fill: '100%' },
 ]
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      // 100vh 는 iOS 주소창 때문에 실제보다 커져 하단 지표가 잘립니다.
-      // svh 로 잡고, 화면을 꽉 채우기보다 다음 섹션이 살짝 보이게 둡니다.
-      className="relative z-10 flex min-h-[88svh] items-center overflow-hidden pb-20 pt-28 md:pt-32"
-    >
-      {/* 앰비언트 글로우 */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[16%] h-[420px] w-[min(920px,120vw)] -translate-x-1/2 bg-[radial-gradient(ellipse_at_40%_40%,rgba(52,211,153,0.18),transparent_58%),radial-gradient(ellipse_at_72%_32%,rgba(34,211,238,0.14),transparent_52%),radial-gradient(ellipse,rgba(99,102,241,0.10)_36%,transparent_74%)] blur-[10px] md:h-[560px]"
-      />
-
-      <div className="container-page text-center">
-        <div className="mb-8 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-sm border border-accent/35 bg-accent/5 px-4 py-1.5 font-mono text-label uppercase tracking-[0.12em] text-accent">
-          <span className="inline-block size-1.5 animate-[pulseDot_1.5s_ease-in-out_infinite] rounded-full bg-accent" />
-          차세대 방화벽 · AI 보안 관제 · 클라우드 보안
-        </div>
-
-        {/* 88px 까지 키우면 두 줄 제목이 화면을 압도해 성기게 보입니다.
-            상한을 낮추고 아래 문단·지표와의 비율을 맞춥니다. */}
-        <h1 className="mx-auto mb-6 max-w-3xl animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.25rem,5.5vw,4.25rem)] font-extrabold leading-[1.1] tracking-[-0.03em] text-fg">
-          <span className="bg-gradient-to-br from-accent via-accent-2 to-indigo-400 bg-clip-text text-transparent">
-            AI 보안
+    <>
+      {/* 상단 상태 티커. 가로 스크롤을 허용해 좁은 화면에서 줄바꿈으로 뭉치지 않게 합니다. */}
+      <div className="relative z-10 border-b border-line bg-elev">
+        <div className="container-page flex items-center gap-4 overflow-x-auto py-2.5">
+          <span className="flex shrink-0 items-center gap-1.5 font-mono text-label font-bold text-danger">
+            <span className="inline-block size-1.5 animate-[pulseDot_1.5s_ease-in-out_infinite] rounded-full bg-danger" />
+            LIVE
           </span>
-          을 설계하고
-          <br />
-          <span className="font-bold text-fg-muted">직접 운영합니다</span>
-        </h1>
-
-        <p className="mx-auto mb-12 max-w-xl animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-base leading-[1.85] text-fg-muted">
-          자체 개발한 차세대 방화벽 Lunarflux Guard를 중심으로, 네트워크·클라우드·AI 보안과 24시간 관제까지 한 팀이 맡습니다.
-        </p>
-
-        <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
-          <Link
-            href="/contact"
-            className="rounded-full bg-accent px-10 py-4 text-body font-semibold tracking-[0.02em] text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.28)] transition duration-300 hover:-translate-y-0.5 hover:bg-accent-2 hover:shadow-[0_14px_36px_rgba(34,211,238,0.38)]"
-          >
-            무료 상담 신청
-          </Link>
-          <Link
-            href="/services/lunarflux-guard/"
-            className="rounded-full border border-line-strong bg-surface/60 px-10 py-4 text-body font-semibold tracking-[0.02em] text-fg backdrop-blur transition duration-300 hover:-translate-y-0.5 hover:border-accent/60 hover:bg-surface"
-          >
-            Lunarflux Guard 보기
-          </Link>
-        </div>
-
-        <div className="mx-auto mt-20 grid max-w-3xl animate-[fadeUp_0.8s_0.4s_ease_both] grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-          {STATS.map(s => (
-            <div
-              key={s.label}
-              className="rounded-2xl border border-line bg-surface/60 px-4 py-6 text-center backdrop-blur transition-colors duration-300 hover:border-accent/40 sm:px-8"
-            >
-              <span className="mb-1 block text-[2rem] font-extrabold leading-tight text-fg sm:text-[2.8rem]">
-                {s.num}
-                <span className="ml-0.5 text-[1.2rem] text-accent sm:text-[1.6rem]">{s.unit}</span>
-              </span>
-              <span className="text-meta font-semibold tracking-[0.04em] text-fg-subtle sm:text-body">
-                {s.label}
-              </span>
-            </div>
+          {TICKER.map(t => (
+            <span key={t.label} className="flex shrink-0 items-center gap-1.5 font-mono text-label text-fg-subtle">
+              <span className="text-line-strong">·</span>
+              {t.label}
+              <b className="font-semibold text-fg-muted">{t.value}</b>
+            </span>
           ))}
         </div>
       </div>
-    </section>
+
+      <section id="hero" className="relative z-10 overflow-hidden pb-24 pt-16 md:pt-20">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_900px_460px_at_50%_8%,rgba(52,211,153,0.14),transparent_62%),radial-gradient(ellipse_620px_340px_at_82%_40%,rgba(248,113,113,0.09),transparent_58%)]"
+        />
+
+        <div className="container-page relative">
+          <div className="mb-14 max-w-2xl">
+            <div className="mb-6 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3.5 py-1.5 font-mono text-label uppercase tracking-[0.12em] text-accent">
+              차세대 방화벽 · AI 보안 관제 · 클라우드 보안
+            </div>
+            <h1 className="mb-5 animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.25rem,5.5vw,3.4rem)] font-extrabold leading-[1.12] tracking-[-0.03em] text-fg">
+              <span className="bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">
+                AI 보안
+              </span>
+              을 설계하고
+              <br />
+              직접 운영합니다
+            </h1>
+            <p className="mb-8 max-w-xl animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-lead text-fg-muted">
+              자체 개발한 Lunarflux Guard가 네트워크 계층에서 직접 지문을 수집합니다. 분석은 전부 온프레미스에서 끝납니다.
+            </p>
+            <div className="flex animate-[fadeUp_0.8s_0.3s_ease_both] flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+              <Link
+                href="/contact"
+                className="rounded-full bg-accent px-9 py-3.5 text-center text-body font-semibold text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.28)] transition-colors hover:bg-accent-2"
+              >
+                무료 상담 신청
+              </Link>
+              <Link
+                href="/services/lunarflux-guard/"
+                className="rounded-full border border-line-strong bg-surface/60 px-9 py-3.5 text-center text-body font-semibold text-fg backdrop-blur transition-colors hover:border-accent hover:text-accent"
+              >
+                제품 살펴보기
+              </Link>
+            </div>
+          </div>
+
+          {/* 관제 보드 */}
+          <div className="grid animate-[fadeUp_0.8s_0.4s_ease_both] grid-cols-1 gap-4 lg:grid-cols-[1.35fr_1fr]">
+            <div className="rounded-2xl border border-line bg-surface/55 p-6 backdrop-blur">
+              <div className="mb-5 flex items-center gap-2.5">
+                <span className="font-mono text-label uppercase tracking-[0.12em] text-accent-2">
+                  활성 인시던트
+                </span>
+                {/* 실시간 데이터로 오해되지 않도록 명시합니다 */}
+                <span className="ml-auto font-mono text-label text-fg-subtle">점수순 · 예시 화면</span>
+              </div>
+              <div className="flex flex-col">
+                {INCIDENTS.map(inc => (
+                  <div
+                    key={inc.org}
+                    className="flex items-center gap-3 border-t border-line py-3.5 first:border-t-0 first:pt-0"
+                  >
+                    <span className="min-w-9 shrink-0 font-mono text-[1.2rem] font-extrabold leading-none text-danger">
+                      {inc.score}
+                    </span>
+                    <span className="shrink-0 rounded border border-line bg-elev px-2 py-0.5 font-mono text-label text-fg-muted">
+                      {inc.cc}
+                    </span>
+                    <span className="min-w-0 flex-1 truncate text-body text-fg-muted">{inc.org}</span>
+                    <span className="hidden shrink-0 gap-1.5 sm:flex">
+                      {inc.tags.map(tag => (
+                        <span
+                          key={tag}
+                          className="whitespace-nowrap rounded-full border border-line bg-elev px-2.5 py-0.5 font-mono text-label text-fg-subtle"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2.5">
+              {STATS.map(s => (
+                <div key={s.label} className="rounded-xl border border-line bg-elev px-5 py-4">
+                  <div className="text-[1.5rem] font-extrabold leading-none tracking-[-0.02em] text-accent">
+                    {s.value}
+                  </div>
+                  <div className="mt-1.5 break-keep font-mono text-label uppercase tracking-[0.06em] text-fg-subtle">
+                    {s.label}
+                  </div>
+                  <div className="mt-3 h-1 overflow-hidden rounded-full bg-line">
+                    <span className="block h-full bg-accent" style={{ width: s.fill }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }

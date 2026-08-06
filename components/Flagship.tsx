@@ -15,12 +15,6 @@ const POINTS = [
   { title: '외부 전송 0', desc: '위협 브리핑을 온프레미스 sLLM이 만듭니다. 로그가 밖으로 나가지 않습니다.' },
 ]
 
-const STATS = [
-  { val: '51,977', label: 'IDS 시그니처' },
-  { val: '105', label: '자체 WAF 규칙' },
-  { val: '0', label: '외부 전송' },
-]
-
 export default function Flagship() {
   return (
     <section className="relative z-10 bg-elev">
@@ -58,21 +52,10 @@ export default function Flagship() {
             </Link>
           </div>
 
-          <div className="flex flex-col gap-5 self-start">
+          {/* 수치 카드는 히어로 관제 보드가 이미 같은 값을 보여주므로 여기서는 뺍니다.
+              콘솔 미리보기는 메뉴 구조를 보여주는 것이라 인시던트 보드와 겹치지 않습니다. */}
+          <div className="self-start">
             <ConsolePreview />
-
-            <div className="grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-line bg-line">
-              {STATS.map(s => (
-                <div key={s.label} className="bg-surface px-4 py-5 text-center">
-                  <div className="text-[1.6rem] font-extrabold leading-none tracking-[-0.03em] text-accent">
-                    {s.val}
-                  </div>
-                  <div className="mt-2 break-keep font-mono text-label uppercase tracking-[0.06em] text-fg-subtle">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
