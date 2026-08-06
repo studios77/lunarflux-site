@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import ServerRack from '@/components/ServerRack'
 
 /**
  * 관제 중심 히어로.
@@ -59,7 +60,11 @@ export default function Hero() {
         />
 
         <div className="container-page relative">
-          <div className="mb-14 max-w-2xl">
+          {/* 상단은 2열: 좌측 카피, 우측 랙 비주얼.
+              lg 미만에서는 랙을 감춥니다 — 좁은 화면에서 세로로 쌓으면
+              본문이 첫 화면 밖으로 밀려납니다. */}
+          <div className="mb-14 grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_360px] lg:gap-16">
+          <div className="max-w-2xl">
             <div className="mb-6 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3.5 py-1.5 font-mono text-label uppercase tracking-[0.12em] text-accent">
               차세대 방화벽 · AI 보안 관제 · 클라우드 보안
             </div>
@@ -87,6 +92,11 @@ export default function Hero() {
               >
                 제품 살펴보기
               </Link>
+            </div>
+          </div>
+
+            <div className="hidden animate-[fadeUp_0.8s_0.35s_ease_both] lg:block">
+              <ServerRack />
             </div>
           </div>
 
