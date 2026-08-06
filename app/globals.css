@@ -133,6 +133,33 @@ body::before {
 
 ::selection { background: rgba(52, 211, 153, 0.28); color: #ffffff; }
 
+/* ---------------------------------------------------------------------------
+   키보드 포커스 링.
+
+   지금까지는 브라우저 기본 outline 에만 의존했는데, 다크 배경에서는 거의
+   보이지 않아 키보드 사용자가 자기 위치를 잃었습니다. :focus-visible 이라
+   마우스 클릭에는 링이 뜨지 않습니다.
+
+   :where() 로 감싸 특이도를 0으로 두었습니다 — 개별 컴포넌트가 자체 포커스
+   스타일을 주면 그쪽이 이깁니다(예: ContactForm 의 focus:ring).
+--------------------------------------------------------------------------- */
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* 본문 바로가기. 평소에는 화면 밖에 두고 포커스를 받으면 나타납니다. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 300;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease;
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--color-elev); }
 ::-webkit-scrollbar-thumb { background: var(--color-line-strong); border-radius: 2px; }

@@ -105,7 +105,7 @@ export default function Home() {
       />
       <div className="grid-bg" />
       <Nav />
-      <main>
+      <main id="main-content">
         {/* 자체 제품 → 보안 4개 축 → 마무리. 예전의 EdgeSection·About 은
             내용이 겹치고 길어 Flagship·ClosingCta 로 흡수했습니다. */}
         <Hero />

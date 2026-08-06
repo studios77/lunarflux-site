@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const links = [
   ['서비스', '/#services'],
   ['소개', '/#about'],
@@ -41,15 +43,18 @@ export default function Footer() {
             ))}
           </div>
 
-          <ul className="flex list-none flex-col gap-3 md:items-end">
+          {/* 패딩 없는 링크는 실효 높이가 20px 남짓이라 손가락으로 누르기 어렵습니다.
+              inline-flex + min-h 로 터치 영역을 확보하고, gap 을 줄여 시각적
+              간격은 그대로 유지합니다. */}
+          <ul className="flex list-none flex-col gap-0.5 md:items-end">
             {links.map(([label, href]) => (
               <li key={label}>
-                <a
+                <Link
                   href={href}
-                  className="font-mono text-body tracking-[0.06em] text-fg-muted transition-colors duration-200 hover:text-accent"
+                  className="inline-flex min-h-11 items-center font-mono text-body tracking-[0.06em] text-fg-muted transition-colors duration-200 hover:text-accent"
                 >
                   {label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

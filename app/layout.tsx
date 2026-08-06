@@ -85,6 +85,14 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: REVEAL_FALLBACK }} />
       </head>
       <body>
+        {/* Tab 첫 타에 나타납니다. 이게 없으면 키보드 사용자는 매 페이지마다
+            로고와 서비스 메뉴를 지나야 본문에 닿습니다. */}
+        <a
+          href="#main-content"
+          className="skip-link rounded-lg bg-accent px-4 py-2.5 text-body font-semibold text-canvas"
+        >
+          본문으로 건너뛰기
+        </a>
         {children}
         {/*
           모든 페이지에 채팅을 띄웁니다. 홈에만 두면 /contact 가 안내하는

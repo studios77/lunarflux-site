@@ -1,18 +1,23 @@
+import type { Metadata } from 'next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
-import { SITE_NAME } from '@/lib/site'
+import { SITE_NAME, pageCanonicalUrl } from '@/lib/site'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: `무료 상담 | ${SITE_NAME}`,
-  description: 'LunarFlux AI 서비스 문의 및 무료 상담 안내',
+  description: 'AI 보안 도입 상담, 인프라 구축 견적, 긴급 장애 대응 문의를 받습니다.',
+  keywords: ['보안 상담', 'NGFW 도입 문의', 'AI 보안 견적', 'IDC 문의'],
+  // canonical 을 지정하지 않으면 루트 레이아웃의 값(홈)을 상속받아
+  // 이 페이지가 홈을 정본으로 가리키고 색인에서 빠집니다.
+  alternates: { canonical: pageCanonicalUrl('/contact/') },
 }
 
 export default function ContactPage() {
   return (
     <>
       <Nav />
-      <main className="min-h-screen bg-canvas text-fg">
+      <main id="main-content" className="min-h-screen bg-canvas text-fg">
       <section className="container-page pb-24 pt-32 md:pt-36">
         <div className="mx-auto max-w-3xl">
         <div className="mb-3 flex items-center gap-2.5 font-mono text-label uppercase tracking-[0.15em] text-accent-2">

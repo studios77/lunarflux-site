@@ -49,7 +49,7 @@ export default function ServiceDetailPage({ s }: { s: ServiceData }) {
       {/* Nav·Footer는 <main> 밖에 둡니다. 랜드마크가 겹치면 스크린리더의
           "본문으로 건너뛰기"가 내비게이션부터 읽습니다. */}
       <Nav />
-      <main className="min-h-screen bg-canvas text-fg">
+      <main id="main-content" className="min-h-screen bg-canvas text-fg">
         <section className="container-page pb-20 pt-32 md:pb-28 md:pt-36">
           <SectionLabel>{s.cat}</SectionLabel>
           <div className="mb-6 flex flex-col items-start gap-6 sm:flex-row">

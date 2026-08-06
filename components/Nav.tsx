@@ -369,7 +369,9 @@ export default function Nav() {
             onClick={() => setMobileOpen(o => !o)}
             aria-label={mobileOpen ? '메뉴 닫기' : '메뉴 열기'}
             aria-expanded={mobileOpen}
-            className="flex p-1 text-fg md:hidden"
+            // 예전 p-1 은 실효 30x30px 로, 모바일 전용 요소인데 가장 작았습니다.
+            // -mr-2 로 시각적 위치는 유지하면서 터치 영역만 44px 로 넓힙니다.
+            className="-mr-2 flex size-11 items-center justify-center text-fg md:hidden"
           >
             {mobileOpen ? (
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">

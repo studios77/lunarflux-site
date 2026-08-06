@@ -140,7 +140,7 @@ export default function ContactForm() {
                 type="button"
                 aria-pressed={formData.service === service}
                 onClick={() => setFormData(prev => ({ ...prev, service }))}
-                className={`rounded-full border px-4 py-2 text-body transition-all duration-200 ${
+                className={`min-h-11 rounded-full border px-4 py-2 text-body transition-all duration-200 ${
                   formData.service === service
                     ? 'border-accent bg-accent/10 font-semibold text-accent'
                     : 'border-line bg-canvas text-fg-muted hover:border-line-strong hover:text-fg'
