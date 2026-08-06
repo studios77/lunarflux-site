@@ -26,6 +26,12 @@ export const SITE_VERIFICATION = {
    * 지우면 네이버 재검증에서 미인증으로 떨어지니 SEO 작업 시 주의하세요.
    */
   naver: 'f5c658e8819d2cff69bcd33a949fcf2885eab0c0',
+  /**
+   * 비워 둡니다. 구글은 DNS TXT 로 이미 인증돼 있습니다.
+   *   google-site-verification=QnuX6yTbHeAPL7CemB-JD07LDE5Po6sHyYqbiwgwbr8
+   * DNS 방식은 사이트 코드와 무관하게 유지되므로 메타태그를 더하면 중복이고
+   * 관리 지점만 늘어납니다. DNS 레코드를 지우는 경우에만 여기에 코드를 넣으세요.
+   */
   google: '',
 } as const
 
