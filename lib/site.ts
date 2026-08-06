@@ -20,7 +20,12 @@ export function serviceCanonicalUrl(slug: string): string {
  * 제출하지 않으면 색인이 거의 되지 않습니다.
  */
 export const SITE_VERIFICATION = {
-  naver: '',
+  /**
+   * 2026-04-25(197fd97)에 넣었다가 2026-05-01(d3b0ad3) SEO 정리 중 유실된 값입니다.
+   * 서치어드바이저 등록은 살아 있으므로 같은 코드를 되돌려 인증을 복구합니다.
+   * 지우면 네이버 재검증에서 미인증으로 떨어지니 SEO 작업 시 주의하세요.
+   */
+  naver: 'f5c658e8819d2cff69bcd33a949fcf2885eab0c0',
   google: '',
 } as const
 
