@@ -58,37 +58,58 @@ export default function Home() {
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: `${SITE_NAME} 서비스`,
+          // 서비스 목록 순서를 실제 주력에 맞춥니다 — 보안 4축 → 인프라 → 스트리밍.
           itemListElement: [
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: '스트리밍 솔루션 / 영상 스트리밍 플랫폼',
-                description: 'UltraStreamingEngine 기반 초저지연 LL-HLS 라이브 스트리밍, VOD·멀티 플랫폼 동시 송출.',
+                name: '네트워크 보안 / 차세대 방화벽',
+                description:
+                  '자체 개발 NGFW Lunarflux Guard(NGFW·WAF·로컬 AI 융합 어플라이언스), IDS/IPS 침입탐지, 제로트러스트 설계, 스트림 이상탐지.',
               },
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'IDC / 클라우드 인프라',
-                description: 'IDC 서버 임대·코로케이션·위탁운영, HA·DB 이중화, 장애 복구 및 이전.',
+                name: '클라우드 보안',
+                description:
+                  '클라우드 보안 형상 진단(CSPM), 컨테이너·쿠버네티스 워크로드 보호(CWPP), 권한 정리 및 컴플라이언스 매핑.',
               },
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: 'AI 보안 / 네트워크 보안',
-                description: 'AI 보안 관제, 스트림 이상 탐지, 딥페이크 검출, 네트워크 보안·IDS/IPS, LLM 보안 감사, 제로트러스트 설계 등',
+                name: 'AI · 데이터 보안',
+                description: '생성형 AI 유출·프롬프트 인젝션 점검(LLM 보안 감사), 실시간 딥페이크 탐지.',
               },
             },
             {
               '@type': 'Offer',
               itemOffered: {
                 '@type': 'Service',
-                name: '백업/DR 솔루션',
-                description: '데이터 백업, 재해복구(DR), 이중화 솔루션 서비스',
+                name: '보안 운영 / 24시간 관제',
+                description: 'AI 자율 보안 관제(SOC), LLM 기반 관제 에이전트로 탐지→분석→대응 자동화.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: 'IDC 인프라',
+                description:
+                  'IDC 서버 임대·코로케이션, GPU 전용 호스팅(AIDC), 위탁운영, HA·DB 이중화, 장애 복구 및 이전.',
+              },
+            },
+            {
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: '라이브 스트리밍',
+                description:
+                  'UltraStreamingEngine 기반 LL-HLS 초저지연 라이브 스트리밍, VOD·멀티 플랫폼 동시 송출.',
               },
             },
           ],
