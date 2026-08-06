@@ -17,11 +17,18 @@
  */
 
 interface Env {
-  /** Resend API 키. https://resend.com — 도메인 인증 후 발급 */
+  /**
+   * ZeptoMail(Zoho) Send Mail 토큰. Zoho 메일을 쓰는 경우 이쪽이 자연스럽습니다.
+   * 값은 "Zoho-enczapikey ..." 에서 뒤쪽 키만 넣어도 되고 통째로 넣어도 됩니다.
+   */
+  ZEPTOMAIL_TOKEN?: string
+  /** ZeptoMail 리전 엔드포인트. 기본 api.zeptomail.com (미국). EU 는 api.zeptomail.eu */
+  ZEPTOMAIL_HOST?: string
+  /** Resend API 키. ZeptoMail 대신 쓸 경우. https://resend.com */
   RESEND_API_KEY?: string
   /** 문의를 받을 주소. 예: contact@lunarflux.ai */
   CONTACT_TO_EMAIL?: string
-  /** 발신 주소. Resend 에서 인증한 도메인이어야 합니다. */
+  /** 발신 주소. 발송 서비스에서 인증한 도메인이어야 합니다. */
   CONTACT_FROM_EMAIL?: string
   /** Slack·Discord·범용 웹훅 URL */
   ADMIN_NOTIFY_WEBHOOK?: string
@@ -62,14 +69,8 @@ function escapeHtml(s: string): string {
 
 type Field = { label: string; value: string }
 
-async function sendEmail(env: Env, values: Field[], replyTo: string): Promise<boolean> {
-  const key = env.RESEND_API_KEY?.trim()
-  const to = env.CONTACT_TO_EMAIL?.trim()
-  if (!key || !to) return false
-
-  // 발신 주소는 Resend 에서 인증한 도메인이어야 합니다. 미지정 시 관례적인 값.
-  const from = env.CONTACT_FROM_EMAIL?.trim() || 'LunarFlux AI <noreply@lunarflux.ai>'
-
+/** 메일 제목·본문은 두 발송 서비스가 공유합니다. */
+function compose(values: Field[]) {
   const rows = values
     .map(
       v =>
@@ -80,24 +81,76 @@ async function sendEmail(env: Env, values: Field[], replyTo: string): Promise<bo
     )
     .join('')
 
+  return {
+    subject: `[문의] ${values.find(v => v.label === '이름 / 직급')?.value ?? ''} — ${TITLE}`,
+    html:
+      `<div style="font-family:system-ui,-apple-system,'Malgun Gothic',sans-serif;font-size:14px;line-height:1.7">` +
+      `<h2 style="margin:0 0 16px">${TITLE}</h2>` +
+      `<table style="border-collapse:collapse;width:100%;max-width:640px">${rows}</table>` +
+      `</div>`,
+    text: values.map(v => `${v.label}\n${v.value || '—'}`).join('\n\n'),
+  }
+}
+
+/** "이름 <주소>" 또는 "주소" 를 ZeptoMail 이 요구하는 형태로 나눕니다. */
+function splitAddress(raw: string): { address: string; name?: string } {
+  const m = raw.match(/^\s*(.*?)\s*<([^>]+)>\s*$/)
+  return m ? { name: m[1] || undefined, address: m[2].trim() } : { address: raw.trim() }
+}
+
+/**
+ * ZeptoMail (Zoho) 발송.
+ *
+ * Zoho 메일을 이미 쓰는 경우 도메인이 그쪽에 붙어 있어 인증이 간단합니다.
+ * 토큰은 "Zoho-enczapikey xxx" 형태로 발급되는데, 통째로 붙여넣든 뒤쪽 키만
+ * 넣든 동작하도록 접두사를 보정합니다.
+ */
+async function sendZeptoMail(env: Env, values: Field[], replyTo: string): Promise<boolean> {
+  const raw = env.ZEPTOMAIL_TOKEN?.trim()
+  const to = env.CONTACT_TO_EMAIL?.trim()
+  if (!raw || !to) return false
+
+  const token = raw.startsWith('Zoho-enczapikey') ? raw : `Zoho-enczapikey ${raw}`
+  const host = env.ZEPTOMAIL_HOST?.trim() || 'api.zeptomail.com'
+  const from = splitAddress(env.CONTACT_FROM_EMAIL?.trim() || 'LunarFlux AI <noreply@lunarflux.ai>')
+  const mail = compose(values)
+
+  const res = await fetch(`https://${host}/v1.1/email`, {
+    method: 'POST',
+    headers: { Authorization: token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      from: { address: from.address, name: from.name },
+      to: [{ email_address: { address: to } }],
+      // 답장하면 문의자에게 바로 가도록. 관리자가 주소를 옮겨 적지 않아도 됩니다.
+      ...(replyTo ? { reply_to: [{ address: replyTo }] } : {}),
+      subject: mail.subject,
+      htmlbody: mail.html,
+      textbody: mail.text,
+    }),
+  })
+
+  return res.ok
+}
+
+/** Resend 발송. ZeptoMail 대신 쓰고 싶을 때. */
+async function sendResend(env: Env, values: Field[], replyTo: string): Promise<boolean> {
+  const key = env.RESEND_API_KEY?.trim()
+  const to = env.CONTACT_TO_EMAIL?.trim()
+  if (!key || !to) return false
+
+  const from = env.CONTACT_FROM_EMAIL?.trim() || 'LunarFlux AI <noreply@lunarflux.ai>'
+  const mail = compose(values)
+
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${key}`,
-      'Content-Type': 'application/json',
-    },
+    headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
       from,
       to: [to],
-      // 답장하면 문의자에게 바로 가도록. 관리자가 주소를 옮겨 적지 않아도 됩니다.
       reply_to: replyTo,
-      subject: `[문의] ${values.find(v => v.label === '이름 / 직급')?.value ?? ''} — ${TITLE}`,
-      html:
-        `<div style="font-family:system-ui,-apple-system,'Malgun Gothic',sans-serif;font-size:14px;line-height:1.7">` +
-        `<h2 style="margin:0 0 16px">${TITLE}</h2>` +
-        `<table style="border-collapse:collapse;width:100%;max-width:640px">${rows}</table>` +
-        `</div>`,
-      text: values.map(v => `${v.label}\n${v.value || '—'}`).join('\n\n'),
+      subject: mail.subject,
+      html: mail.html,
+      text: mail.text,
     }),
   })
 
@@ -169,17 +222,21 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
     values.push({ label: f.label, value: v.slice(0, f.max) })
   }
 
-  const hasEmail = Boolean(env.RESEND_API_KEY?.trim() && env.CONTACT_TO_EMAIL?.trim())
+  const to = Boolean(env.CONTACT_TO_EMAIL?.trim())
+  const hasZepto = Boolean(env.ZEPTOMAIL_TOKEN?.trim() && to)
+  const hasResend = Boolean(env.RESEND_API_KEY?.trim() && to)
   const hasWebhook = (env.ADMIN_NOTIFY_WEBHOOK?.trim()?.length ?? 0) >= 10
-  if (!hasEmail && !hasWebhook) {
+  if (!hasZepto && !hasResend && !hasWebhook) {
     return json({ ok: false, reason: 'unconfigured' }, 503)
   }
 
   const replyTo = values.find(v => v.label === '이메일')?.value ?? ''
 
   // 한 채널이 실패해도 다른 채널로 전달됐으면 접수 성공입니다.
+  // 이메일 서비스는 둘 다 설정돼 있으면 둘 다 보냅니다(중복 발송이 유실보다 낫습니다).
   const results = await Promise.allSettled([
-    hasEmail ? sendEmail(env, values, replyTo) : Promise.resolve(false),
+    hasZepto ? sendZeptoMail(env, values, replyTo) : Promise.resolve(false),
+    hasResend ? sendResend(env, values, replyTo) : Promise.resolve(false),
     hasWebhook ? sendWebhook(env, values) : Promise.resolve(false),
   ])
   const delivered = results.some(r => r.status === 'fulfilled' && r.value === true)
