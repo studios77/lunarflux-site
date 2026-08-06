@@ -25,7 +25,11 @@ export const SITE_VERIFICATION = {
 } as const
 
 /** 서비스 외 정적 페이지. 사이트맵과 canonical 이 같은 목록을 보게 둡니다. */
-export const STATIC_PAGES = [{ path: '/contact/', priority: 0.9 }] as const
+export const STATIC_PAGES = [
+  { path: '/contact/', priority: 0.9 },
+  // 사용자용 사이트맵. 전환 페이지가 아니라 우선순위는 낮게 둡니다.
+  { path: '/sitemap-page/', priority: 0.4 },
+] as const
 
 export function pageCanonicalUrl(path: string): string {
   return `${SITE_ORIGIN}${path}`

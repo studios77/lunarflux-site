@@ -4,6 +4,9 @@ const links = [
   ['서비스', '/#services'],
   ['소개', '/#about'],
   ['문의', '/contact'],
+  // 전체 페이지 목록. 푸터에 두면 크롤러가 모든 상세 페이지를 발견하는
+  // 경로가 사이트 어디에서나 한 번에 열립니다.
+  ['사이트맵', '/sitemap-page'],
 ]
 
 const companyInfo = [
