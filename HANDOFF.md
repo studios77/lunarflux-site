@@ -175,6 +175,9 @@ WAF 규칙       101규칙 → 105규칙  (그새 늘었음)
   들고 있던 중복은 제거했습니다.
 - `next dev` 가 `CLAUDE.md` 하단에 자기 안내 블록을, `next-env.d.ts` 에 dev 경로를
   자동으로 씁니다. 커밋 전에 확인하세요.
+- `npm install` 시 `prepare` 스크립트가 `core.hooksPath` 를 `.githooks` 로 잡아
+  줍니다(`scripts/setup-hooks.mjs`). git 저장소가 아니어도 설치가 깨지지 않도록
+  실패를 삼킵니다 — 배포 빌드 컨테이너를 세우지 않기 위함입니다.
 
 ### 디자인 시안
 
@@ -204,19 +207,20 @@ UI 를 재현했습니다).
 
 ## 5. 남은 과제 (우선순위 순)
 
-1. **네이버 서치어드바이저 마무리** — 인증 복구가 배포됐으니
-   ① 사이트 관리 › 검증에서 소유확인 상태 확인
-   ② 요청 › 사이트맵 제출 (`sitemap.xml`, URL 21개로 늘었고 바뀐 주소 있음)
-   ③ 요청 › 웹페이지 수집으로 홈·`lunarflux-guard`·`contact` 수동 요청
-3. **다음 검색 등록** — https://register.search.daum.net (미등록 상태)
+1. **네이버 서치어드바이저 마무리** — 소유확인은 2026-08-08 통과했습니다. 남은 것:
+   ① 요청 › 사이트맵 제출 (`sitemap.xml`, URL 21개로 늘었고 바뀐 주소 있음)
+   ② 요청 › 웹페이지 수집으로 홈·`lunarflux-guard`·`contact` 수동 요청
+2. **다음 검색 등록** — https://register.search.daum.net (미등록 상태).
+   `robots.txt` 의 `DaumOA: Allow: /` 는 확인했습니다. 등록 후 검토에 수 일~2주.
+3. **Bing Webmaster Tools 등록** — `bingbot: Allow: /` 는 이미 열어 뒀는데 등록만
+   안 돼 있습니다. https://www.bing.com/webmasters 에서 Search Console 가져오기로
+   소유확인 없이 끝납니다.
 4. **디자인 마무리** — 여백 버그 수정 이후 화면을 보고 다듬는 작업이 남았습니다.
    랙 비주얼 밝기·속도, 히어로 균형 등.
 5. **Guard 미확정 2건**
    - HA·노드 이중화가 출시됐는지 (사양서엔 "로드맵" 으로 표기돼 사이트에서 뺐음)
    - 경쟁사 비교표를 넣을지 (순수 WAF 대비 차별점이 강력한데 비교 대상·값 필요)
 6. `.reveal` 섹션의 JS 의존 — 폴백을 넣어 완화했지만 구조 자체는 그대로.
-7. `package.json` 에 `prepare` 스크립트 없음 — 새로 클론하면
-   `git config core.hooksPath .githooks` 를 수동 실행해야 합니다.
 
 ---
 

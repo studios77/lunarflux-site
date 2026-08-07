@@ -102,10 +102,10 @@ export const metadata: Metadata = {
 
 - `main` 브랜치에 푸시하면 **Cloudflare Pages가 자동으로 빌드·배포**합니다. 빌드는 Cloudflare 서버에서 수행되며, 로컬 빌드 산출물(`out/`)은 업로드되지 않습니다.
 - 빌드 명령과 출력 디렉터리 설정은 저장소가 아니라 [Cloudflare 대시보드](https://dash.cloudflare.com/0b60a547abf5ee6413207b3c7ca2e7cc/pages/view/lunarflux)에 있습니다.
-- `.githooks/pre-push`가 푸시 전에 `npm run build`를 실행해 빌드 실패를 미리 잡습니다. 훅이 동작하려면 `core.hooksPath`가 `.githooks`로 설정되어 있어야 합니다.
+- `.githooks/pre-push`가 푸시 전에 `npm run build`를 실행해 빌드 실패를 미리 잡습니다. 훅이 동작하려면 `core.hooksPath`가 `.githooks`로 설정되어 있어야 하는데, `npm install` 시 `prepare` 스크립트(`scripts/setup-hooks.mjs`)가 자동으로 지정하므로 별도 조치가 필요 없습니다.
 
 ```bash
-git config core.hooksPath .githooks   # 저장소를 새로 클론한 경우 1회 실행
+git config core.hooksPath   # 확인용. '.githooks' 가 나와야 합니다
 ```
 
 - 커밋 메시지: 타입 접두사는 영문(`feat:` / `fix:` / `chore:` / `docs:`), 본문은 한국어. 예: `feat: 각 서비스 페이지 구조화된 데이터 삽입`
