@@ -1,12 +1,13 @@
 /**
  * Cloudflare Pages Function — POST /api/contact
  *
- * 문의 폼을 관리자에게 전달합니다. 전달 경로는 두 가지이고 둘 다 선택입니다.
+ * 문의 폼을 관리자에게 전달합니다. 전달 경로는 세 가지이고 전부 선택입니다.
  *
- *   이메일  RESEND_API_KEY + CONTACT_TO_EMAIL 이 있으면 메일로 발송
- *   웹훅    ADMIN_NOTIFY_WEBHOOK 이 있으면 Slack·Discord·범용 JSON 으로 전달
+ *   폼 서비스  WEB3FORMS_ACCESS_KEY 가 있으면 Web3Forms 가 메일로 발송
+ *   이메일     ZEPTOMAIL_TOKEN 또는 RESEND_API_KEY + CONTACT_TO_EMAIL 로 직접 발송
+ *   웹훅       ADMIN_NOTIFY_WEBHOOK 이 있으면 Slack·Discord·범용 JSON 으로 전달
  *
- * 둘 다 설정하면 양쪽으로 보냅니다. 하나라도 성공하면 접수 성공입니다.
+ * 여럿 설정하면 모두로 보냅니다. 하나라도 성공하면 접수 성공입니다.
  * 아무것도 설정되지 않으면 503 을 돌려주고, 폼은 "이메일로 보내주세요" 를
  * 안내합니다 — 전달되지 않은 문의를 접수된 것처럼 보이게 하지 않기 위함입니다.
  *
@@ -17,6 +18,15 @@
  */
 
 interface Env {
+  /**
+   * Web3Forms 액세스 키. 계정에 등록된 주소로 Web3Forms 가 대신 메일을 보냅니다.
+   * 도메인 인증·DKIM 이 필요 없어 가장 빨리 붙는 경로입니다.
+   *
+   * Web3Forms 는 이 키를 브라우저에 노출해도 된다고 안내하지만, 키를 아는
+   * 누구나 이 주소로 메일을 보낼 수 있어 스팸 표적이 됩니다. 그래서 클라이언트가
+   * 아니라 여기(서버)에서만 호출합니다.
+   */
+  WEB3FORMS_ACCESS_KEY?: string
   /**
    * ZeptoMail(Zoho) Send Mail 토큰. Zoho 메일을 쓰는 경우 이쪽이 자연스럽습니다.
    * 값은 "Zoho-enczapikey ..." 에서 뒤쪽 키만 넣어도 되고 통째로 넣어도 됩니다.
@@ -90,6 +100,37 @@ function compose(values: Field[]) {
       `</div>`,
     text: values.map(v => `${v.label}\n${v.value || '—'}`).join('\n\n'),
   }
+}
+
+/**
+ * Web3Forms 발송.
+ *
+ * 받는 주소는 Web3Forms 계정에 등록된 주소라 여기서 지정하지 않습니다
+ * (CONTACT_TO_EMAIL 과 무관하게 동작합니다). 발신 도메인 인증도 필요 없습니다.
+ *
+ * access_key·subject 같은 예약 필드를 폼 값이 덮어쓰지 못하도록 값을 먼저
+ * 펼치고 예약 필드를 나중에 씁니다. 지금 라벨은 한글이라 충돌하지 않지만
+ * FIELDS 가 늘었을 때 조용히 깨지지 않게 하기 위함입니다.
+ */
+async function sendWeb3Forms(env: Env, values: Field[], replyTo: string): Promise<boolean> {
+  const key = env.WEB3FORMS_ACCESS_KEY?.trim()
+  if (!key) return false
+
+  const res = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      // 임의 필드는 그대로 메일 본문에 실립니다. 라벨을 키로 씁니다.
+      ...Object.fromEntries(values.map(v => [v.label, v.value || '—'])),
+      access_key: key,
+      subject: compose(values).subject,
+      from_name: 'LunarFlux AI 사이트',
+      // 답장하면 문의자에게 바로 가도록.
+      ...(replyTo ? { replyto: replyTo } : {}),
+    }),
+  })
+
+  return res.ok
 }
 
 /** "이름 <주소>" 또는 "주소" 를 ZeptoMail 이 요구하는 형태로 나눕니다. */
@@ -223,10 +264,12 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   }
 
   const to = Boolean(env.CONTACT_TO_EMAIL?.trim())
+  // Web3Forms 는 받는 주소를 계정에서 관리하므로 CONTACT_TO_EMAIL 이 필요 없습니다.
+  const hasWeb3 = Boolean(env.WEB3FORMS_ACCESS_KEY?.trim())
   const hasZepto = Boolean(env.ZEPTOMAIL_TOKEN?.trim() && to)
   const hasResend = Boolean(env.RESEND_API_KEY?.trim() && to)
   const hasWebhook = (env.ADMIN_NOTIFY_WEBHOOK?.trim()?.length ?? 0) >= 10
-  if (!hasZepto && !hasResend && !hasWebhook) {
+  if (!hasWeb3 && !hasZepto && !hasResend && !hasWebhook) {
     return json({ ok: false, reason: 'unconfigured' }, 503)
   }
 
@@ -235,6 +278,7 @@ export async function onRequestPost(context: EventContext): Promise<Response> {
   // 한 채널이 실패해도 다른 채널로 전달됐으면 접수 성공입니다.
   // 이메일 서비스는 둘 다 설정돼 있으면 둘 다 보냅니다(중복 발송이 유실보다 낫습니다).
   const results = await Promise.allSettled([
+    hasWeb3 ? sendWeb3Forms(env, values, replyTo) : Promise.resolve(false),
     hasZepto ? sendZeptoMail(env, values, replyTo) : Promise.resolve(false),
     hasResend ? sendResend(env, values, replyTo) : Promise.resolve(false),
     hasWebhook ? sendWebhook(env, values) : Promise.resolve(false),
