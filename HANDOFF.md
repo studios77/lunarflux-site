@@ -1,4 +1,4 @@
-# 작업 인계 노트 — 2026-08-07 갱신
+# 작업 인계 노트 — 2026-08-08 갱신
 
 다음 세션에서 바로 이어갈 수 있도록 정리합니다.
 
@@ -6,61 +6,46 @@
 
 ## 1. 지금 상태 한 줄 요약
 
-메인 개편·접근성·SEO까지 **31개 커밋 전부 배포 완료**. 미푸시 없음, 작업 트리 깨끗함.
-남은 것은 **문의 폼 전달 경로 등록 하나뿐**입니다.
+메인 개편·접근성·SEO에 더해 **문의 폼까지 동작합니다.** 미푸시 없음, 작업 트리 깨끗함.
+사이트 기능상 막힌 것은 없고, 남은 건 검색 등록과 디자인 다듬기입니다.
 
 | | |
 |---|---|
-| 원격 `origin/main` | `aed4b03` |
+| 원격 `origin/main` | `d7ec40d` |
 | 미푸시 커밋 | 없음 |
 | 라이브 | https://lunarflux.ai |
+| 문의 폼 | ✅ 동작 (Web3Forms → contact@lunarflux.ai) |
 
 ---
 
-## 2. ⚠️ 아침에 가장 먼저 — 문의 폼이 아직 접수되지 않습니다
+## 2. 문의 폼 — 2026-08-08 해결됨
 
-**코드는 배포 끝났고 시크릿만 없습니다.** 지금 폼을 제출하면 `503` 이 돌아오고
-"온라인 접수 준비 중, 이메일로 보내주세요" 안내가 뜹니다. 전달되지 않은 문의를
-접수된 것처럼 보이게 하지 않으려고 의도한 동작입니다.
+**Web3Forms 경로로 붙였습니다.** 도메인 인증·DKIM 없이 액세스 키 하나로 끝나서
+ZeptoMail보다 훨씬 빨랐습니다. `POST /api/contact` → `200 {"ok":true}` 확인 완료.
 
 ```
-$ npx wrangler pages secret list --project-name lunarflux
-The "production" environment ... has access to the following secrets:
-   (비어 있음)
+WEB3FORMS_ACCESS_KEY   production 등록됨 (Value Encrypted)
+액세스 키 원본          _input/92e76d57-….txt  ← 파일명 자체가 키, 내용은 비어 있음
+수신 주소               contact@lunarflux.ai (Web3Forms 계정에 등록된 주소)
 ```
 
-### 선택지 — 셋 중 하나만 등록해도 동작합니다
+### 여기서 걸렸던 것 — 다음에 또 만나면
 
-**A. 웹훅 (가장 빠름, 1~2분)** ← 8/6 밤에 여기까지 진행하다 중단
-
-Discord: 채널 우클릭 → 채널 편집 → 연동 → 웹후크 → 새 웹후크 → URL 복사
-Slack: api.slack.com/apps → Create New App → Incoming Webhooks 켜기 → URL 복사
+**대시보드에서 등록한 줄 알았는데 실제로는 비어 있었습니다.** 배포는 정상인데
+계속 `503 unconfigured` 가 나와서, 아래 명령으로 production·preview 양쪽 모두
+비어 있는 것을 확인하고 나서야 원인을 잡았습니다.
 
 ```bash
-npx wrangler pages secret put ADMIN_NOTIFY_WEBHOOK --project-name lunarflux
+npx wrangler pages secret list --project-name lunarflux
+npx wrangler pages secret list --project-name lunarflux --env preview
 ```
 
-URL 로 Slack·Discord·범용을 자동 판별합니다.
-
-**B. 이메일 — ZeptoMail (Zoho)**
-
-`lunarflux.ai` 가 이미 Zoho 에 인증돼 있어(DNS 에 `zoho-verification` TXT 확인)
-도메인 등록이 짧게 끝납니다. DKIM 레코드만 Cloudflare DNS 에 추가하면 됩니다.
-
-1. https://www.zoho.com/zeptomail/ 가입 → 도메인 추가 → DKIM 등록
-2. Mail Agent 생성 → Send Mail Token 발급
+대시보드 입력은 하단 **Save** 를 놓치기 쉽습니다. CLI 쪽이 결과가 명확합니다.
 
 ```bash
-npx wrangler pages secret put ZEPTOMAIL_TOKEN   --project-name lunarflux
-npx wrangler pages secret put CONTACT_TO_EMAIL  --project-name lunarflux   # contact@lunarflux.ai
+# 값을 명령문에 노출하지 않으려면 파일에서 읽어 파이프로 넘깁니다
+(Get-Item "_input/92*.txt").BaseName | npx wrangler pages secret put WEB3FORMS_ACCESS_KEY --project-name lunarflux
 ```
-
-`CONTACT_FROM_EMAIL` 은 생략 가능(기본 `LunarFlux AI <noreply@lunarflux.ai>`).
-다른 주소를 쓰려면 등록하되 ZeptoMail 에서 인증한 도메인이어야 합니다.
-
-**C. Resend** — `RESEND_API_KEY` + `CONTACT_TO_EMAIL`. 대안일 뿐 우선순위 낮음.
-
-> 여럿 등록하면 모두로 전달됩니다. 중복 발송이 유실보다 낫다는 판단입니다.
 
 ### 등록 뒤 반드시 재배포
 
@@ -76,8 +61,20 @@ git commit --allow-empty -m "chore: 시크릿 반영 재배포" && git push orig
 ```bash
 curl -X POST https://lunarflux.ai/api/contact -H "Content-Type: application/json" \
   -d '{"name":"테스트","email":"a@b.com","message":"등록 확인"}'
-# 503 unconfigured → 200 {"ok":true} 로 바뀌고 채널·메일에 도착하면 완료
+# 200 {"ok":true} + 메일 도착이면 완료. 첫 발송은 스팸함에 들어갈 수 있습니다.
 ```
+
+### 다른 경로도 코드에 남아 있습니다 (미사용)
+
+`ZEPTOMAIL_TOKEN` · `RESEND_API_KEY` · `ADMIN_NOTIFY_WEBHOOK` 분기는 그대로
+살아 있습니다. 시크릿만 추가하면 코드 수정 없이 병행 발송됩니다.
+
+> **웹훅(Slack·Discord)은 의도적으로 쓰지 않기로 했습니다** (2026-08-08 결정).
+> 폰 푸시 알림이 필요해지면 그때 `ADMIN_NOTIFY_WEBHOOK` 만 등록하면 됩니다.
+> 그전까지는 다시 권하지 마세요.
+
+**알아둘 점** — Web3Forms 무료 플랜은 **이메일 발송만** 됩니다. 웹훅·Slack·Discord
+연동, `ccemail`, 첨부파일은 전부 PRO 기능입니다.
 
 ---
 
@@ -207,8 +204,7 @@ UI 를 재현했습니다).
 
 ## 5. 남은 과제 (우선순위 순)
 
-1. **문의 폼 전달 경로 등록** — 위 2번. 이것만 하면 사이트가 온전히 동작합니다.
-2. **네이버 서치어드바이저 마무리** — 인증 복구가 배포됐으니
+1. **네이버 서치어드바이저 마무리** — 인증 복구가 배포됐으니
    ① 사이트 관리 › 검증에서 소유확인 상태 확인
    ② 요청 › 사이트맵 제출 (`sitemap.xml`, URL 21개로 늘었고 바뀐 주소 있음)
    ③ 요청 › 웹페이지 수집으로 홈·`lunarflux-guard`·`contact` 수동 요청
@@ -234,6 +230,7 @@ UI 를 재현했습니다).
 | 도메인 | lunarflux.ai, lunarflux.pages.dev |
 | 대시보드 | https://dash.cloudflare.com/0b60a547abf5ee6413207b3c7ca2e7cc/pages/view/lunarflux |
 | 메일 | Zoho (도메인 인증 완료, SPF 설정됨) |
+| 문의 폼 발송 | Web3Forms (계정 `contact@lunarflux.ai`, 무료 플랜) |
 | wrangler | OAuth 로그인 완료 (`npx wrangler whoami`) |
 
 `main` 에 푸시하면 곧바로 프로덕션 배포됩니다. `.githooks/pre-push` 가 푸시 전에
