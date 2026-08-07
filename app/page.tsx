@@ -1,5 +1,3 @@
-'use client'
-import { useEffect } from 'react'
 import Nav from '@/components/Nav'
 import { SITE_NAME, SITE_ORIGIN } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION } from '@/lib/seo'
@@ -11,26 +9,6 @@ import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
 
 export default function Home() {
-  useEffect(() => {
-    // 여기까지 실행됐다면 번들이 살아 있다는 뜻이므로 layout.tsx의
-    // 폴백 타이머를 취소합니다. 취소하지 않으면 4초 뒤 `.js` 가 걷혀
-    // 아직 화면 밖인 섹션들이 애니메이션 없이 한꺼번에 나타납니다.
-    const w = window as Window & { __revealFallback?: ReturnType<typeof setTimeout> }
-    clearTimeout(w.__revealFallback)
-
-    const reveals = document.querySelectorAll('.reveal')
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80)
-          obs.unobserve(e.target)
-        }
-      })
-    }, { threshold: 0.1 })
-    reveals.forEach(r => obs.observe(r))
-    return () => obs.disconnect()
-  }, [])
-
   const site = SITE_ORIGIN
   const jsonLd = {
     '@context': 'https://schema.org',

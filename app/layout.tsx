@@ -4,16 +4,6 @@ import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE, SEO_KEYWORDS } from '@/lib/
 import ChatBot from '@/components/ChatBot'
 import './globals.css'
 
-/**
- * 등장 애니메이션의 안전장치. 자세한 동작은 globals.css 의 `.js .reveal` 주석 참고.
- *
- * <head>에서 즉시 실행되므로 본문이 그려지기 전에 `.js` 가 붙습니다.
- * (body 렌더 뒤에 붙이면 숨겨지기 전 한 프레임이 노출돼 깜빡입니다.)
- * 앱 번들과 별개로 실행되므로 번들이 죽어도 타이머는 살아남습니다.
- */
-const REVEAL_FALLBACK = `document.documentElement.classList.add('js');
-window.__revealFallback=setTimeout(function(){document.documentElement.classList.remove('js')},4000)`
-
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -77,10 +67,6 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      // 위 인라인 스크립트가 하이드레이션 전에 class="js" 를 붙입니다.
-      // 서버 렌더 결과에는 그 클래스가 없어 React 가 불일치를 보고하므로,
-      // <html> 속성 차이만 무시합니다 (자식에는 영향 없음).
-      suppressHydrationWarning
       // globals.css 의 scroll-behavior: smooth 를 의도한 것임을 Next 에 알립니다.
       // 없으면 라우트 전환마다 부드러운 스크롤 경고가 뜹니다.
       data-scroll-behavior="smooth"
@@ -89,7 +75,6 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" as="style" crossOrigin="anonymous" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
-        <script dangerouslySetInnerHTML={{ __html: REVEAL_FALLBACK }} />
       </head>
       <body>
         {/* Tab 첫 타에 나타납니다. 이게 없으면 키보드 사용자는 매 페이지마다
