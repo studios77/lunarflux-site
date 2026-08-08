@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { SITE_NAME, SITE_ORIGIN, SITE_VERIFICATION } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE, SEO_KEYWORDS } from '@/lib/seo'
-import KakaoChat from '@/components/KakaoChat'
 import './globals.css'
 
 export const viewport: Viewport = {
@@ -87,12 +86,14 @@ export default function RootLayout({
         </a>
         {children}
         {/*
-          채널톡(Channel.io) 위젯을 2026-08-08 에 걷어내고 카카오톡 채널로
-          바꿨습니다. 모든 페이지에 둡니다 — 홈에만 두면 /contact 가 안내하는
-          상담 버튼이 정작 그 페이지에 없습니다. 예전에 실제로 그랬습니다.
-          KAKAO_CHANNEL_URL 이 비어 있으면 렌더되지 않습니다.
+          떠 있는 상담 위젯은 두지 않습니다. 채널톡(Channel.io)과 카카오톡
+          채널 버튼을 2026-08-08 에 차례로 걷어냈습니다. 상담 창구는
+          /contact 의 문의 폼과 전화 두 가지입니다.
+
+          위젯을 다시 붙일 때는 /contact 의 안내 문구도 함께 고치세요 —
+          예전에 위젯이 홈에만 있던 시절, contact 페이지가 정작 그 페이지에
+          없는 버튼을 가리키고 있었습니다.
         */}
-        <KakaoChat />
       </body>
     </html>
   )
