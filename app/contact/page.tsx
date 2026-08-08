@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
-import { SITE_NAME } from '@/lib/site'
+import { KAKAO_CHANNEL_URL, SITE_NAME } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
 // canonical·openGraph 를 헬퍼가 함께 만듭니다. 예전에는 canonical 만 있어
@@ -32,12 +32,45 @@ export default function ContactPage() {
           아래의 상담 채널 중 가장 편하신 방법으로 연락해 주세요.
         </p>
 
-        {/* 채널톡 위젯을 걷어낸 2026-08-08 이후 상담 채널은 폼과 전화 둘입니다.
-            예전에는 맨 위에 "실시간 채팅 상담(추천)" 카드가 있었는데, 그 카드가
-            안내하던 "화면 우측 하단의 채팅 버튼"이 이제 없습니다. 카드를 빼면서
-            거기 있던 운영 시간은 아래 전화 카드로 옮겼습니다. 채팅을 다시
-            붙이면 이 문단과 layout.tsx 주석을 함께 되돌리세요. */}
+        {/* 채널톡 위젯을 걷어낸 2026-08-08 이후 상담 창구는 카카오톡 채널 ·
+            문의 폼 · 전화 셋입니다. 예전 "실시간 채팅 상담(추천)" 카드는
+            "화면 우측 하단의 채팅 버튼"을 가리키고 있어 함께 지웠고, 거기
+            있던 운영 시간은 아래 전화 카드로 옮겼습니다.
+            카카오 카드는 KAKAO_CHANNEL_URL 이 비어 있으면 통째로 빠집니다 —
+            없는 채널로 보내는 링크를 내보내지 않기 위해서입니다. */}
         <div className="flex flex-col gap-6">
+          {KAKAO_CHANNEL_URL && (
+            <div className="relative overflow-hidden rounded-xl border border-line bg-surface p-6 sm:p-8">
+              <div className="absolute inset-y-0 left-0 w-1 bg-accent" />
+              <div className="flex items-start gap-5">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-2xl">
+                  💬
+                </div>
+                <div>
+                  <h3 className="mb-2 text-[1.25rem] font-bold">
+                    카카오톡 상담
+                    <span className="ml-2 rounded-full bg-accent px-2 py-0.5 align-middle font-mono text-label text-canvas">
+                      추천
+                    </span>
+                  </h3>
+                  <p className="mb-4 break-keep text-body text-fg-muted">
+                    카카오톡으로 문의를 남겨 주시면 담당 엔지니어가 확인 후 답변드립니다.
+                    <br />
+                    답변이 카카오톡 알림으로 도착하므로 창을 닫으셔도 놓치지 않습니다.
+                  </p>
+                  <a
+                    href={KAKAO_CHANNEL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 items-center rounded-lg bg-[#FEE500] px-4 py-2 text-body font-bold text-[#3C1E1E] transition-transform duration-200 hover:scale-[1.02]"
+                  >
+                    카카오톡으로 문의하기
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+
           <ContactForm />
 
           <div className="rounded-xl border border-line bg-surface p-6 sm:p-8">
