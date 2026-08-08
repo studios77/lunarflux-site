@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { SITE_NAME, SITE_ORIGIN, SITE_VERIFICATION } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE, SEO_KEYWORDS } from '@/lib/seo'
-import FreshChat from '@/components/FreshChat'
+import SalesIq from '@/components/SalesIq'
 import './globals.css'
 
 export const viewport: Viewport = {
@@ -89,9 +89,9 @@ export default function RootLayout({
         {/*
           상담 위젯은 모든 페이지에 둡니다 — 홈에만 두면 /contact 가 안내하는
           채팅이 정작 그 페이지에 없습니다. 예전에 실제로 그랬습니다.
-          FRESHCHAT.token 이 비어 있으면 아무것도 로드하지 않습니다.
+          SALESIQ.widgetCode 가 비어 있으면 아무것도 로드하지 않습니다.
         */}
-        <FreshChat />
+        <SalesIq />
       </body>
     </html>
   )
