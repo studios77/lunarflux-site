@@ -21,6 +21,12 @@ export type ServiceData = {
   specs: string[]
   useCases: string[]
   cta: string
+  /**
+   * 이 서비스 내용을 마지막으로 고친 날 (`YYYY-MM-DD`).
+   * `sitemap.xml` 의 `lastmod` 로 나갑니다. 비우면 `CONTENT_LAST_MODIFIED`.
+   * 서비스 하나만 고쳤을 때 여기에 적으면 그 URL 만 갱신된 것으로 보입니다.
+   */
+  updated?: string
   coloPricing?: ColoPlan[]
   comparison?: {
     label: string

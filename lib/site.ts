@@ -35,12 +35,33 @@ export const SITE_VERIFICATION = {
   google: '',
 } as const
 
+/**
+ * 콘텐츠 최종 수정일 (`YYYY-MM-DD`). `sitemap.xml` 의 `lastmod` 기본값입니다.
+ *
+ * 예전에는 `app/sitemap.ts` 가 `new Date()` 를 써서, 배포할 때마다 21개 URL 이
+ * 전부 "방금 수정됨" 으로 나갔습니다. 인계 노트만 고친 배포에도 그랬습니다.
+ * 매번 바뀌는 `lastmod` 는 검색엔진이 아예 무시하게 되는 신호입니다.
+ *
+ * **문구나 서비스 내용을 고칠 때 함께 올리세요.** 리팩터링·설정 변경처럼
+ * 방문자가 보는 내용이 그대로인 배포에서는 건드리지 않습니다.
+ * 특정 페이지만 갱신됐다면 아래 `STATIC_PAGES.lastModified` 나
+ * `ServiceData.updated` 로 그 페이지만 덮어쓰면 됩니다.
+ */
+export const CONTENT_LAST_MODIFIED = '2026-08-08'
+
+export type StaticPage = {
+  path: string
+  priority: number
+  /** 비우면 CONTENT_LAST_MODIFIED 를 씁니다. */
+  lastModified?: string
+}
+
 /** 서비스 외 정적 페이지. 사이트맵과 canonical 이 같은 목록을 보게 둡니다. */
-export const STATIC_PAGES = [
+export const STATIC_PAGES: StaticPage[] = [
   { path: '/contact/', priority: 0.9 },
   // 사용자용 사이트맵. 전환 페이지가 아니라 우선순위는 낮게 둡니다.
   { path: '/sitemap-page/', priority: 0.4 },
-] as const
+]
 
 export function pageCanonicalUrl(path: string): string {
   return `${SITE_ORIGIN}${path}`
