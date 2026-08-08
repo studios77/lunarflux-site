@@ -14,9 +14,8 @@ const SCRIPT_ID = 'zsiqscript'
 type ZohoWindow = Window & {
   $zoho?: {
     salesiq?: {
-      widgetcode?: string
-      values?: Record<string, unknown>
       ready?: () => void
+      /** 위젯이 로드된 뒤에 붙습니다. contact 페이지 버튼이 씁니다. */
       floatwindow?: { visible: (state: 'show' | 'hide') => void }
     }
   }
@@ -25,10 +24,20 @@ type ZohoWindow = Window & {
 /**
  * Zoho SalesIQ 라이브 채팅 위젯.
  *
- * Zoho 대시보드가 주는 스니펫과 같은 일을 합니다 — `$zoho.salesiq` 전역을
- * 먼저 세우고 위젯 스크립트를 넣습니다. 순서가 중요합니다. 스크립트가
- * 로드되면서 이 전역을 읽으므로, 전역보다 스크립트가 먼저 실행되면
- * 위젯 코드를 찾지 못합니다.
+ * Zoho 대시보드가 주는 스니펫과 같은 일을 합니다.
+ *
+ * ```html
+ * <script>window.$zoho=window.$zoho||{};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script>
+ * <script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=..." defer></script>
+ * ```
+ *
+ * **위젯 코드는 전역이 아니라 스크립트 URL 의 `?wc=` 로 넘어갑니다.** 예전
+ * 스니펫은 `$zoho.salesiq.widgetcode` 에 넣는 방식이었고 문서에도 그렇게
+ * 남아 있는 곳이 많습니다. 지금 계정이 주는 형태는 위와 같으니 대시보드
+ * 스니펫을 기준으로 맞추세요.
+ *
+ * 전역을 스크립트보다 먼저 세우는 순서는 그대로 지킵니다. 스크립트가
+ * 로드되면서 `$zoho.salesiq` 를 읽고 거기에 API 를 붙입니다.
  *
  * **로딩은 유휴 시간까지 미룹니다.** 상담 위젯은 방문자가 도착하자마자
  * 필요한 것이 아닌데, 마운트 즉시 외부 번들을 받으면 첫 화면 렌더와
@@ -51,15 +60,11 @@ export default function SalesIq() {
 
       // 스크립트가 읽어 갈 전역을 먼저 세웁니다. 이미 있으면 덮지 않습니다.
       w.$zoho = w.$zoho || {}
-      w.$zoho.salesiq = w.$zoho.salesiq || {
-        widgetcode: widgetCode,
-        values: {},
-        ready: () => {},
-      }
+      w.$zoho.salesiq = w.$zoho.salesiq || { ready: () => {} }
 
       const s = document.createElement('script')
       s.id = SCRIPT_ID
-      s.src = scriptSrc
+      s.src = `${scriptSrc}?wc=${encodeURIComponent(widgetCode)}`
       s.defer = true
       document.head.appendChild(s)
     }

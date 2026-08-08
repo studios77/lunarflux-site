@@ -36,9 +36,9 @@ export const SITE_VERIFICATION = {
 } as const
 
 export type SalesIqConfig = {
-  /** `$zoho.salesiq.widgetcode` 값. 비면 위젯과 contact 카드가 렌더되지 않습니다. */
+  /** 스크립트 URL 의 `?wc=` 값. 비면 위젯과 contact 카드가 렌더되지 않습니다. */
   widgetCode: string
-  /** 대시보드 스니펫의 `s.src` 값. 데이터센터에 따라 도메인이 다릅니다. */
+  /** 쿼리스트링을 뺀 위젯 스크립트 URL. 데이터센터에 따라 도메인이 다릅니다. */
   scriptSrc: string
 }
 
@@ -46,11 +46,16 @@ export type SalesIqConfig = {
  * Zoho SalesIQ 라이브 채팅 설정.
  *
  * 값을 받는 곳: SalesIQ 관리자 → Settings → Brands → Installation → Website.
- * 거기 표시되는 스니펫에 `widgetcode` 와 스크립트 `src` 가 함께 들어 있습니다.
+ * 거기 표시되는 스니펫의 스크립트 `src` 에 두 값이 다 들어 있습니다.
+ *
+ * ```
+ * src="https://salesiq.zohopublic.com/widget?wc=siq1730fe..."
+ *      └────────── scriptSrc ──────────┘     └── widgetCode ──┘
+ * ```
  *
  * **`scriptSrc` 는 대시보드에 적힌 값을 그대로 옮기세요.** Zoho 는 계정이
  * 속한 데이터센터마다 도메인이 다릅니다(`.com` / `.eu` / `.in` / `.com.au`
- * / `.jp` 등). 아래 기본값과 다르면 위젯이 조용히 뜨지 않고, 콘솔에도
+ * / `.jp` 등). 아래 값과 다르면 위젯이 조용히 뜨지 않고, 콘솔에도
  * 뚜렷한 오류가 남지 않아 원인 찾기가 번거롭습니다.
  *
  * 위젯 코드는 비밀이 아닙니다 — 브라우저에서 채팅을 띄우는 데 쓰이므로
@@ -64,7 +69,8 @@ export type SalesIqConfig = {
  * 리터럴 타입이 되면 `if (!widgetCode)` 이후가 도달 불가로 좁혀집니다.
  */
 export const SALESIQ: SalesIqConfig = {
-  widgetCode: '',
+  widgetCode:
+    'siq1730fe109dc2800dc930598e6232621582ab0c501c9084ce5db75c40e76a9862',
   scriptSrc: 'https://salesiq.zohopublic.com/widget',
 }
 
