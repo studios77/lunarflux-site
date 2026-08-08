@@ -73,6 +73,12 @@ curl -X POST https://lunarflux.ai/api/contact -H "Content-Type: application/json
 > 폰 푸시 알림이 필요해지면 그때 `ADMIN_NOTIFY_WEBHOOK` 만 등록하면 됩니다.
 > 그전까지는 다시 권하지 마세요.
 
+> **노션 연동도 검토 후 취소했습니다** (2026-08-08 결정). 문의를 노션 DB 로
+> 적재하는 안이었고 기술적으로는 문제가 없었습니다 — `onRequestPost` 의
+> `Promise.allSettled` 에 채널 하나를 더하고 시크릿 두 개(`NOTION_TOKEN`,
+> `NOTION_DATABASE_ID`)를 등록하면 됐습니다. 코드는 작성하지 않았습니다.
+> 다시 필요해지기 전까지 권하지 마세요.
+
 **알아둘 점** — Web3Forms 무료 플랜은 **이메일 발송만** 됩니다. 웹훅·Slack·Discord
 연동, `ccemail`, 첨부파일은 전부 PRO 기능입니다.
 
