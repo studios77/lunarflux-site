@@ -35,6 +35,38 @@ export const SITE_VERIFICATION = {
   google: '',
 } as const
 
+export type FreshchatConfig = {
+  /** 웹 위젯 토큰. 비어 있으면 위젯과 contact 페이지 카드가 렌더되지 않습니다. */
+  token: string
+  /** 계정 리전 엔드포인트. 토큰과 함께 관리자 화면에 표시됩니다. */
+  host: string
+}
+
+/**
+ * Freshchat 웹 위젯 설정.
+ *
+ * 값을 받는 곳: Freshchat 관리자 → Settings → Channels → Web Chat.
+ * 여기에 위젯 토큰과 호스트가 함께 표시됩니다. 리전에 따라 호스트가
+ * 다릅니다 — 미국 `wchat.freshchat.com`, EU `wchat.eu.freshchat.com`,
+ * 인도 `wchat.in.freshchat.com`, 호주 `wchat.au.freshchat.com`.
+ * **관리자 화면에 적힌 값을 그대로 쓰세요.** 틀리면 위젯이 조용히 뜨지 않습니다.
+ *
+ * 토큰은 비밀이 아닙니다 — 브라우저에서 위젯을 띄우는 데 쓰이므로 어차피
+ * 공개됩니다. 그래서 환경변수가 아니라 저장소에 둡니다. Cloudflare Secret 으로
+ * 옮길 이유가 없고, 정적 내보내기라 빌드 시점에 값이 필요합니다.
+ *
+ * **비어 있으면 위젯도 contact 카드도 렌더되지 않습니다.** 붙지 않을 채팅을
+ * 안내하지 않기 위한 의도적인 동작이므로, 토큰을 받은 뒤 이 값만 채우면
+ * 배포와 동시에 노출됩니다.
+ *
+ * `as const` 를 쓰지 않는 이유: 빈 문자열이 리터럴 타입이 되면 `if (!token)`
+ * 이후가 도달 불가로 좁혀져 편집이 번거로워집니다. STATIC_PAGES 와 같은 이유입니다.
+ */
+export const FRESHCHAT: FreshchatConfig = {
+  token: '',
+  host: 'https://wchat.freshchat.com',
+}
+
 /**
  * 콘텐츠 최종 수정일 (`YYYY-MM-DD`). `sitemap.xml` 의 `lastmod` 기본값입니다.
  *

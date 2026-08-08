@@ -2,7 +2,8 @@ import type { Metadata } from 'next'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
-import { SITE_NAME } from '@/lib/site'
+import FreshChatOpenButton from '@/components/FreshChatOpenButton'
+import { FRESHCHAT, SITE_NAME } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
 // canonical·openGraph 를 헬퍼가 함께 만듭니다. 예전에는 canonical 만 있어
@@ -32,13 +33,37 @@ export default function ContactPage() {
           아래의 상담 채널 중 가장 편하신 방법으로 연락해 주세요.
         </p>
 
-        {/* 상담 창구는 문의 폼과 전화 둘입니다. 2026-08-08 에 채널톡과
-            카카오톡 채널 카드를 차례로 걷어냈습니다. 예전 맨 위에 있던
-            "실시간 채팅 상담(추천)" 카드는 "화면 우측 하단의 채팅 버튼"을
-            가리키고 있어 위젯과 함께 지웠고, 거기 있던 운영 시간은 아래
-            전화 카드로 옮겼습니다. 채팅을 다시 붙이면 이 문단과
-            layout.tsx 주석을 함께 되돌리세요. */}
+        {/* 상담 창구는 채팅(Freshchat) · 문의 폼 · 전화 셋입니다.
+            채팅 카드는 FRESHCHAT.token 이 비어 있으면 통째로 빠집니다 —
+            붙지 않을 채팅을 안내하지 않기 위해서입니다. 예전에 위젯을
+            지우면서 이 카드를 남겨 두어, 없는 버튼을 가리킨 적이 있습니다.
+            운영 시간은 아래 전화 카드에 있습니다. */}
         <div className="flex flex-col gap-6">
+          {FRESHCHAT.token && (
+            <div className="relative overflow-hidden rounded-xl border border-line bg-surface p-6 sm:p-8">
+              <div className="absolute inset-y-0 left-0 w-1 bg-accent" />
+              <div className="flex items-start gap-5">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-2xl">
+                  💬
+                </div>
+                <div>
+                  <h3 className="mb-2 text-[1.25rem] font-bold">
+                    실시간 채팅 상담
+                    <span className="ml-2 rounded-full bg-accent px-2 py-0.5 align-middle font-mono text-label text-canvas">
+                      추천
+                    </span>
+                  </h3>
+                  <p className="mb-4 break-keep text-body text-fg-muted">
+                    전문 엔지니어와 바로 대화하실 수 있습니다.
+                    <br />
+                    기술 검토와 비용 안내를 가장 빠르게 받는 방법입니다.
+                  </p>
+                  <FreshChatOpenButton />
+                </div>
+              </div>
+            </div>
+          )}
+
           <ContactForm />
 
           <div className="rounded-xl border border-line bg-surface p-6 sm:p-8">

@@ -15,7 +15,7 @@
 - **UI/UX 및 컴포넌트 모듈화**:
   - Tailwind CSS v4 기반의 유틸리티 클래스 스타일링 전면 적용
   - Hero, Nav, Footer, About, Pricing 등 페이지를 구성하는 모듈화된 UI 컴포넌트 분리 (`components/`)
-  - 사용자 편의를 위한 UI 컴포넌트(ChatBot, ScrollTop 등) 도입
+  - 사용자 편의를 위한 UI 컴포넌트(상담 위젯, ScrollTop 등) 도입
 - **SEO 최적화**:
   - `next-seo` 및 메타데이터 API를 활용한 페이지별 SEO 적용 (`lib/seo.ts`)
   - 검색엔진 노출 최적화를 위한 `sitemap.ts` 및 `robots.ts` 자동 생성 로직 구현
