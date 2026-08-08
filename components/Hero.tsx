@@ -65,16 +65,25 @@ export default function Hero() {
               본문이 첫 화면 밖으로 밀려납니다. */}
           <div className="mb-14 grid grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div className="max-w-2xl">
+            {/* 배지는 h1 이 다루지 않는 축을 맡습니다. 예전에는 배지와 h1 이
+                모두 "차세대 방화벽 · AI 보안 관제" 를 말해 같은 말이 두 번
+                나왔습니다. h1 에 방화벽·관제가 들어갔으므로 배지는 클라우드와
+                데이터 쪽을 가져갑니다. */}
             <div className="mb-6 inline-flex animate-[fadeUp_0.8s_ease_both] items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3.5 py-1.5 font-mono text-label uppercase tracking-[0.12em] text-accent">
-              차세대 방화벽 · AI 보안 관제 · 클라우드 보안
+              네트워크 · 클라우드 · AI 데이터 보안
             </div>
+            {/* 검색엔진이 가장 무겁게 보는 자리입니다. 예전 문구
+                "AI 보안을 설계하고 직접 운영합니다" 는 브랜드 선언이라
+                주력 검색어인 "차세대 방화벽" 과 "AI 보안 관제" 가 없었습니다.
+                줄당 10~11자를 넘기면 좁은 화면에서 네 줄로 늘어지므로
+                문구를 바꿀 때 길이를 함께 보세요. */}
             <h1 className="mb-5 animate-[fadeUp_0.8s_0.1s_ease_both] break-keep text-[clamp(2.25rem,5.5vw,3.4rem)] font-extrabold leading-[1.12] tracking-[-0.03em] text-fg">
               <span className="bg-gradient-to-br from-accent to-accent-2 bg-clip-text text-transparent">
-                AI 보안
+                차세대 방화벽
               </span>
-              을 설계하고
+              을 만들고
               <br />
-              직접 운영합니다
+              AI 보안 관제까지 맡습니다
             </h1>
             <p className="mb-8 max-w-xl animate-[fadeUp_0.8s_0.2s_ease_both] break-keep text-lead text-fg-muted">
               자체 개발한 Lunarflux Guard가 네트워크 계층에서 직접 지문을 수집합니다. 분석은 전부 온프레미스에서 끝납니다.
