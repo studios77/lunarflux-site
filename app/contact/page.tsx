@@ -32,32 +32,12 @@ export default function ContactPage() {
           아래의 상담 채널 중 가장 편하신 방법으로 연락해 주세요.
         </p>
 
+        {/* 채널톡 위젯을 걷어낸 2026-08-08 이후 상담 채널은 폼과 전화 둘입니다.
+            예전에는 맨 위에 "실시간 채팅 상담(추천)" 카드가 있었는데, 그 카드가
+            안내하던 "화면 우측 하단의 채팅 버튼"이 이제 없습니다. 카드를 빼면서
+            거기 있던 운영 시간은 아래 전화 카드로 옮겼습니다. 채팅을 다시
+            붙이면 이 문단과 layout.tsx 주석을 함께 되돌리세요. */}
         <div className="flex flex-col gap-6">
-          <div className="relative overflow-hidden rounded-xl border border-line bg-surface p-6 sm:p-8">
-            <div className="absolute inset-y-0 left-0 w-1 bg-accent" />
-            <div className="flex items-start gap-5">
-              <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-2xl">
-                💬
-              </div>
-              <div>
-                <h3 className="mb-2 text-[1.25rem] font-bold">
-                  실시간 채팅 상담
-                  <span className="ml-2 rounded-full bg-accent px-2 py-0.5 align-middle font-mono text-label text-canvas">
-                    추천
-                  </span>
-                </h3>
-                <p className="mb-4 break-keep text-body text-fg-muted">
-                  화면 우측 하단의 채팅 버튼을 클릭하시면 전문 엔지니어와 실시간으로 대화하실 수 있습니다.
-                  <br />
-                  가장 빠르고 정확한 기술 및 비용 안내를 받아보실 수 있습니다.
-                </p>
-                <p className="break-keep text-body text-fg-subtle">
-                  * 운영 시간: 평일 10:00 - 19:00 (긴급 장애는 24시간)
-                </p>
-              </div>
-            </div>
-          </div>
-
           <ContactForm />
 
           <div className="rounded-xl border border-line bg-surface p-6 sm:p-8">
@@ -70,7 +50,7 @@ export default function ContactPage() {
                 <p className="mb-3 break-keep text-body text-fg-muted">
                   LunarFlux 인프라 장애 발생 시나 긴급하게 대응이 필요한 사안은 즉각 연락 바랍니다.
                   <br />
-                  (일반 비용 문의는 가급적 채팅/이메일 활용을 부탁드립니다.)
+                  (일반 비용 문의는 가급적 위 문의 폼을 이용해 주세요.)
                 </p>
                 <a
                   href="tel:01032043847"
@@ -78,6 +58,9 @@ export default function ContactPage() {
                 >
                   010-3204-3847
                 </a>
+                <p className="mt-3 break-keep text-body text-fg-subtle">
+                  * 운영 시간: 평일 10:00 - 19:00 (긴급 장애는 24시간)
+                </p>
               </div>
             </div>
           </div>

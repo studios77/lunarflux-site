@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { SITE_NAME, SITE_ORIGIN, SITE_VERIFICATION } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION, SEO_DEFAULT_TITLE, SEO_KEYWORDS } from '@/lib/seo'
-import ChatBot from '@/components/ChatBot'
 import './globals.css'
 
 export const viewport: Viewport = {
@@ -87,10 +86,12 @@ export default function RootLayout({
         </a>
         {children}
         {/*
-          모든 페이지에 채팅을 띄웁니다. 홈에만 두면 /contact 가 안내하는
-          "화면 우측 하단의 채팅 버튼"이 정작 그 페이지에 없습니다.
+          채널톡(Channel.io) 위젯을 2026-08-08 에 걷어냈습니다. 상담 채널은
+          현재 /contact 의 문의 폼과 전화 두 가지입니다. 다시 붙일 때는
+          /contact 의 안내 문구와 함께 고쳐야 합니다 — 예전에 위젯이 홈에만
+          있던 시절, contact 페이지가 정작 그 페이지에 없는 버튼을 가리키고
+          있었습니다.
         */}
-        <ChatBot />
       </body>
     </html>
   )

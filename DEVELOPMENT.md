@@ -44,7 +44,6 @@ lunarflux-site/
 │       └── ...기타 서비스 라우트
 ├── components/            # 공통 및 재사용 가능한 React 컴포넌트
 │   ├── About.tsx          # 회사 및 서비스 소개 섹션
-│   ├── ChatBot.tsx        # 플로팅 챗봇 UI
 │   ├── EdgeSection.tsx    # 특정 기능 강조 섹션
 │   ├── Footer.tsx         # 사이트 하단 푸터
 │   ├── Hero.tsx           # 메인 최상단 히어로 섹션
