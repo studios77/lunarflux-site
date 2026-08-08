@@ -86,6 +86,24 @@ export const SEO_KEYWORDS: string[] = [
 ]
 
 /**
+ * 공유 카드 이미지.
+ *
+ * app/opengraph-image.png 파일 규약이 만드는 /opengraph-image.png 를 그대로
+ * 가리킵니다. metadataBase 가 절대 URL 로 확장해 주므로 경로만 적으면 됩니다.
+ *
+ * 아래 두 함수가 openGraph 를 정의하는 순간 루트 레이아웃의 openGraph 는
+ * 통째로 대체됩니다 — 필드 단위로 합쳐지지 않습니다. images 를 빼면
+ * 상속되는 것이 아니라 그냥 사라져서, 홈을 뺀 전 페이지가 og:image 없이
+ * 나갔습니다(카톡·슬랙에 썸네일 자체가 안 뜸). 여기서 항상 붙입니다.
+ */
+const OG_IMAGE = {
+  url: '/opengraph-image.png',
+  width: 1200,
+  height: 630,
+  alt: `${SITE_NAME} — 차세대 방화벽 · AI 보안 관제`,
+}
+
+/**
  * 서비스 상세 페이지 메타데이터.
  *
  * 예전에는 18개 페이지가 title·description·canonical 만 갖고 openGraph 는
@@ -113,11 +131,13 @@ export function serviceMetadata(opts: {
       siteName: SITE_NAME,
       locale: 'ko_KR',
       type: 'website',
+      images: [OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: opts.title,
       description: opts.description,
+      images: [OG_IMAGE.url],
     },
   }
 }
@@ -142,11 +162,13 @@ export function pageMetadata(opts: {
       siteName: SITE_NAME,
       locale: 'ko_KR',
       type: 'website',
+      images: [OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: opts.title,
       description: opts.description,
+      images: [OG_IMAGE.url],
     },
   }
 }

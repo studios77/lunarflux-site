@@ -156,6 +156,7 @@ WAF 규칙       101규칙 → 105규칙  (그새 늘었음)
 - P1 4건: focus-visible, skip link, 터치 타겟 44px, contact canonical (`f5c15c1`)
 - 제목·설명·구조화 데이터를 주력 서비스로 교체 (`a61ad0c`)
 - 페이지별 OpenGraph, BreadcrumbList, Organization 기업정보 (`390514e`)
+  — 제목·설명만 붙고 **이미지는 빠져 있었습니다.** 2026-08-08 에 보강했습니다(아래 참고).
 - `npm audit` high 3건 해소 → `found 0 vulnerabilities` (`45d49be`)
 
 ---
@@ -169,6 +170,16 @@ WAF 규칙       101규칙 → 105규칙  (그새 늘었음)
   `p-*/px-*` 라고 적었다가 dev 서버가 500 을 냈습니다 (`9dddb0f`).
   프로덕션 빌드는 통과해서 Turbopack 만 잡아냅니다.
 - **`SITE_VERIFICATION.naver` 를 지우지 마세요.** 지우면 네이버 인증이 끊깁니다.
+- **`metadata.openGraph` 는 필드 단위로 합쳐지지 않고 통째로 대체됩니다.**
+  페이지가 `openGraph` 를 정의하는 순간 루트 레이아웃 것은 상속되지 않습니다.
+  `images` 를 빼면 홈 이미지가 상속되는 게 아니라 `og:image` 자체가 사라집니다.
+  실제로 홈을 뺀 20개 페이지가 썸네일 없이 나가고 있었습니다. `lib/seo.ts` 의
+  `OG_IMAGE` 를 두 헬퍼가 항상 붙이도록 해 뒀으니 새 헬퍼를 만들 때도 넣으세요.
+- **라이브 `robots.txt` 앞에 Cloudflare 관리형 블록이 주입됩니다.** 저장소의
+  `app/robots.ts` 결과 위에 `ClaudeBot`·`GPTBot`·`Google-Extended`·`CCBot` 등을
+  `Disallow` 하는 블록이 붙습니다. Googlebot·Yeti 는 각자 그룹이 있어 검색
+  색인에는 영향이 없습니다. 설정 위치는 Cloudflare → AI Crawl Control 이며
+  저장소를 고쳐서는 바뀌지 않습니다.
 - 구글은 **DNS TXT** 로 인증돼 있어 코드와 무관합니다. 메타태그를 더하면 중복입니다.
   `google-site-verification=QnuX6yTbHeAPL7CemB-JD07LDE5Po6sHyYqbiwgwbr8`
 - 서비스 콘텐츠는 `lib/servicesData.ts` 단일 출처입니다. `Services.tsx` 가 따로
@@ -226,7 +237,29 @@ UI 를 재현했습니다).
    - HA·노드 이중화가 출시됐는지 (사양서엔 "로드맵" 으로 표기돼 사이트에서 뺐음)
    - 경쟁사 비교표를 넣을지 (순수 WAF 대비 차별점이 강력한데 비교 대상·값 필요)
 
+5. **홈 `<h1>` 이 브랜드 문구입니다** — 2026-08-08 SEO 점검에서 확인. 서비스 18개
+   페이지는 `seoH1` 으로 고쳤는데(3번 ②) 홈만 `AI 보안을 설계하고 직접 운영합니다`
+   그대로입니다. 사이트에서 가장 가중치 높은 h1 인데 "차세대 방화벽" 같은 검색어가
+   없습니다. 히어로 첫인상이 바뀌는 일이라 문구를 정한 뒤 손대기로 하고 보류했습니다.
+
+6. **`sitemap.xml` 의 `lastmod` 가 전부 빌드 시각입니다** — `app/sitemap.ts` 가
+   `new Date()` 를 쓰고 있어, 문서만 고친 배포에서도 21개 URL 전부 "방금 수정됨"
+   으로 나갑니다. 반복되면 검색엔진이 `lastmod` 를 신뢰하지 않습니다. 서비스별
+   갱신일을 `servicesData` 에 두거나 고정 날짜를 쓰는 쪽으로 바꿔야 합니다.
+
 ### 마친 것 (재확인 불필요)
+
+- **og:image 누락 수정** (2026-08-08) — 홈을 뺀 20개 페이지에 `og:image` 와
+  `twitter:image` 가 아예 없어, 카톡·슬랙·블로그에 서비스 페이지를 공유하면
+  썸네일이 안 떴습니다. `lib/seo.ts` 에 `OG_IMAGE` 를 두고 `serviceMetadata` ·
+  `pageMetadata` 양쪽에 붙였습니다. 빌드 산출물 21개 페이지 전부에서 확인했습니다.
+  원인은 4번의 `openGraph` 대체 항목 참고.
+
+- **SEO 설정 점검** (2026-08-08) — 라이브에서 직접 확인했습니다. title·description·
+  canonical 전 페이지, 네이버 소유확인 태그 생존, robots.txt 의 Googlebot·Yeti·
+  bingbot·DaumOA Allow, sitemap 21개 URL, 홈 `WebSite`+`Organization`+`OfferCatalog`
+  와 서비스 `Service`+`BreadcrumbList` 구조화 데이터, `trailingSlash` 와 canonical
+  슬래시 일치까지 정상입니다. 남은 지적 사항은 위 5·6번입니다.
 
 - **카테고리별 설명 보강** (2026-08-08, `97ff04b`) — 홈 "네 개의 축으로 지킵니다"
   네 카드가 제목·한 줄 요약·링크뿐이라 각 축이 무엇을 막는지 알 수 없었습니다.
