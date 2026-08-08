@@ -28,13 +28,37 @@ export const metadata: Metadata = pageMetadata({
 })
 
 /** 노출 순서 = 배열 순서. 보안을 앞에, 스트리밍을 뒤에 둡니다. */
-const GROUPS: { label: string; prefix: string }[] = [
-  { label: '네트워크 보안', prefix: '보안 / 네트워크' },
-  { label: '클라우드 보안', prefix: '보안 / 클라우드' },
-  { label: 'AI · 데이터 보안', prefix: '보안 / AI·데이터' },
-  { label: '보안 운영', prefix: '보안 / 운영' },
-  { label: 'IDC 인프라', prefix: 'IDC' },
-  { label: '스트리밍', prefix: '스트리밍' },
+const GROUPS: { label: string; prefix: string; desc: string }[] = [
+  {
+    label: '네트워크 보안',
+    prefix: '보안 / 네트워크',
+    desc: '경계 방화벽부터 내부 세그먼트까지, 트래픽이 지나는 길목을 통제합니다.',
+  },
+  {
+    label: '클라우드 보안',
+    prefix: '보안 / 클라우드',
+    desc: 'AWS·Azure·GCP 계정 설정과 컨테이너 워크로드를 한 흐름으로 점검합니다.',
+  },
+  {
+    label: 'AI · 데이터 보안',
+    prefix: '보안 / AI·데이터',
+    desc: '생성형 AI 도입에 따르는 유출 리스크와 합성 영상·음성 탐지를 다룹니다.',
+  },
+  {
+    label: '보안 운영',
+    prefix: '보안 / 운영',
+    desc: '탐지 이후를 맡습니다. 24시간 자율 관제와 플레이북 기반 자동 대응.',
+  },
+  {
+    label: 'IDC 인프라',
+    prefix: 'IDC',
+    desc: '서버 임대·코로케이션부터 GPU 호스팅, 이중화, 위탁운영, 장애 복구까지.',
+  },
+  {
+    label: '스트리밍',
+    prefix: '스트리밍',
+    desc: '초저지연 라이브 송출과 VOD 아카이빙·멀티 플랫폼 동시 리스트림.',
+  },
 ]
 
 const GENERAL = [
@@ -85,13 +109,14 @@ export default function SitemapPage() {
 
             return (
               <div key={group.label} className="mb-12">
-                <div className="mb-5 flex items-center gap-4">
+                <div className="mb-2 flex items-center gap-4">
                   <h2 className="shrink-0 break-keep text-[1.25rem] font-bold tracking-[-0.02em]">
                     {group.label}
                   </h2>
                   <span className="h-px flex-1 bg-line" />
                   <span className="shrink-0 font-mono text-label text-fg-subtle">{items.length}</span>
                 </div>
+                <p className="mb-5 max-w-2xl break-keep text-meta text-fg-subtle">{group.desc}</p>
 
                 <ul className="grid list-none grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {items.map(s => (
