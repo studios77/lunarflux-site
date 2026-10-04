@@ -3,6 +3,34 @@ export const SITE_NAME = 'LunarFlux AI'
 /** Production site origin (trailing slash 없음) */
 export const SITE_ORIGIN = 'https://lunarflux.ai'
 
+/**
+ * 리뉴얼 모드.
+ *
+ * `true` 면 사이트 전체가 "홈페이지 리뉴얼 중" 안내 한 장으로 바뀝니다.
+ * 켜고 끄는 지점은 이 한 줄이고, 아래 네 곳이 이 값을 함께 봅니다.
+ *
+ *   app/page.tsx      홈을 리뉴얼 안내로 교체 (JSON-LD 도 내보내지 않음)
+ *   app/layout.tsx    `noindex, nofollow` 와 리뉴얼용 제목·설명
+ *   app/robots.ts     사이트맵 선언 제거 (크롤링 자체는 계속 허용 — 아래 참고)
+ *   app/sitemap.ts    홈 한 건만 남김
+ *
+ * **크롤러를 막지 않는 것이 의도입니다.** 검색 결과에서 빼는 일은
+ * `noindex` 가 하고, `robots.txt` 로 `Disallow: /` 를 걸면 크롤러가 페이지에
+ * 들어오지 못해 그 `noindex` 를 읽지 못합니다. 이미 색인된 URL 이 그대로
+ * 남는 역효과가 나므로, 리뉴얼 중에도 크롤링은 열어 둡니다.
+ *
+ * 서비스 상세·문의 등 나머지 경로는 코드가 아니라 `public/_redirects` 가
+ * 홈으로 보냅니다(Cloudflare Pages 가 정적 파일보다 먼저 평가). 리뉴얼을
+ * 끝낼 때 **이 플래그와 그 파일을 함께** 되돌리세요.
+ */
+export const MAINTENANCE = true
+
+/** 리뉴얼 안내에 싣는 연락처. Footer 와 같은 값입니다. */
+export const CONTACT = {
+  tel: '0505-924-1004',
+  email: 'contact@lunarflux.ai',
+} as const
+
 export function serviceCanonicalUrl(slug: string): string {
   return `${SITE_ORIGIN}/services/${slug}/`
 }

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import {
   CONTENT_LAST_MODIFIED,
+  MAINTENANCE,
   pageCanonicalUrl,
   serviceCanonicalUrl,
   SITE_ORIGIN,
@@ -23,6 +24,21 @@ export const revalidate = false
  * ServiceData.updated 로 그 항목만 덮어쓰세요.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
+  // 리뉴얼 중에는 홈 한 건만 남깁니다. 나머지 경로는 `_redirects` 가 홈으로
+  // 보내므로, 그대로 두면 사이트맵이 전부 리다이렉트되는 URL 21개를 알리는
+  // 셈입니다. 네이버 서치어드바이저에 이미 제출돼 있어 주기적으로 읽히므로
+  // 파일 자체는 유효하게 남겨 둡니다.
+  if (MAINTENANCE) {
+    return [
+      {
+        url: `${SITE_ORIGIN}/`,
+        lastModified: CONTENT_LAST_MODIFIED,
+        changeFrequency: 'daily',
+        priority: 1,
+      },
+    ]
+  }
+
   const entries: MetadataRoute.Sitemap = [
     {
       url: `${SITE_ORIGIN}/`,

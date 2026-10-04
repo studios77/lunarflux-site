@@ -1,5 +1,5 @@
 import Nav from '@/components/Nav'
-import { SITE_NAME, SITE_ORIGIN } from '@/lib/site'
+import { MAINTENANCE, SITE_NAME, SITE_ORIGIN } from '@/lib/site'
 import { SEO_DEFAULT_DESCRIPTION } from '@/lib/seo'
 import Hero from '@/components/Hero'
 import Services from '@/components/Services'
@@ -7,8 +7,13 @@ import Flagship from '@/components/Flagship'
 import ClosingCta from '@/components/ClosingCta'
 import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
+import Maintenance from '@/components/Maintenance'
 
 export default function Home() {
+  // 리뉴얼 중에는 안내 한 장만 내보냅니다. 아래 JSON-LD 도 함께 빠집니다 —
+  // 서비스 목록을 구조화 데이터로 알리면서 화면에는 안 보여주면 안 됩니다.
+  if (MAINTENANCE) return <Maintenance />
+
   const site = SITE_ORIGIN
   const jsonLd = {
     '@context': 'https://schema.org',
