@@ -48,9 +48,14 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
   },
-  alternates: {
-    canonical: SITE_ORIGIN,
-  },
+  // 리뉴얼 중에는 canonical 을 내보내지 않습니다.
+  //
+  // 이 페이지는 `_redirects` 의 200 재작성으로 /services/... · /contact/ 주소
+  // 에서도 그대로 응답됩니다. 그때 canonical 이 "/" 를 가리키면 검색엔진에게
+  // "이 URL 은 색인하지 말고(noindex), 대신 저 URL 을 보라(canonical)" 는
+  // 모순된 지시가 됩니다. 구글이 명시적으로 함께 쓰지 말라고 안내하는 조합
+  // 이라, 색인에서 내리는 일만 하도록 noindex 만 남깁니다.
+  ...(MAINTENANCE ? {} : { alternates: { canonical: SITE_ORIGIN } }),
   // 코드가 비어 있으면 태그를 내보내지 않습니다. lib/site 의 SITE_VERIFICATION 참고.
   verification: {
     ...(SITE_VERIFICATION.google ? { google: SITE_VERIFICATION.google } : {}),
