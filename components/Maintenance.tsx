@@ -4,8 +4,10 @@ import { CONTACT, SITE_NAME } from '@/lib/site'
  * 홈페이지 리뉴얼 안내.
  *
  * 리뉴얼 중에는 서비스 상세·문의 페이지가 모두 홈으로 모이므로(`_redirects`),
- * **이 한 장이 사이트의 유일한 화면입니다.** 그래서 연락처를 여기에 싣습니다 —
- * 문의 페이지로 보낼 수 없으니 전화와 이메일이 이 화면에 있어야 합니다.
+ * **이 한 장이 사이트의 유일한 화면입니다.** 문의 페이지로 보낼 수 없으니
+ * 연락 수단이 이 화면에 있어야 하는데, 공개하는 것은 **이메일 하나뿐**입니다.
+ * 전화번호·주소·사업자등록번호는 리뉴얼이 끝나고 Footer 가 돌아올 때까지
+ * 내보내지 않습니다.
  *
  * 외부 의존이 없습니다. Nav·Footer·상담 위젯을 쓰지 않는 이유는 그것들이
  * 전부 지금 닿을 수 없는 경로를 가리키기 때문입니다.
@@ -44,27 +46,20 @@ export default function Maintenance() {
         <p className="mb-10 break-keep text-lead leading-[1.85] text-fg-muted">
           더 나은 모습으로 찾아뵙기 위해 사이트를 새로 단장하고 있습니다.
           <br />
-          그동안 문의는 아래 연락처로 보내주시면 동일하게 도와드립니다.
+          그동안 문의는 아래 이메일로 보내주시면 동일하게 도와드립니다.
         </p>
 
-        {/* 전화는 tel: 로 걸어 둡니다. 모바일에서 바로 통화로 이어집니다. */}
-        <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center">
-          <a
-            href={`tel:${CONTACT.tel.replace(/-/g, '')}`}
-            className="rounded-full bg-accent px-8 py-3.5 text-center text-body font-bold text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.26)] transition-colors hover:bg-accent-2"
-          >
-            {CONTACT.tel}
-          </a>
-          <a
-            href={`mailto:${CONTACT.email}`}
-            className="rounded-full border border-line-strong bg-surface/60 px-8 py-3.5 text-center text-body font-bold text-fg backdrop-blur transition-colors hover:border-accent hover:text-accent"
-          >
-            {CONTACT.email}
-          </a>
-        </div>
+        {/* 리뉴얼 기간에 공개하는 연락 수단은 이메일 하나입니다.
+            전화번호·주소·사업자등록번호는 일부러 싣지 않습니다. */}
+        <a
+          href={`mailto:${CONTACT.email}`}
+          className="inline-block rounded-full bg-accent px-9 py-3.5 text-center text-body font-bold text-canvas shadow-[0_8px_28px_rgba(52,211,153,0.26)] transition-colors hover:bg-accent-2"
+        >
+          {CONTACT.email}
+        </a>
 
         <p className="mt-12 font-mono text-meta tracking-[0.06em] text-fg-subtle">
-          주식회사 스트리밍랩스 · {SITE_NAME}
+          {SITE_NAME}
         </p>
       </div>
     </main>

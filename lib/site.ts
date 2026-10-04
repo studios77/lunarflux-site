@@ -25,9 +25,14 @@ export const SITE_ORIGIN = 'https://lunarflux.ai'
  */
 export const MAINTENANCE = true
 
-/** 리뉴얼 안내에 싣는 연락처. Footer 와 같은 값입니다. */
+/**
+ * 리뉴얼 안내에 싣는 연락처.
+ *
+ * 이메일 하나만 둡니다. 전화번호·주소·사업자등록번호는 리뉴얼 기간에
+ * 노출하지 않기로 했습니다 — 리뉴얼이 끝나면 `Footer` 가 원래대로 전부
+ * 보여주므로, 여기에 다시 적어 두면 가려야 할 값이 두 군데가 됩니다.
+ */
 export const CONTACT = {
-  tel: '0505-924-1004',
   email: 'contact@lunarflux.ai',
 } as const
 

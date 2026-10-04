@@ -15,8 +15,10 @@ export const viewport: Viewport = {
  * 남아 있는 동안, 설명만이라도 현재 상태를 알려주는 편이 낫습니다.
  */
 const TITLE = MAINTENANCE ? `홈페이지 리뉴얼 중 | ${SITE_NAME}` : SEO_DEFAULT_TITLE
+// 설명은 검색 결과와 링크 공유 카드에 그대로 나갑니다. 화면에서 가린 전화번호가
+// 여기 남으면 가린 의미가 없으므로 이메일만 적습니다.
 const DESCRIPTION = MAINTENANCE
-  ? '홈페이지 리뉴얼 중입니다. 문의는 0505-924-1004 또는 contact@lunarflux.ai 로 보내주시면 동일하게 처리해 드립니다.'
+  ? '홈페이지 리뉴얼 중입니다. 문의는 contact@lunarflux.ai 로 보내주시면 동일하게 처리해 드립니다.'
   : SEO_DEFAULT_DESCRIPTION
 
 export const metadata: Metadata = {
