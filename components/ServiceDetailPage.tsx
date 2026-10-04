@@ -3,9 +3,10 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ScrollTop from '@/components/ScrollTop'
 import ServiceIcon from '@/components/ServiceIcon'
+import Maintenance from '@/components/Maintenance'
 import type { ServiceData } from '@/lib/servicesData'
 import { getRelatedServices } from '@/lib/servicesData'
-import { SITE_NAME, SITE_ORIGIN, serviceCanonicalUrl } from '@/lib/site'
+import { MAINTENANCE, SITE_NAME, SITE_ORIGIN, serviceCanonicalUrl } from '@/lib/site'
 
 const SECTION = 'py-20 md:py-28'
 const TH = 'border-b border-line px-5 py-3.5 text-center font-mono text-label font-normal uppercase tracking-[0.1em] text-fg-subtle'
@@ -41,6 +42,11 @@ function SectionLabel({
 }
 
 export default function ServiceDetailPage({ s }: { s: ServiceData }) {
+  // 리뉴얼 중에는 18개 서비스 상세가 전부 안내 한 장으로 바뀝니다.
+  // 서비스 내용과 JSON-LD 가 HTML 에 아예 담기지 않으므로, 주소를 직접
+  // 쳐도 볼 수 없습니다. 라우트별로 막지 않고 여기 한 곳에서 처리합니다.
+  if (MAINTENANCE) return <Maintenance />
+
   // Service 와 BreadcrumbList 를 한 그래프로 묶습니다.
   // 이동경로가 있으면 검색 결과에 "lunarflux.ai › 서비스 › 제품명" 이 표시돼
   // 클릭률이 올라가고, 사이트 구조도 함께 전달됩니다.

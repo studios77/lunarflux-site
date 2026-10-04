@@ -3,8 +3,9 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ServiceIcon from '@/components/ServiceIcon'
+import Maintenance from '@/components/Maintenance'
 import { servicesData } from '@/lib/servicesData'
-import { SITE_NAME } from '@/lib/site'
+import { MAINTENANCE, SITE_NAME } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
 /**
@@ -67,6 +68,10 @@ const GENERAL = [
 ]
 
 export default function SitemapPage() {
+  // 리뉴얼 중에는 전체 서비스 목록을 내보내지 않습니다. 여기가 열려 있으면
+  // 막아 둔 상세 페이지 주소가 한곳에 모여 그대로 노출됩니다.
+  if (MAINTENANCE) return <Maintenance />
+
   return (
     <>
       <Nav />

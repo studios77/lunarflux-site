@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SITE_NAME, SITE_ORIGIN, serviceCanonicalUrl } from './site'
+import { MAINTENANCE, SITE_NAME, SITE_ORIGIN, serviceCanonicalUrl } from './site'
 
 /**
  * 브라우저 탭과 검색 결과에 뜨는 기본 제목·설명.
@@ -118,6 +118,13 @@ export function serviceMetadata(opts: {
   description: string
   keywords?: string[]
 }): Metadata {
+  // 리뉴얼 중에는 페이지별 메타데이터를 내보내지 않습니다. 빈 객체를 주면
+  // 루트 레이아웃의 값(리뉴얼 제목·설명·noindex)이 그대로 쓰입니다.
+  // 본문이 안내 한 장인데 제목만 서비스명으로 남으면 검색 결과와 공유
+  // 카드가 실제 내용과 어긋납니다. canonical 도 함께 빠집니다 — noindex 와
+  // 같이 쓰면 모순된 지시가 되기 때문입니다.
+  if (MAINTENANCE) return {}
+
   const url = serviceCanonicalUrl(opts.slug)
   return {
     title: opts.title,
@@ -149,6 +156,9 @@ export function pageMetadata(opts: {
   description: string
   keywords?: string[]
 }): Metadata {
+  // 리뉴얼 중 동작은 serviceMetadata 와 같습니다. 위 주석 참고.
+  if (MAINTENANCE) return {}
+
   const url = `${SITE_ORIGIN}${opts.path}`
   return {
     title: opts.title,

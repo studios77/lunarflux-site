@@ -3,7 +3,8 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
 import SalesIqOpenButton from '@/components/SalesIqOpenButton'
-import { SALESIQ, SITE_NAME } from '@/lib/site'
+import Maintenance from '@/components/Maintenance'
+import { MAINTENANCE, SALESIQ, SITE_NAME } from '@/lib/site'
 import { pageMetadata } from '@/lib/seo'
 
 // canonical·openGraph 를 헬퍼가 함께 만듭니다. 예전에는 canonical 만 있어
@@ -16,6 +17,10 @@ export const metadata: Metadata = pageMetadata({
 })
 
 export default function ContactPage() {
+  // 리뉴얼 중에는 문의 폼·전화번호가 HTML 에 담기지 않습니다.
+  // 연락은 안내 화면의 이메일 한 곳으로만 받습니다.
+  if (MAINTENANCE) return <Maintenance />
+
   return (
     <>
       <Nav />
