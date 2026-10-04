@@ -1,0 +1,122 @@
+# 홈페이지 리뉴얼 모드 — 복구 안내
+
+현재 사이트는 **리뉴얼 모드**입니다. 되돌리는 방법을 적어 둡니다.
+리뉴얼이 끝나면 **이 파일도 함께 지우세요.**
+
+| | |
+|---|---|
+| 적용일 | 2026-08-09 (`8f54447`, `e5df611`) |
+| 상태 | 홈 = 리뉴얼 안내 한 장 / 나머지 경로 = 홈으로 리다이렉트 / 전 페이지 `noindex` |
+| 공개 연락처 | `contact@lunarflux.ai` 하나 (전화·주소·사업자등록번호 비공개) |
+
+---
+
+## 복구는 두 군데만 고치면 됩니다
+
+### 1. 플래그 끄기
+
+```ts
+// lib/site.ts
+export const MAINTENANCE = false   // true → false
+```
+
+이 한 줄이 아래 네 곳을 한꺼번에 되돌립니다. **개별 파일을 손댈 필요가 없습니다.**
+
+| 파일 | 돌아오는 것 |
+|---|---|
+| `app/page.tsx` | 홈 본문(Hero·Flagship·Services·ClosingCta)과 JSON-LD |
+| `app/layout.tsx` | 원래 제목·설명·키워드, `index, follow`, 상담 위젯 |
+| `app/robots.ts` | `robots.txt` 의 사이트맵 선언 |
+| `app/sitemap.ts` | `sitemap.xml` 의 21개 URL |
+
+### 2. 리다이렉트 규칙 지우기
+
+```bash
+rm public/_redirects
+```
+
+**이게 핵심입니다.** 플래그만 끄면 홈은 돌아오지만 서비스·문의 페이지는 계속
+홈으로 튕깁니다. 이 파일은 플래그의 영향을 받지 않는 Cloudflare Pages 설정이라
+따로 지워야 합니다.
+
+### 3. 콘텐츠 수정일 올리기
+
+```ts
+// lib/site.ts
+export const CONTENT_LAST_MODIFIED = '2026-08-09'   // 복구한 날짜로
+```
+
+`sitemap.xml` 의 `lastmod` 입니다. 내용이 실제로 바뀌는 배포이므로 함께 올립니다.
+
+### 4. 배포
+
+```bash
+npm run build          # 로컬 확인
+git add -A && git commit -m "feat: 리뉴얼 모드 해제, 사이트 원상 복구"
+git push origin main   # Cloudflare Pages 자동 배포, 1~3분
+```
+
+---
+
+## 복구 후 확인
+
+아래 다섯 가지가 복구 상태의 기준입니다. **실제로 끄고 빌드해 확인한 값**입니다.
+
+```bash
+npm run build && cd out
+
+grep -o '<title>[^<]*</title>' index.html      # 차세대 방화벽 · AI 보안 관제 …
+grep -o 'content="index, follow"' index.html   # noindex 가 아니어야 함
+grep -c 'application/ld+json' index.html       # 1  (구조화 데이터 복귀)
+grep -c '<url>' sitemap.xml                    # 21
+test -f _redirects && echo "남아있음(문제)" || echo "없음(정상)"
+```
+
+라이브에서는 이것만 봐도 됩니다.
+
+- https://lunarflux.ai — 원래 메인
+- https://lunarflux.ai/services/lunarflux-guard/ — 홈으로 안 튕기고 열리는지
+- https://lunarflux.ai/contact/ — 문의 폼이 뜨는지
+
+> `404/index.html` 과 `_not-found/index.html` 에는 복구 후에도 `noindex` 가
+> 남습니다. Next.js 가 not-found 에 기본으로 넣는 것이라 **정상입니다.**
+
+---
+
+## 검색 노출 되돌리기 (코드 밖의 일)
+
+코드를 되돌려도 검색 결과는 바로 돌아오지 않습니다. 리뉴얼 기간에 `noindex` 를
+읽은 검색엔진이 색인에서 내렸기 때문입니다. 재수집을 **요청**해야 빨라집니다.
+
+1. **네이버 서치어드바이저** — https://searchadvisor.naver.com
+   `sitemap.xml` 재제출 → 홈·`lunarflux-guard`·`contact` 수집 요청
+2. **구글 서치콘솔** — https://search.google.com/search-console
+   `sitemap.xml` 재제출 → URL 검사에서 홈 색인 요청
+
+반영까지 수일~수주 걸립니다. 조급해하지 않아도 됩니다.
+
+---
+
+## 건드리지 말 것
+
+- **`SITE_VERIFICATION.naver`** — 리뉴얼 중에도 일부러 남겨 뒀습니다. 지우면
+  네이버 소유확인이 끊겨 복구가 훨씬 번거로워집니다.
+- **`components/Maintenance.tsx`** — 복구 후 당장은 안 쓰이지만, 다음에 또
+  리뉴얼할 때 그대로 재사용합니다. 지우려면 `app/page.tsx` 의 import 도 함께
+  정리해야 합니다.
+
+## 리뉴얼 기간에 알아 둘 것
+
+- **`robots.txt` 로 크롤링을 막지 않았습니다. 일부러입니다.** 검색 결과에서
+  내려가게 하는 일은 `noindex` 가 합니다. `Disallow: /` 를 걸면 크롤러가
+  페이지에 들어오지 못해 그 `noindex` 를 읽을 수 없고, 이미 색인된 URL 이
+  제목만 남은 채 검색 결과에 계속 머무릅니다. 빼려고 막는 것이 못 빼게
+  만듭니다. 리뉴얼이 길어져도 이 설정은 그대로 두세요.
+- **`_redirects` 는 로컬에서 검증되지 않습니다.** Cloudflare Pages 기능이라
+  `npm run dev` 나 정적 서버에서는 동작하지 않습니다. 배포 후에 확인하세요.
+- **상담 위젯(Zoho SalesIQ)은 리뉴얼 중 꺼져 있습니다.** 안내 화면이 이메일로
+  연락을 청하는데 채팅창까지 띄우면 말이 엇갈리고, 아무도 보지 않는 채팅은
+  없는 것보다 나쁩니다. 플래그를 끄면 자동으로 돌아옵니다.
+- **서비스 상세 페이지의 HTML 은 계속 빌드됩니다.** `_redirects` 가 정적 파일보다
+  먼저 평가돼 응답되지 않을 뿐입니다. 빌드를 줄이려던 것이 아니라 접근을
+  막으려던 것이므로 의도한 동작입니다.

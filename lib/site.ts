@@ -22,6 +22,8 @@ export const SITE_ORIGIN = 'https://lunarflux.ai'
  * 서비스 상세·문의 등 나머지 경로는 코드가 아니라 `public/_redirects` 가
  * 홈으로 보냅니다(Cloudflare Pages 가 정적 파일보다 먼저 평가). 리뉴얼을
  * 끝낼 때 **이 플래그와 그 파일을 함께** 되돌리세요.
+ *
+ * 복구 절차 전체와 확인 방법은 저장소 루트의 `MAINTENANCE.md` 에 있습니다.
  */
 export const MAINTENANCE = true
 
